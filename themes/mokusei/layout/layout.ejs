@@ -1,0 +1,42 @@
+<!--
+ * @Author: Kinsiy
+ * @Date: 2020-11-24 22:35:47
+ * @LastEditTime: 2021-01-11 00:53:43
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \c01c:\Blog\Kinsiy.github.io\themes\mokusei\layout\layout.ejs
+-->
+<!DOCTYPE html>
+<html<% if(config.language){ %> lang="<%= config.language %>" <% } %>>
+<%- partial('_partial/head') %>
+
+<body>
+	<%- js('js/org/jquery.min.js') %>
+    <%- js('js/click.js') %>
+    <%- js('js/search.js') %>
+
+	<div class="main-con">
+
+        <%- partial('_partial/nav') %>
+        <%- partial('_partial/top',{}, {cache: true}) %>
+
+        <%- body %>
+    
+        <%- partial('_partial/footer',{}, {cache: true}) %>
+        <%- partial('_partial/extend',{}, {cache: true}) %>
+    </div>
+
+
+    <% if (config.search) { %>
+        <script type="text/javascript">      
+          var search_path = "<%= config.search.path %>";
+          if (search_path.length == 0) {
+              search_path = "search.xml";
+          }
+          var path = "<%= config.root %>" + search_path;
+          searchFunc(path, 'local-search-input', 'local-search-result');
+        </script>
+     <% } %>
+     <%- js('js/extend.js') %>
+</body>
+</html>

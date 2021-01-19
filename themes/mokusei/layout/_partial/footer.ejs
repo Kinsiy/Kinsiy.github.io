@@ -1,0 +1,23 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-24 22:35:47
+ * @LastEditTime: 2021-01-11 01:09:21
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \c01c:\Blog\Kinsiy.github.io\themes\mokusei\layout\_partial\footer.ejs
+-->
+<footer class="footer">
+	<p class="footer-intro">
+		<%
+			var date = new Date();
+			var year = date.getFullYear();
+		%>
+		@<%=  year %> <%= config.title %>.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+	</p>
+</footer>
+
+
+

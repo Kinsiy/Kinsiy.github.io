@@ -1,0 +1,28 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-11-24 22:35:47
+ * @LastEditTime: 2021-01-10 23:43:05
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \c01c:\Blog\Kinsiy.github.io\themes\mokusei\layout\index.ejs
+-->
+<div class="con-wrap fadeToTop">
+    <% if(!theme.layout.columnPosition) { %>
+    <section class="article-area" style="order: 1; margin-right: 0; margin-left: 40px;" >
+    <% } else { %>
+
+        
+
+    <section class="article-area">
+    <% } %>
+        <% page.posts.each(function(item){ %>
+            <%- partial('_partial/article', {item: item}) %>
+        <% }) %>
+        <%- partial('_partial/pagination') %>
+    </section>
+    <%- partial('_partial/toolbar') %>
+
+</div>
+
+
+

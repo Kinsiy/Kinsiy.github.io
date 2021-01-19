@@ -1,0 +1,62 @@
+<!--
+ * @Author: Kinsiy
+ * @Date: 2020-11-24 22:35:47
+ * @LastEditTime: 2021-01-11 22:57:23
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \c01c:\Blog\Kinsiy.github.io\themes\mokusei\layout\_partial\nav.ejs
+-->
+<div class="nav cl">
+    <ul class="cl nav-list">
+        <% for (var i in theme.menu){ %>
+            <li>
+                <% if(theme.menu[i].child){ %>
+                    <% if(theme.menu[i].url == 'none'){ %>
+                    <a href="javascript:void(0)" class="<%- is_current(url_for(theme.menu[i].url)) ? 'active' : '' %>">
+                    <% } else { %>
+                    <a href="<%- url_for(theme.menu[i].url) %>" class="<%- is_current(url_for(theme.menu[i].url)) ? 'active' : '' %>">
+                    <% } %>
+                        <i class="<%= theme.menu[i].iconType %> fa-<%= theme.menu[i].icon %>"></i> 
+                        <span><%= i %></span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        <% for (var f in theme.menu[i].child){ %>
+                            <li>
+                                <a href="<%- url_for(theme.menu[i].child[f].url) %>" class="">
+                                    <i class="<%= theme.menu[i].child[f].iconType %> fa-<%= theme.menu[i].child[f].icon %>"></i>
+                                    <span><%= f %></span>
+                                </a>
+                            </li>
+                        <% } %>
+                    </dl>
+                <% } else { %>
+                    <a href="<%- url_for(theme.menu[i].url) %>" class="<%- is_current(url_for(theme.menu[i].url)) ? 'active' : '' %>">
+                        <i class="<%= theme.menu[i].iconType %> fa-<%= theme.menu[i].icon %>"></i> 
+                        <span><%= i %></span>
+                    </a>
+                <% } %>
+            </li>
+        <% } %>
+    </ul>
+    <ul class="cl nav-tool">
+        <% for (var i in theme.account){ %>
+            <li>
+                <a href="<%- url_for(theme.account[i].url) %>">
+                    <i class="<%= theme.account[i].iconType %> fa-<%= theme.account[i].icon %>"></i>
+                </a>
+            </li>
+        <% } %>
+        <% if (theme.layout.headSearchIcon) { %>
+        <li>
+            <div class="nav-search">
+                <input type="text" id="local-search-input" name="q" results="0" placeholder="<%= __('Search') %>" />
+                <button type="button" id="site_search"></button>
+            </div>
+            <div class="search-panel" id="local-search-result"></div>
+        </li>
+        <% } %>
+    </ul>
+    
+</div>
+
