@@ -79,9 +79,9 @@ theme: Sakura
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/Kinsiy/Kinsiy.github.io.git
-    # github: 
-    # coding: https://git.coding.net/hojun/hojun.git
+  repo: git@github.com:Kinsiy/Kinsiy.github.io.git
+    # github: git@github.com:Kinsiy/Kinsiy.github.io.git
+    # # coding: https://git.coding.net/hojun/hojun.git
   branch: master
 
 # backup
