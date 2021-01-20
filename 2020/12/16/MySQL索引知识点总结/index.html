@@ -378,7 +378,26 @@ where a1.FStatDate = a2.FStatDate
 <li>前后两条语句执行流程的差异是什么？</li>
 </ol>
 <h1 id="索引的数据结构"><a href="#索引的数据结构" class="headerlink" title="索引的数据结构"></a>索引的数据结构</h1><p>在 MySQL 中，索引是在存储引擎层实现的，而不同的存储引擎根据其业务场景特点会有不同的实现方式。这里会先介绍我们常见的有序数组、Hash 和搜索树，最后看下 Innodb 的引擎支持的 B+树。</p>
-<h2 id="有序数组"><a href="#有序数组" class="headerlink" title="有序数组"></a>有序数组</h2><p>数组是在任何一本数据结构和算法的书籍都会介绍到的一种重要的数据结构。有序数组如其字面意思，以 Key 的递增顺序保存数据在数组中。非常适合等值查询和范围查询。<br>ID:1|ID:2|….|ID:N<br>:-:|:-:|:-:|:-:<br>name1|name2|….|nameN<br>在 ID 值没有重复的情况下，上述数组按照 ID 的递增顺序进行保存。这个时候如果需要查询特定 ID 值的 name，用二分法就可以快速得到，时间复杂度是 O(logn)。</p>
+<h2 id="有序数组"><a href="#有序数组" class="headerlink" title="有序数组"></a>有序数组</h2><p>数组是在任何一本数据结构和算法的书籍都会介绍到的一种重要的数据结构。有序数组如其字面意思，以 Key 的递增顺序保存数据在数组中。非常适合等值查询和范围查询。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ID:1</th>
+<th style="text-align:center">ID:2</th>
+<th style="text-align:center">….</th>
+<th style="text-align:center">ID:N</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name1</td>
+<td style="text-align:center">name2</td>
+<td style="text-align:center">….</td>
+<td style="text-align:center">nameN</td>
+</tr>
+</tbody>
+</table>
+<p>在 ID 值没有重复的情况下，上述数组按照 ID 的递增顺序进行保存。这个时候如果需要查询特定 ID 值的 name，用二分法就可以快速得到，时间复杂度是 O(logn)。</p>
 <pre><code class="java">// 二分查找递归实现方式
 int binary_search(const int arr[], int start, int end, int key)
 {
@@ -424,11 +443,11 @@ int binary_search(const int arr[], int start, int end, int key)
 <ul>
 <li>插入</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e6%8f%92%e5%85%a5.png" alt="插入"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e6%8f%92%e5%85%a5.jpg" alt="插入"></p>
 <ul>
 <li>删除</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e5%88%a0%e9%99%a4.png" alt="删除"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e5%88%a0%e9%99%a4.jpg" alt="删除"></p>
 <p>填充因子（innodb_fill_factor）：索引构建期间填充的每个 B-tree 页面上的空间百分比，其余空间保留给未来索引增长。从插入和删除操作中可以看到填充因子的值会影响到数据页的 split 和 merge 的频率。将值设置小些，可以减少 split 和 merge 的频率，但是索引相对会占用更多的磁盘空间；反之，则会增加 split 和 merge 的频率，但是可以减少占用磁盘空间。Innodb 对于聚集索引默认会预留 1/16 的空间保证后续的插入和升级索引。</p>
 <h1 id="Innodb-B-树索引"><a href="#Innodb-B-树索引" class="headerlink" title="Innodb B+树索引"></a>Innodb B+树索引</h1><p>前文介绍了索引的基本数据结构，现在开始我们从 Innodb 的角度了解如何使用 B+树构建索引，索引如何工作和如何使用索引提升查找效率。</p>
 <h2 id="聚集索引和非聚集索引"><a href="#聚集索引和非聚集索引" class="headerlink" title="聚集索引和非聚集索引"></a>聚集索引和非聚集索引</h2><p>数据库中的 B+树索引可以分为聚集索引和非聚集索引。聚集索引和非聚集索引的不同点在于叶子节点是否是完整行数据。<br><br><br>Innodb 存储引擎表是索引组织表，即表中的数据按照主键顺序存放。聚集索引就是按照每张表的主键构造一棵 B+树，叶子节点存放的是表的完整行记录。非聚集索引的叶子节点不包含行记录的全部数据。Innodb 存储引擎的非聚集索引的叶子节点的内容为主键索引值。<br><br><br>若数据表没有主键聚集索引是怎么建立的？在没有主键时 Innodb 会给数据表的每条记录生成一个 6 个字节长度的 RowId 字段，会以此建立聚集索引。</p>
@@ -814,7 +833,7 @@ where a1.FStatDate = a2.FStatDate
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
-        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo</a>
         </span>
       </p>
     </div>
@@ -1082,7 +1101,7 @@ $(document).ready(function() {
 </style>
 <meting-js
 
-    id="3444345290"
+    id="7864731649"
 
     server="tencent"
 

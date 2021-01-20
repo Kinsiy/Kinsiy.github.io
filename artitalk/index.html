@@ -311,16 +311,21 @@
   <div id="content" class="site-content">
     <article class="post-item post-301 page type-page status-publish has-post-thumbnail hentry">
       
-
+<script>console.log("1 "+Artitalk)</script>
 <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
+<script>console.log("2 "+Artitalk)</script>
 <!-- 存放说说的容器 -->
 <div id="artitalk_main"></div>
-<script type="text/javascript">
+<script type="text/javascript"> 
+ try{
     var at = new Artitalk();
     at.init({
     appId: 'AJ8PWseL9ucLigdRhUuoDiJC-MdYXbMMI',
     appKey: 'xuOLMc7TmsMi8y9BrAllkPHw',
     });
+}catch(e){
+    window.location.reload(true);
+}
 </script>
 
 
@@ -411,7 +416,7 @@
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
-        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo</a>
         </span>
       </p>
     </div>
@@ -679,7 +684,7 @@ $(document).ready(function() {
 </style>
 <meting-js
 
-    id="3444345290"
+    id="7864731649"
 
     server="tencent"
 
