@@ -108,7 +108,7 @@ movies:
 
 # https://github.com/metowolf/MetingJS#option
 aplayer: 
-  id: 3444345290
+  id: 7864731649
   server: tencent
   type: playlist
   fixed: true

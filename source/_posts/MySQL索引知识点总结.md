@@ -86,9 +86,11 @@ where a1.FStatDate = a2.FStatDate
 在 MySQL 中，索引是在存储引擎层实现的，而不同的存储引擎根据其业务场景特点会有不同的实现方式。这里会先介绍我们常见的有序数组、Hash 和搜索树，最后看下 Innodb 的引擎支持的 B+树。
 ## 有序数组
 数组是在任何一本数据结构和算法的书籍都会介绍到的一种重要的数据结构。有序数组如其字面意思，以 Key 的递增顺序保存数据在数组中。非常适合等值查询和范围查询。
-ID:1|ID:2|....|ID:N
-:-:|:-:|:-:|:-:
-name1|name2|....|nameN
+
+| ID:1  | ID:2  | ....  | ID:N  |
+| :---: | :---: | :---: | :---: |
+| name1 | name2 | ....  | nameN |
+
 在 ID 值没有重复的情况下，上述数组按照 ID 的递增顺序进行保存。这个时候如果需要查询特定 ID 值的 name，用二分法就可以快速得到，时间复杂度是 O(logn)。
 ```java
 // 二分查找递归实现方式
@@ -146,11 +148,11 @@ B+树的 3 个优点:
 
 * 插入
 
-![插入](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e6%8f%92%e5%85%a5.png)
+![插入](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e6%8f%92%e5%85%a5.jpg)
 
 * 删除
 
-![删除](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e5%88%a0%e9%99%a4.png)
+![删除](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e5%88%a0%e9%99%a4.jpg)
 
 填充因子（innodb_fill_factor）：索引构建期间填充的每个 B-tree 页面上的空间百分比，其余空间保留给未来索引增长。从插入和删除操作中可以看到填充因子的值会影响到数据页的 split 和 merge 的频率。将值设置小些，可以减少 split 和 merge 的频率，但是索引相对会占用更多的磁盘空间；反之，则会增加 split 和 merge 的频率，但是可以减少占用磁盘空间。Innodb 对于聚集索引默认会预留 1/16 的空间保证后续的插入和升级索引。
 # Innodb B+树索引
