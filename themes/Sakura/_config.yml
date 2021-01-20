@@ -69,7 +69,7 @@ art:
 
 # startdash url, title, desc img
 startdash: 
-  - {url: /theme-sakura/, title: Hello Word!, desc: 天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。, img: /img/startdash/top-1.png}
+  - {url: /2020/11/23/hello-world/, title: Hello Word!, desc: 天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。, img: /img/startdash/top-1.png}
   - {url: /, title: 广告位, desc: 广告位招租, img: /img/startdash/top-2.png}
   - {url: /, title: 广告位, desc: 广告位招租, img: /img/startdash/top-3.png}
 
