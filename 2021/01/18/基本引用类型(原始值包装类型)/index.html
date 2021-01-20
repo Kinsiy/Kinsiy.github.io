@@ -543,7 +543,41 @@ console.log(result);                    // cond, bat, sat, fat
 result = text.replace(/at/g,&quot;ond&quot;);     // cond, bond, sond, fond
 console.log(result);
 </code></pre>
-<p>在第二个参数是字符串的情况下，有几个特殊的字符序列，可以用来插入正则表达式操作的值。<br>字符序列|替换文本<br>|:-:|:-:|<br>\$\$|\$<br>\$\&amp;|匹配整个模式的子字符串。与RegExp.lastMatch相同<br>\&amp;’|匹配的子字符串之前的字符串。与RegExp.rightContext相同<br>\&amp;`|匹配的子字符串之后的字符串。与RegExp.leftContext相同<br>\&amp;n|匹配第n个捕获组的字符串，其中n是0~9<br>\&amp;nn|匹配第nn个捕获组的字符串，其中nn是01~99</p>
+<p>在第二个参数是字符串的情况下，有几个特殊的字符序列，可以用来插入正则表达式操作的值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符序列</th>
+<th style="text-align:left">替换文本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$$</td>
+<td style="text-align:left">$</td>
+</tr>
+<tr>
+<td style="text-align:center">$&amp;</td>
+<td style="text-align:left">匹配整个模式的子字符串。与RegExp.lastMatch相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;’</td>
+<td style="text-align:left">匹配的子字符串之前的字符串。与RegExp.rightContext相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;`</td>
+<td style="text-align:left">匹配的子字符串之后的字符串。与RegExp.leftContext相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;n</td>
+<td style="text-align:left">匹配第n个捕获组的字符串，其中n是0~9</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;nn</td>
+<td style="text-align:left">匹配第nn个捕获组的字符串，其中nn是01~99</td>
+</tr>
+</tbody>
+</table>
 <pre><code class="javascript">let text = &quot;cat, bat, sat, fat&quot;;
 let result = text.replace(/(.at)/g,&quot;word ($1)&quot;);
 console.log(result);                         // word (cat), word (bat), word (sat), word (fat)
@@ -601,7 +635,7 @@ console.log(stringValue.localeCompare(&quot;zoo&quot;));          // -1
             <div class="reward-main">
               <ul class="reward-row">
                 <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/AliPayQR.jpg"></li>
-                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WeChatQR.png"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WechatQR.png"></li>
               </ul>
             </div>
           </div>
