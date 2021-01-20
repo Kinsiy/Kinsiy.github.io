@@ -11,8 +11,8 @@ photos: https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/banner/shuoshuo.png
 <!-- 引用 artitalk -->
 
 <!-- 存放说说的容器 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/artitalk.js"></script>
 <div id="artitalk_main"></div>
-<script defer type="text/javascript" src="//unpkg.com/artitalk"></script>
 <script defer type="text/javascript" >
     var at = new Artitalk();
     at.init({
