@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">变量、作用域与内存 | Kinsiy</title>
+  <title itemprop="name">基本引用类型(RegExp) | Kinsiy</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -308,232 +308,138 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">变量、作用域与内存</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2021-1-10&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">基本引用类型(RegExp)</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2021-1-17&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>相比于其他语言，Javascript中的变量可谓独树一帜。正如ECMA-262所规定的，Javascript变量是松散类型的，而且变量不过就是特定时间点的一个特定值而已。由于没有规定变量必须包含什么数据类型，变量的值和数据类型在脚本生命期间可以改变。这样的变量很有意思，很强大，当然也有不少问题。本章会剖析错综复杂的变量。<br><a id="more"></a></p>
-<h1 id="原始值与引用值"><a href="#原始值与引用值" class="headerlink" title="原始值与引用值"></a>原始值与引用值</h1><p>EMCAScript变量可以包含两种不同类型的数据：原始值和引用值。原始值就是最简单的数据，引用值则是由多个值构成的对象。再把一个值赋给变量是，Javascript引擎必须确定这个值是原始值还是引用值。《语言基础》一章讨论了6种原始值：undefined、Null、Boolean、Number、String、Symbol。保存原始值的变量是按值访问的。引用值是保存在内存中的对象，Javascript不允许直接访问内存位置，因此也就不能直接操作对象所在的内存空间。在操作对象时，实际上操作的是对该对象的引用。为此保存引用值的变量是按引用访问的。</p>
-<h2 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h2><pre><code class="javascript">/* 引用值 */
-let person = new Object();
-person.name = &quot;Kinsiy&quot;;
-console.log(person.name); // &quot;Kinsiy&quot;
-/* 原始值 */
-// 原始值不能有属性，尽管尝试给原始值添加属性不会报错
-ler name = &quot;Kinsiy&quot;;
-name.age = 23;
-console.log(name.age); // undefined
+          <h1 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h1><p>ECMAscript通过RegExp类型支持正则表达式。正则表达式使用类似Perl的简洁语法来创建:</p>
+<pre><code class="javascript">let expression = /pattern/flags
 </code></pre>
-<h2 id="复制值"><a href="#复制值" class="headerlink" title="复制值"></a>复制值</h2><pre><code class="javascript">/* 原始值复制 */
-// num1 与 num2 完全独立
-let num1 = 8;
-let num2 = num1;
+<p>这个正则表达式的pattern(模式)可以是任何简单或复杂的正则表达式，包括字符类、限定符、分组、先前查找和反向查找和反向引用、每个正则表达式可以带零个或多个flags(标记)、用于控制正则表达式的行为。下面给出了表示匹配模式的标记。</p>
+<ul>
+<li>g：全局模式，表示查找字符串的全部内容，而不是找到第一个匹配的内容就结束</li>
+<li>i：不区分大小写，表示在查找匹配时忽略pattern和字符串的大小写</li>
+<li>m：多行模式，表示查到一行文本末尾时会继续查找</li>
+<li>y：粘贴模式，表示只查找从lastIndex开始及之后的字符串</li>
+<li>u：Unicode模式，启用Unicode匹配</li>
+<li>s：dotAll模式，表示元字符。匹配任何字符(包括\n或\r)</li>
+</ul>
+<pre><code class="javascript">/* 匹配 ( [ { \ ^ | } ] ) ? * = . 需要使用(\)转义 */
 
-/* 引用值复制 */
-// obj1 与 obj2 指向同一个对象
-let obj1 = new Object();
-let obj2 = obj1;
-obj1.name = &quot;Kinsiy&quot;;
-console.log(obj2.name); // &quot;Kinsiy&quot;
-</code></pre>
-<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><p>ECMAscript 中所有函数的参数都是按值传递的。在按值传递参数时，值会被复制到一个局部变量中。在按引用传递参数时，值在内存中的位置会被保存在一个局部变量中，这意味着对本地变量的修改会反映到函数外部。</p>
-<pre><code class="javascript">function addTen(num){
-    num += 10;
-    return num;
-}
+/* 使用字面量形式定义 */
 
-let count  = 20;
-let result = addTen(count);
-console.log(count); // 20
-console.log(result); // 30
+let pattern1 = /at/g;       // 匹配字符串中的所有&quot;at&quot;
+let pattern2 = /[bc]at/i;   // 匹配第一个&quot;bat&quot;或&quot;cat&quot;,忽略大小写
+let pattern3 = /\.at/gi;     // 匹配所有以&quot;.at&quot;结尾的三字符组合，忽略大小写
 
-function setName(obj){
-    obj.name = &quot;Kinsiy&quot;;
-    obj = New Object();
-    obj.name = &quot;Restituo&quot;;
-}
-
-let person = new Object();
-setName(person);
-console.log(person.name); // &quot;Kinsiy&quot;
-</code></pre>
-<h2 id="确定类型"><a href="#确定类型" class="headerlink" title="确定类型"></a>确定类型</h2><pre><code class="javascript">let a = &quot;Kinsiy&quot;;
-let b = true;
-let c = 56;
-let d;
-let e = null;
-let f = new Object();
-
-/* typeof */
-console.log(typeof a);     //String
-console.log(typeof b);     //boolean
-console.log(typeof c);     //number
-console.log(typeof d);     //undefined
-console.log(typeof e);     //object
-console.log(typeof f);     //object
-
-/* instanceof 
-    result = variable instanceof constructor
+/* 使用RegExp构造函数定义 
+    RegExp构造函数接受两个参数：模式字符串和标记字符串(可选)
+    因为RegExp的模式参数是字符串，所以在某些情况下需要二次转义
 */
-let colors = [&quot;粉色&quot;];
-let patter = /.d/;
+let pattern4 = new RegExp(&quot;\\.at&quot;,&quot;gi&quot;);        // 与pattern3等价
 
-console.log(f instanceof Object);       //true
-console.log(colors instanceof Array);   //true
-console.log(patter instanceof RegExp);  //true
+let pattern5 = new RegExp(pattern2, &quot;gi&quot;);      // 基于已有的正则表达式实例，可以选择性的修改它们的标记
+console.log(pattern5);                          // /[bc]at/gi
+
+/* 无论正则表达式是怎么创建的，继承的方法toLocalString() 和toString() 都返回正则表达式的字面量表示 */
+console.log(patter4.toLocalString());           // /\.at/gi
+console.log(patter4.toString());                // /\.at/gi
+
 </code></pre>
-<h1 id="执行上下文与作用域"><a href="#执行上下文与作用域" class="headerlink" title="执行上下文与作用域"></a>执行上下文与作用域</h1><p>全局上下文是最外层的上下文。在浏览器中，全局上下文就是我们常说的window对象，因此所有通过var 定义的全局变量和函数都会成为window对象的属性和方法。使用let和const的顶级声明不会定义在全局上下文中，但在作用域链解析上效果是一样的。</p>
-<pre><code class="javascript">var color = &quot;bule&quot;;
-function changeColor(){
-    let anotherColor = &quot;red&quot;;
-
-    function swapColor(){
-        ler tempColor = anotherColor;
-        anotherColor = color;
-        color = tempColor;
-
-        // 可以访问color、anotherColor、tempColor
-    }
-    // 可以访问color、anotherColor, 无法访问tempColor
-    swapColor();
-}
-
-// 只能访问color
-changeColor();
-
-/* 内部上下文可以通过作用域链访问外部上下文的一切，但外部上下文无法访问内部上下文中的任何东西。上下文之间的连接是线性的、有序的 */
+<h2 id="RegExp-实例属性"><a href="#RegExp-实例属性" class="headerlink" title="RegExp 实例属性"></a>RegExp 实例属性</h2><ul>
+<li>global: 布尔值，表示是否设置了g标记</li>
+<li>ignoreCase: 布尔值，表示是否设置了i标记</li>
+<li>unicode: 布尔值，表示是否设置了u标记</li>
+<li>sticky: 布尔值，表示是否设置了y标记</li>
+<li>lastIndex: 整数，表示在源自符串中下一次搜索的开始位置，始终从0开始</li>
+<li>multiline: 布尔值，表示是否设置了m标记</li>
+<li>dotAll: 布尔值，表示是否设置了s标记</li>
+<li>source：正则表达式的字面量字符串(不是传给构造函数的模式字符串)，没有开头和结尾的斜杠</li>
+<li>flags: 正则表达式的标记字符串。始终以字面量而非传入构造函数的字符串模式形式返回(没有前后斜杠)</li>
+</ul>
+<pre><code class="javascript">let pattern = new RegExp(&quot;\\[bc\\]at&quot;,&quot;i&quot;);
+console.log(pattern.global);        // false
+console.log(pattern.ignoreCase);    // true
+console.log(pattern.unicode);       // false
+console.log(pattern.sticky);        // false
+console.log(pattern.lastIndex);     // 0
+console.log(pattern.multiline);     // false
+console.log(pattern.dotAll);        // false
+console.log(pattern.source);        // \[bc\]at
+console.log(pattern.flags);         // i
 </code></pre>
-<h2 id="作用域增强"><a href="#作用域增强" class="headerlink" title="作用域增强"></a>作用域增强</h2><pre><code class="javascript">function testWith(){
-    let qs = &quot;?debug=ture&quot;;
-    with(location){
-        let url = href + qs;        // 相当于location.href
-    }
-    return url;                     // ReferenceError: url is not defined   使用let定义把url限制在了{}中，换做var可增强作用域
-}
-console.log(testWith());
+<h2 id="RegExp-实例方法"><a href="#RegExp-实例方法" class="headerlink" title="RegExp 实例方法"></a>RegExp 实例方法</h2><h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><p>RegExp实例的主要方法是exec(),主要用于配合捕获组使用。这个方法只接受一个参数，即要应用的模式字符串。如果找到了匹配项。则返回包含第一个匹配信息的数组；如果没找到匹配项，则返回null。返回的数组虽然是Array的实例，但包含两个额外的属性：index和input。index是字符串中匹配模式的起始位置，input是要查找的字符串。这个数组的第一个元素是匹配整个模式的字符串，其他元素是与表达式中的捕获组匹配的字符串。如果模式中没有捕获组，则数组只包含一个元素。</p>
+<pre><code class="javascript">let text = &quot;mom and dad and bady&quot;;
+let pattern = /mom( and dad( and bady)?)?/gi;
 
-/* try/catch 语句的catch块、with语句 会导致在作用域的前端临时添加一个上下文，这个上下文在代码执行后会被删除 */
-</code></pre>
-<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>使用var的函数作用域声明<br><br>在使用var声明变量时，变量会被自动添加到最接近的上下文。在函数中，最接近的上下文就是函数的局部上下文。在with语句中最接近的上下文也是函数上下文。如果变量未经声明就被初始化了那么它就会自动添加到全局上下文</p>
-<pre><code class="javascript">/* var */
-function add(num1, num2){
-    var sum = num1 + num2;      //若省略var，下方console.log不会报错
-    return sum;
-}
+let matches = pattern.exec(text);
+console.log(matches.index);     // 0
+console.log(matches.input);     // mom and dad and baby
+console.log(matches[0]);        // mom and dad and baby
+console.log(matches[1]);        // and dad and baby
+console.log(matches[2]);        // and bady
 
-let result = add(10,20);
-console.log(sum);       //ReferenceError: sum is not defined
-/* 变量提升 */
-console.log(name);      //不会报错，而是undefined
-var name = &quot;Kinsiy&quot;;
-</code></pre>
-<p>使用let的快级作用域声明<br><br>ES6新增的let关键字与var很相似，但它作用域是块级的，这也是Javascript中的新概念。块级作用域由最近的一对花括号{}界定</p>
-<pre><code class="javascript">if(true){
-    let a;
-}
-
-{
-    let b;
-}
-
-console.log(a);     //ReferenceError: a is not defined
-console.log(b);     //ReferenceError: b is not defined
-
-/* 不能重复声明 */
-let c;
-let c;      //SyntaxError
-</code></pre>
-<p>使用const的常量声明<br><br>使用const声明的变量必须同时初始化为某个值。一经声明，在其生命周期的任何时候都不能再重新赋予新值、</p>
-<pre><code class="javascript">const a;        // SyntaxError
-const b=3;
-console.log(b); // 3
-b = 4;          // TypeError
-/* cosnt除了要遵守以上规则，其它方面与let声明一样
-    const声明只应用到顶级原语或对象，换句话说，赋值为对象的const变量不能再被重新赋值为其他引用值，但对象的键则不收限制
-    若想让整个对象都不能修改，可以使用Object.freeze(),这样再给属性赋值时虽然不会报错，但会静默失败
+/* 如果模式设置了全局模式，则每次调用exec()方法会返回一个匹配的信息。直至搜索到字符串的末尾，此时返回null
+    反之，则无论对同一字符串调用了多少次exec(), 也只返回第一个匹配的信息
 */
 
-const o1 = {};
-o1 = {};                //TypeError
+let string = &quot;cat, bat, sat&quot;;
+let pattern_2 = /.at/g;
+let matches_2 = pattern_2.exec(string);
+console.log(matches_2.index);       // 0
+console.log(matches_2[0]);          // cat
+console.log(matches_2.lastIndex);   // 3
 
-const o2 = {};
-o2.name = &quot;Kinsiy&quot;;
-console.log(o2.name);   //Kinsiy
+matches_2 = pattern_2.exec(string); 
+console.log(matches_2.index);       // 5
+console.log(matches_2[0]);          // bat
+console.log(matches_2.lastIndex);   // 8
 
-const o3 = Object.freeze({})
-o3.name = &quot;Restituo&quot;;
-console.log(o3.name);   //undefined
+matches_2 = pattern_2.exec(string);
+console.log(matches_2.index);       // 10
+console.log(matches_2[0]);          // sat
+console.log(matches_2.lastIndex);   // 13
+
+matches_2 = pattern_2.exec(string);
+console.log(matches_2);             //null
 </code></pre>
-<h2 id="标识符查找"><a href="#标识符查找" class="headerlink" title="标识符查找"></a>标识符查找</h2><pre><code class="javascript">var color = &quot;red&quot;;
+<h3 id="test"><a href="#test" class="headerlink" title="test()"></a>test()</h3><p>正则表达式的另一个方法是test(),接收一个字符串参数。如果输入的文本与模式匹配，则参数返回true，反之返回false。这个方法适用于只想测试模式是否匹配，而不需要实际匹配内容的情况。</p>
+<pre><code class="javascript">let text = &quot;000-00-0000&quot;;
+let pattern = /\d{3}-\d{2}-\d{4}/;
 
-function getColor(){
-    let color = &quot;pink&quot;;
-    {
-        let color = &quot;green&quot;;
-        return color;
-    }
+if (pattern.test(text)){
+    console.log(&quot;匹配成功！&quot;);      // 匹配成功！
 }
-
-console.log(getColor());        //green
 </code></pre>
-<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>Javascript 最常用的垃圾回收策略是标记清理。<br><br>垃圾回收程序在运行的时候，会标记内存中存储的所有变量(标记方法有很多种)。然后，它会将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉。在此之后再被加上标记的变量就是待删除的了，原因是任何在上下文中的变量都访问不到它们了。随后垃圾回收程序做一次内存清理，销毁带标记的所有值并回收它们的内存。</p>
-<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>将内存占用量保持在一个较小的值可以让页面性能更好。优化内存占用的最佳手段就是保证在执行代码时只保存必要的数据。如果数据不在必要，那么把它设置为null，从而释放其引用。这也可以叫做解除引用。这个建议最适合全局变量和全局对象。局部变量在超出作用域后会被自动解除引用</p>
-<pre><code class="javascript">function createPerson(name){
-    let locatPerson = new Object();
-    locatPerson.name = name;
-    return localPerson;
-}
+<h2 id="RegExp-构造函数属性"><a href="#RegExp-构造函数属性" class="headerlink" title="RegExp 构造函数属性"></a>RegExp 构造函数属性</h2><p>RegExp 构造函数本身也有几个属性。这些属性适用于作用域中的所有正则表达式，而且会根据最后执行的正则表达式操作而变化。<br>全名|简写|说明<br>|:-:|:-:|:-:|<br>input|$_|最后搜索的字符串<br>lastMatch|$&amp;|最后匹配的字符串<br>lastParen|$+|最后的捕获组<br>leftContext|$`|input 字符串中出现在lastMatch 前面的文本<br>rightContext|$’|input 字符串中出现在lastMach 后面的文本</p>
+<pre><code class="javascript">let text = &quot;this has been a short winter&quot;;
+let pattern_1 = /(..)or(.)/g;
+let pattern_2 = /(..)win/g;
 
-let grobalPerson = createPerson(&quot;Kinsiy&quot;);
-//  ....
+let matches_1 = pattern_2.exec(text);
+console.log(RegExp.input);          // this has been a short winter
+console.log(RegExp.lastMatch);      // t win
+console.log(RegExp[&quot;$+&quot;]);          // t (t后边有一个空格)
+console.log(RegExp[&quot;$`&quot;]);          // this has been a shor
+console.log(RegExp[&quot;$&#39;&quot;]);          // ter
 
-grobalPerson = null;        //解除grobalPerson 对值得引用
-
-/* 通过const和let 声明提升性能 
-    因为const和let 都以块(而非)函数为作用域，所以相比于var，使用这两个新关键字可能会更早的让垃圾回收程序介入,尽早的回收应该回收的内存
-*/
-
-
-/* 隐藏类和删除操作
-    V8 Javascript 引擎 
-    运行期间，V8 会将创建的对象和隐藏类关联起来，以跟踪它们的属性特征。能够共享相同隐藏类的对象性能会更好，V8 会针对这种情况进行优化，但不一定总能够做到
-*/
-
-function Article(opt_authour){
-    this.title = &quot;V8 Javascript&quot;;
-    this.authour = opt_authour;     //避免“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性
-}
-
-let a1 = new Article(&quot;someone&quot;);
-let a2 = new Article(&quot;otherSomeone&quot;);
-
-// delete a1.author                 //避免使用delete ,最佳实践是把不想要的属性设置为null
-a1.author = null;
-
-/* 内存泄露 */
-function setName(){
-    name = &quot;Kinsiy&quot;;                //最常见，解释器会把变量name当做window属性来创建。
-}
-
-let name = &quot;Kinsiy&quot;;
-setInterval(() =&gt; {
-    console.log(name);
-}, 100;)                            //定时器导致内存泄露
-
-let outer = function(){
-    let name = &quot;Kinsiy&quot;;
-    return function(){
-        return name;
-    };
-};                                  //闭包导致内存泄露
-
-/* 静态分配与对象池 */
-
-//略
+pattern_1.test(text);
+console.log(RegExp[&quot;$&amp;&quot;]);          // short
+console.log(RegExp.$1);             // sh
+console.log(RegExp[&quot;$2&quot;]);          // t
 </code></pre>
+<h2 id="模式局限"><a href="#模式局限" class="headerlink" title="模式局限"></a>模式局限</h2><p>下列特性目前还没有得到EMCAScript的支持</p>
+<ul>
+<li>\A和\Z锚(分别匹配字符串的开始和结尾)</li>
+<li>联合及交叉类</li>
+<li>原子组</li>
+<li>x(忽略空格)匹配模式</li>
+<li>条件式匹配</li>
+<li>正则表达式注释</li>
+</ul>
 
         </div>
         <!-- .entry-content -->
@@ -565,7 +471,7 @@ let outer = function(){
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/01/13/基本引用类型(Date)/" rel="prev">
+            <a href="/2021/01/18/Javascript-String/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -573,7 +479,7 @@ let outer = function(){
               Previous Post</span>
               <div class="info">
                 <h3>
-                基本引用类型(Date)</h3>
+                基本引用类型(原始包装类型)</h3>
                 <hr>
               </div>
             </a>
@@ -583,7 +489,7 @@ let outer = function(){
           
             <div class="post-nepre half next">
           
-            <a href="/2020/12/20/JavaScript语言基础/" rel="next">
+            <a href="/2021/01/13/Javascript-Date/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -591,7 +497,7 @@ let outer = function(){
               Next Post</span>
               <div class="info">
                 <h3>
-                JavaScript语言基础</h3>
+                基本引用类型(Date)</h3>
                 <hr>
               </div>
             </a>
@@ -676,7 +582,7 @@ let outer = function(){
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
       </div>
-      <p style="color: #666666;">&copy 2020</p>
+      <p style="color: #666666;">&copy 2020-2021</p>
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
@@ -690,14 +596,14 @@ let outer = function(){
 
 
 <!-- <script src="/js/tocbot.js"></script> -->
-<script type="text/javascript" src="/js/lib.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/js/zoom.min.js"></script>
 <script type="text/javascript" src="/js/sakura-app.js"></script>
 <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
 <script src="/js/botui.js"></script>
 <!-- 不蒜子 网页计数器 -->
 <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

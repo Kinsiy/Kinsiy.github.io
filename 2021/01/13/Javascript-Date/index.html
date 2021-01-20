@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">基本引用类型(RegExp) | Kinsiy</title>
+  <title itemprop="name">基本引用类型(Date) | Kinsiy</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -308,138 +308,101 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">基本引用类型(RegExp)</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2021-1-17&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">基本引用类型(Date)</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2021-1-13&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <h1 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h1><p>ECMAscript通过RegExp类型支持正则表达式。正则表达式使用类似Perl的简洁语法来创建:</p>
-<pre><code class="javascript">let expression = /pattern/flags
+          <p>引用值(或者对象)是某个特定引用对象的实例。<br><a id="more"></a></p>
+<h1 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h1><p>要创建日期对象，就使用new操作符来调用Date构造函数：</p>
+<pre><code class="javascript">// 在不给Date()传参数的时候，创建的对象将保存当前的日期和时间。
+let now = new Date();
+
+// 要基于其他日期和时间建立日期对象，必须传入其毫秒表示(UNIX纪元1970年1月1日午夜之后的毫秒数)
+
+/* Date.parse() */     
+// 月/日/年
+
+let someDate = new Date(Date.parse(&quot;3/18/1998&quot;));
+let otherDate = new Date(&quot;3/18/1998&quot;);              // 等价
+
+/* Date.UTC() */
+// *年-*月(0-11)-日(1-31)-时(0-23)-分-秒-毫秒
+// GMT 时间 2021年1月13日1时06分55秒
+let nowDate_1 = new Date(Date.UTC(2021, 0, 13, 1, 05, 55))      // 无引号
+let nowDate_2 = new Date(2021, 0, 13, 1, 05, 55)                // 等价
+
+/* Date.now() */
+// 返回表示方法执行时日期和时间的毫秒数
+let start = Date.now();
+let stop = Date.now();
+let result = stop - start;
+console.log(result);        // 0
 </code></pre>
-<p>这个正则表达式的pattern(模式)可以是任何简单或复杂的正则表达式，包括字符类、限定符、分组、先前查找和反向查找和反向引用、每个正则表达式可以带零个或多个flags(标记)、用于控制正则表达式的行为。下面给出了表示匹配模式的标记。</p>
-<ul>
-<li>g：全局模式，表示查找字符串的全部内容，而不是找到第一个匹配的内容就结束</li>
-<li>i：不区分大小写，表示在查找匹配时忽略pattern和字符串的大小写</li>
-<li>m：多行模式，表示查到一行文本末尾时会继续查找</li>
-<li>y：粘贴模式，表示只查找从lastIndex开始及之后的字符串</li>
-<li>u：Unicode模式，启用Unicode匹配</li>
-<li>s：dotAll模式，表示元字符。匹配任何字符(包括\n或\r)</li>
-</ul>
-<pre><code class="javascript">/* 匹配 ( [ { \ ^ | } ] ) ? * = . 需要使用(\)转义 */
-
-/* 使用字面量形式定义 */
-
-let pattern1 = /at/g;       // 匹配字符串中的所有&quot;at&quot;
-let pattern2 = /[bc]at/i;   // 匹配第一个&quot;bat&quot;或&quot;cat&quot;,忽略大小写
-let pattern3 = /\.at/gi;     // 匹配所有以&quot;.at&quot;结尾的三字符组合，忽略大小写
-
-/* 使用RegExp构造函数定义 
-    RegExp构造函数接受两个参数：模式字符串和标记字符串(可选)
-    因为RegExp的模式参数是字符串，所以在某些情况下需要二次转义
-*/
-let pattern4 = new RegExp(&quot;\\.at&quot;,&quot;gi&quot;);        // 与pattern3等价
-
-let pattern5 = new RegExp(pattern2, &quot;gi&quot;);      // 基于已有的正则表达式实例，可以选择性的修改它们的标记
-console.log(pattern5);                          // /[bc]at/gi
-
-/* 无论正则表达式是怎么创建的，继承的方法toLocalString() 和toString() 都返回正则表达式的字面量表示 */
-console.log(patter4.toLocalString());           // /\.at/gi
-console.log(patter4.toString());                // /\.at/gi
-
-</code></pre>
-<h2 id="RegExp-实例属性"><a href="#RegExp-实例属性" class="headerlink" title="RegExp 实例属性"></a>RegExp 实例属性</h2><ul>
-<li>global: 布尔值，表示是否设置了g标记</li>
-<li>ignoreCase: 布尔值，表示是否设置了i标记</li>
-<li>unicode: 布尔值，表示是否设置了u标记</li>
-<li>sticky: 布尔值，表示是否设置了y标记</li>
-<li>lastIndex: 整数，表示在源自符串中下一次搜索的开始位置，始终从0开始</li>
-<li>multiline: 布尔值，表示是否设置了m标记</li>
-<li>dotAll: 布尔值，表示是否设置了s标记</li>
-<li>source：正则表达式的字面量字符串(不是传给构造函数的模式字符串)，没有开头和结尾的斜杠</li>
-<li>flags: 正则表达式的标记字符串。始终以字面量而非传入构造函数的字符串模式形式返回(没有前后斜杠)</li>
-</ul>
-<pre><code class="javascript">let pattern = new RegExp(&quot;\\[bc\\]at&quot;,&quot;i&quot;);
-console.log(pattern.global);        // false
-console.log(pattern.ignoreCase);    // true
-console.log(pattern.unicode);       // false
-console.log(pattern.sticky);        // false
-console.log(pattern.lastIndex);     // 0
-console.log(pattern.multiline);     // false
-console.log(pattern.dotAll);        // false
-console.log(pattern.source);        // \[bc\]at
-console.log(pattern.flags);         // i
-</code></pre>
-<h2 id="RegExp-实例方法"><a href="#RegExp-实例方法" class="headerlink" title="RegExp 实例方法"></a>RegExp 实例方法</h2><h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><p>RegExp实例的主要方法是exec(),主要用于配合捕获组使用。这个方法只接受一个参数，即要应用的模式字符串。如果找到了匹配项。则返回包含第一个匹配信息的数组；如果没找到匹配项，则返回null。返回的数组虽然是Array的实例，但包含两个额外的属性：index和input。index是字符串中匹配模式的起始位置，input是要查找的字符串。这个数组的第一个元素是匹配整个模式的字符串，其他元素是与表达式中的捕获组匹配的字符串。如果模式中没有捕获组，则数组只包含一个元素。</p>
-<pre><code class="javascript">let text = &quot;mom and dad and bady&quot;;
-let pattern = /mom( and dad( and bady)?)?/gi;
-
-let matches = pattern.exec(text);
-console.log(matches.index);     // 0
-console.log(matches.input);     // mom and dad and baby
-console.log(matches[0]);        // mom and dad and baby
-console.log(matches[1]);        // and dad and baby
-console.log(matches[2]);        // and bady
-
-/* 如果模式设置了全局模式，则每次调用exec()方法会返回一个匹配的信息。直至搜索到字符串的末尾，此时返回null
-    反之，则无论对同一字符串调用了多少次exec(), 也只返回第一个匹配的信息
+<h3 id="toLocaleString-toString-valueof-…"><a href="#toLocaleString-toString-valueof-…" class="headerlink" title="toLocaleString()-toString()-valueof()-…"></a>toLocaleString()-toString()-valueof()-…</h3><pre><code class="javascript">/* Date类型的
+toLocaleString()方法 返回与浏览器运行的本地环境一致的时间和日期。这通常意味着格式中包含针对时间的AM或PM，但不包含时区信息(具体格式  可能因浏览器而不同)
+toString()方法 返回带时区信息的日期和时间，而时间也是24小时制表示的
+valueOf()方法 不返回字符串，这个方法被重写后返回的是日期的毫秒表示
+toDateString() 显示日期中的周几、月、日、年(格式特定于实现)
+toTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
+toLocaleDateString() 显示日期中的周几、月、日、年(格式特定于实现和地区)
+toLocaleTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
+toUTCString() 显示完整UTC日期(格式特定于实现)
 */
 
-let string = &quot;cat, bat, sat&quot;;
-let pattern_2 = /.at/g;
-let matches_2 = pattern_2.exec(string);
-console.log(matches_2.index);       // 0
-console.log(matches_2[0]);          // cat
-console.log(matches_2.lastIndex);   // 3
-
-matches_2 = pattern_2.exec(string); 
-console.log(matches_2.index);       // 5
-console.log(matches_2[0]);          // bat
-console.log(matches_2.lastIndex);   // 8
-
-matches_2 = pattern_2.exec(string);
-console.log(matches_2.index);       // 10
-console.log(matches_2[0]);          // sat
-console.log(matches_2.lastIndex);   // 13
-
-matches_2 = pattern_2.exec(string);
-console.log(matches_2);             //null
+let now = new Date()
+console.log(now.toLocaleString());              // 2021/1/13 上午1:25:05
+console.log(now.toString());                    // Wed Jan 13 2021 01:29:11 GMT+0800 (中国标准时间)
+console.log(now.valueOf());                     // 1610472551838
+console.log(now.toDateString());                // Wed Jan 13 2021
+console.log(now.toTimeString());                // 01:39:22 GMT+0800 (中国标准时间)
+console.log(now.toLocaleDateString());          // 2021/1/13
+console.log(now.toLocaleTimeString());          // 上午1:39:22
+console.log(now.toUTCString());                 // 1610472Tue, 12 Jan 2021 17:39:22 GMT551838
 </code></pre>
-<h3 id="test"><a href="#test" class="headerlink" title="test()"></a>test()</h3><p>正则表达式的另一个方法是test(),接收一个字符串参数。如果输入的文本与模式匹配，则参数返回true，反之返回false。这个方法适用于只想测试模式是否匹配，而不需要实际匹配内容的情况。</p>
-<pre><code class="javascript">let text = &quot;000-00-0000&quot;;
-let pattern = /\d{3}-\d{2}-\d{4}/;
+<h3 id="日期-时间组件方法"><a href="#日期-时间组件方法" class="headerlink" title="日期/时间组件方法"></a>日期/时间组件方法</h3><pre><code class="javascript">/*
+getTime()               返回日期的毫秒数；与valueOf()相同
+setTime(milliseconds)   设置日期的毫秒数，从而修改整个日期
+getFullYear()           返回四位年数(即2021而不是21)
+getUTCFullYear()        返回UTC日期的四位年数
+setFullYear(year)       设置日期的年(year必须是4位数) 
+setUTCFullYear(year)    设置UTC时间的年(year必须是四位数)
+getMonth()          ....
+getUTCMonth()
+setMonth(month)
+setUTCMonth(month)
+getDate()
+getUTCDate()
+setDate(date)
+setUTCDate(date)
+getDay()
+getUTCDay()
+getHours()
+getUTCHours()
+setHours(hours)
+setUTCHours(hours)
+getMinutes()
+getUTCMinutes()
+setMinutes(minutes)
+setUTCMinutes(minutes)
+getSeconds()
+getUTCSeconds()
+setSeconds(seconds)
+setUTCSeconds(seconds)
+getMillseconds()
+getUTCMillseconds()
+setMillseconds(millseconds)
+setUTCMillseconds(millseconds)
+getTimezoneOffset()             返回以分钟计的UTC与本地时区的偏移量
+*/
 
-if (pattern.test(text)){
-    console.log(&quot;匹配成功！&quot;);      // 匹配成功！
-}
+let now = new Date();
+console.log(now.getTime());                         // 1610474569539
+console.log(now.setTime(now.getTime()/2));          // Sun Jul 09 1995 05:01:24 GMT+0800 (中国标准时间)
+console.log(now.getTimezoneOffset());               // -480
 </code></pre>
-<h2 id="RegExp-构造函数属性"><a href="#RegExp-构造函数属性" class="headerlink" title="RegExp 构造函数属性"></a>RegExp 构造函数属性</h2><p>RegExp 构造函数本身也有几个属性。这些属性适用于作用域中的所有正则表达式，而且会根据最后执行的正则表达式操作而变化。<br>全名|简写|说明<br>|:-:|:-:|:-:|<br>input|$_|最后搜索的字符串<br>lastMatch|$&amp;|最后匹配的字符串<br>lastParen|$+|最后的捕获组<br>leftContext|$`|input 字符串中出现在lastMatch 前面的文本<br>rightContext|$’|input 字符串中出现在lastMach 后面的文本</p>
-<pre><code class="javascript">let text = &quot;this has been a short winter&quot;;
-let pattern_1 = /(..)or(.)/g;
-let pattern_2 = /(..)win/g;
-
-let matches_1 = pattern_2.exec(text);
-console.log(RegExp.input);          // this has been a short winter
-console.log(RegExp.lastMatch);      // t win
-console.log(RegExp[&quot;$+&quot;]);          // t (t后边有一个空格)
-console.log(RegExp[&quot;$`&quot;]);          // this has been a shor
-console.log(RegExp[&quot;$&#39;&quot;]);          // ter
-
-pattern_1.test(text);
-console.log(RegExp[&quot;$&amp;&quot;]);          // short
-console.log(RegExp.$1);             // sh
-console.log(RegExp[&quot;$2&quot;]);          // t
-</code></pre>
-<h2 id="模式局限"><a href="#模式局限" class="headerlink" title="模式局限"></a>模式局限</h2><p>下列特性目前还没有得到EMCAScript的支持</p>
-<ul>
-<li>\A和\Z锚(分别匹配字符串的开始和结尾)</li>
-<li>联合及交叉类</li>
-<li>原子组</li>
-<li>x(忽略空格)匹配模式</li>
-<li>条件式匹配</li>
-<li>正则表达式注释</li>
-</ul>
 
         </div>
         <!-- .entry-content -->
@@ -471,7 +434,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/01/18/基本引用类型(原始值包装类型)/" rel="prev">
+            <a href="/2021/01/17/Javascript-RegExp/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -479,7 +442,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
               Previous Post</span>
               <div class="info">
                 <h3>
-                基本引用类型(原始包装类型)</h3>
+                基本引用类型(RegExp)</h3>
                 <hr>
               </div>
             </a>
@@ -489,7 +452,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
           
             <div class="post-nepre half next">
           
-            <a href="/2021/01/13/基本引用类型(Date)/" rel="next">
+            <a href="/2021/01/10/Javascript-Variables/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -497,7 +460,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
               Next Post</span>
               <div class="info">
                 <h3>
-                基本引用类型(Date)</h3>
+                变量、作用域与内存</h3>
                 <hr>
               </div>
             </a>
@@ -582,7 +545,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
       </div>
-      <p style="color: #666666;">&copy 2020</p>
+      <p style="color: #666666;">&copy 2020-2021</p>
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
@@ -596,14 +559,14 @@ console.log(RegExp[&quot;$2&quot;]);          // t
 
 
 <!-- <script src="/js/tocbot.js"></script> -->
-<script type="text/javascript" src="/js/lib.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/js/zoom.min.js"></script>
 <script type="text/javascript" src="/js/sakura-app.js"></script>
 <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
 <script src="/js/botui.js"></script>
 <!-- 不蒜子 网页计数器 -->
 <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

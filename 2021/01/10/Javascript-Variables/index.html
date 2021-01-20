@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">基本引用类型(Date) | Kinsiy</title>
+  <title itemprop="name">变量、作用域与内存 | Kinsiy</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -308,100 +308,231 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">基本引用类型(Date)</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2021-1-13&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">变量、作用域与内存</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2021-1-10&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>引用值(或者对象)是某个特定引用对象的实例。<br><a id="more"></a></p>
-<h1 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h1><p>要创建日期对象，就使用new操作符来调用Date构造函数：</p>
-<pre><code class="javascript">// 在不给Date()传参数的时候，创建的对象将保存当前的日期和时间。
-let now = new Date();
-
-// 要基于其他日期和时间建立日期对象，必须传入其毫秒表示(UNIX纪元1970年1月1日午夜之后的毫秒数)
-
-/* Date.parse() */     
-// 月/日/年
-
-let someDate = new Date(Date.parse(&quot;3/18/1998&quot;));
-let otherDate = new Date(&quot;3/18/1998&quot;);              // 等价
-
-/* Date.UTC() */
-// *年-*月(0-11)-日(1-31)-时(0-23)-分-秒-毫秒
-// GMT 时间 2021年1月13日1时06分55秒
-let nowDate_1 = new Date(Date.UTC(2021, 0, 13, 1, 05, 55))      // 无引号
-let nowDate_2 = new Date(2021, 0, 13, 1, 05, 55)                // 等价
-
-/* Date.now() */
-// 返回表示方法执行时日期和时间的毫秒数
-let start = Date.now();
-let stop = Date.now();
-let result = stop - start;
-console.log(result);        // 0
+          <p>相比于其他语言，Javascript中的变量可谓独树一帜。正如ECMA-262所规定的，Javascript变量是松散类型的，而且变量不过就是特定时间点的一个特定值而已。由于没有规定变量必须包含什么数据类型，变量的值和数据类型在脚本生命期间可以改变。这样的变量很有意思，很强大，当然也有不少问题。本章会剖析错综复杂的变量。<br><a id="more"></a></p>
+<h1 id="原始值与引用值"><a href="#原始值与引用值" class="headerlink" title="原始值与引用值"></a>原始值与引用值</h1><p>EMCAScript变量可以包含两种不同类型的数据：原始值和引用值。原始值就是最简单的数据，引用值则是由多个值构成的对象。再把一个值赋给变量是，Javascript引擎必须确定这个值是原始值还是引用值。《语言基础》一章讨论了6种原始值：undefined、Null、Boolean、Number、String、Symbol。保存原始值的变量是按值访问的。引用值是保存在内存中的对象，Javascript不允许直接访问内存位置，因此也就不能直接操作对象所在的内存空间。在操作对象时，实际上操作的是对该对象的引用。为此保存引用值的变量是按引用访问的。</p>
+<h2 id="动态属性"><a href="#动态属性" class="headerlink" title="动态属性"></a>动态属性</h2><pre><code class="javascript">/* 引用值 */
+let person = new Object();
+person.name = &quot;Kinsiy&quot;;
+console.log(person.name); // &quot;Kinsiy&quot;
+/* 原始值 */
+// 原始值不能有属性，尽管尝试给原始值添加属性不会报错
+ler name = &quot;Kinsiy&quot;;
+name.age = 23;
+console.log(name.age); // undefined
 </code></pre>
-<h3 id="toLocaleString-toString-valueof-…"><a href="#toLocaleString-toString-valueof-…" class="headerlink" title="toLocaleString()-toString()-valueof()-…"></a>toLocaleString()-toString()-valueof()-…</h3><pre><code class="javascript">/* Date类型的
-toLocaleString()方法 返回与浏览器运行的本地环境一致的时间和日期。这通常意味着格式中包含针对时间的AM或PM，但不包含时区信息(具体格式  可能因浏览器而不同)
-toString()方法 返回带时区信息的日期和时间，而时间也是24小时制表示的
-valueOf()方法 不返回字符串，这个方法被重写后返回的是日期的毫秒表示
-toDateString() 显示日期中的周几、月、日、年(格式特定于实现)
-toTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
-toLocaleDateString() 显示日期中的周几、月、日、年(格式特定于实现和地区)
-toLocaleTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
-toUTCString() 显示完整UTC日期(格式特定于实现)
+<h2 id="复制值"><a href="#复制值" class="headerlink" title="复制值"></a>复制值</h2><pre><code class="javascript">/* 原始值复制 */
+// num1 与 num2 完全独立
+let num1 = 8;
+let num2 = num1;
+
+/* 引用值复制 */
+// obj1 与 obj2 指向同一个对象
+let obj1 = new Object();
+let obj2 = obj1;
+obj1.name = &quot;Kinsiy&quot;;
+console.log(obj2.name); // &quot;Kinsiy&quot;
+</code></pre>
+<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><p>ECMAscript 中所有函数的参数都是按值传递的。在按值传递参数时，值会被复制到一个局部变量中。在按引用传递参数时，值在内存中的位置会被保存在一个局部变量中，这意味着对本地变量的修改会反映到函数外部。</p>
+<pre><code class="javascript">function addTen(num){
+    num += 10;
+    return num;
+}
+
+let count  = 20;
+let result = addTen(count);
+console.log(count); // 20
+console.log(result); // 30
+
+function setName(obj){
+    obj.name = &quot;Kinsiy&quot;;
+    obj = New Object();
+    obj.name = &quot;Restituo&quot;;
+}
+
+let person = new Object();
+setName(person);
+console.log(person.name); // &quot;Kinsiy&quot;
+</code></pre>
+<h2 id="确定类型"><a href="#确定类型" class="headerlink" title="确定类型"></a>确定类型</h2><pre><code class="javascript">let a = &quot;Kinsiy&quot;;
+let b = true;
+let c = 56;
+let d;
+let e = null;
+let f = new Object();
+
+/* typeof */
+console.log(typeof a);     //String
+console.log(typeof b);     //boolean
+console.log(typeof c);     //number
+console.log(typeof d);     //undefined
+console.log(typeof e);     //object
+console.log(typeof f);     //object
+
+/* instanceof 
+    result = variable instanceof constructor
+*/
+let colors = [&quot;粉色&quot;];
+let patter = /.d/;
+
+console.log(f instanceof Object);       //true
+console.log(colors instanceof Array);   //true
+console.log(patter instanceof RegExp);  //true
+</code></pre>
+<h1 id="执行上下文与作用域"><a href="#执行上下文与作用域" class="headerlink" title="执行上下文与作用域"></a>执行上下文与作用域</h1><p>全局上下文是最外层的上下文。在浏览器中，全局上下文就是我们常说的window对象，因此所有通过var 定义的全局变量和函数都会成为window对象的属性和方法。使用let和const的顶级声明不会定义在全局上下文中，但在作用域链解析上效果是一样的。</p>
+<pre><code class="javascript">var color = &quot;bule&quot;;
+function changeColor(){
+    let anotherColor = &quot;red&quot;;
+
+    function swapColor(){
+        ler tempColor = anotherColor;
+        anotherColor = color;
+        color = tempColor;
+
+        // 可以访问color、anotherColor、tempColor
+    }
+    // 可以访问color、anotherColor, 无法访问tempColor
+    swapColor();
+}
+
+// 只能访问color
+changeColor();
+
+/* 内部上下文可以通过作用域链访问外部上下文的一切，但外部上下文无法访问内部上下文中的任何东西。上下文之间的连接是线性的、有序的 */
+</code></pre>
+<h2 id="作用域增强"><a href="#作用域增强" class="headerlink" title="作用域增强"></a>作用域增强</h2><pre><code class="javascript">function testWith(){
+    let qs = &quot;?debug=ture&quot;;
+    with(location){
+        let url = href + qs;        // 相当于location.href
+    }
+    return url;                     // ReferenceError: url is not defined   使用let定义把url限制在了{}中，换做var可增强作用域
+}
+console.log(testWith());
+
+/* try/catch 语句的catch块、with语句 会导致在作用域的前端临时添加一个上下文，这个上下文在代码执行后会被删除 */
+</code></pre>
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>使用var的函数作用域声明<br><br>在使用var声明变量时，变量会被自动添加到最接近的上下文。在函数中，最接近的上下文就是函数的局部上下文。在with语句中最接近的上下文也是函数上下文。如果变量未经声明就被初始化了那么它就会自动添加到全局上下文</p>
+<pre><code class="javascript">/* var */
+function add(num1, num2){
+    var sum = num1 + num2;      //若省略var，下方console.log不会报错
+    return sum;
+}
+
+let result = add(10,20);
+console.log(sum);       //ReferenceError: sum is not defined
+/* 变量提升 */
+console.log(name);      //不会报错，而是undefined
+var name = &quot;Kinsiy&quot;;
+</code></pre>
+<p>使用let的快级作用域声明<br><br>ES6新增的let关键字与var很相似，但它作用域是块级的，这也是Javascript中的新概念。块级作用域由最近的一对花括号{}界定</p>
+<pre><code class="javascript">if(true){
+    let a;
+}
+
+{
+    let b;
+}
+
+console.log(a);     //ReferenceError: a is not defined
+console.log(b);     //ReferenceError: b is not defined
+
+/* 不能重复声明 */
+let c;
+let c;      //SyntaxError
+</code></pre>
+<p>使用const的常量声明<br><br>使用const声明的变量必须同时初始化为某个值。一经声明，在其生命周期的任何时候都不能再重新赋予新值、</p>
+<pre><code class="javascript">const a;        // SyntaxError
+const b=3;
+console.log(b); // 3
+b = 4;          // TypeError
+/* cosnt除了要遵守以上规则，其它方面与let声明一样
+    const声明只应用到顶级原语或对象，换句话说，赋值为对象的const变量不能再被重新赋值为其他引用值，但对象的键则不收限制
+    若想让整个对象都不能修改，可以使用Object.freeze(),这样再给属性赋值时虽然不会报错，但会静默失败
 */
 
-let now = new Date()
-console.log(now.toLocaleString());              // 2021/1/13 上午1:25:05
-console.log(now.toString());                    // Wed Jan 13 2021 01:29:11 GMT+0800 (中国标准时间)
-console.log(now.valueOf());                     // 1610472551838
-console.log(now.toDateString());                // Wed Jan 13 2021
-console.log(now.toTimeString());                // 01:39:22 GMT+0800 (中国标准时间)
-console.log(now.toLocaleDateString());          // 2021/1/13
-console.log(now.toLocaleTimeString());          // 上午1:39:22
-console.log(now.toUTCString());                 // 1610472Tue, 12 Jan 2021 17:39:22 GMT551838
+const o1 = {};
+o1 = {};                //TypeError
+
+const o2 = {};
+o2.name = &quot;Kinsiy&quot;;
+console.log(o2.name);   //Kinsiy
+
+const o3 = Object.freeze({})
+o3.name = &quot;Restituo&quot;;
+console.log(o3.name);   //undefined
 </code></pre>
-<h3 id="日期-时间组件方法"><a href="#日期-时间组件方法" class="headerlink" title="日期/时间组件方法"></a>日期/时间组件方法</h3><pre><code class="javascript">/*
-getTime()               返回日期的毫秒数；与valueOf()相同
-setTime(milliseconds)   设置日期的毫秒数，从而修改整个日期
-getFullYear()           返回四位年数(即2021而不是21)
-getUTCFullYear()        返回UTC日期的四位年数
-setFullYear(year)       设置日期的年(year必须是4位数) 
-setUTCFullYear(year)    设置UTC时间的年(year必须是四位数)
-getMonth()          ....
-getUTCMonth()
-setMonth(month)
-setUTCMonth(month)
-getDate()
-getUTCDate()
-setDate(date)
-setUTCDate(date)
-getDay()
-getUTCDay()
-getHours()
-getUTCHours()
-setHours(hours)
-setUTCHours(hours)
-getMinutes()
-getUTCMinutes()
-setMinutes(minutes)
-setUTCMinutes(minutes)
-getSeconds()
-getUTCSeconds()
-setSeconds(seconds)
-setUTCSeconds(seconds)
-getMillseconds()
-getUTCMillseconds()
-setMillseconds(millseconds)
-setUTCMillseconds(millseconds)
-getTimezoneOffset()             返回以分钟计的UTC与本地时区的偏移量
+<h2 id="标识符查找"><a href="#标识符查找" class="headerlink" title="标识符查找"></a>标识符查找</h2><pre><code class="javascript">var color = &quot;red&quot;;
+
+function getColor(){
+    let color = &quot;pink&quot;;
+    {
+        let color = &quot;green&quot;;
+        return color;
+    }
+}
+
+console.log(getColor());        //green
+</code></pre>
+<h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><p>Javascript 最常用的垃圾回收策略是标记清理。<br><br>垃圾回收程序在运行的时候，会标记内存中存储的所有变量(标记方法有很多种)。然后，它会将所有在上下文中的变量，以及被在上下文中的变量引用的变量的标记去掉。在此之后再被加上标记的变量就是待删除的了，原因是任何在上下文中的变量都访问不到它们了。随后垃圾回收程序做一次内存清理，销毁带标记的所有值并回收它们的内存。</p>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><p>将内存占用量保持在一个较小的值可以让页面性能更好。优化内存占用的最佳手段就是保证在执行代码时只保存必要的数据。如果数据不在必要，那么把它设置为null，从而释放其引用。这也可以叫做解除引用。这个建议最适合全局变量和全局对象。局部变量在超出作用域后会被自动解除引用</p>
+<pre><code class="javascript">function createPerson(name){
+    let locatPerson = new Object();
+    locatPerson.name = name;
+    return localPerson;
+}
+
+let grobalPerson = createPerson(&quot;Kinsiy&quot;);
+//  ....
+
+grobalPerson = null;        //解除grobalPerson 对值得引用
+
+/* 通过const和let 声明提升性能 
+    因为const和let 都以块(而非)函数为作用域，所以相比于var，使用这两个新关键字可能会更早的让垃圾回收程序介入,尽早的回收应该回收的内存
 */
 
-let now = new Date();
-console.log(now.getTime());                         // 1610474569539
-console.log(now.setTime(now.getTime()/2));          // Sun Jul 09 1995 05:01:24 GMT+0800 (中国标准时间)
-console.log(now.getTimezoneOffset());               // -480
+
+/* 隐藏类和删除操作
+    V8 Javascript 引擎 
+    运行期间，V8 会将创建的对象和隐藏类关联起来，以跟踪它们的属性特征。能够共享相同隐藏类的对象性能会更好，V8 会针对这种情况进行优化，但不一定总能够做到
+*/
+
+function Article(opt_authour){
+    this.title = &quot;V8 Javascript&quot;;
+    this.authour = opt_authour;     //避免“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性
+}
+
+let a1 = new Article(&quot;someone&quot;);
+let a2 = new Article(&quot;otherSomeone&quot;);
+
+// delete a1.author                 //避免使用delete ,最佳实践是把不想要的属性设置为null
+a1.author = null;
+
+/* 内存泄露 */
+function setName(){
+    name = &quot;Kinsiy&quot;;                //最常见，解释器会把变量name当做window属性来创建。
+}
+
+let name = &quot;Kinsiy&quot;;
+setInterval(() =&gt; {
+    console.log(name);
+}, 100;)                            //定时器导致内存泄露
+
+let outer = function(){
+    let name = &quot;Kinsiy&quot;;
+    return function(){
+        return name;
+    };
+};                                  //闭包导致内存泄露
+
+/* 静态分配与对象池 */
+
+//略
 </code></pre>
 
         </div>
@@ -434,7 +565,7 @@ console.log(now.getTimezoneOffset());               // -480
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/01/17/基本引用变量(RegExp)/" rel="prev">
+            <a href="/2021/01/13/Javascript-Date/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -442,7 +573,7 @@ console.log(now.getTimezoneOffset());               // -480
               Previous Post</span>
               <div class="info">
                 <h3>
-                基本引用类型(RegExp)</h3>
+                基本引用类型(Date)</h3>
                 <hr>
               </div>
             </a>
@@ -452,7 +583,7 @@ console.log(now.getTimezoneOffset());               // -480
           
             <div class="post-nepre half next">
           
-            <a href="/2021/01/10/变量、作用域与内存/" rel="next">
+            <a href="/2020/12/20/JavaScript-Basics/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -460,7 +591,7 @@ console.log(now.getTimezoneOffset());               // -480
               Next Post</span>
               <div class="info">
                 <h3>
-                变量、作用域与内存</h3>
+                JavaScript语言基础</h3>
                 <hr>
               </div>
             </a>
@@ -545,7 +676,7 @@ console.log(now.getTimezoneOffset());               // -480
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
       </div>
-      <p style="color: #666666;">&copy 2020</p>
+      <p style="color: #666666;">&copy 2020-2021</p>
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
@@ -559,14 +690,14 @@ console.log(now.getTimezoneOffset());               // -480
 
 
 <!-- <script src="/js/tocbot.js"></script> -->
-<script type="text/javascript" src="/js/lib.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/js/zoom.min.js"></script>
 <script type="text/javascript" src="/js/sakura-app.js"></script>
 <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
 <script src="/js/botui.js"></script>
 <!-- 不蒜子 网页计数器 -->
 <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

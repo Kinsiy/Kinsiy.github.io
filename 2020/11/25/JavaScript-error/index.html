@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">HTML快速参考 | Kinsiy</title>
+  <title itemprop="name">JavaScript错误处理与调试 | Kinsiy</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -308,403 +308,127 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">HTML快速参考</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-12-1&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">JavaScript错误处理与调试</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-11-25&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>HTML 基本文档<br><a id="more"></a></p>
-<pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;HTML快速参考&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;段落：可见文本&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
+          <h1 id="Error-对象"><a href="#Error-对象" class="headerlink" title="Error 对象"></a>Error 对象</h1><h2 id="SyntaxError"><a href="#SyntaxError" class="headerlink" title="SyntaxError"></a>SyntaxError</h2><p>语法不正确。这是因为代码不遵循语言规范。通常因为输入错误导致。<br><a id="more"></a></p>
+<pre><code class="javascript">//引号不匹配或未闭合
+document.write(&quot;Howdy&#39;)
 </code></pre>
-<h1 id="HTML-链接"><a href="#HTML-链接" class="headerlink" title="HTML 链接"></a>HTML 链接</h1><h2 id="target-属性"><a href="#target-属性" class="headerlink" title="target 属性"></a>target 属性</h2><pre><code class="html">&lt;a name=&quot;mark_a&quot;&gt;Mark_A&lt;/a&gt;
-&lt;a href=&quot;https://www.baidu.com&quot; target=&quot;_blank&quot;&gt;Baidu&lt;/a&gt;
+<h2 id="ReferenceError"><a href="#ReferenceError" class="headerlink" title="ReferenceError"></a>ReferenceError</h2><p>变量不存在。这是因为变量未声明或不在作用域内。</p>
+<pre><code class="javascript">//变量未声明
+var width = 3;
+var area = width * height;
 </code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">_blank</td>
-<td style="text-align:center">在新窗口中打开被链接文档</td>
-<td style="text-align:center">_top</td>
-<td style="text-align:center">在整个窗口打开被链接文档</td>
-</tr>
-<tr>
-<td style="text-align:center">_self</td>
-<td style="text-align:center">默认，在相同框架中打开被链接文档</td>
-<td style="text-align:center">framename</td>
-<td style="text-align:center">在指定的框架中打开被链接文档</td>
-</tr>
-<tr>
-<td style="text-align:center">_parent</td>
-<td style="text-align:center">在父框架中打开被链接文档</td>
-</tr>
-</tbody>
-</table>
-<h2 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h2><pre><code class="html">&lt;a href=&quot;#mark_a&quot;&gt;跳转到Mark_A&lt;/a&gt;
-&lt;br /&gt;
-&lt;a href=&quot;mailto:solo@gmail.com?cc=kinsiy@qq.com&amp;bcc=someone@outlook.com&amp;subject=Hello%20word&amp;body=正文&quot;
-    &gt;发送邮件！&lt;/a&gt;
+<h2 id="TypeError"><a href="#TypeError" class="headerlink" title="TypeError"></a>TypeError</h2><p>值为意外的数据类型。这通常是因为尝试使用不存在的对象或方法而引起的。</p>
+<pre><code class="javascript">//方法不存在
+var box = {};
+box.GetArea();
+
+//DOM节点不存在
+var el = document.getElementById(&#39;Name&#39;);
+el.innerHTML = &#39;Kinsiy&#39;;
 </code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">cc</td>
-<td style="text-align:center">抄送</td>
-<td style="text-align:center">bcc</td>
-<td style="text-align:center">暗送</td>
-<td style="text-align:center">subject</td>
-<td style="text-align:center">主题</td>
-<td style="text-align:center">body</td>
-<td style="text-align:center">正文</td>
-</tr>
-</tbody>
-</table>
-<h2 id="图片链接"><a href="#图片链接" class="headerlink" title="图片链接"></a>图片链接</h2><pre><code class="html">&lt;a href=&quot;https://kinsiy.github.io&quot;&gt;&lt;img src=&quot;URL&quot; alt=&quot;kinsiy&quot;&gt;&lt;/a&gt;
+<h2 id="RangeError"><a href="#RangeError" class="headerlink" title="RangeError"></a>RangeError</h2><p>数字在可接受范围之外。使用了可接受范围之外的数字来调用某个函数所致。</p>
+<pre><code class="javascript">//无法创建长度为-1的数组
+var AnArray = new Array(-1)
 </code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">alt</td>
-<td style="text-align:center">替换文本属性</td>
-</tr>
-<tr>
-<td style="text-align:center">align</td>
-<td style="text-align:center">bottom/middle/top 图像行内对齐方式 left/right 浮动图像到那一侧</td>
-</tr>
-</tbody>
-</table>
-<h3 id="图像映射"><a href="#图像映射" class="headerlink" title="图像映射"></a>图像映射</h3><pre><code class="html">&lt;img src=&quot;girl.jpg&quot; alt=&quot;girl&quot; border=&quot;0&quot;  usemap=&quot;#grilmap&quot; width=&quot;200&quot;  height=&quot;200&quot;&gt;
-&lt;map name=&quot;grilmap&quot; id=&quot;grilmap&quot;&gt;
-    &lt;area shape=&quot;circle&quot; coords=&quot;100,150,10&quot; href=&quot;https://www.baidu.com&quot; alt=&quot;baidu&quot; target=&quot;_blank&quot;&gt;
-&lt;/map&gt;
+<h2 id="URIError"><a href="#URIError" class="headerlink" title="URIError"></a>URIError</h2><p>没有正确使用URI函数。如果URI没有对以下字符进行转义，就会导致此错误：/ ? &amp; # : ;</p>
+<pre><code class="javascript">//字符未转义
+decodeURI(&#39;http://bbc.com/news.php ? a=1&#39;);     // URIError: URI error
 </code></pre>
-<h4 id="ismap"><a href="#ismap" class="headerlink" title="ismap"></a>ismap</h4><p>ismap 可将图片转换为图像映射。点击图片任意位置访问时在自动在URL中添加点击点坐标</p>
-<pre><code class="html">&lt;a href=&quot;https://www.baidu.com&quot;&gt;&lt;img src=&quot;girl.jpg&quot; width=&quot;250&quot; height=&quot;100&quot; ismap /&gt;&lt;/a&gt;
+<h2 id="EvalError"><a href="#EvalError" class="headerlink" title="EvalError"></a>EvalError</h2><p>没有正确使用eval()函数。eval()函数通过解释器来评估文本，并将其作为代码来执行。很少能看到这种类型的错误，因为通常浏览器会在发现EvalError时，抛出其他类型错误。</p>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>一般错误类型。一般错误对象是用来创建其他所有错误对象的模板(或原型)。</p>
+<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><p>不是错误。如果使用一个非数字的值来执行数学运算的话，就会得到NaN这样的结果，这并不是错误。</p>
+<pre><code class="javascript">// 不是数字
+var total = 3 * &quot;Ivy&quot;
 </code></pre>
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code class="html">&lt;table frame=&quot;box&quot; border=&quot;1&quot;&gt;
-    &lt;tr&gt;
-        &lt;th rowspan=&quot;2&quot;&gt;标题1，横跨两行&lt;/th&gt;
-        &lt;td&gt;数据格&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;数据格&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;th colspan=&quot;2&quot;&gt;标题2，横跨两列&lt;/th&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;&amp;nbsp;&lt;/td&gt; &lt;!-- 空格占位符 --&gt;
-        &lt;td&gt;数据格&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;
+<h1 id="console"><a href="#console" class="headerlink" title="console"></a>console</h1><ul>
+<li>console.log()</li>
+<li>console.info()    用于一般信息</li>
+<li>console.warn()    用于警告</li>
+<li>console.error()   用于输出错误</li>
+<li>console.group()   消息分组 用于输出一组相关数据</li>
+<li>console.table()   如果浏览器支持的话可以使用此方法输出表格</li>
+<li>console.assert()  根据条件输出</li>
+</ul>
+<pre><code class="javascript">//console.group()
+console.group(&#39;Area calculations&#39;);
+    console.info(&#39;Width &#39;,width);
+    console.info(&#39;Height &#39;,height);
+    console.log(area);
+console.groupEnd();
+
+//console.table()
+var contacts = {
+    &quot;London&quot;:{
+        &quot;Tel&quot;: &quot;110&quot;,
+        &quot;Country&quot;: &quot;UK&quot;},
+    &quot;Syfeny&quot;:{
+        &quot;Tel&quot;: &quot;120&quot;,
+        &quot;Country&quot;: &quot;CN&quot;},
+    &quot;Kinsiy&quot;:{
+        &quot;Tel&quot;: &quot;119&quot;,
+        &quot;Country&quot;: &quot;USA&quot;}
+}
+console.table(contacts);
+
+// console.assert()
+var width, height, area;
+width = $(&#39;#width&#39;).val();
+height = $(&#39;#height&#39;).val();
+area = width * height;
+console.assert($.isNumeric(area),&#39;用户输入非数字！&#39;)
 </code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">colspan</td>
-<td style="text-align:center">标题横跨列</td>
-<td style="text-align:center">rowspan</td>
-<td style="text-align:center">标题横跨行</td>
-</tr>
-<tr>
-<td style="text-align:center">cellpadding</td>
-<td style="text-align:center">单元格边距</td>
-<td style="text-align:center">cellspacing</td>
-<td style="text-align:center">单元格间距</td>
-</tr>
-<tr>
-<td style="text-align:center">align</td>
-<td style="text-align:center">单元格内对齐</td>
-<td style="text-align:center">border</td>
-<td style="text-align:center">单元格边框宽度</td>
-</tr>
-</tbody>
-</table>
-<h2 id="框架属性——frame"><a href="#框架属性——frame" class="headerlink" title="框架属性——frame"></a>框架属性——frame</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">box</td>
-<td style="text-align:center">四周</td>
-<td style="text-align:center">above</td>
-<td style="text-align:center">上边框</td>
-<td style="text-align:center">below</td>
-<td style="text-align:center">下边框</td>
-<td style="text-align:center">hsides</td>
-<td style="text-align:center">上下边框</td>
-<td style="text-align:center">vsides</td>
-<td style="text-align:center">左右边框</td>
-</tr>
-</tbody>
-</table>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><pre><code class="html">&lt;ol&gt;
-    &lt;li&gt;有序列表1&lt;/li&gt;
-    &lt;li&gt;有序列表2&lt;/li&gt;
-    &lt;li&gt;有序列表3&lt;/li&gt;
-    &lt;li&gt;有序列表4&lt;/li&gt;
-&lt;/ol&gt;
+<h1 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h1><p>使用debugger关键字在代码中创建断点。打开开发者工具后，就会自动创建这个断点。可以将debugger关键字添加到条件语句中，在满足条件时触发断点。</p>
+<pre><code class="javascript">var width, height, area;
+width = $(&#39;#width&#39;).val();
+height = $(&#39;#height&#39;).val();
+area = width * height;
+if (area &lt; 20){
+    debugger;
+}
 </code></pre>
-<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><pre><code class="html">&lt;ul&gt;
-    &lt;li&gt;无序列表1&lt;/li&gt;
-    &lt;li&gt;无序列表2&lt;/li&gt;
-    &lt;li&gt;无序列表3&lt;/li&gt;
-    &lt;li&gt;无序列表4&lt;/li&gt;
-&lt;/ul&gt;
+<h1 id="try-catch-finally"><a href="#try-catch-finally" class="headerlink" title="try catch finally"></a>try catch finally</h1><pre><code class="javascript">...
+response = &#39; {&quot;deal&quot;: {[&quot;title&quot;: &quot;Javascript错误处理与调试&quot;,...&#39;        // Json 串
+if (response){
+    try{
+        var dealData = JSON.parse(response);
+        ...
+    }catch(e){
+        var errorMessage = e.name + &quot; &quot; + e.message;
+        console.log(errorMessage);
+        feed.innerHTML = &quot;&lt;em&gt;加载deal数据出错！&lt;/em&gt;&quot;
+    }finally{
+        var link = document.creatElement(&quot;a&quot;);
+        link.innerHTML = &quot;&lt;a herf = &#39;dealerror.html&#39;&gt;重新加载&lt;/a&gt;&quot;；
+        feed.appendChild(link);
+    }
+}
+...
 </code></pre>
-<h2 id="自定义列表"><a href="#自定义列表" class="headerlink" title="自定义列表"></a>自定义列表</h2><pre><code class="html">&lt;dl&gt;
-    &lt;dt&gt;Java&lt;/dt&gt;
-    &lt;dd&gt;Java是一种非常强大的语言&lt;/dd&gt;
-    &lt;dt&gt;Python&lt;/dt&gt;
-    &lt;dd&gt;Python是一种脚本语言&lt;/dd&gt;
-    &lt;dt&gt;Javascript&lt;/dt&gt;
-    &lt;dd&gt;Javascript也是一种脚本语言&lt;/dd&gt;
-&lt;/dl&gt;
+<h1 id="抛出错误"><a href="#抛出错误" class="headerlink" title="抛出错误"></a>抛出错误</h1><p>throw new Error(‘message’)</p>
+<pre><code class="javascript">var width = 12;
+var height = &quot;Test&quot;;
+function calculateArea(width, height){
+    try{
+        var area = width * height;
+        if (!isNaN(area)){
+            return area;
+        }else{
+            throw new Error(&#39;calculateArea() 入参无效！&#39;)
+        }
+    }catch(e){
+        var errorMessage = e.name + &quot; &quot; + e.message;
+        console.log(erroeMessage)
+        return &quot;无法计算！&quot;;
+    }
+}
 </code></pre>
-<h1 id="块"><a href="#块" class="headerlink" title="块"></a>块</h1><h2 id="块元素"><a href="#块元素" class="headerlink" title="块元素"></a>块元素</h2><pre><code class="html">&lt;h1&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;table&gt;  &lt;!-- 块元素 --&gt;
-</code></pre>
-<p>大多数 HTML 元素被定义为块级元素或内联元素。<br><br>“块级元素”译为 block level element，“内联元素”译为 inline element。<br><br>块级元素在浏览器显示时，通常会以新行来开始（和结束）。</p>
-<h1 id="HTML-内联元素"><a href="#HTML-内联元素" class="headerlink" title="HTML 内联元素"></a>HTML 内联元素</h1><pre><code class="html">&lt;b&gt;, &lt;td&gt;, &lt;a&gt;, &lt;img&gt;  &lt;!-- 块元素 --&gt;
-</code></pre>
-<p>内联元素在显示时通常不会以新行开始。</p>
-<h2 id="lt-div-元素"><a href="#lt-div-元素" class="headerlink" title="&lt;div> 元素"></a>&lt;div> 元素</h2><p>HTML &lt;div> 元素是块级元素，它是可用于组合其他 HTML 元素的容器。</p>
-<p>&lt;div> 元素没有特定的含义。除此之外，由于它属于块级元素，浏览器会在其前后显示折行。如果与 CSS 一同使用，&lt;div> 元素可用于对大的内容块设置样式属性。</p>
-<p>&lt;div> 元素的另一个常见的用途是文档布局。它取代了使用表格定义布局的老式方法。使用 &lt;table> 元素进行文档布局不是表格的正确用法。&lt;table> 元素的作用是显示表格化的数据。</p>
-<h2 id="lt-span-元素"><a href="#lt-span-元素" class="headerlink" title="&lt;span> 元素"></a>&lt;span> 元素</h2><p>HTML &lt;span> 元素是内联元素，可用作文本的容器。<br>&lt;span> 元素也没有特定的含义。<br>当与 CSS 一同使用时，&lt;span> 元素可用于为部分文本设置样式属性。</p>
-<h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><pre><code class="html">&lt;form action=&quot;#&quot;&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Html边框测试&lt;/legend&gt;
-        &lt;label for=&quot;sex&quot;&gt;性别：&lt;/label&gt;
-        &lt;input type=&quot;text&quot; name=&quot;sex&quot; /&gt;
-        &lt;br /&gt;
-        &lt;label for=&quot;name&quot;&gt;姓名：&lt;/label&gt;
-        &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
-        &lt;br /&gt;
-        &lt;label for=&quot;password&quot;&gt;密码：&lt;/label&gt;
-        &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
-        &lt;br /&gt;
-        &lt;input type=&quot;radio&quot; value=&quot;male&quot; /&gt;Male
-        &lt;br /&gt;
-        &lt;input type=&quot;radio&quot; value=&quot;female&quot; checked/&gt;Female
-        &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; value=&quot;1&quot; checked/&gt;男生
-        &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; value=&quot;0&quot; /&gt;女生
-        &lt;br /&gt;
-        &lt;input type=&quot;submit&quot;&gt;
-        &lt;br /&gt;
-        &lt;input type=&quot;reset&quot;&gt;
-        &lt;br /&gt;
-        &lt;input type=&quot;hidden&quot;&gt;
-        &lt;select name=&quot;cars&quot; id=&quot;cars&quot;&gt;
-            &lt;option value=&quot;1&quot;&gt;大众&lt;/option&gt;
-            &lt;optgroup label=&quot;豪车&quot;&gt;
-                &lt;option value=&quot;2&quot;&gt;宝马&lt;/option&gt;
-                &lt;option value=&quot;3&quot; selected&gt;奔驰&lt;/option&gt;
-            &lt;/optgroup&gt;
-            &lt;option value=&quot;4&quot;&gt;东风&lt;/option&gt;
-        &lt;/select&gt;
-    &lt;/fieldset&gt;
-&lt;/form&gt;
-</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">fieldset</td>
-<td style="text-align:center">定义域</td>
-<td style="text-align:center">optgroup</td>
-<td style="text-align:center">定义选项组</td>
-</tr>
-<tr>
-<td style="text-align:center">legend</td>
-<td style="text-align:center">fieldset 元素定义标题。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><p>不能将 &lt;body>&lt;/body> 标签与 &lt;frameset>&lt;/frameset> 标签同时使用！<br>不过，假如你添加包含一段文本的 &lt;noframes> 标签，就必须将这段文字嵌套于 &lt;body>&lt;/body> 标签内。</p>
-<pre><code class="html">&lt;frameset rows=&quot;50%,50%&quot;&gt;
-    &lt;frame src=&quot;frame_a.html&quot; /&gt;
-    &lt;frameset cols=&quot;25%,75%&quot;&gt;
-        &lt;frame src=&quot;frame_b.html&quot; /&gt;
-        &lt;frame src=&quot;frame_c.html&quot; /&gt;
-    &lt;/frameset&gt;
-    &lt;noframes&gt;
-    &lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
-    &lt;/noframes&gt;
-&lt;/frameset&gt;
-&lt;!-- 内联框架 --&gt;
-&lt;iframe src=&quot;key.html&quot; width=&quot;100%&quot; height=&quot;30%&quot; frameborder=&quot;0&quot; name=&quot;iframe_a&quot;&gt;&lt;/iframe&gt;
-</code></pre>
-<h1 id="格式化文档"><a href="#格式化文档" class="headerlink" title="格式化文档"></a>格式化文档</h1><h2 id="文本格式化标签"><a href="#文本格式化标签" class="headerlink" title="文本格式化标签"></a>文本格式化标签</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">&lt;b></td>
-<td style="text-align:center">粗体文字</td>
-<td style="text-align:center">&lt;em></td>
-<td style="text-align:center">着重文字</td>
-<td style="text-align:center">&lt;small></td>
-<td style="text-align:center">小号字</td>
-<td style="text-align:center">&lt;sub></td>
-<td style="text-align:center">下标字</td>
-<td style="text-align:center">&lt;ins></td>
-<td style="text-align:center">插入字</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;big></td>
-<td style="text-align:center">大号字</td>
-<td style="text-align:center">&lt;i></td>
-<td style="text-align:center">斜体字</td>
-<td style="text-align:center">&lt;strong></td>
-<td style="text-align:center">加重语气</td>
-<td style="text-align:center">&lt;sup></td>
-<td style="text-align:center">上标字</td>
-<td style="text-align:center">&lt;del></td>
-<td style="text-align:center">删除字</td>
-</tr>
-</tbody>
-</table>
-<h2 id="计算机输出标签"><a href="#计算机输出标签" class="headerlink" title="计算机输出标签"></a>计算机输出标签</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">&lt;code></td>
-<td style="text-align:center">计算机代码</td>
-<td style="text-align:center">&lt;kbd></td>
-<td style="text-align:center">键盘码</td>
-<td style="text-align:center">&lt;samp></td>
-<td style="text-align:center">计算机代码样本</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;tt></td>
-<td style="text-align:center">打字机代码</td>
-<td style="text-align:center">&lt;var></td>
-<td style="text-align:center">变量</td>
-<td style="text-align:center">&lt;pre></td>
-<td style="text-align:center">预格式文本</td>
-</tr>
-</tbody>
-</table>
-<h2 id="引用与术语定义"><a href="#引用与术语定义" class="headerlink" title="引用与术语定义"></a>引用与术语定义</h2><table>
-<thead>
-<tr>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-<th style="text-align:center">标签</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">&lt;abbr></td>
-<td style="text-align:center">缩写</td>
-<td style="text-align:center">&lt;acronym></td>
-<td style="text-align:center">首字母缩写</td>
-<td style="text-align:center">&lt;address></td>
-<td style="text-align:center">地址</td>
-<td style="text-align:center">&lt;bdo></td>
-<td style="text-align:center">文字方向</td>
-</tr>
-<tr>
-<td style="text-align:center">&lt;blockquote></td>
-<td style="text-align:center">长引用</td>
-<td style="text-align:center">&lt;q></td>
-<td style="text-align:center">短引用</td>
-<td style="text-align:center">&lt;cite></td>
-<td style="text-align:center">引用、引证</td>
-<td style="text-align:center">&lt;dfn></td>
-<td style="text-align:center">定义项目</td>
-</tr>
-</tbody>
-</table>
 
         </div>
         <!-- .entry-content -->
@@ -736,7 +460,7 @@
           
             <div class="post-nepre half previous">
           
-            <a href="/2020/12/16/MySQL索引知识点总结/" rel="prev">
+            <a href="/2020/12/01/HTML-Reference/" rel="prev">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -744,7 +468,7 @@
               Previous Post</span>
               <div class="info">
                 <h3>
-                MySQL索引知识点总结</h3>
+                HTML快速参考</h3>
                 <hr>
               </div>
             </a>
@@ -754,7 +478,7 @@
           
             <div class="post-nepre half next">
           
-            <a href="/2020/11/25/Javascript错误处理与调试/" rel="next">
+            <a href="/2020/11/23/hello-world/" rel="next">
               <div class="background">
                 <img class="lazyload" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="">
               </div>
@@ -762,7 +486,7 @@
               Next Post</span>
               <div class="info">
                 <h3>
-                JavaScript错误处理与调试</h3>
+                Hello World</h3>
                 <hr>
               </div>
             </a>
@@ -847,7 +571,7 @@
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
         <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
       </div>
-      <p style="color: #666666;">&copy 2020</p>
+      <p style="color: #666666;">&copy 2020-2021</p>
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
@@ -861,14 +585,14 @@
 
 
 <!-- <script src="/js/tocbot.js"></script> -->
-<script type="text/javascript" src="/js/lib.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
 <script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="/js/zoom.min.js"></script>
 <script type="text/javascript" src="/js/sakura-app.js"></script>
 <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
 <script src="/js/botui.js"></script>
 <!-- 不蒜子 网页计数器 -->
 <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
