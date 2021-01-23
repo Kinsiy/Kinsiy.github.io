@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-01-20T15:08:13.912Z</updated>
+  <updated>2021-01-23T17:58:56.496Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>集合引用类型(Object)</title>
+    <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Object/"/>
+    <id>https://Kinsiy.github.io/2021/01/24/Javascript-Object/</id>
+    <published>2021-01-23T17:44:54.000Z</published>
+    <updated>2021-01-23T17:58:56.496Z</updated>
+    
+    <summary type="html">
+    
+      Object 对象类型的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基本引用类型(单例内置对象)</title>
+    <link href="https://Kinsiy.github.io/2021/01/23/built-in-object/"/>
+    <id>https://Kinsiy.github.io/2021/01/23/built-in-object/</id>
+    <published>2021-01-23T14:57:33.000Z</published>
+    <updated>2021-01-23T17:44:07.101Z</updated>
+    
+    <summary type="html">
+    
+      介绍ECMA-262定义的两个单例内置对象：Global和Math
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>基本引用类型(原始包装类型)</title>
@@ -153,7 +197,7 @@
     <link href="https://Kinsiy.github.io/2020/12/01/HTML-Reference/"/>
     <id>https://Kinsiy.github.io/2020/12/01/HTML-Reference/</id>
     <published>2020-11-30T16:25:37.000Z</published>
-    <updated>2021-01-20T15:09:11.945Z</updated>
+    <updated>2021-01-23T17:37:46.143Z</updated>
     
     <summary type="html">
     
