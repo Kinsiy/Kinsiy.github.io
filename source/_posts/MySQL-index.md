@@ -1,6 +1,7 @@
 ---
 title: MySQL索引知识点总结
 date: 2020-12-16 00:19:51
+author: fanili
 description: 本文将从一个案例开始，从索引的数据结构、分类、关键概念及如何使用索引提高查找效率等方面对索引知识进行总结
 categories: SKILL
 tags: [Reprint,MySQL]
