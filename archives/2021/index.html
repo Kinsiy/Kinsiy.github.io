@@ -631,7 +631,6 @@ $(document).ready(function() {
         $(this).attr('id', hyphenated);
         id++;
     });
-    debugger
     if ($(".pattern-center").length > 0) { //有图的情况
       tocbot.init({
           // Where to render the table of contents.
@@ -654,7 +653,7 @@ $(document).ready(function() {
           scrollSmooth: true,
           headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
           headingsOffset: -85,
-          scrollSmoothOffset: -95,
+          scrollSmoothOffset: -85,
       });
     }
     var offsetTop = $('.toc').offset().top - 95;
