@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-01-24T12:00:06.785Z</updated>
+  <updated>2021-01-31T06:39:09.499Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>集合引用类型(Map &amp; Set)</title>
+    <link href="https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/"/>
+    <id>https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/</id>
+    <published>2021-01-29T14:31:45.000Z</published>
+    <updated>2021-01-31T06:39:09.499Z</updated>
+    
+    <summary type="html">
+    
+      Map()、WeakMap()、Set()、WeakSet()的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>集合引用类型(Array)</title>
     <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Array/"/>
     <id>https://Kinsiy.github.io/2021/01/24/Javascript-Array/</id>
     <published>2021-01-24T06:47:28.000Z</published>
-    <updated>2021-01-24T12:00:06.785Z</updated>
+    <updated>2021-01-31T07:05:24.882Z</updated>
     
     <summary type="html">
     
@@ -31,6 +53,10 @@
     
       <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
     
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
     
   </entry>
   

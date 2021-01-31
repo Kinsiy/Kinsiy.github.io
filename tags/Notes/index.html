@@ -318,6 +318,72 @@
     <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
   <div class="post-entry">
     <div class="feature">
+      <a href="/2021/01/29/javascriopt-Map-Set/">
+        <div class="overlay">
+          <i class="iconfont icon-text">
+          </i>
+        </div>
+        <img width="150" height="150" src="" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
+      </a>
+    </div>
+    <h1 class="entry-title">
+    <a href="/2021/01/29/javascriopt-Map-Set/">
+    集合引用类型(Map &amp; Set)</a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time">
+      </i>
+    2021-1-29</div>
+    <p>
+    Map()、WeakMap()、Set()、WeakSet()的使用</p>
+    <footer class="entry-footer">
+      <div class="post-more">
+        <a href="/2021/01/29/javascriopt-Map-Set/">
+          <i class="iconfont icon-caidan">
+          </i>
+        </a>
+      </div>
+    </footer>
+  </div>
+  <hr>
+</article>
+  
+    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
+  <div class="post-entry">
+    <div class="feature">
+      <a href="/2021/01/24/Javascript-Array/">
+        <div class="overlay">
+          <i class="iconfont icon-text">
+          </i>
+        </div>
+        <img width="150" height="150" src="" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
+      </a>
+    </div>
+    <h1 class="entry-title">
+    <a href="/2021/01/24/Javascript-Array/">
+    集合引用类型(Array)</a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time">
+      </i>
+    2021-1-24</div>
+    <p>
+    Array 的使用</p>
+    <footer class="entry-footer">
+      <div class="post-more">
+        <a href="/2021/01/24/Javascript-Array/">
+          <i class="iconfont icon-caidan">
+          </i>
+        </a>
+      </div>
+    </footer>
+  </div>
+  <hr>
+</article>
+  
+    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
+  <div class="post-entry">
+    <div class="feature">
       <a href="/2021/01/24/Javascript-Object/">
         <div class="overlay">
           <i class="iconfont icon-text">
@@ -579,45 +645,19 @@
   <hr>
 </article>
   
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-  <div class="post-entry">
-    <div class="feature">
-      <a href="/2020/11/25/JavaScript-error/">
-        <div class="overlay">
-          <i class="iconfont icon-text">
-          </i>
-        </div>
-        <img width="150" height="150" src="" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" >
-      </a>
-    </div>
-    <h1 class="entry-title">
-    <a href="/2020/11/25/JavaScript-error/">
-    JavaScript错误处理与调试</a>
-    </h1>
-    <div class="p-time">
-      <i class="iconfont icon-time">
-      </i>
-    2020-11-25</div>
-    <p>
-    Javascript错误对象汇总、console、debugger、try-catch</p>
-    <footer class="entry-footer">
-      <div class="post-more">
-        <a href="/2020/11/25/JavaScript-error/">
-          <i class="iconfont icon-caidan">
-          </i>
-        </a>
-      </div>
-    </footer>
-  </div>
-  <hr>
-</article>
-  
 
 
       <div class="clearer">
       </div>
     </main>
-    <!--  -->
+    <!-- 
+      <nav class="navigator">
+        
+        <span class="page-number current">1</span><a class="page-number" href="/tags/Notes/page/2/">2</a><a class="extend next" rel="next" href="/tags/Notes/page/2/"><i class="iconfont icon-right"></i></a>
+      </nav>
+     -->
+    
+      <div id="pagination"><a href="/tags/Notes/page/2/" class="">Previous</a></div>
     
   </div>
 </div>
@@ -704,6 +744,14 @@ if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
 <script>
 $(document).ready(function() {
   if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    var id = 1;
+    $(".entry-content").children("h1,h2,h3,h4,h5").each(function() {
+        //var hyphenated = $(this).text().replace(/\s/g, '-');
+        var hyphenated = "kinsiy-" + id;
+        $(this).attr('id', hyphenated);
+        id++;
+    });
+    debugger
     if ($(".pattern-center").length > 0) { //有图的情况
       tocbot.init({
           // Where to render the table of contents.
@@ -726,7 +774,7 @@ $(document).ready(function() {
           scrollSmooth: true,
           headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
           headingsOffset: -85,
-          scrollSmoothOffset: -85
+          scrollSmoothOffset: -95,
       });
     }
     var offsetTop = $('.toc').offset().top - 95;
