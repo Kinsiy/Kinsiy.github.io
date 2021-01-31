@@ -6,7 +6,7 @@
       <% if(post.photos && post.photos.length){ %>
         <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= post.photos[0] || 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/image-404.png' %>">
       <% }else{ %>
-        <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= theme.art[Math.floor(Math.random() * theme.art.length + 1)-1] || 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/image-404.png' %>">
+        <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= theme.art[Math.floor(Math.random() * theme.art.length)] || 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/image-404.png' %>">
       <% } %>
     </a>
   </div>
