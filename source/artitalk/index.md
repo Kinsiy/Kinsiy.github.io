@@ -7,18 +7,19 @@ description:
 photos: https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/banner/shuoshuo.png
 ---
 {% raw %}
-<script type="text/javascript" src="https://unpkg.com/artitalk"></script>
 <!-- 存放说说的容器 -->
 <div id="artitalk_main"></div>
-<script type="text/javascript" > 
- try{
-    var at = new Artitalk();
-    at.init({
-    appId: 'AJ8PWseL9ucLigdRhUuoDiJC-MdYXbMMI',
-    appKey: 'xuOLMc7TmsMi8y9BrAllkPHw',
+<script>
+    window.addEventListener("DOMContentLoaded",()=>{
+        let script = document.createElement("script");
+        script.addEventListener("load", (event) => {
+            new Artitalk({
+                appId: "AJ8PWseL9ucLigdRhUuoDiJC-MdYXbMMI",
+                appKey: "xuOLMc7TmsMi8y9BrAllkPHw",
+            });
+        });
+        script.src = "https://unpkg.com/artitalk";
+        document.body.appendChild(script);
     });
-}catch(e){
-    window.location.reload(true);
-}
 </script>
 {% endraw %}
