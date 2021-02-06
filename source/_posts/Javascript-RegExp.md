@@ -2,6 +2,7 @@
 title: 基本引用类型(RegExp)
 date: 2021-1-17 22:14:48
 description: RegExp 对象的使用
+author: Kinsiy
 categories: SKILL
 tags: [Notes,Javascript]
 ---
@@ -116,13 +117,14 @@ if (pattern.test(text)){
 ```
 ## RegExp 构造函数属性
 RegExp 构造函数本身也有几个属性。这些属性适用于作用域中的所有正则表达式，而且会根据最后执行的正则表达式操作而变化。
-全名|简写|说明
-|:-:|:-:|:-:|
-input|$_|最后搜索的字符串
-lastMatch|$&|最后匹配的字符串
-lastParen|$+|最后的捕获组
-leftContext|$`|input 字符串中出现在lastMatch 前面的文本
-rightContext|$'|input 字符串中出现在lastMach 后面的文本
+
+|     全名     | 简写  |                   说明                   |
+| :----------: | :---: | :--------------------------------------: |
+|    input     |  $_   |             最后搜索的字符串             |
+|  lastMatch   |  $&   |             最后匹配的字符串             |
+|  lastParen   |  $+   |               最后的捕获组               |
+| leftContext  |  $`   | input 字符串中出现在lastMatch 前面的文本 |
+| rightContext |  $'   | input 字符串中出现在lastMach 后面的文本  |
 
 ```javascript
 let text = "this has been a short winter";
