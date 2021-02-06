@@ -310,7 +310,7 @@
         
           <header class="entry-header">
             <h1 class="entry-title">基本引用类型(RegExp)</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2021-1-17&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-17&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
@@ -415,7 +415,43 @@ if (pattern.test(text)){
     console.log(&quot;匹配成功！&quot;);      // 匹配成功！
 }
 </code></pre>
-<h2 id="RegExp-构造函数属性"><a href="#RegExp-构造函数属性" class="headerlink" title="RegExp 构造函数属性"></a>RegExp 构造函数属性</h2><p>RegExp 构造函数本身也有几个属性。这些属性适用于作用域中的所有正则表达式，而且会根据最后执行的正则表达式操作而变化。<br>全名|简写|说明<br>|:-:|:-:|:-:|<br>input|$_|最后搜索的字符串<br>lastMatch|$&amp;|最后匹配的字符串<br>lastParen|$+|最后的捕获组<br>leftContext|$`|input 字符串中出现在lastMatch 前面的文本<br>rightContext|$’|input 字符串中出现在lastMach 后面的文本</p>
+<h2 id="RegExp-构造函数属性"><a href="#RegExp-构造函数属性" class="headerlink" title="RegExp 构造函数属性"></a>RegExp 构造函数属性</h2><p>RegExp 构造函数本身也有几个属性。这些属性适用于作用域中的所有正则表达式，而且会根据最后执行的正则表达式操作而变化。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">全名</th>
+<th style="text-align:center">简写</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">input</td>
+<td style="text-align:center">$_</td>
+<td style="text-align:center">最后搜索的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">lastMatch</td>
+<td style="text-align:center">$&amp;</td>
+<td style="text-align:center">最后匹配的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">lastParen</td>
+<td style="text-align:center">$+</td>
+<td style="text-align:center">最后的捕获组</td>
+</tr>
+<tr>
+<td style="text-align:center">leftContext</td>
+<td style="text-align:center">$`</td>
+<td style="text-align:center">input 字符串中出现在lastMatch 前面的文本</td>
+</tr>
+<tr>
+<td style="text-align:center">rightContext</td>
+<td style="text-align:center">$’</td>
+<td style="text-align:center">input 字符串中出现在lastMach 后面的文本</td>
+</tr>
+</tbody>
+</table>
 <pre><code class="javascript">let text = &quot;this has been a short winter&quot;;
 let pattern_1 = /(..)or(.)/g;
 let pattern_2 = /(..)win/g;
@@ -495,7 +531,7 @@ console.log(RegExp[&quot;$2&quot;]);          // t
             <a href="/2021/01/13/Javascript-Date/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-1.png">
                  
               </div>
               <span class="label">
@@ -526,11 +562,11 @@ console.log(RegExp[&quot;$2&quot;]);          // t
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="Kinsiy" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="" itemprop="url" rel="author">Kinsiy</a>
             </h3>
           </div>
         </div>
