@@ -10,7 +10,7 @@ comments: true
 date: 2021-01-24 01:44:54
 tags: [Notes,Javascript]
 keywords:
-description: Object 对象类型的使用
+description: 理解对象Object
 photos:
 ---
 # 理解对象
