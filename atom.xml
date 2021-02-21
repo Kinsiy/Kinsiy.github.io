@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-02-06T17:01:49.687Z</updated>
+  <updated>2021-02-19T16:14:25.314Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>集合引用类型(Object.2)-创建对象</title>
+    <link href="https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/"/>
+    <id>https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/</id>
+    <published>2021-02-19T14:22:00.000Z</published>
+    <updated>2021-02-19T16:14:25.314Z</updated>
+    
+    <summary type="html">
+    
+      创建对象(Object)
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>迭代器与生成器</title>
@@ -87,11 +109,11 @@
     <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Object/"/>
     <id>https://Kinsiy.github.io/2021/01/24/Javascript-Object/</id>
     <published>2021-01-23T17:44:54.000Z</published>
-    <updated>2021-02-07T16:51:49.598Z</updated>
+    <updated>2021-02-19T14:24:02.981Z</updated>
     
     <summary type="html">
     
-      Object 对象类型的使用
+      理解对象Object
     
     </summary>
     
