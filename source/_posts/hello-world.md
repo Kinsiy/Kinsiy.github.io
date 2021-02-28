@@ -1,34 +1,51 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-19 22:54:33
+ * @LastEditTime: 2021-02-28 19:46:16
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Kinsiy\source\_posts\hello-world.md
+-->
+
 ---
 
 title: Hello World
 date: 2020-11-23 23:00:00
+author: Kinsiy
+avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
+authorLink: "https://kinsiy.github.io"
+authorAbout: I'm True
+authorDesc: I'm True
 description: 天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
 categories: Think
-tag: 
+tag:
 
 ---
+
 &ensp;&ensp;&ensp;&ensp;天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。是故君子戒慎乎其所不睹，恐惧乎其所不问。莫见乎隐，莫显乎微，故君子慎其独也。喜怒哀乐之未发，谓之中；发而皆中节，谓之和。中也者，天下之大本也；和也者，天下之达道也。致中和，天地位焉，万物育焉。<p align="right">——《中庸》(第一章)</p>
+
 <!--more-->
 
 # We Choose to Go to the Moon
-> *Slipoed the surly bonds of earth to touch to face of God*
+
+> _Slipoed the surly bonds of earth to touch to face of God_
 
 # Nothing is Ture
 
 ## 建站
 
-&ensp;&ensp;&ensp;&ensp;很早之前就想写一个自己的博客，但直到2020/11/18之前都没有动手去写。最主要的原因是觉得自己太菜了，没什么好写的。就一点皮毛也敢写博客?现在动手建站，是因为我觉得其实博客是写给自己看的，多年后回头看看这第一篇Hello World。不知会作何感想？</br>
-&ensp;&ensp;&ensp;&ensp;毕业到现在(2020/11/24)算是入行四个月快五个月了，因为工作性质的原因平时也不用写什么难的代码。但就是这些简单的需求，在写的时候都会忘记该如何实现。加上平时记东西基本都是TXT记录的，找起来很是麻烦。还有就是虽然是搞实施的，但我一直觉得我是一个程序猿 :)，能有个自己的站点可以按照想法随意改动对我来说是非常舒服的！！！
+&ensp;&ensp;&ensp;&ensp;很早之前就想写一个自己的博客，但直到 2020/11/18 之前都没有动手去写。最主要的原因是觉得自己太菜了，没什么好写的。就一点皮毛也敢写博客?现在动手建站，是因为我觉得其实博客是写给自己看的，多年后回头看看这第一篇 Hello World。不知会作何感想？</br>
+&ensp;&ensp;&ensp;&ensp;毕业到现在(2020/11/24)算是入行四个月快五个月了，因为工作性质的原因平时也不用写什么难的代码。但就是这些简单的需求，在写的时候都会忘记该如何实现。加上平时记东西基本都是 TXT 记录的，找起来很是麻烦。还有就是虽然是搞实施的，但我一直觉得我是一个程序猿 :)，能有个自己的站点可以按照想法随意改动对我来说是非常舒服的！！！
 
 # Everything is Permitted
 
 ## 更新
 
-* 更文
- * 设想是每月除去水文至少两篇是对自己来说是干货的文章，希望能坚持下去！
-* 功能
- * 没计划，有空去别人的Blog看看有啥功能好用就抄过来 :)
-* 样式
- * mokusei 原主题凑合着先吧！有空再去改改。</br>但这不重要，又不是不能用。淦！
-* More
- * 梦里啥都有。
+-   更文
+-   设想是每月除去水文至少两篇是对自己来说是干货的文章，希望能坚持下去！
+-   功能
+-   没计划，有空去别人的 Blog 看看有啥功能好用就抄过来 :)
+-   样式
+-   mokusei 原主题凑合着先吧！有空再去改改。</br>但这不重要，又不是不能用。淦！
+-   More
+-   梦里啥都有。
