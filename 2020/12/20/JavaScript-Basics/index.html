@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">JavaScript语言基础 | Kinsiy</title>
+  
+    <link rel="shortcut icon" href="/img/custom/avatar.jpg">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "Kinsiy";
+  mashiro_option.author_name = "";
+  mashiro_option.site_url = "https://kinsiy.github.io/";
+  mashiro_option.v_appId = "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI";
+  mashiro_option.v_appKey = "sdnc0TF9hEH64aiXJ6GFf6MS";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-2.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-3.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-4.png".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="https://kinsiy.github.io/">
+          <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>slipped the surly bonds of earth to touch the face of God</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="http://github.com/Kinsiy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/social/github.webp">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:solo1184194039@gmail.com?&amp;subject=Hello%20Kinsiy!" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">Kinsiy</span>
+            <span class="shironeko"></span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/SKILL/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/Reprint/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/Notes/">
+                          <i class="fa fa-edit" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/Think/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/artitalk/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    说说
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/lab/">
+                          <i class="fa fa-cogs" aria-hidden="true"></i>
+                          Lab
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">JavaScript语言基础</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2020-12-20&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <p>本文依据红宝书内容概括了Javascript的语言基础，分语法、关键字与保留字、变量、数据类型、操作符、语句、函数六部分。为个人读书笔记，可能会有错误的地方。<br><a id="more"></a></p>
+<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="区分大小写"><a href="#区分大小写" class="headerlink" title="区分大小写"></a>区分大小写</h2><p>ECMAScript中一切都区分大小写。无论是变量、函数名、还是操作符，都区分大小写。</p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul>
+<li>第一个字符必须是字母、下划线(_)或美元符号($)</li>
+<li>剩下的其他字符可以是字母、下划线、美元符号或数字</li>
+</ul>
+<p>字母可以是扩展ASCII中的字母，也可以是Unicode的字母字符。<br>按照惯例，ECMAScript标识符使用驼峰大小写形式，即第一个单词的首字母小写，后面每个单词的首字母大写。</p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><pre><code class="javascript">// 驼峰大小写(单行注释)
+/*· 多行注释
+    firstSecond
+    myCar
+    doSomethingImportant
+*/
+</code></pre>
+<h2 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h2><p>严格模式(ECMAScript 5增加)是一种不同的Javascript解析和执行模式，ECMAScript 3的一些不规范写法在这种模式下会被处理，对于不安全的活动会抛出错误。</p>
+<pre><code class="javascript">&quot;use strict&quot;    //对整个脚本启用严格模式
+
+function doSomething(){
+    &quot;use strict&quot;    // 在指定函数中启用严格模式
+}
+</code></pre>
+<h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><p>ECMAScript 中的语句以分号结尾。多条语句可以合并到一个C语言风格的代码块中。代码块由一个左花括号( { )标识开始，一个右花括号( } )标识结束。</p>
+<pre><code class="javascript">let sum = a + b     //没有分号也有效，但不推荐
+let sum = a - b;    //加分号有效，推荐
+/* 代码块 */
+if (test){
+    test = false;
+    console.log(test);
+}
+/* if 之类的控制语句只在执行多条语句时要求必须有代码块。不过，最佳实践是始终在控制语句中使用代码块，即使要执行的只有一条语句 */
+</code></pre>
+<h2 id="关键字与保留字"><a href="#关键字与保留字" class="headerlink" title="关键字与保留字"></a>关键字与保留字</h2><p>ECMA-262 第六版规定的所有关键字如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">break</td>
+<td style="text-align:center">do</td>
+<td style="text-align:center">in</td>
+<td style="text-align:center">typeof</td>
+<td style="text-align:center">case</td>
+<td style="text-align:center">else</td>
+<td style="text-align:center">instanceof</td>
+<td style="text-align:center">var</td>
+</tr>
+<tr>
+<td style="text-align:center">catch</td>
+<td style="text-align:center">export</td>
+<td style="text-align:center">new</td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">class</td>
+<td style="text-align:center">extends</td>
+<td style="text-align:center">return</td>
+<td style="text-align:center">while</td>
+</tr>
+<tr>
+<td style="text-align:center">const</td>
+<td style="text-align:center">finally</td>
+<td style="text-align:center">super</td>
+<td style="text-align:center">with</td>
+<td style="text-align:center">continue</td>
+<td style="text-align:center">for</td>
+<td style="text-align:center">switch</td>
+<td style="text-align:center">yield</td>
+</tr>
+<tr>
+<td style="text-align:center">debugger</td>
+<td style="text-align:center">function</td>
+<td style="text-align:center">this</td>
+<td style="text-align:center">default</td>
+<td style="text-align:center">if</td>
+<td style="text-align:center">throw</td>
+<td style="text-align:center">delete</td>
+<td style="text-align:center">import</td>
+</tr>
+<tr>
+<td style="text-align:center">try</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="未来的保留字"><a href="#未来的保留字" class="headerlink" title="未来的保留字"></a>未来的保留字</h3><p>ECMA-262 第6版为将来保留的所有词汇：<br><br>始终保留：<b>enum</b></p>
+<p>严格模式下保留：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">implements</th>
+<th style="text-align:center">package</th>
+<th style="text-align:center">public</th>
+<th style="text-align:center">interface</th>
+<th style="text-align:center">protected</th>
+<th style="text-align:center">static</th>
+<th style="text-align:center">let</th>
+<th style="text-align:center">private</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<p>代码块中保留：<b>await</b></p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>有三个关键字可以声明变量：var、const和let。const和let只能在ECMAScript 6 及更晚的版本中使用。</p>
+<h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><pre><code class="javascript">var message = &quot;hello worid!&quot;;
+message = &quot;hi&quot;;             // 合法，但不推荐
+
+
+/* 使用var操作符定义的变量会成为包含它的函数的局部变量
+    在使用var声明变量时，变量会自动添加到最接近的上下文中(参见《变量、作用域与内存》，不好意思还没写！) */
+
+function doSomething(){
+    var firstName = &quot;Kinsiy&quot;;    //局部变量
+    secondName = &quot;Kinsiy&quot;;        //全局变量。不推荐，难维护
+
+    console.log(sex);       //不会报错
+    var sex = &quot;boy&quot;;        //使用var这个关键字声明的变量会自动提升到函数作用域的顶部
+    var sex = &quot;girl&quot;;       //反复多次使用var声明一个变量也没有问题
+}
+console.log(firstName);     //ReferenceError
+console.log(secondName);    //Kinsiy
+</code></pre>
+<h3 id="let"><a href="#let" class="headerlink" title="let"></a>let</h3><p>let 和 var的作用差不多,但有着非常重要的区别。最明显的区别是，let声明的范围是块作用域，而var声明的范围是函数作用域。</p>
+<pre><code class="javascript">//全局声明
+/* 使用let在全局作用域中声明的变量不会成为window对象的属性(var声明则会) */
+var car = &quot;civic&quot;;
+let house = &quot;Oh! No&quot;;
+console.log(window.car);            //civic
+console.log(window.house);          //undefined
+
+if (true){
+    console.log(myName);            //undefined     myName变量提升
+    console.log(anotherName);       //ReferenceError    anotherName不会被提升   暂时性死区
+
+    var myName = &quot;Kinsiy&quot;;
+    let anotherName = &quot;Restituo&quot;;
+    let anotherName = &quot;QING&quot;;       //SyntaxError; 标识符anotherName已经声明过了
+
+    console.log(myName);            //Kinsiy
+    console.log(anotherName);      //Restituo
+}
+
+console.log(myName);               //Kinsiy
+console.log(anotherName);          //ReferenceError     作用域仅作用与块内部
+
+// 条件声明
+/* let 不能依赖条件声明模式，即使使用try/catch或typeof也不能解决 */
+if (typeof Testname === &quot;undefined&quot;) {
+    let Testname;
+}
+/* Testname 被限制在 if { } 块的作用域中
+    这个声明形同下面这个全局声明 */
+Testname
+
+try {
+    console.log(sex);
+} catch (error) {
+    let sex = &quot;boy&quot;;
+}
+/* sex 被限制在 catch { } 块的作用域中
+    这个声明形同下面这个全局声明 */
+sex
+/* 总之一句话不能使用let进行条件式声明 */
+</code></pre>
+<h3 id="const"><a href="#const" class="headerlink" title="const"></a>const</h3><p>const 的行为与let基本相同，唯一一个重要的区别是用它声明变量时必须同时初始化变量尝试修改const声明的变量会导致运行时错误。</p>
+<pre><code class="javascript">const age = 22;
+age = 17;                    //TypeError
+//const 也不允许重复声明
+const name = &quot;Restituo&quot;; 
+const name = &quot;Kinsiy&quot;;      //SyntaxError
+//const 的作用域也是块
+const sex = &quot;girl&quot;;
+if (true){
+    const sex = &quot;boy&quot;;
+}
+console.log(sex);           //girl
+/* const 声明的限制只适用与它指向的变量的引用 */
+const person = {};
+person.name = &quot;Kinsiy&quot;;     //没有问题
+
+// 特别得
+/* 对于for、for in 、 for of 循环 
+    for in 和for of它们两个都是一种严格的迭代语句，对于对象中的每一个属性值，有一个指定的语句块被执行。
+    也就是每一次循环，都会产生一个块级作用域来完成每个变量的行为
+    然而for循环并不会遍历对象的属性，每一次循环都是在同个块级作用域中进行，使用const声明就会报错。
+    所以在for in或者for of当中，推荐使用const来确保访问到的属性值不会被后续语句所改变。
+*/
+</code></pre>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h3><p>Undefined 类型只有一个值，就是特殊值undefined(假值)。当使用var或let声明了变量但没有初始化值时，就相当于给变量赋予了undefined值：</p>
+<pre><code class="javascript">let message;
+console.log(message == undefinded); //true
+
+console.log(message);               //&quot;undefined&quot;
+console.log(age);                   //ReferenceError，声明了变量但未赋值与未声明变量是不同的
+
+//typeof 时变量声明与否均返回undefined
+console.log(typeof message);        //&quot;undefined&quot;
+console.log(typeof age);            //&quot;undefined&quot;
+</code></pre>
+<h3 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h3><p>Null 类型同样只有一个值，即特殊值null(假值)。逻辑上讲，null值表示一个空对象指针。</p>
+<pre><code class="javascript">let car = null;
+console.log(typeof car);            //&quot;object&quot;
+
+// undefined 值是有null值派生而来的，因此ECMA-262将他们定义为表面上相等
+console.log(null == undefined);     //true
+
+/* 任何时候，只要变量要保存对象，而当时又没有那个对象可保存,就要用null来填充该变量。这样可以保持null是空对象指针的语义，并进一步与undefined区分开来 */
+</code></pre>
+<h3 id="Boolean-类型"><a href="#Boolean-类型" class="headerlink" title="Boolean 类型"></a>Boolean 类型</h3><p>Boolean 有两个字面值：true和false。这两个布尔值不同于数值，因此true不等于1，false不等于0。<br><br>Boolean()转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。转换规则如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">转换为true的值</th>
+<th style="text-align:center">转化为false的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">非空字符串</td>
+<td style="text-align:center">“”(空字符串)</td>
+</tr>
+<tr>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">非零数值(包括无穷值)</td>
+<td style="text-align:center">0、NaN</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">任意对象</td>
+<td style="text-align:center">null</td>
+</tr>
+<tr>
+<td style="text-align:center">Undefined</td>
+<td style="text-align:center">N/A(不存在)</td>
+<td style="text-align:center">undefined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Number-类型"><a href="#Number-类型" class="headerlink" title="Number 类型"></a>Number 类型</h3><h4 id="浮点值"><a href="#浮点值" class="headerlink" title="浮点值"></a>浮点值</h4><p>要定义浮点值，数值中必须包含小数点，且小数点后面必须至少有一个数字。</p>
+<pre><code class="javascript">// 科学记数法
+// 格式要求是一个数值(整数或浮点数)后跟一个大写或小写的e，再加上一个要乘的10的多少次幂
+let floatNum = 3.14e7;      //等于31400000
+
+// 值得范围
+/*如果某个计算得到的数值结果超过了Javascript可以表示的范围，那么这个数值会被自动转换为一个特殊的Infinity(无穷值)。任何无法表示的负数以-Infinity表示，任何无法表示的正数以Infinity表示。*/
+
+let result = Number.MAX_VALUE + Number.MAX_VALUE;
+console.log(isFinite(result));            //false, isFinite()确定一个值是不是有限大
+
+//NaN
+/* 用于表示本来要反回数值的操作失败了(不是错误) ，任何涉及NaN的操作始终返回NaN */
+
+console.log(0/0);           //NaN
+console.log(-0/+0);         //NaN
+console.log(NaN/10);        //NaN
+console.log(5/0);           //Infinity
+console.log(5/-0);          //-Infinity
+
+// 数值转换
+/* 有3个函数可以将非数值转换为数值：Number()、parseInt()、parseFloat(); Number()为转型函数,可用于任何数据类型。后两个主要用于将字符串转换为数值 */
+let num1 = Number(&quot;Hello World!&quot;);      //NaN
+let num2 = Number(&quot;&quot;);                  //0
+let num3 = Number(&quot;000011&quot;);            //11
+let num4 = Number(&quot;true&quot;);              //1
+
+let num5 = parseInt(&quot;Hello World!&quot;);    //NaN
+let num6 = parseInt(&quot;1234hi&quot;);          //1234
+let num7 = parseInt(&quot;0xA&quot;);             //10
+let num8 = parseInt(&quot;AF&quot;,16);           //175
+
+// parseFloat() 只解析十进制值，不能指定底数
+let num10 = parseFloat(&quot;1234hi&quot;);        //1234       按整数解析
+let num11 = parseFloat(&quot;22.4.5&quot;);        //22.4        指解析到第一个小数点
+let num12 = parseFloat(&quot;0xA&quot;);           //0
+</code></pre>
+<p>Number()函数基于如下规则执行转换：</p>
+<ul>
+<li>布尔值，true转换为1，false转换为0。</li>
+<li>数值，直接返回</li>
+<li>null，返回0</li>
+<li>undefined，返回NaN</li>
+<li>字符串应用一下规则<ul>
+<li>如果字符串包含数值字符，包括数值字符前面带加、减号的情况，则转换为一个十进制数值。</li>
+<li>如果字符串包含有效的浮点值格式如”1.1”,则会转换为相应的浮点值</li>
+<li>如果字符串包含有效的十六进制格式如”0xf”,则会转换为与该十六进制对应的十进制数值</li>
+<li>如果是空字符串，则返回0</li>
+<li>如果字符串包含除上述情况之外的其他字符，则返回NaN</li>
+</ul>
+</li>
+<li>对象，调用valueof()方法，并按照上述规则转换返回的值。如果转换结果是NaN，则调用toString()方法,在按照字符串的规则转换。</li>
+</ul>
+<h3 id="String-类型"><a href="#String-类型" class="headerlink" title="String 类型"></a>String 类型</h3><p>String (字符串)数据类型表示零或多个16位Unicode字符序列。字符串可以使用双引号(“)、单引号(‘)或反引号(`)标识。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字面量</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">制表</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\\</td>
+<td style="text-align:center">反斜杠(\)</td>
+</tr>
+<tr>
+<td style="text-align:center">\‘</td>
+<td style="text-align:center">单引号，在字符串以单引号标示时使用，例如’He said, \‘hey.\‘’</td>
+</tr>
+<tr>
+<td style="text-align:center">\“</td>
+<td style="text-align:center">双引号，在字符串以双引号标示时使用，例如”He said, \“hey.\“”</td>
+</tr>
+<tr>
+<td style="text-align:center">\`</td>
+<td style="text-align:center">反引号，在字符串以反引号标示时使用，例如`He said, \`hey.\``</td>
+</tr>
+<tr>
+<td style="text-align:center">\xnn</td>
+<td style="text-align:center">以十六进制编码nn标识的字符(其中n是十六进制数字0~F)，例如\x41 等于”A”</td>
+</tr>
+<tr>
+<td style="text-align:center">\unnn</td>
+<td style="text-align:center">以十六进制编码nnnn标识的Unicode字符(其中n是十六进制数字0~F)，例如\u03a3 等于希腊字符”Σ”</td>
+</tr>
+</tbody>
+</table>
+<p>ECMAScript中的字符串是不可变的，意思是一旦创建，它们的值就不能变了。要修改某个变量中的字符串值，必须先销毁原始字符串，然后将包含新值得另一个字符串保存到该变量。</p>
+<pre><code class="javascript">// toString()
+/* toString()方法可见于数值、布尔值、对象、和字符串值。null和undefined值没有toString()方法 */
+let num = 10;
+console.log(num.toString());        //&quot;10&quot;
+console.log(num.toString(2));       //&quot;1010&quot;
+console.log(num.toString(8));       //&quot;12&quot;
+console.log(num.toString(10));      //&quot;10&quot;
+console.log(num.toString(16));      //&quot;a&quot;
+/* 不确定一个值是不是null或undefined，可以用String()转型函数 */
+
+// 模板字面量
+/* 模板字面量可以保留换行字符，可以跨行定义字符串 */
+let pageHtml = `
+&lt;div&gt;
+    &lt;a herf=&quot;#&quot;&gt;
+        &lt;span&gt;Kinsiy&lt;/span&gt;
+    &lt;/a&gt;
+&lt;/div&gt;`;
+console.log(pageHtml);      //输出保留制表符(空格)
+
+let value = 5;
+let exponent = &quot;五倍&quot;;
+let resultStr = `${ value }的${ exponent }是${ value*5 }`;
+console.log(resultStr);     //5的5倍是25
+
+
+//原始字符串
+/* 使用模板字面量也可以直接获取原始的模板字面量内容(如换行符或Unicode字符)，而不是被转义后的字符表示。 */
+console.log(`\u00A9`)           //    ©
+console.log(String.raw`\u00A9`) // \u00A9
+</code></pre>
+<p>String()函数遵循如下规则：</p>
+<ul>
+<li>如果有toString()方法，则调用该方法(不传参数)并返回结果</li>
+<li>如果值是null，返回”null”</li>
+<li>如果值是undefined，返回”undefined”</li>
+</ul>
+<h3 id="Symbol-类型"><a href="#Symbol-类型" class="headerlink" title="Symbol 类型"></a>Symbol 类型</h3><p>Symbol(符号)是EMCAScript 6 新增的数据类型。符号是原始值，且符号是唯一、不可变的。符号的用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险。<br><br>看不明白，暂时略过。</p>
+<h3 id="Object-类型"><a href="#Object-类型" class="headerlink" title="Object 类型"></a>Object 类型</h3><p>ECMAScript 中的对象其实就是一组数据和功能的集合。<br><br>每个Object实例都有如下属性和方法：</p>
+<ul>
+<li>constructor: 用于创建当前对象的函数</li>
+<li>hasOwnProperty(propertyName): 用于判断当前对象实例(不是原型)上是否存在给定的属性。要检查的属性名必须是字符串。</li>
+<li>propertyIsEnumerable(propertyName): 用于判断给定的属性是否可以使用for-in语句枚举</li>
+<li>toLocalString(): 返回对象的字符串表示, 该字符串反应对象所在的本地唤环境</li>
+<li>toString(): 返回对象的字符串表示</li>
+<li>valueof(): 返会对象对应的字符串、数值、布尔值表示。通常与toString()的返回值相同。</li>
+</ul>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">“+”</th>
+<th style="text-align:center">“++”</th>
+<th style="text-align:center">“-“</th>
+<th style="text-align:center">“–”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">规则(效果)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">按位非</td>
+<td style="text-align:center">~</td>
+<td style="text-align:center">返回数值的一补数(最终效果：对数值取反并减1)</td>
+</tr>
+<tr>
+<td style="text-align:center">按位与</td>
+<td style="text-align:center">&amp;</td>
+<td style="text-align:center">两位均为1，返回1</td>
+</tr>
+<tr>
+<td style="text-align:center">按位或</td>
+<td style="text-align:center">&#124;</td>
+<td style="text-align:center">在至少一位是1是返回1</td>
+</tr>
+<tr>
+<td style="text-align:center">按位异或</td>
+<td style="text-align:center">^</td>
+<td style="text-align:center">只在一位是1是返回1，两位都是1或0返回0</td>
+</tr>
+<tr>
+<td style="text-align:center">左移</td>
+<td style="text-align:center">&lt;&lt;</td>
+<td style="text-align:center">按照指定的位数将数值的所有位向左移动</td>
+</tr>
+<tr>
+<td style="text-align:center">有符号右移</td>
+<td style="text-align:center">&gt;&gt;</td>
+<td style="text-align:center">将数值的所有32位都向右移，同时保留符号</td>
+</tr>
+<tr>
+<td style="text-align:center">无符号右移</td>
+<td style="text-align:center">&gt;&gt;&gt;</td>
+<td style="text-align:center">将数值的所有32位都向右移</td>
+</tr>
+</tbody>
+</table>
+<h3 id="布尔操作符"><a href="#布尔操作符" class="headerlink" title="布尔操作符"></a>布尔操作符</h3><h4 id="逻辑非"><a href="#逻辑非" class="headerlink" title="逻辑非(!)"></a>逻辑非(!)</h4><p>逻辑非会遵循如下规则：</p>
+<ul>
+<li>如果操作数是对象，则返回false</li>
+<li>如果操作数是空字符串，返回true</li>
+<li>如果操作数是非空字符串，返回false</li>
+<li>如果操作数是数值0，返回true</li>
+<li>如果操作数是非0数值(包括Infinity)，返回false</li>
+<li>如果操作数是null，返回true</li>
+<li>如果操作数是NaN，返回true</li>
+<li>如果操作数数undefined，返回true</li>
+</ul>
+<h4 id="逻辑与-amp-amp"><a href="#逻辑与-amp-amp" class="headerlink" title="逻辑与(&amp;&amp;)"></a>逻辑与(&amp;&amp;)</h4><p>逻辑与操作符可用于任何类型的操作数，不限与布尔值。如果有操作数不是布尔值，则逻辑与并不一定会返回布尔值，而是遵循如下规则。</p>
+<ul>
+<li>如果第一个操作数是对象，则返回第二个操作数</li>
+<li>如果第二个操作数是对象，则只有第一个操作数求值为true才会返回该对象</li>
+<li>如果两个操作数均是对象，则返回第二个操作数</li>
+<li>如果有一个操作数是null，则返回null</li>
+<li>如果有一个操作数是NaN，则返回NaN</li>
+<li>如果有一个操作数是undefined，则返回undefined</li>
+</ul>
+<h4 id="逻辑或"><a href="#逻辑或" class="headerlink" title="逻辑或(||)"></a>逻辑或(||)</h4><p>与逻辑与类似，如果有一个操作数不是布尔值，那么逻辑或操作符也不一定返回布尔值</p>
+<ul>
+<li>如果第一个操作数是对象，则返回第一个操作数</li>
+<li>如果第一个操作数求值为false，则返回第二个操作数</li>
+<li>如果两个操作数均是对象，则返回第一个操作数</li>
+<li>如果两个操作数都是null，则返回null</li>
+<li>如果两个操作数都是NaN，则返回NaN</li>
+<li>如果两个操作数都是undefined，则返回undefined</li>
+</ul>
+<h3 id="乘性操作符"><a href="#乘性操作符" class="headerlink" title="乘性操作符"></a>乘性操作符</h3><h4 id="乘法"><a href="#乘法" class="headerlink" title="乘法(*)"></a>乘法(*)</h4><ul>
+<li>有任一操作数是NaN，返回NaN</li>
+<li>Infinity * 0 ，返回NaN</li>
+<li>Infinity * x，依据x的正负返回Infinity或-Infinity</li>
+<li>Infinity * Infinity，返回Infinity</li>
+<li>如果不是数值的操作数，则现在后台用Number()将其转换为数值，再应用上述规则</li>
+</ul>
+<h4 id="除法"><a href="#除法" class="headerlink" title="除法(/)"></a>除法(/)</h4><ul>
+<li>有任一操作数是NaN，返回NaN</li>
+<li>Infinity / Infinity ，返回NaN</li>
+<li>x / 0 (x≠0)，依据x的正负返回Infinity或-Infinity</li>
+<li>0 / 0，返回NaN</li>
+<li>Infinity / x，依据x的正负返回Infinity或-Infinity</li>
+<li>如果不是数值的操作数，则现在后台用Number()将其转换为数值，再应用上述规则</li>
+</ul>
+<h4 id="取模"><a href="#取模" class="headerlink" title="取模(%)"></a>取模(%)</h4><p>与其他乘性操作符一样，取模操作符对特殊值也有一些特殊的行为</p>
+<ul>
+<li>如果操作数是数值，则执行常规除法运算，返回余数</li>
+<li>如果被除数是无限值，除数是有限值，返回NaN</li>
+<li>如果被除数是有限值，除数是0，则返回NaN</li>
+<li>Infinity % Infinity，返回NaN</li>
+<li>被除数是有限值，除数是无限值，返回被除数</li>
+<li>如果不是数值的操作数，则现在后台用Number()将其转换为数值，再应用上述规则</li>
+</ul>
+<h3 id="指数操作符"><a href="#指数操作符" class="headerlink" title="指数操作符"></a>指数操作符</h3><pre><code class="javascript">console.log(3 ** 2);    //9
+console.log(16 ** 0.5); //4
+</code></pre>
+<h3 id="加性操作符"><a href="#加性操作符" class="headerlink" title="加性操作符"></a>加性操作符</h3><h4 id="加法操作符"><a href="#加法操作符" class="headerlink" title="加法操作符"></a>加法操作符</h4><ul>
+<li>如果有任一操作数是NaN，返回NaN</li>
+<li>Infinity + Infinity,返回Infinity</li>
+<li>-Infinity + -Infinity,返回-Infinity</li>
+<li>-Infinity + Infinity,返回NaN</li>
+<li>+0 + +0，返回+0</li>
+<li>-0 + +0，返回+0</li>
+<li>-0 + -0，返回-0</li>
+<li>若有一个操作数是字符串<ul>
+<li>两个操作数均为字符串，将第二个字符串拼接到第一个字符串后面</li>
+<li>如果只有一个操作数是字符串，则将另一个操作数转换为字符串，再将两个字符串拼接到一起</li>
+</ul>
+</li>
+</ul>
+<h4 id="减法操作符"><a href="#减法操作符" class="headerlink" title="减法操作符"></a>减法操作符</h4><ul>
+<li>如果有任一操作数是NaN，返回NaN</li>
+<li>Infinity - Infinity,返回NaN</li>
+<li>Infinity - -Infinity,返回Infinity</li>
+<li>-Infinity - Infinity,返回-Infinity</li>
+<li>+0 - +0，返回+0</li>
+<li>+0 - -0，返回-0</li>
+<li>-0 - -0，返回+0</li>
+<li>若有一个操作数是字符串、布尔值、null或undefined，则先在后台使用Number()将其转换为数值，然后在根据前面的规则执行数学运算。</li>
+<li>如果有任一操作数是对象，则调用其valueof()方法取得表示他的数值。如果对象没有valueof()方法，则调用其toString()方法，然后再将得到的字符串转换为数值。</li>
+</ul>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><ul>
+<li>如果操作符都是数值，则执行数值比较</li>
+<li>如果操作数是字符串，则逐个比较字符串中对应字符的编码</li>
+<li>如果有任一操作数是数值，则将另一个操作数转换为数值，执行数值比较</li>
+<li>如果有任一操作数是对象，则调用其valueof()方法取得表示他的数值。如果对象没有valueof()方法，则调用其toString()方法，然后再将得到的字符串转换为数值。</li>
+<li>如果有任一操作数是布尔值，则将其转换为数值在执行比较</li>
+<li>只要任一操作数为NaN，均返会false</li>
+</ul>
+<h3 id="相等操作符"><a href="#相等操作符" class="headerlink" title="相等操作符"></a>相等操作符</h3><h4 id="等于-与不等于"><a href="#等于-与不等于" class="headerlink" title="等于(==)与不等于(!=)"></a>等于(==)与不等于(!=)</h4><ul>
+<li>null 与 undefined不能转换为其他类型的值再进行比较</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">表达式</th>
+<th style="text-align:left">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">null == undefined</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">“NaN” == NaN</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">5 == NaN</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">NaN == NaN</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">NaN != NaN</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">false == 0</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">true == 1</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left">true == 2</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">undefined == 0</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">null == 0</td>
+<td style="text-align:left">false</td>
+</tr>
+<tr>
+<td style="text-align:left">“5” == 5</td>
+<td style="text-align:left">true</td>
+</tr>
+</tbody>
+</table>
+<h4 id="全等-和不全等"><a href="#全等-和不全等" class="headerlink" title="全等(===)和不全等(!==)"></a>全等(===)和不全等(!==)</h4><pre><code class="javascript">let result_1 = (&quot;55&quot; == 55);        //true, 转换后相等
+let result_2 = (&quot;55&quot; === 55);        //false, 因为数据类型不同
+</code></pre>
+<h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><pre><code class="javascript">// variable = boolean_expression ? true_value : false_value;
+let max = (num1 &gt; num2)? num1 : num2
+</code></pre>
+<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><p><b>“=”</b></p>
+<h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><pre><code class="javascript">let num1 = 1, num2 = 2, num3 = 3;
+let num = (5,1,4,8,0);      //num = 0
+</code></pre>
+<h2 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><blockquote>
+<p>if (condition) statement1 else statement2</p>
+</blockquote>
+<p>这里的条件(condition)可以是任何表达式，并且求值结果不一定是布尔值。ECMAScript 会自动调用Boolean()函数将这个表达式转换为布尔值。</p>
+<h3 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h3><blockquote>
+<p>do { statement } while (expression)</p>
+</blockquote>
+<pre><code class="javascript">let i = 0;
+do{
+    i += 2;
+}while(i&lt;10&gt;);
+</code></pre>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><blockquote>
+<p>while (expression) statement</p>
+</blockquote>
+<pre><code class="javascript">let i = 0;
+while(i&lt;10&gt;){
+    i += 2;
+};
+</code></pre>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><blockquote>
+<p>for (initialization; expression; post-loop-expression) statement</p>
+</blockquote>
+<pre><code class="javascript">let count = 10;
+for (let i = 0; i &lt; count; i++&gt;){
+    console.log(i)
+}
+</code></pre>
+<h3 id="for-in"><a href="#for-in" class="headerlink" title="for-in"></a>for-in</h3><p>for-in 语句是一种严格的迭代语句，<b>用于枚举对象中的非符号键属性</b></p>
+<blockquote>
+<p>for (property in expression) statement</p>
+</blockquote>
+<pre><code class="javascript">for (const proName in window){
+    console.log(proName)
+}
+</code></pre>
+<p>ECMAScript 中对象的属性是无序的，因此for-in语句不能保证返回对象属性的顺序</p>
+<h3 id="for-of"><a href="#for-of" class="headerlink" title="for-of"></a>for-of</h3><p>for-of 语句是一种严格的迭代语句，<b>用于遍历可迭代对象的元素</b></p>
+<blockquote>
+<p>for (property of expression) statement</p>
+</blockquote>
+<pre><code class="javascript">for (const el of [1,5,4,6]){
+    console.log(el)
+}
+</code></pre>
+<p>for-of 会按照可迭代对象的next()方法产生值得顺序迭代元素。</p>
+<h3 id="标签-amp-break-amp-continue"><a href="#标签-amp-break-amp-continue" class="headerlink" title="标签 &amp; break &amp; continue"></a>标签 &amp; break &amp; continue</h3><pre><code class="javascript">let num = 0;
+
+outermost:
+for(let i = 0; i &lt; 10; i++){
+    for(let j = 0;j &lt; 10; j++){
+        if (i == 5 &amp;&amp; j == 5 ){
+            continue outermost;
+        }
+        num++;
+    }
+}
+console.log(num);       //95
+</code></pre>
+<h3 id="with"><a href="#with" class="headerlink" title="with"></a>with</h3><p>不推荐使用<br><br>使用场景是针对一个对象反复操作</p>
+<pre><code class="javascript">let qs = location.search.substring(1);
+let hostName = location.hostname;
+let url = location.herf;
+// 上方代码等同于
+with(location){
+    let qs = search.substring(1);
+    let hostName = hostname;
+    let url = href;
+}
+</code></pre>
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><pre><code class="javascript">/*
+    switch(expression){
+        case value1:
+            statement
+            break;
+        case value2:
+            statement
+            break;
+        default:
+            statement
+    }
+*/
+switch(i){
+    case 25:
+        /* 跳过 */
+    case 35:
+        console.log(&quot;25 或 35&quot;);
+        break;
+    case 45:
+        console.log(&quot;45&quot;);
+    default:
+        console.log(&quot;其他&quot;)
+}
+/* switch语句可以用于所有数据类型，可以使用字符串甚至对象、条件的值不需要是常量，也可以是变量或表达式。 */
+let num = 25;
+switch (true){
+    case num &lt; 0:
+        console.log(&quot;(-∞，0)&quot;);
+        break;
+    case num &gt;= 0  &amp;&amp; num &lt;= 10:
+        console.log(&quot;[0,10]&quot;);
+        break;
+    case num &gt; 10 &amp;&amp; num &lt;= 20:
+        console.log(&quot;(10,20]&quot;);
+        break;
+    default:
+        console.log(&quot;(20,+∞)&quot;);
+}
+</code></pre>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>见《函数专章》不好意思，还没写。</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WechatQR.png"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/01/10/Javascript-Variables/" rel="prev">
+              <div class="background">
+                
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
+                    
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                变量、作用域与内存</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2020/12/16/MySQL-index/" rel="next">
+              <div class="background">
+                
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-1.png">
+                 
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                MySQL索引知识点总结</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI",
+        appKey: "sdnc0TF9hEH64aiXJ6GFf6MS",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Kinsiy<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2020-2021</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/Kinsiy/Video","name":"The-Witcher.mkv","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/Kinsiy/Video","name":"The-Witcher.mkv","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    var id = 1;
+    $(".entry-content").children("h1,h2,h3,h4,h5").each(function() {
+        //var hyphenated = $(this).text().replace(/\s/g, '-');
+        var hyphenated = "kinsiy-" + id;
+        $(this).attr('id', hyphenated);
+        id++;
+    });
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85,
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">Kinsiy</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/Kinsiy" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=1184194039&site=qq&menu=yes" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/SKILL/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/Reprint/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/Notes/">
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/Think/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/artitalk/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            说说
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/lab/">
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                  Lab
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7864731649"
+
+    server="tencent"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>

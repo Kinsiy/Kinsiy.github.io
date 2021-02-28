@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kinsiy</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://Kinsiy.github.io/"/>
+  <updated>2021-02-28T09:03:52.744Z</updated>
+  <id>https://Kinsiy.github.io/</id>
+  
+  <author>
+    <name>Kinsiy</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>集合引用类型(Object.2)-创建对象</title>
+    <link href="https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/"/>
+    <id>https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/</id>
+    <published>2021-02-19T14:22:00.000Z</published>
+    <updated>2021-02-28T09:03:52.744Z</updated>
+    
+    <summary type="html">
+    
+      创建对象(Object)
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>迭代器与生成器</title>
+    <link href="https://Kinsiy.github.io/2021/02/03/Javascript-Iterable-Iterator/"/>
+    <id>https://Kinsiy.github.io/2021/02/03/Javascript-Iterable-Iterator/</id>
+    <published>2021-02-02T17:13:43.000Z</published>
+    <updated>2021-02-06T17:01:49.687Z</updated>
+    
+    <summary type="html">
+    
+      理解于使用迭代器与生成器
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合引用类型(Map &amp; Set)</title>
+    <link href="https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/"/>
+    <id>https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/</id>
+    <published>2021-01-29T14:31:45.000Z</published>
+    <updated>2021-01-31T06:39:09.499Z</updated>
+    
+    <summary type="html">
+    
+      Map()、WeakMap()、Set()、WeakSet()的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合引用类型(Array)</title>
+    <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Array/"/>
+    <id>https://Kinsiy.github.io/2021/01/24/Javascript-Array/</id>
+    <published>2021-01-24T06:47:28.000Z</published>
+    <updated>2021-01-31T07:05:24.882Z</updated>
+    
+    <summary type="html">
+    
+      Array 的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合引用类型(Object.1)-理解对象</title>
+    <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Object/"/>
+    <id>https://Kinsiy.github.io/2021/01/24/Javascript-Object/</id>
+    <published>2021-01-23T17:44:54.000Z</published>
+    <updated>2021-02-19T14:24:02.981Z</updated>
+    
+    <summary type="html">
+    
+      理解对象Object
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基本引用类型(单例内置对象)</title>
+    <link href="https://Kinsiy.github.io/2021/01/23/built-in-object/"/>
+    <id>https://Kinsiy.github.io/2021/01/23/built-in-object/</id>
+    <published>2021-01-23T14:57:33.000Z</published>
+    <updated>2021-01-23T17:44:07.101Z</updated>
+    
+    <summary type="html">
+    
+      介绍ECMA-262定义的两个单例内置对象：Global和Math
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基本引用类型(原始包装类型)</title>
+    <link href="https://Kinsiy.github.io/2021/01/18/Javascript-String/"/>
+    <id>https://Kinsiy.github.io/2021/01/18/Javascript-String/</id>
+    <published>2021-01-18T13:33:05.000Z</published>
+    <updated>2021-01-20T15:08:13.912Z</updated>
+    
+    <summary type="html">
+    
+      原始包装类型：Boolean、Number、String对象的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基本引用类型(RegExp)</title>
+    <link href="https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/"/>
+    <id>https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/</id>
+    <published>2021-01-17T14:14:48.000Z</published>
+    <updated>2021-02-02T16:56:19.079Z</updated>
+    
+    <summary type="html">
+    
+      RegExp 对象的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基本引用类型(Date)</title>
+    <link href="https://Kinsiy.github.io/2021/01/13/Javascript-Date/"/>
+    <id>https://Kinsiy.github.io/2021/01/13/Javascript-Date/</id>
+    <published>2021-01-12T16:48:35.000Z</published>
+    <updated>2021-01-20T15:07:47.125Z</updated>
+    
+    <summary type="html">
+    
+      Date 对象的使用
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>变量、作用域与内存</title>
+    <link href="https://Kinsiy.github.io/2021/01/10/Javascript-Variables/"/>
+    <id>https://Kinsiy.github.io/2021/01/10/Javascript-Variables/</id>
+    <published>2021-01-10T06:15:42.000Z</published>
+    <updated>2021-01-20T15:08:57.664Z</updated>
+    
+    <summary type="html">
+    
+      本章会剖析错综复杂的变量。
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript语言基础</title>
+    <link href="https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/"/>
+    <id>https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/</id>
+    <published>2020-12-20T04:01:49.000Z</published>
+    <updated>2021-02-02T17:07:25.615Z</updated>
+    
+    <summary type="html">
+    
+      本文依据红宝书内容概括了Javascript的语言基础，分语法、关键字与保留字、变量、数据类型、操作符、语句、函数六部分。为个人读书笔记，可能会有错误的地方。
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL索引知识点总结</title>
+    <link href="https://Kinsiy.github.io/2020/12/16/MySQL-index/"/>
+    <id>https://Kinsiy.github.io/2020/12/16/MySQL-index/</id>
+    <published>2020-12-15T16:19:51.000Z</published>
+    <updated>2021-01-24T11:59:44.625Z</updated>
+    
+    <summary type="html">
+    
+      本文将从一个案例开始，从索引的数据结构、分类、关键概念及如何使用索引提高查找效率等方面对索引知识进行总结
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Reprint" scheme="https://Kinsiy.github.io/tags/Reprint/"/>
+    
+      <category term="MySQL" scheme="https://Kinsiy.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML快速参考</title>
+    <link href="https://Kinsiy.github.io/2020/12/01/HTML-Reference/"/>
+    <id>https://Kinsiy.github.io/2020/12/01/HTML-Reference/</id>
+    <published>2020-11-30T16:25:37.000Z</published>
+    <updated>2021-01-23T17:37:46.143Z</updated>
+    
+    <summary type="html">
+    
+      HTML 基本文档
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="HTML" scheme="https://Kinsiy.github.io/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript错误处理与调试</title>
+    <link href="https://Kinsiy.github.io/2020/11/25/JavaScript-error/"/>
+    <id>https://Kinsiy.github.io/2020/11/25/JavaScript-error/</id>
+    <published>2020-11-24T17:26:39.000Z</published>
+    <updated>2021-01-20T15:07:08.401Z</updated>
+    
+    <summary type="html">
+    
+      Javascript错误对象汇总、console、debugger、try-catch
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+      <category term="debug" scheme="https://Kinsiy.github.io/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://Kinsiy.github.io/2020/11/23/hello-world/"/>
+    <id>https://Kinsiy.github.io/2020/11/23/hello-world/</id>
+    <published>2020-11-23T15:00:00.000Z</published>
+    <updated>2021-01-17T12:06:05.395Z</updated>
+    
+    <summary type="html">
+    
+      天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
+    
+    </summary>
+    
+      <category term="Think" scheme="https://Kinsiy.github.io/categories/Think/"/>
+    
+    
+  </entry>
+  
+</feed>

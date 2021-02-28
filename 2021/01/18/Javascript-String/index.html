@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">基本引用类型(原始包装类型) | Kinsiy</title>
+  
+    <link rel="shortcut icon" href="/img/custom/avatar.jpg">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "Kinsiy";
+  mashiro_option.author_name = "";
+  mashiro_option.site_url = "https://kinsiy.github.io/";
+  mashiro_option.v_appId = "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI";
+  mashiro_option.v_appKey = "sdnc0TF9hEH64aiXJ6GFf6MS";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-2.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-3.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-4.png".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="https://kinsiy.github.io/">
+          <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>slipped the surly bonds of earth to touch the face of God</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="http://github.com/Kinsiy" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/social/github.webp">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="mailto:solo1184194039@gmail.com?&amp;subject=Hello%20Kinsiy!" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">Kinsiy</span>
+            <span class="shironeko"></span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/SKILL/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/Reprint/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/Notes/">
+                          <i class="fa fa-edit" aria-hidden="true"></i>
+                          笔记
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/Think/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/artitalk/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    说说
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/donate/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+                    赞赏
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/lab/">
+                          <i class="fa fa-cogs" aria-hidden="true"></i>
+                          Lab
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/atom.xml">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+                    RSS
+                  </span>
+                </a>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+          <header class="entry-header">
+            <h1 class="entry-title">基本引用类型(原始包装类型)</h1>
+            <p class="entry-census">&nbsp;·&nbsp;2021-1-18&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+
+            <hr>
+          </header>
+        
+        <div class="entry-content">
+          <h1 id="基本引用类型-原始包装类型"><a href="#基本引用类型-原始包装类型" class="headerlink" title="基本引用类型(原始包装类型)"></a>基本引用类型(原始包装类型)</h1><p>为了方便操作原始值，EMCAScript提供了3种特殊的引用类型：Boolean、Number和String。这些类型具有与其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应包装类型的对象，从而暴露出操作原始值得各种方法。<br>在以读模式访问字符串值得时候，后台都会执行一下三步：</p>
+<ul>
+<li>创建一个String类型的实例</li>
+<li>调用实例上的特定方法</li>
+<li>销毁实例</li>
+</ul>
+<pre><code class="javascript">let s1 = &quot;some text&quot;;
+let s2 = s1.substring(2);
+/* 可以想象成 */
+let s1_ = &quot;some text&quot;;
+let s2_ = new String(s1_).substring(2);
+s_ = null;
+</code></pre>
+<p>这种行为可以让原始值拥有对象的行为。对布尔值和数值而言，以上三步也会在后台发生，只不过使用的是Boolean和Number包装类型而已。<br>引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过new实例化引用类型后，得到的实例会在离开作用域是被销毁，而自动创建的原始值包装对象则只存在于访问它执行期间。</p>
+<pre><code class="javascript">let s1 = &quot;some text&quot;;
+s1.color = &quot;red&quot;;
+console.log(s1.color);      //undefined
+
+/* Object作为一个工厂方法，能够根据传入值得类型返回相应原始值包装类型的实例 */
+let obj = new Object(&quot;some text&quot;);
+console.log(obj instanceof String);
+
+/* 使用new调用原始值包装类型的构造函数，与调用同名的转型函数并不一样 */
+let value = &quot;25&quot;;
+let number = Number(value);
+let obj = new Number(value);
+console.log(typeof number);         // number
+console.log(typeof obj);            // object
+</code></pre>
+<h2 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h2><p>建议永远不要使用Boolean对象<br>Boolean 的实例会重写valueof()方法，返回一个原始值true或false。toString()方法在被调用时也会被覆盖，返回字符串”true”或”false”。</p>
+<pre><code class="javascript">let falseObject = new Boolean(false);
+let result = falseObject &amp;&amp; true;
+console.log(result);                // true
+
+let falseValue = false;
+result = falseValue &amp;&amp; true;
+console.log(result);                // false
+
+console.log(typeof falseObject);    // object
+console.log(typeof falseValue);     // Boolean
+console.log(falseObject instanceof Boolean);    // true
+console.log(falseValue instanceof Boolean);     // false
+</code></pre>
+<h2 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h2><p>与Boolean类型一样，Number类型重写了valueof()、toLocaleString()和toString()方法。valueof()方法返回对象表示的原始数值，另外两个方法返回数值字符串。toString()方法可选地接收一个表示基数的参数，并返回相应技术形式的数值字符串。</p>
+<pre><code class="javascript">let num = 10;
+console.log(num.toString());            // 10
+console.log(num.toString(2));           // 1010
+console.log(num.toString(16));          // a
+
+/* toFixed()方法返回包含指定小数点位数的数值字符串 */
+console.log(num.toFixed(2));            // 10.00
+num = 10.008
+console.log(num.toFixed(2));            // 10.01        四舍五入
+
+/* toExponential(),返回以科学计数法表示的数值字符串 */
+num  = 88888;
+console.log(num.toExponential(1))       // 8.9e+4
+
+/* toPrecision(),根据情况返回最合理的输出结果 */
+num = 88;
+console.log(num.toPrecision(1));        // 9e+1
+console.log(num.toPrecision(2));        // 88
+console.log(num.toPrecision(3));        // 88.0
+
+// 本质上toPrecision()会根据数值和精度来决定调用toFixed()还是toExponential()。为了以正确的小数位精确表示数值，这三个方法都会向上或向下舍入。
+
+/* isInteger(), 用于辨别一个数值是否保存为整数 */
+console.log(Number.isInteger(1));          // true
+console.log(Number.isInteger(1.00));       // true
+console.log(Number.isInteger(1.01));       // false
+</code></pre>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String 对象的方法可以在所有字符串原始值上调用。上个继承的方法valueof()、toLocaleString()和toString()都返回对象的原始字符串值。<br>每个String对象都有一个length属性，表示字符串中字符的数量。</p>
+<pre><code class="javascript">let stringValue = &quot;hello world&quot;;
+console.log(stringValue.length);        // 11
+
+// 即使字符串中包含双字节字符(而不是单字节的ASCII字符)，也仍然会按单字符来计数
+let str_1 = &quot;这串文字的长度是⑨&quot;；
+console.log(str_1.length);              // 9
+</code></pre>
+<h3 id="Javascript-字符"><a href="#Javascript-字符" class="headerlink" title="Javascript 字符"></a>Javascript 字符</h3><p>Javascript字符串有16位码元(code unit)组成。对多数字符来说，每16位码元对应一个字符。换句话说，字符串的length 属性表示字符串包含多少16位码元。</p>
+<pre><code class="javascript">/* charAt()用于返回给定索引位置的字符 */
+let message = &quot;abcde&quot;;
+console.log(message.charAt(2));         // c
+
+/* charCodeAt()方法可以查看指定码元的字符编码 */
+console.log(message.charCodeAt(2));     //  99
+
+/* fromCharCode(), 用于根据给定的UTF-16码元创建字符串中的字符。 */
+console.log(String.fromCharCode(0x61,0x62,0x63,0x64,0x65));     // abcde
+console.log(String.fromCharCode(97,98,99,100,101));             // abcde
+
+/* 当字符编码扩展到Unicode增补平面时 */
+/* codePointAt(), 接收16位码元的索引并返回改索引位置上的码点 */
+message = &quot;ab🤣de&quot;;
+console.log(message.length);            // 6
+console.log(message.charAt(1));         // b
+console.log(message.charAt(2));         // &lt;?\&gt;
+console.log(message.charAt(3));         // &lt;?\&gt;
+console.log(message.charAt(4));         // d
+
+console.log(message.charCodeAt(1));     // 98
+console.log(message.charCodeAt(2));     // 55358
+console.log(message.charCodeAt(3));     // 56611
+console.log(message.charCodeAt(4));     // 100
+
+console.log(message.codePointAt(1));    // 98
+console.log(message.codePointAt(2));    // 129315
+console.log(message.codePointAt(3));    // 56611
+console.log(message.codePointAt(4));    // 100
+
+/* fromCodePoint(), 接受任意个码点，返回对应字符拼接起来的字符串 */
+console.log(String.fromCharCode(97,98,55358,56611,100,101));        // ab🤣de
+console.log(String.fromCodePoint(97,98,129315,100,101));            // ab🤣de
+</code></pre>
+<h3 id="normalize"><a href="#normalize" class="headerlink" title="normalize()"></a>normalize()</h3><p>某些Unicode字符可以有多种编码方式。有的字符即可以通过一个BMP字符表示，也可以通过一个代理对表示。</p>
+<pre><code class="javascript">let a = String.fromCharCode(0x00c5), b = String.fromCharCode(0x212B), c = String.fromCharCode(0x0041, 0x030A)
+console.log(`a: ${a} b: ${b} c: ${c}`);           // a: Å b: Å c: Å
+
+console.log(a === b);       // false
+console.log(a === c);       // false
+console.log(b === c);       // false
+
+/* 使用normalize() 规范化，使用时需要传入表示那种形式的字符串：&quot;NFD&quot;,&quot;NFC&quot;,&quot;NFKD&quot;,&quot;NFKC&quot; */
+console.log(a.normalize(&quot;NFC&quot;) === b.normalize(&quot;NFC&quot;));     // true
+</code></pre>
+<h3 id="字符串操作方法"><a href="#字符串操作方法" class="headerlink" title="字符串操作方法"></a>字符串操作方法</h3><h4 id="拼接-concat"><a href="#拼接-concat" class="headerlink" title="拼接-concat()"></a>拼接-concat()</h4><p>concat(), 用于将一个或多个字符串拼接成一个新字符串。常用(+)替代</p>
+<pre><code class="javascript">let strValue = &quot;Hello&quot;;
+let result = strValue.concat(&quot; &quot;,&quot;World &quot;,&quot;!&quot;);
+console.log(result);        // Hello World !
+</code></pre>
+<h4 id="切片-slice-substr-substring"><a href="#切片-slice-substr-substring" class="headerlink" title="切片-slice(), substr(), substring()"></a>切片-slice(), substr(), substring()</h4><p>这三个方法都返回调用他们的字符串的一个字字符串，而且都接收一或两个参数。对slice()和substring()而言，第二个参数是提取结束的位置。对substr()而言，第二个参数表示返回的字符串数量。任何情况下，省略第二个参数都意味着提取到字符串末尾。</p>
+<pre><code class="javascript">let strValue = &quot;Hello World!&quot;;
+console.log(strValue.slice(3));         // lo World!
+console.log(strValue.slice(-3));        // ld!
+
+console.log(strValue.slice(-3,-1));     // ld
+console.log(strValue.substring(3,-4));  // Hel      substring(), 把所有负参数转换为0
+console.log(strValue.substr(-3,2));     // ld
+console.log(strValue.substr(-3,-2));    // &quot;&quot;(空字符串) substr()，第二个参数若为负数，转换为0
+</code></pre>
+<h4 id="定位-indexOf-lastIndexOf"><a href="#定位-indexOf-lastIndexOf" class="headerlink" title="定位-indexOf(), lastIndexOf()"></a>定位-indexOf(), lastIndexOf()</h4><p>这两个方法从字符串中搜索传入的字符串，并返回位置(如果没找到，则返回-1)。两者的区别在于，indexof()方法从字符串开头开始查找子字符串，而lastIndexOf从字符串末尾开始查找子字符串。这两个方法都可以接收第二个参数，表示开始搜索的位置。</p>
+<pre><code class="javascript">let strValue = &quot;slipped the surly bonds of earth to touch the face of God&quot;;
+console.log(strValue.indexOf(&quot;f&quot;));        // 25
+console.log(strValue.lastindexOf(&quot;f&quot;));    // 52
+
+let position = [];
+let pos = strValue.indexOf(&quot;f&quot;);
+
+while(pos &gt; -1){
+    position.push(pos);
+    pos = strValue.indexOf(&quot;f&quot;, ++pos);
+}
+console.log(position);                      // [25,46,52]
+</code></pre>
+<h4 id="包含-startWith-endsWith-includes"><a href="#包含-startWith-endsWith-includes" class="headerlink" title="包含-startWith(), endsWith(), includes()"></a>包含-startWith(), endsWith(), includes()</h4><p>用于判断字符串中是否包含另一个字符串，这些方法都会从字符串中搜索传入的字符串，并返回表示是否包含的布尔值。区别在于，startsWith()检查目标字符串是否以传入字符串开头，endsWith()检查目标字符串是否以传入字符串结尾，includes()检查目标字符串是否包含传入字符串。</p>
+<pre><code class="javascript">let message = &quot;foobarbaz&quot;;
+
+console.log(message.startsWith(&quot;foo&quot;));     // true
+console.log(message.endsWith(&quot;bak&quot;));       // false
+console.log(message.endsWith(&quot;bar&quot;,-3));    // false        可接受第二个参数结束索引
+console.log(message.includes(&quot;oba&quot;));       // true
+</code></pre>
+<h4 id="修剪-trim-trimLeft-trimRight"><a href="#修剪-trim-trimLeft-trimRight" class="headerlink" title="修剪-trim(), trimLeft(), trimRight()"></a>修剪-trim(), trimLeft(), trimRight()</h4><p>创建字符串的一个副本，删除前、后所有空格，再返回结果。原字符串不受影响</p>
+<pre><code class="javascript">let strValue = &quot;   Hello  &quot;; 
+console.log(strValue.trim());                // Hello
+console.log(strValue.trimLeft());            // Hello__(两空格)
+console.log(strValue.trimRight());           // ___Hello
+</code></pre>
+<h4 id="重复-repeat"><a href="#重复-repeat" class="headerlink" title="重复-repeat()"></a>重复-repeat()</h4><p>ECMAScript 在所有字符串上都提供repeat()方法。这个方法接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本的结果。</p>
+<pre><code class="javascript">let strValue = &quot;Kinsiy &quot;; 
+console.log(strValue.repeat(5)+&quot;🤣&quot;);       // Kinsiy Kinsiy Kinsiy Kinsiy Kinsiy 🤣
+</code></pre>
+<h4 id="填充-padStart-padEnd"><a href="#填充-padStart-padEnd" class="headerlink" title="填充-padStart(), padEnd()"></a>填充-padStart(), padEnd()</h4><p>padStatr()和padEnd()方法会复制字符串，如果小于指定长度，则在相应的一边填充字符直至满足长度条件。这个方法的第一个参数是长度，第二个参数是可选的填充字符串，默认为空格(U+0020)。</p>
+<pre><code class="javascript">let strValue = &quot;Kinsiy&quot;; 
+console.log(strValue.padStart(10,&quot;🤣&quot;));       // 🤣🤣Kinsiy 别忘了前面说的Unicode代理对
+console.log(strValue.padEnd(10,&quot;🤣&quot;));         // Kinsiy🤣🤣
+
+/* 可选的第二个参数不限于一个字符。如果提供了多个字符的字符串，则会将其拼接并截断以匹配指定长度。
+    此外，如果长度小于或等于字符串长度，则会返回原始字符串
+ */
+strValue = &quot;foo&quot;;
+console.log(strValue.padStart(10,&quot;bar&quot;));       // barbarbfoo
+</code></pre>
+<h4 id="迭代与解构-iterator"><a href="#迭代与解构-iterator" class="headerlink" title="迭代与解构-@@iterator()"></a>迭代与解构-@@iterator()</h4><p>字符串的原型上暴露了一个@@iterator()方法，表示可以迭代字符串的每个字符。可以向下面这样手动使用迭代器：</p>
+<pre><code class="javascript">let strValue = &quot;ab&quot;; 
+let stringIterator = strValue[Symbol.iterator]();
+
+console.log(stringIterator.next());     //{value: &quot;a&quot;, done: false}
+console.log(stringIterator.next());     //{value: &quot;b&quot;, done: false}
+console.log(stringIterator.next());     //{value: undefined, done: true}
+
+/* 在for-of 循环中可以通过这个迭代器按序访问每个字符 */
+for (const c of &quot;abcde&quot;){
+    console.log(c);
+}
+
+/* 使用解构操作符解构为数组 */
+let name = &quot;Kinsiy&quot;;
+console.log([...name]);                 // [&quot;K&quot;, &quot;i&quot;, &quot;n&quot;, &quot;s&quot;, &quot;i&quot;, &quot;y&quot;]
+</code></pre>
+<h4 id="大小写-toLowerCase-toUpperCase"><a href="#大小写-toLowerCase-toUpperCase" class="headerlink" title="大小写-toLowerCase(), toUpperCase()"></a>大小写-toLowerCase(), toUpperCase()</h4><p>还有toLocaleLowerCase(),toLocaleUpperCase(), 旨在基于特定地区实现。</p>
+<pre><code class="javascript">let strValue = &quot;Kinsiy &quot;; 
+console.log(strValue.toLowerCase());       // kinsiy
+console.log(strValue.toUpperCase());       // KINSIY
+</code></pre>
+<h4 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h4><h5 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h5><p>本质上跟RegExp对象的exec()方法相同。match()方法接收一个参数，可以是一个正则表达式字面量，也可以是一个RegExp对象。</p>
+<pre><code class="javascript">let text = &quot;cat, bat, sat, fat&quot;;
+let pattern = /.at/;
+
+let matches = text.match(pattern);
+console.log(matches.index);         // 0
+console.log(matches[0]);            // cat
+console.log(pattern.lastIndex);     // 0
+</code></pre>
+<h5 id="search"><a href="#search" class="headerlink" title="search()"></a>search()</h5><p>这个方法唯一的参数和match()一样：正则表达式字面量或RegExp对象。这个方法返回模式第一个匹配位置的位置索引，如果没找到则返回-1</p>
+<pre><code class="javascript">let text = &quot;cat, bat, sat, fat&quot;;
+let pattern = /at/;
+
+console.log(text.search(pattern));         // 1
+</code></pre>
+<h5 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h5><p>这个方法接收两个参数，第一个参数可以是一个RegExp对象或一个字符串(这个字符串不会转换为正则表达式)，第二个参数可以是一个字符串或一个函数。如果第一个参数是字符串，那么只会替换第一个字字符串。想要替换所有子字符串，第一个参数必须为正则表达式并且带全局标记。</p>
+<pre><code class="javascript">let text = &quot;cat, bat, sat, fat&quot;;
+let result = text.replace(&quot;at&quot;,&quot;ond&quot;);
+console.log(result);                    // cond, bat, sat, fat
+
+result = text.replace(/at/g,&quot;ond&quot;);     // cond, bond, sond, fond
+console.log(result);
+</code></pre>
+<p>在第二个参数是字符串的情况下，有几个特殊的字符序列，可以用来插入正则表达式操作的值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符序列</th>
+<th style="text-align:left">替换文本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$$</td>
+<td style="text-align:left">$</td>
+</tr>
+<tr>
+<td style="text-align:center">$&amp;</td>
+<td style="text-align:left">匹配整个模式的子字符串。与RegExp.lastMatch相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;’</td>
+<td style="text-align:left">匹配的子字符串之前的字符串。与RegExp.rightContext相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;`</td>
+<td style="text-align:left">匹配的子字符串之后的字符串。与RegExp.leftContext相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;n</td>
+<td style="text-align:left">匹配第n个捕获组的字符串，其中n是0~9</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;nn</td>
+<td style="text-align:left">匹配第nn个捕获组的字符串，其中nn是01~99</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="javascript">let text = &quot;cat, bat, sat, fat&quot;;
+let result = text.replace(/(.at)/g,&quot;word ($1)&quot;);
+console.log(result);                         // word (cat), word (bat), word (sat), word (fat)
+
+/* replace() 第二个参数可以是一个函数
+    在只有一个匹配项时，这个函数会收到3个参数：与整个模式匹配的字符串，匹配项在字符串中的开始位置，以及整个字符串。在有多个捕获组的情况下，每个匹配捕获组的字符串也会作为参数传给这个函数。但最后两个参数还是与整个模式匹配的开始位置和原始字符串。
+ */
+
+ function htmlEscape(text){
+     return text.replace(/[&lt;&gt;&quot;&amp;]/g,function(match, pos, originalText){
+         switch(match){
+             case &quot;&lt;&quot;:
+                return &quot;&amp;lt;&quot;;
+             case &quot;&gt;&quot;:
+                return &quot;&amp;gt;&quot;;
+             case &quot;&amp;&quot;:
+                return &quot;&amp;amp;&quot;;
+             case &quot;\&quot;&quot;:
+                return &quot;&amp;quot;&quot;;
+         }
+     })
+ }
+
+ console.log(htmlEscape(&quot;&lt;p class=\&quot;greeting\&quot;&gt;Hello World!&lt;/p&gt;&quot;));
+ // &amp;lt;p class=&amp;quot;greeting&amp;quot;&amp;gt;Hello World!&amp;lt;/p&amp;gt;
+</code></pre>
+<h5 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h5><p>这个方法会根据传入的分隔符将字符串拆分成数组。作为分隔符的参数可以是字符串，也可以是RegExp对象。还可以传入第二个参数，即数组大小，确保返回的数组不会超过指定大小。</p>
+<pre><code class="javascript">let colorText = &quot;ref,bule,green,yellow&quot;;
+let colors1 = colorText.split(&quot;,&quot;);
+console.log(colors1);                       //[&quot;ref&quot;, &quot;bule&quot;, &quot;green&quot;, &quot;yellow&quot;]
+
+let colors2 = colorText.split(&quot;,&quot;,2);
+console.log(colors2);                       //[&quot;ref&quot;, &quot;bule&quot;]
+
+let colors3 = colorText.split(/[^,]+/);
+console.log(colors3);                       //[&quot;&quot;, &quot;,&quot;, &quot;,&quot;, &quot;,&quot;, &quot;&quot;]
+</code></pre>
+<h4 id="比较—localeCompare"><a href="#比较—localeCompare" class="headerlink" title="比较—localeCompare()"></a>比较—localeCompare()</h4><p>这个方法比价两个字符串，返回如下3个值中的一个</p>
+<ul>
+<li>如果按照字母表顺序，字符串应该排在字符串参数前头，则返回负值</li>
+<li>如果字符串与字符串参数相等，则返回0</li>
+<li>如果按照字母表顺序，字符串应该排在字符串参数后头，则返回正值</li>
+</ul>
+<pre><code class="javascript">let stringValue = &quot;yellow&quot;;
+console.log(stringValue.localeCompare(&quot;brick&quot;));        // 1
+console.log(stringValue.localeCompare(&quot;yellow&quot;));       // 0
+console.log(stringValue.localeCompare(&quot;zoo&quot;));          // -1
+</code></pre>
+<h4 id="html方法"><a href="#html方法" class="headerlink" title="html方法"></a>html方法</h4><p>略</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WechatQR.png"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2021/01/23/built-in-object/" rel="prev">
+              <div class="background">
+                
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
+                    
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                基本引用类型(单例内置对象)</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2021/01/17/Javascript-RegExp/" rel="next">
+              <div class="background">
+                
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png">
+                 
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                基本引用类型(RegExp)</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI",
+        appKey: "sdnc0TF9hEH64aiXJ6GFf6MS",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i></p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            // PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Kinsiy<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2020-2021</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+<script src='https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/Kinsiy/Video","name":"The-Witcher.mkv","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "https://cdn.jsdelivr.net/gh/Kinsiy/Video","name":"The-Witcher.mkv","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    var id = 1;
+    $(".entry-content").children("h1,h2,h3,h4,h5").each(function() {
+        //var hyphenated = $(this).text().replace(/\s/g, '-');
+        var hyphenated = "kinsiy-" + id;
+        $(this).attr('id', hyphenated);
+        id++;
+    });
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85,
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">Kinsiy</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="http://github.com/Kinsiy" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=1184194039&site=qq&menu=yes" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/SKILL/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/Reprint/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/Notes/">
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  笔记
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/Think/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/artitalk/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            说说
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/donate/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-heart faa-pulse" aria-hidden="true"></i>
+            赞赏
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/lab/">
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                  Lab
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/atom.xml">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-rss faa-pulse" aria-hidden="true"></i>
+            RSS
+          </span>
+        </a>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="7864731649"
+
+    server="tencent"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
