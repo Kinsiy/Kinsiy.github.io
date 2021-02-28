@@ -310,13 +310,14 @@
         
           <header class="entry-header">
             <h1 class="entry-title">HTML快速参考</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-12-1&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2020-12-1&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>HTML 基本文档<br><a id="more"></a></p>
+          <p>HTML 基本文档</p>
+<a id="more"></a>
 <pre><code class="html">&lt;html&gt;
     &lt;head&gt;
         &lt;title&gt;HTML快速参考&lt;/title&gt;
@@ -326,8 +327,7 @@
     &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<h1 id="HTML-链接"><a href="#HTML-链接" class="headerlink" title="HTML 链接"></a>HTML 链接</h1><h2 id="target-属性"><a href="#target-属性" class="headerlink" title="target 属性"></a>target 属性</h2><pre><code class="html">&lt;a name=&quot;mark_a&quot;&gt;Mark_A&lt;/a&gt;
-&lt;a href=&quot;https://www.baidu.com&quot; target=&quot;_blank&quot;&gt;Baidu&lt;/a&gt;
+<h1 id="HTML-链接"><a href="#HTML-链接" class="headerlink" title="HTML 链接"></a>HTML 链接</h1><h2 id="target-属性"><a href="#target-属性" class="headerlink" title="target 属性"></a>target 属性</h2><pre><code class="html">&lt;a name=&quot;mark_a&quot;&gt;Mark_A&lt;/a&gt; &lt;a href=&quot;https://www.baidu.com&quot; target=&quot;_blank&quot;&gt;Baidu&lt;/a&gt;
 </code></pre>
 <table>
 <thead>
@@ -359,8 +359,7 @@
 </table>
 <h2 id="电子邮件"><a href="#电子邮件" class="headerlink" title="电子邮件"></a>电子邮件</h2><pre><code class="html">&lt;a href=&quot;#mark_a&quot;&gt;跳转到Mark_A&lt;/a&gt;
 &lt;br /&gt;
-&lt;a href=&quot;mailto:solo@gmail.com?cc=kinsiy@qq.com&amp;bcc=someone@outlook.com&amp;subject=Hello%20word&amp;body=正文&quot;
-    &gt;发送邮件！&lt;/a&gt;
+&lt;a href=&quot;mailto:solo@gmail.com?cc=kinsiy@qq.com&amp;bcc=someone@outlook.com&amp;subject=Hello%20word&amp;body=正文&quot;&gt;发送邮件！&lt;/a&gt;
 </code></pre>
 <table>
 <thead>
@@ -388,7 +387,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="图片链接"><a href="#图片链接" class="headerlink" title="图片链接"></a>图片链接</h2><pre><code class="html">&lt;a href=&quot;https://kinsiy.github.io&quot;&gt;&lt;img src=&quot;URL&quot; alt=&quot;kinsiy&quot;&gt;&lt;/a&gt;
+<h2 id="图片链接"><a href="#图片链接" class="headerlink" title="图片链接"></a>图片链接</h2><pre><code class="html">&lt;a href=&quot;https://kinsiy.github.io&quot;&gt;&lt;img src=&quot;URL&quot; alt=&quot;kinsiy&quot; /&gt;&lt;/a&gt;
 </code></pre>
 <table>
 <thead>
@@ -408,12 +407,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="图像映射"><a href="#图像映射" class="headerlink" title="图像映射"></a>图像映射</h3><pre><code class="html">&lt;img src=&quot;girl.jpg&quot; alt=&quot;girl&quot; border=&quot;0&quot;  usemap=&quot;#grilmap&quot; width=&quot;200&quot;  height=&quot;200&quot;&gt;
+<h3 id="图像映射"><a href="#图像映射" class="headerlink" title="图像映射"></a>图像映射</h3><pre><code class="html">&lt;img src=&quot;girl.jpg&quot; alt=&quot;girl&quot; border=&quot;0&quot; usemap=&quot;#grilmap&quot; width=&quot;200&quot; height=&quot;200&quot; /&gt;
 &lt;map name=&quot;grilmap&quot; id=&quot;grilmap&quot;&gt;
-    &lt;area shape=&quot;circle&quot; coords=&quot;100,150,10&quot; href=&quot;https://www.baidu.com&quot; alt=&quot;baidu&quot; target=&quot;_blank&quot;&gt;
+    &lt;area shape=&quot;circle&quot; coords=&quot;100,150,10&quot; href=&quot;https://www.baidu.com&quot; alt=&quot;baidu&quot; target=&quot;_blank&quot; /&gt;
 &lt;/map&gt;
 </code></pre>
-<h4 id="ismap"><a href="#ismap" class="headerlink" title="ismap"></a>ismap</h4><p>ismap 可将图片转换为图像映射。点击图片任意位置访问时在自动在URL中添加点击点坐标</p>
+<h4 id="ismap"><a href="#ismap" class="headerlink" title="ismap"></a>ismap</h4><p>ismap 可将图片转换为图像映射。点击图片任意位置访问时在自动在 URL 中添加点击点坐标</p>
 <pre><code class="html">&lt;a href=&quot;https://www.baidu.com&quot;&gt;&lt;img src=&quot;girl.jpg&quot; width=&quot;250&quot; height=&quot;100&quot; ismap /&gt;&lt;/a&gt;
 </code></pre>
 <h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><pre><code class="html">&lt;table frame=&quot;box&quot; border=&quot;1&quot;&gt;
@@ -428,7 +427,8 @@
         &lt;th colspan=&quot;2&quot;&gt;标题2，横跨两列&lt;/th&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-        &lt;td&gt;&amp;nbsp;&lt;/td&gt; &lt;!-- 空格占位符 --&gt;
+        &lt;td&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;!-- 空格占位符 --&gt;
         &lt;td&gt;数据格&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
@@ -516,10 +516,28 @@
     &lt;dd&gt;Javascript也是一种脚本语言&lt;/dd&gt;
 &lt;/dl&gt;
 </code></pre>
-<h1 id="块"><a href="#块" class="headerlink" title="块"></a>块</h1><h2 id="块元素"><a href="#块元素" class="headerlink" title="块元素"></a>块元素</h2><pre><code class="html">&lt;h1&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;table&gt;  &lt;!-- 块元素 --&gt;
+<h1 id="块"><a href="#块" class="headerlink" title="块"></a>块</h1><h2 id="块元素"><a href="#块元素" class="headerlink" title="块元素"></a>块元素</h2><pre><code class="html">&lt;h1&gt;
+    ,
+    &lt;p&gt;,&lt;/p&gt;
+    &lt;ul&gt;
+        ,
+        &lt;table&gt;
+            &lt;!-- 块元素 --&gt;
+        &lt;/table&gt;
+    &lt;/ul&gt;
+&lt;/h1&gt;
 </code></pre>
 <p>大多数 HTML 元素被定义为块级元素或内联元素。<br><br>“块级元素”译为 block level element，“内联元素”译为 inline element。<br><br>块级元素在浏览器显示时，通常会以新行来开始（和结束）。</p>
-<h1 id="HTML-内联元素"><a href="#HTML-内联元素" class="headerlink" title="HTML 内联元素"></a>HTML 内联元素</h1><pre><code class="html">&lt;b&gt;, &lt;td&gt;, &lt;a&gt;, &lt;img&gt;  &lt;!-- 块元素 --&gt;
+<h1 id="HTML-内联元素"><a href="#HTML-内联元素" class="headerlink" title="HTML 内联元素"></a>HTML 内联元素</h1><pre><code class="html">&lt;b
+    &gt;,
+    &lt;td&gt;
+        ,
+        &lt;a
+            &gt;, &lt;img /&gt;
+            &lt;!-- 块元素 --&gt;&lt;/a
+        &gt;
+    &lt;/td&gt;&lt;/b
+&gt;
 </code></pre>
 <p>内联元素在显示时通常不会以新行开始。</p>
 <h2 id="lt-div-元素"><a href="#lt-div-元素" class="headerlink" title="&lt;div> 元素"></a>&lt;div> 元素</h2><p>HTML &lt;div> 元素是块级元素，它是可用于组合其他 HTML 元素的容器。</p>
@@ -536,21 +554,21 @@
         &lt;input type=&quot;text&quot; name=&quot;name&quot; /&gt;
         &lt;br /&gt;
         &lt;label for=&quot;password&quot;&gt;密码：&lt;/label&gt;
-        &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;
+        &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;
         &lt;br /&gt;
         &lt;input type=&quot;radio&quot; value=&quot;male&quot; /&gt;Male
         &lt;br /&gt;
-        &lt;input type=&quot;radio&quot; value=&quot;female&quot; checked/&gt;Female
+        &lt;input type=&quot;radio&quot; value=&quot;female&quot; checked /&gt;Female
         &lt;br /&gt;
-        &lt;input type=&quot;checkbox&quot; value=&quot;1&quot; checked/&gt;男生
+        &lt;input type=&quot;checkbox&quot; value=&quot;1&quot; checked /&gt;男生
         &lt;br /&gt;
         &lt;input type=&quot;checkbox&quot; value=&quot;0&quot; /&gt;女生
         &lt;br /&gt;
-        &lt;input type=&quot;submit&quot;&gt;
+        &lt;input type=&quot;submit&quot; /&gt;
         &lt;br /&gt;
-        &lt;input type=&quot;reset&quot;&gt;
+        &lt;input type=&quot;reset&quot; /&gt;
         &lt;br /&gt;
-        &lt;input type=&quot;hidden&quot;&gt;
+        &lt;input type=&quot;hidden&quot; /&gt;
         &lt;select name=&quot;cars&quot; id=&quot;cars&quot;&gt;
             &lt;option value=&quot;1&quot;&gt;大众&lt;/option&gt;
             &lt;optgroup label=&quot;豪车&quot;&gt;
@@ -592,7 +610,9 @@
         &lt;frame src=&quot;frame_c.html&quot; /&gt;
     &lt;/frameset&gt;
     &lt;noframes&gt;
-    &lt;body&gt;您的浏览器无法处理框架！&lt;/body&gt;
+        &lt;body&gt;
+            您的浏览器无法处理框架！
+        &lt;/body&gt;
     &lt;/noframes&gt;
 &lt;/frameset&gt;
 &lt;!-- 内联框架 --&gt;
@@ -740,7 +760,7 @@
             <a href="/2020/12/16/MySQL-index/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
                     
               </div>
               <span class="label">
@@ -760,7 +780,7 @@
             <a href="/2020/11/25/JavaScript-error/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
                  
               </div>
               <span class="label">
@@ -791,16 +811,16 @@
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="https://kinsiy.github.io" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg" itemprop="image" alt="Kinsiy" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="https://kinsiy.github.io" itemprop="url" rel="author">Kinsiy</a>
             </h3>
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i></p>
+        <p><i class="iconfont icon-write"></i>I'm True</p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->

@@ -310,13 +310,14 @@
         
           <header class="entry-header">
             <h1 class="entry-title">JavaScript错误处理与调试</h1>
-            <p class="entry-census">&nbsp;·&nbsp;2020-11-25&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2020-11-25&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <h1 id="Error-对象"><a href="#Error-对象" class="headerlink" title="Error 对象"></a>Error 对象</h1><h2 id="SyntaxError"><a href="#SyntaxError" class="headerlink" title="SyntaxError"></a>SyntaxError</h2><p>语法不正确。这是因为代码不遵循语言规范。通常因为输入错误导致。<br><a id="more"></a></p>
+          <h1 id="Error-对象"><a href="#Error-对象" class="headerlink" title="Error 对象"></a>Error 对象</h1><h2 id="SyntaxError"><a href="#SyntaxError" class="headerlink" title="SyntaxError"></a>SyntaxError</h2><p>语法不正确。这是因为代码不遵循语言规范。通常因为输入错误导致。</p>
+<a id="more"></a>
 <pre><code class="javascript">//引号不匹配或未闭合
 document.write(&quot;Howdy&#39;)
 </code></pre>
@@ -331,66 +332,69 @@ var box = {};
 box.GetArea();
 
 //DOM节点不存在
-var el = document.getElementById(&#39;Name&#39;);
-el.innerHTML = &#39;Kinsiy&#39;;
+var el = document.getElementById(&quot;Name&quot;);
+el.innerHTML = &quot;Kinsiy&quot;;
 </code></pre>
 <h2 id="RangeError"><a href="#RangeError" class="headerlink" title="RangeError"></a>RangeError</h2><p>数字在可接受范围之外。使用了可接受范围之外的数字来调用某个函数所致。</p>
 <pre><code class="javascript">//无法创建长度为-1的数组
-var AnArray = new Array(-1)
+var AnArray = new Array(-1);
 </code></pre>
-<h2 id="URIError"><a href="#URIError" class="headerlink" title="URIError"></a>URIError</h2><p>没有正确使用URI函数。如果URI没有对以下字符进行转义，就会导致此错误：/ ? &amp; # : ;</p>
+<h2 id="URIError"><a href="#URIError" class="headerlink" title="URIError"></a>URIError</h2><p>没有正确使用 URI 函数。如果 URI 没有对以下字符进行转义，就会导致此错误：/ ? &amp; # : ;</p>
 <pre><code class="javascript">//字符未转义
-decodeURI(&#39;http://bbc.com/news.php ? a=1&#39;);     // URIError: URI error
+decodeURI(&quot;http://bbc.com/news.php ? a=1&quot;); // URIError: URI error
 </code></pre>
-<h2 id="EvalError"><a href="#EvalError" class="headerlink" title="EvalError"></a>EvalError</h2><p>没有正确使用eval()函数。eval()函数通过解释器来评估文本，并将其作为代码来执行。很少能看到这种类型的错误，因为通常浏览器会在发现EvalError时，抛出其他类型错误。</p>
+<h2 id="EvalError"><a href="#EvalError" class="headerlink" title="EvalError"></a>EvalError</h2><p>没有正确使用 eval()函数。eval()函数通过解释器来评估文本，并将其作为代码来执行。很少能看到这种类型的错误，因为通常浏览器会在发现 EvalError 时，抛出其他类型错误。</p>
 <h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>一般错误类型。一般错误对象是用来创建其他所有错误对象的模板(或原型)。</p>
-<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><p>不是错误。如果使用一个非数字的值来执行数学运算的话，就会得到NaN这样的结果，这并不是错误。</p>
+<h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><p>不是错误。如果使用一个非数字的值来执行数学运算的话，就会得到 NaN 这样的结果，这并不是错误。</p>
 <pre><code class="javascript">// 不是数字
-var total = 3 * &quot;Ivy&quot;
+var total = 3 * &quot;Ivy&quot;;
 </code></pre>
 <h1 id="console"><a href="#console" class="headerlink" title="console"></a>console</h1><ul>
 <li>console.log()</li>
-<li>console.info()    用于一般信息</li>
-<li>console.warn()    用于警告</li>
-<li>console.error()   用于输出错误</li>
-<li>console.group()   消息分组 用于输出一组相关数据</li>
-<li>console.table()   如果浏览器支持的话可以使用此方法输出表格</li>
-<li>console.assert()  根据条件输出</li>
+<li>console.info() 用于一般信息</li>
+<li>console.warn() 用于警告</li>
+<li>console.error() 用于输出错误</li>
+<li>console.group() 消息分组 用于输出一组相关数据</li>
+<li>console.table() 如果浏览器支持的话可以使用此方法输出表格</li>
+<li>console.assert() 根据条件输出</li>
 </ul>
 <pre><code class="javascript">//console.group()
-console.group(&#39;Area calculations&#39;);
-    console.info(&#39;Width &#39;,width);
-    console.info(&#39;Height &#39;,height);
-    console.log(area);
+console.group(&quot;Area calculations&quot;);
+console.info(&quot;Width &quot;, width);
+console.info(&quot;Height &quot;, height);
+console.log(area);
 console.groupEnd();
 
 //console.table()
 var contacts = {
-    &quot;London&quot;:{
-        &quot;Tel&quot;: &quot;110&quot;,
-        &quot;Country&quot;: &quot;UK&quot;},
-    &quot;Syfeny&quot;:{
-        &quot;Tel&quot;: &quot;120&quot;,
-        &quot;Country&quot;: &quot;CN&quot;},
-    &quot;Kinsiy&quot;:{
-        &quot;Tel&quot;: &quot;119&quot;,
-        &quot;Country&quot;: &quot;USA&quot;}
-}
+    London: {
+        Tel: &quot;110&quot;,
+        Country: &quot;UK&quot;,
+    },
+    Syfeny: {
+        Tel: &quot;120&quot;,
+        Country: &quot;CN&quot;,
+    },
+    Kinsiy: {
+        Tel: &quot;119&quot;,
+        Country: &quot;USA&quot;,
+    },
+};
 console.table(contacts);
 
 // console.assert()
 var width, height, area;
-width = $(&#39;#width&#39;).val();
-height = $(&#39;#height&#39;).val();
+width = $(&quot;#width&quot;).val();
+height = $(&quot;#height&quot;).val();
 area = width * height;
-console.assert($.isNumeric(area),&#39;用户输入非数字！&#39;)
+console.assert($.isNumeric(area), &quot;用户输入非数字！&quot;);
 </code></pre>
-<h1 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h1><p>使用debugger关键字在代码中创建断点。打开开发者工具后，就会自动创建这个断点。可以将debugger关键字添加到条件语句中，在满足条件时触发断点。</p>
+<h1 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h1><p>使用 debugger 关键字在代码中创建断点。打开开发者工具后，就会自动创建这个断点。可以将 debugger 关键字添加到条件语句中，在满足条件时触发断点。</p>
 <pre><code class="javascript">var width, height, area;
-width = $(&#39;#width&#39;).val();
-height = $(&#39;#height&#39;).val();
+width = $(&quot;#width&quot;).val();
+height = $(&quot;#height&quot;).val();
 area = width * height;
-if (area &lt; 20){
+if (area &lt; 20) {
     debugger;
 }
 </code></pre>
@@ -415,17 +419,17 @@ if (response){
 <h1 id="抛出错误"><a href="#抛出错误" class="headerlink" title="抛出错误"></a>抛出错误</h1><p>throw new Error(‘message’)</p>
 <pre><code class="javascript">var width = 12;
 var height = &quot;Test&quot;;
-function calculateArea(width, height){
-    try{
+function calculateArea(width, height) {
+    try {
         var area = width * height;
-        if (!isNaN(area)){
+        if (!isNaN(area)) {
             return area;
-        }else{
-            throw new Error(&#39;calculateArea() 入参无效！&#39;)
+        } else {
+            throw new Error(&quot;calculateArea() 入参无效！&quot;);
         }
-    }catch(e){
+    } catch (e) {
         var errorMessage = e.name + &quot; &quot; + e.message;
-        console.log(erroeMessage)
+        console.log(erroeMessage);
         return &quot;无法计算！&quot;;
     }
 }
@@ -459,12 +463,12 @@ function calculateArea(width, height){
       <section class="post-squares nextprev">
         
           
-            <div class="post-nepre half previous">
+            <div class="post-nepre full previous">
           
             <a href="/2020/12/01/HTML-Reference/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-5.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png">
                     
               </div>
               <span class="label">
@@ -477,25 +481,6 @@ function calculateArea(width, height){
             </a>
           </div>
         
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2020/11/23/hello-world/" rel="next">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-1.png">
-                 
-              </div>
-              <span class="label">
-              Next Post</span>
-              <div class="info">
-                <h3>
-                Hello World</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
         
       </section>
       
@@ -515,16 +500,16 @@ function calculateArea(width, height){
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="" height="70" width="70"></a>
+          <a href="https://kinsiy.github.io" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg" itemprop="image" alt="Kinsiy" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
-            <a href="" itemprop="url" rel="author"></a>
+            <a href="https://kinsiy.github.io" itemprop="url" rel="author">Kinsiy</a>
             </h3>
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i></p>
+        <p><i class="iconfont icon-write"></i>I'm True</p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->

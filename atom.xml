@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-02-28T09:14:19.253Z</updated>
+  <updated>2021-02-28T11:46:36.185Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="https://Kinsiy.github.io/2021/02/28/RegExp/"/>
+    <id>https://Kinsiy.github.io/2021/02/28/RegExp/</id>
+    <published>2021-02-28T09:45:48.000Z</published>
+    <updated>2021-02-28T11:46:36.185Z</updated>
+    
+    <summary type="html">
+    
+      一文掌握开发利器：正则表达式
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Reprint" scheme="https://Kinsiy.github.io/tags/Reprint/"/>
+    
+      <category term="RegExp" scheme="https://Kinsiy.github.io/tags/RegExp/"/>
+    
+  </entry>
   
   <entry>
     <title>集合引用类型(Object.2)-创建对象</title>
@@ -153,7 +175,7 @@
     <link href="https://Kinsiy.github.io/2021/01/18/Javascript-String/"/>
     <id>https://Kinsiy.github.io/2021/01/18/Javascript-String/</id>
     <published>2021-01-18T13:33:05.000Z</published>
-    <updated>2021-01-20T15:08:13.912Z</updated>
+    <updated>2021-02-28T11:45:13.207Z</updated>
     
     <summary type="html">
     
@@ -175,7 +197,7 @@
     <link href="https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/"/>
     <id>https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/</id>
     <published>2021-01-17T14:14:48.000Z</published>
-    <updated>2021-02-02T16:56:19.079Z</updated>
+    <updated>2021-02-28T11:45:31.040Z</updated>
     
     <summary type="html">
     
@@ -197,7 +219,7 @@
     <link href="https://Kinsiy.github.io/2021/01/13/Javascript-Date/"/>
     <id>https://Kinsiy.github.io/2021/01/13/Javascript-Date/</id>
     <published>2021-01-12T16:48:35.000Z</published>
-    <updated>2021-01-20T15:07:47.125Z</updated>
+    <updated>2021-02-28T11:45:51.060Z</updated>
     
     <summary type="html">
     
@@ -219,7 +241,7 @@
     <link href="https://Kinsiy.github.io/2021/01/10/Javascript-Variables/"/>
     <id>https://Kinsiy.github.io/2021/01/10/Javascript-Variables/</id>
     <published>2021-01-10T06:15:42.000Z</published>
-    <updated>2021-01-20T15:08:57.664Z</updated>
+    <updated>2021-02-28T11:44:40.301Z</updated>
     
     <summary type="html">
     
@@ -241,7 +263,7 @@
     <link href="https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/"/>
     <id>https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/</id>
     <published>2020-12-20T04:01:49.000Z</published>
-    <updated>2021-02-02T17:07:25.615Z</updated>
+    <updated>2021-02-28T11:45:59.205Z</updated>
     
     <summary type="html">
     
@@ -263,7 +285,7 @@
     <link href="https://Kinsiy.github.io/2020/12/16/MySQL-index/"/>
     <id>https://Kinsiy.github.io/2020/12/16/MySQL-index/</id>
     <published>2020-12-15T16:19:51.000Z</published>
-    <updated>2021-01-24T11:59:44.625Z</updated>
+    <updated>2021-02-28T11:44:53.261Z</updated>
     
     <summary type="html">
     
@@ -285,7 +307,7 @@
     <link href="https://Kinsiy.github.io/2020/12/01/HTML-Reference/"/>
     <id>https://Kinsiy.github.io/2020/12/01/HTML-Reference/</id>
     <published>2020-11-30T16:25:37.000Z</published>
-    <updated>2021-01-23T17:37:46.143Z</updated>
+    <updated>2021-02-28T11:46:07.657Z</updated>
     
     <summary type="html">
     
@@ -307,7 +329,7 @@
     <link href="https://Kinsiy.github.io/2020/11/25/JavaScript-error/"/>
     <id>https://Kinsiy.github.io/2020/11/25/JavaScript-error/</id>
     <published>2020-11-24T17:26:39.000Z</published>
-    <updated>2021-01-20T15:07:08.401Z</updated>
+    <updated>2021-02-28T11:45:45.046Z</updated>
     
     <summary type="html">
     
@@ -323,24 +345,6 @@
       <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
     
       <category term="debug" scheme="https://Kinsiy.github.io/tags/debug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://Kinsiy.github.io/2020/11/23/hello-world/"/>
-    <id>https://Kinsiy.github.io/2020/11/23/hello-world/</id>
-    <published>2020-11-23T15:00:00.000Z</published>
-    <updated>2021-01-17T12:06:05.395Z</updated>
-    
-    <summary type="html">
-    
-      天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
-    
-    </summary>
-    
-      <category term="Think" scheme="https://Kinsiy.github.io/categories/Think/"/>
-    
     
   </entry>
   

@@ -317,8 +317,9 @@
         
         <div class="entry-content">
           <blockquote>
-<p>文章原出处为 &lt;腾讯技术工程&gt; 公众号，个人觉得写的非常好，故搬运过来，以便日后查阅。<br>作者：fanili，腾讯 WXG 后台开发工程师<br><a id="more"></a></p>
+<p>文章原出处为 &lt;腾讯技术工程&gt; 公众号，个人觉得写的非常好，故搬运过来，以便日后查阅。<br>作者：fanili，腾讯 WXG 后台开发工程师</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h1><p>在关系数据库中，索引是一种单独的、物理的对数据库表中一列或多列的值进行排序的一种存储结构，它是某个表中一列或若干列值的集合和相应的指向表中物理标识这些值的数据页的逻辑指针清单。索引的作用相当于图书的目录，可以根据目录中的页码快速找到所需的内容。（百度百科）<br><br><br>索引的目的是提高查找效率，对数据表的值集合进行了排序，并按照一定数据结构进行了存储。<br><br><br>本文将从一个案例开始，从索引的数据结构、分类、关键概念及如何使用索引提高查找效率等方面对索引知识进行总结。</p>
 <h1 id="从一个案例开始"><a href="#从一个案例开始" class="headerlink" title="从一个案例开始"></a>从一个案例开始</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>业务中有个既存的历史 SQL 语句在运行时会导致 DB 服务器过载，进而导致相关服务阻塞无法及时完成。CPU 监控曲线如下：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%E4%BC%98%E5%8C%96%E5%89%8DCPU%E4%BD%BF%E7%94%A8%E7%8E%87.png" alt="优化前CPU使用率"><br><br><br>从 DB 的 CPU 使用率曲线可以看到业务运行一直处于“亚健康”状态（1），随着业务的增长随时都可能出现问题。这种问题（2）在 11 月 11 日凌晨出现，当时 DB CPU 一直处于 100%高负荷状态，且存在大量的慢查询语句。最终以杀死进程降低 DB 负载、减少业务进程（3）的方式恢复业务。<br><br><br>在 11 月 11 日下午，对该业务的 SQL 语句进行了优化，优化的效果如下。业务运行时的 CPU 使用率峰值有很大的降低（对比图 2 的 1，2，3 可见）；慢查询语句几乎在监控曲线上也无法明显观察到（对比图 3 的 1，2，3 可见）。<br><br><br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%E4%BC%98%E5%8C%96%E5%89%8D%E5%90%8E%E7%9A%84CPU%E4%BD%BF%E7%94%A8%E7%8E%87.png" alt="优化前后的CUP使用率"><br><br><br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%E4%BC%98%E5%8C%96%E5%89%8D%E5%90%8E%E7%9A%84%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%95%B0%E9%87%8F.png" alt="优化前后的慢查询数量"><br><br></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>表结构</p>
@@ -470,7 +471,7 @@ insert into T values(100, 1, &#39;aa&#39;),(200, 2, &#39;bb&#39;),(300, 3, &#39;
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e7%b4%a2%e5%bc%95%e7%bb%93%e6%9e%84%e7%a4%ba%e6%84%8f.png" alt="索引结构示意"><br>左边是以主键 ID 建立起的聚集索引，其叶子节点存储了完整的表记录信息；右边是以普通字段 K 建立的普通索引，其叶子节点的值是主键 ID。</p>
 <ul>
-<li>Select语句执行过程</li>
+<li>Select 语句执行过程</li>
 </ul>
 <pre><code class="sql">select * from T where k between 3 and 5;
 </code></pre>
@@ -502,7 +503,7 @@ insert into T values(100, 1, &#39;aa&#39;),(200, 2, &#39;bb&#39;),(300, 3, &#39;
 </code></pre>
 <p>explain 结果：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/sql3.png" alt="sql3"></p>
 <ul>
-<li>SQL 语句B</li>
+<li>SQL 语句 B</li>
 </ul>
 <pre><code class="sql">explain select emp_no from employees where hire_date &gt; &#39;1990-01-14&#39;;
 </code></pre>
@@ -518,7 +519,7 @@ insert into T values(100, 1, &#39;aa&#39;),(200, 2, &#39;bb&#39;),(300, 3, &#39;
 </code></pre>
 <p>explain 结果：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/sql5.png" alt="sql5"></p>
 <ul>
-<li>SQL 语句B</li>
+<li>SQL 语句 B</li>
 </ul>
 <pre><code class="sql">explain select * from employees where hire_date &gt; &#39;1990-01-14&#39; and first_name like &#39;Hi%&#39;;
 </code></pre>
@@ -542,16 +543,16 @@ insert into T values(100, 1, &#39;aa&#39;),(200, 2, &#39;bb&#39;),(300, 3, &#39;
 <li>索引下推</li>
 </ul>
 <p>explain 结果中的 extra 字段值包含 using index condition，则说明使用了索引下推。索引下推功能是从 5.6 版本开始支持的。在 5.6 版本之前，i_first_name 索引是没有使用上的，需要每次去主键索引表取完整的记录值进行比较。从 5.6 版本开始，由于索引 i_first_name 的存在，可以直接取索引的 first_name 值进行过滤，这样不符合”first_name like ‘Hi%’”条件的记录就不再需要回表操作。</p>
-<h2 id="MRR优化"><a href="#MRR优化" class="headerlink" title="MRR优化"></a>MRR优化</h2><p>MySQL 5.6 版本开始支持 Multi-Range Read(MRR)优化，MRR 优化的目的是为减少磁盘的随机访问，并且将随机访问转化为较为顺序的数据访问，对于 IO-bound 类型的 SQL 查询语句可带来性能极大提升。我们先看下对比测试，以下测试语句在同一个 MySQL 实例下执行，执行前均进行 mysql 服务重启，以保证缓存此没被预热。</p>
+<h2 id="MRR-优化"><a href="#MRR-优化" class="headerlink" title="MRR 优化"></a>MRR 优化</h2><p>MySQL 5.6 版本开始支持 Multi-Range Read(MRR)优化，MRR 优化的目的是为减少磁盘的随机访问，并且将随机访问转化为较为顺序的数据访问，对于 IO-bound 类型的 SQL 查询语句可带来性能极大提升。我们先看下对比测试，以下测试语句在同一个 MySQL 实例下执行，执行前均进行 mysql 服务重启，以保证缓存此没被预热。</p>
 <ul>
-<li>关闭MRR</li>
+<li>关闭 MRR</li>
 </ul>
 <pre><code class="sql">SET @@optimizer_switch=&#39;mrr=off&#39;;
 select * from employees where hire_date &gt; &#39;1990-01-14&#39; and first_name like &#39;Hi%&#39;;
 </code></pre>
 <p>执行耗时为 0.90s<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/sql11.png" alt="sql11"></p>
 <ul>
-<li>开启MRR</li>
+<li>开启 MRR</li>
 </ul>
 <pre><code class="sql">SET @@optimizer_switch=&#39;mrr=off&#39;;
 SET @@optimizer_switch=&#39;mrr=on,mrr_cost_based=off&#39;;
@@ -662,22 +663,14 @@ where a1.FStatDate = a2.FStatDate
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/sql20.png" alt="sql20"></p>
 <h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><ul>
-<li>主键索引<ul>
+<li>主键索引</li>
 <li>顾名思义该类索引由表的主键组成，从左到右由小到大排序。一个 Innodb 存储表只有一张主键索引表（聚集索引）。</li>
-</ul>
-</li>
-<li>普通索引<ul>
+<li>普通索引</li>
 <li>最为平常的一种索引，没有特别限制。</li>
-</ul>
-</li>
-<li>唯一索引<ul>
+<li>唯一索引</li>
 <li>该索引的字段不能有相同值，但允许有空值。</li>
-</ul>
-</li>
-<li>组合索引<ul>
+<li>组合索引</li>
 <li>由多列字段组合而成的索引，往往是为了提升查询效率而设置。</li>
-</ul>
-</li>
 </ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在文章开始时介绍了常见的几种索引数据结构，适合静态数据的有序数组、适合 KV 结构的哈希索引及兼顾查询及插入性能的搜索二叉树；然后介绍了 Innodb 的常见索引实现方式 B+树及 Select 语句使用 B+树索引查找记录的执行过程，在这个部分我们了解了几个关键的概念，回表、覆盖索引、最左匹配、索引下推和 MMR；之后还总结了索引的失效场景及背后的原因。最后，我们回到最初的案例，分析出优化前后 SQL 语句在使用索引的差异，进而导致执行效率的差异。<br><br><br>本文介绍了索引的一些粗浅知识，希望能够对读者有些许帮助。作为阶段性学习的一个总结，文章对 MySQL 索引的相关知识基本上是浅藏辄止，日后还需多多使用和深入学习。<br><br><br>何以解忧？唯有学习。<br><br><br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/%e6%80%9d%e7%bb%b4%e5%af%bc%e5%9b%be.png" alt="思维导图"></p>
 <h1 id="餐卡书目和资料"><a href="#餐卡书目和资料" class="headerlink" title="餐卡书目和资料"></a>餐卡书目和资料</h1><ul>
@@ -722,7 +715,7 @@ where a1.FStatDate = a2.FStatDate
             <a href="/2020/12/20/JavaScript-Basics/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-3.png">
                     
               </div>
               <span class="label">
@@ -742,7 +735,7 @@ where a1.FStatDate = a2.FStatDate
             <a href="/2020/12/01/HTML-Reference/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
                  
               </div>
               <span class="label">
@@ -773,7 +766,7 @@ where a1.FStatDate = a2.FStatDate
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="" class="profile gravatar"><img src="" itemprop="image" alt="fanili" height="70" width="70"></a>
+          <a href="" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg" itemprop="image" alt="fanili" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
@@ -782,7 +775,7 @@ where a1.FStatDate = a2.FStatDate
           </div>
         </div>
         <hr>
-        <p><i class="iconfont icon-write"></i></p>
+        <p><i class="iconfont icon-write"></i>I'm True</p>
       </section>
     </main><!-- #main -->
   </div><!-- #primary -->
