@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-02-28T11:46:36.185Z</updated>
+  <updated>2021-03-02T14:23:27.409Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript中的继承</title>
+    <link href="https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/"/>
+    <id>https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/</id>
+    <published>2021-03-02T11:54:11.000Z</published>
+    <updated>2021-03-02T14:23:27.409Z</updated>
+    
+    <summary type="html">
+    
+      实现继承是 ECMAScript 唯一支持的继承方式，而这主要是通过原型链实现的。
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>正则表达式</title>
@@ -345,6 +363,24 @@
       <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
     
       <category term="debug" scheme="https://Kinsiy.github.io/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://Kinsiy.github.io/2020/11/23/hello-world/"/>
+    <id>https://Kinsiy.github.io/2020/11/23/hello-world/</id>
+    <published>2020-11-23T15:00:00.000Z</published>
+    <updated>2021-03-02T11:53:10.474Z</updated>
+    
+    <summary type="html">
+    
+      天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
+    
+    </summary>
+    
+      <category term="Think" scheme="https://Kinsiy.github.io/categories/Think/"/>
+    
     
   </entry>
   
