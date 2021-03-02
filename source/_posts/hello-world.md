@@ -1,14 +1,4 @@
-<!--
- * @Author: your name
- * @Date: 2021-01-19 22:54:33
- * @LastEditTime: 2021-02-28 19:46:16
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \Kinsiy\source\_posts\hello-world.md
--->
-
 ---
-
 title: Hello World
 date: 2020-11-23 23:00:00
 author: Kinsiy
@@ -19,7 +9,6 @@ authorDesc: I'm True
 description: 天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
 categories: Think
 tag:
-
 ---
 
 &ensp;&ensp;&ensp;&ensp;天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。是故君子戒慎乎其所不睹，恐惧乎其所不问。莫见乎隐，莫显乎微，故君子慎其独也。喜怒哀乐之未发，谓之中；发而皆中节，谓之和。中也者，天下之大本也；和也者，天下之达道也。致中和，天地位焉，万物育焉。<p align="right">——《中庸》(第一章)</p>
