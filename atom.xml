@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-02T14:23:27.409Z</updated>
+  <updated>2021-03-03T01:17:20.437Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/"/>
     <id>https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/</id>
     <published>2021-03-02T11:54:11.000Z</published>
-    <updated>2021-03-02T14:23:27.409Z</updated>
+    <updated>2021-03-03T01:17:20.437Z</updated>
     
     <summary type="html">
     
@@ -32,6 +32,10 @@
       <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
     
     
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
   </entry>
   
   <entry>
@@ -39,7 +43,7 @@
     <link href="https://Kinsiy.github.io/2021/02/28/RegExp/"/>
     <id>https://Kinsiy.github.io/2021/02/28/RegExp/</id>
     <published>2021-02-28T09:45:48.000Z</published>
-    <updated>2021-02-28T11:46:36.185Z</updated>
+    <updated>2021-03-03T02:52:44.114Z</updated>
     
     <summary type="html">
     
