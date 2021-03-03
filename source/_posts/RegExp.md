@@ -138,7 +138,7 @@ photos:
 ### 没有回溯的正则
 
 举一个网上常见的例子，正则表达式/ab{1,3}c/g 去匹配文本'abbc'，我们接下来会通过 RegexBuddy 分析其中的匹配过程，后续的一个章节有关于 RegexBuddy 的使用介绍。
-![](https://https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_1.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_1.png)
 如上图所示，让我们一步一步分解匹配过程：
 
 1. 正则引擎先匹配 a。

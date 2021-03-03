@@ -8,7 +8,7 @@ authorDesc: I'm True
 categories: SKILL
 comments: true
 date: 2021-03-02 19:54:11
-tags:
+tags: [Notes, Javascript]
 keywords:
 description: 实现继承是 ECMAScript 唯一支持的继承方式，而这主要是通过原型链实现的。
 photos:
@@ -192,7 +192,7 @@ instance_2.sayName(); // Restituo
 instance_2.sayAge(); // 23
 ```
 
-## 原型式继承
+# 原型式继承
 
 ```javascript
 function object(o) {
@@ -231,7 +231,7 @@ let person_3 = Object.create(person, {
 console.log(person_3.name); // Queen
 ```
 
-## 寄生式继承
+# 寄生式继承
 
 与原型式继承比较接近的是一种继承方式是寄生式继承。寄生式继承背后的思路类似于寄生构造函数和工厂模式：创建一个实现继承的函数，以某种方式增强对象，然后返回这个对象。基本的寄生继承模式如下：
 
@@ -254,7 +254,7 @@ let someone = createAnother(person);
 someone.sayHi(); // Hi
 ```
 
-## 寄生式组合继承
+# 寄生式组合继承
 
 组合继承其实也有存在效率问题。最主要的效率问题就是父类构造函数始终会被调用两次：一次是在创建子类原型时调用，另一次是在子类构造函数中调用。本质上，子类原型最终是要包含超类对象的所有实例属性，子类构造函数只要在执行时重写自己的原型就行了。
 
