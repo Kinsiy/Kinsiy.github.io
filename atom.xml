@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-03T01:17:20.437Z</updated>
+  <updated>2021-03-05T13:34:23.643Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-class</title>
+    <link href="https://Kinsiy.github.io/2021/03/04/Javascript-class/"/>
+    <id>https://Kinsiy.github.io/2021/03/04/Javascript-class/</id>
+    <published>2021-03-04T13:07:28.000Z</published>
+    <updated>2021-03-05T13:34:23.643Z</updated>
+    
+    <summary type="html">
+    
+      类(class)是 ECMAScript 中新的基础性语法糖结构。虽然 ECMAScript6 类表面上看起来可以支持正式的面向对象编程，但实际上它背后使用的仍然是原型和构造函数的概念。
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript中的继承</title>
