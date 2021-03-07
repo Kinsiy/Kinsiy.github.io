@@ -1,12 +1,12 @@
 ---
-title: 基本引用类型(RegExp)
+title: Javascript-RegExp
 date: 2021-1-17 22:14:48
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"
 authorAbout: I'm True
 authorDesc: I'm True
-description: RegExp 对象的使用
+description: 基本引用类型, RegExp 对象的使用
 categories: SKILL
 tags: [Notes, Javascript]
 ---

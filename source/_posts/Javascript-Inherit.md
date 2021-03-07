@@ -1,5 +1,5 @@
 ---
-title: Javascript中的继承
+title: Javascript-继承
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"

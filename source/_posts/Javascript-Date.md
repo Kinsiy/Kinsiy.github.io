@@ -1,12 +1,12 @@
 ---
-title: 基本引用类型(Date)
+title: Javascript-Date
 date: 2021-01-13 00:48:35
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"
 authorAbout: I'm True
 authorDesc: I'm True
-description: Date 对象的使用
+description: 基本引用类型, Date 对象的使用
 categories: SKILL
 tags: [Notes, Javascript]
 ---

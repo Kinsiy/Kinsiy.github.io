@@ -1,12 +1,12 @@
 ---
-title: 变量、作用域与内存
+title: Javascript-变量、作用域与内存
 date: 2021-01-10 14:15:42
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"
 authorAbout: I'm True
 authorDesc: I'm True
-description: 本章会剖析错综复杂的变量。
+description: 本章会剖析Javascript中错综复杂的变量。
 categories: SKILL
 tags: [Notes, Javascript]
 ---

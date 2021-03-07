@@ -1,12 +1,12 @@
 ---
-title: 基本引用类型(原始包装类型)
+title: Javascript-原始包装类型
 date: 2021-1-18 21:33:05
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"
 authorAbout: I'm True
 authorDesc: I'm True
-description: 原始包装类型：Boolean、Number、String对象的使用
+description: 基本引用类型-原始包装类型：Boolean、Number、String对象的使用
 categories: SKILL
 tags: [Notes, Javascript]
 ---

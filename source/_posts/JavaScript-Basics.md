@@ -1,5 +1,5 @@
 ---
-title: JavaScript语言基础
+title: JavaScript-语言基础
 date: 2020-12-20 12:01:49
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"

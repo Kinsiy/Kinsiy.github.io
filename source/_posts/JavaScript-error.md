@@ -1,5 +1,5 @@
 ---
-title: JavaScript错误处理与调试
+title: JavaScript-错误处理与调试
 date: 2020-11-25 01:26:39
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"

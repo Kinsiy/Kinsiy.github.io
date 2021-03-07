@@ -1,5 +1,5 @@
 ---
-title: 集合引用类型(Object.2)-创建对象
+title: Javascript-Object.2[创建对象]
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
 authorLink: "https://kinsiy.github.io"
@@ -10,7 +10,7 @@ comments: true
 date: 2021-02-19 22:22:00
 tags: [Notes, Javascript]
 keywords:
-description: 创建对象(Object)
+description: 集合引用类型-创建对象Object
 photos:
 ---
 
