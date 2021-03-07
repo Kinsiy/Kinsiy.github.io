@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Javascript-(Global &amp; Math) | Kinsiy</title>
+  <title itemprop="name">Javascript-Object.1[理解对象] | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -309,316 +309,351 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">Javascript-(Global & Math)</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-23&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">Javascript-Object.1[理解对象]</h1>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-24&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。</p>
-<h1 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h1><p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 Global 对象的属性。</p>
-<h2 id="URL-编码方法"><a href="#URL-编码方法" class="headerlink" title="URL 编码方法"></a>URL 编码方法</h2><p>encodeURI()和 encodeURIComponent()方法用于编码统一资源标识符(URI)，以便传给浏览器。</p>
-<pre><code class="javascript">/* 编码
-    encodeURI()
-    encondeURIComponent()
- */
-let uri = &quot;https://kinsiy.github.io?name=哈哈哈&quot;;
-let url_1 = encodeURI(uri);
-let url_2 = encodeURIComponent(uri);
-console.log(url_1); // https://kinsiy.github.io?name=%E5%93%88%E5%93%88%E5%93%88
-console.log(url_2); // https%3A%2F%2Fkinsiy.github.io%3Fname%3D%E5%93%88%E5%93%88%E5%93%88
+          <h1 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h1><p>Object 是 ECMAScript 中最常用的类型之一。虽然 Object 的实例没有多少功能，但很适合存储和在应用程序间交换数据。</p>
+<pre><code class="javascript">/* new Object() */
+let person = new Object();
+person.name = &quot;Kinsiy&quot;;
+person.age = 23;
 
-/* 解码
-    decodeURI()
-    decondeURIComponent()
- */
-console.log(decodeURI(url_1)); // https://kinsiy.github.io?name=哈哈哈
-console.log(decodeURIComponent(url_2)); // https://kinsiy.github.io?name=哈哈哈
-</code></pre>
-<h2 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h2><p>这个方法就是一个完整的 EMCAScript 解释器，它接收一个参数，即一个要执行的 EMCAScript(Javascript)字符串。<br>通过 eval()定义的任何变量和函数都不会提升。</p>
-<pre><code class="javascript">let msg = &quot;hello world!&quot;;
-eval(&quot;console.log(msg)&quot;); // hello world!
-eval(&quot;function sayHi() { console.log(&#39;Hi&#39;); }&quot;);
-sayHi(); // Hi
-eval(&quot;var name = &#39;Kinsiy&#39;&quot;); // 此处使用let与const声明console.log()均为空，原因不明，作用域原因？
-console.log(name); // Kinsiy
-</code></pre>
-<h2 id="Global-属性"><a href="#Global-属性" class="headerlink" title="Global 属性"></a>Global 属性</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">undefined</td>
-<td style="text-align:left">特殊值 undefined</td>
-</tr>
-<tr>
-<td style="text-align:left">NaN</td>
-<td style="text-align:left">特殊值 NaN</td>
-</tr>
-<tr>
-<td style="text-align:left">Infinity</td>
-<td style="text-align:left">特殊值 Infinity</td>
-</tr>
-<tr>
-<td style="text-align:left">Object</td>
-<td style="text-align:left">Object 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Array</td>
-<td style="text-align:left">Array 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Function</td>
-<td style="text-align:left">Function 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Boolean</td>
-<td style="text-align:left">Boolean 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">String</td>
-<td style="text-align:left">String 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Number</td>
-<td style="text-align:left">Number 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Date</td>
-<td style="text-align:left">Date 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RegExp</td>
-<td style="text-align:left">RegExp 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Symbol</td>
-<td style="text-align:left">Symbol 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Error</td>
-<td style="text-align:left">Errot 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">EvalError</td>
-<td style="text-align:left">EvalError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RangeError</td>
-<td style="text-align:left">RangerError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">ReferenceError</td>
-<td style="text-align:left">RefenceError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">SyntaxError</td>
-<td style="text-align:left">SytaxError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">TypeError</td>
-<td style="text-align:left">TypeError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">URIError</td>
-<td style="text-align:left">URIError 的构造函数</td>
-</tr>
-</tbody>
-</table>
-<h2 id="window-对象"><a href="#window-对象" class="headerlink" title="window 对象"></a>window 对象</h2><p>虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global 对象的代理。因此，所有全局作用域声明的变量和函数都变成了 window 的属性。</p>
-<pre><code class="javascript">var color = &quot;red&quot;;
-function sayColor() {
-    console.log(window.color);
-}
+/* 对象字面量 */
+let people = {
+    name: &quot;Meng&quot;,
+    age: 24,
+    5: true,
+};
 
-window.satColor(); // red
+/* 存取 */
+console.log(people.name); // Meng
+console.log(people[&quot;age&quot;]); // 24
 
-/* 另一种获取Global对象的方式 */
-let global = (function () {
-    return this;
-})();
-</code></pre>
-<h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><h2 id="Math-对象属性"><a href="#Math-对象属性" class="headerlink" title="Math 对象属性"></a>Math 对象属性</h2><p>Math 有一些属性，主要用于保存数学中的一些特殊值。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.E</td>
-<td style="text-align:left">自然对数的基数 e 的值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN10</td>
-<td style="text-align:left">In10</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN2</td>
-<td style="text-align:left">In2</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG2E</td>
-<td style="text-align:left">Log<sub>2</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG10E</td>
-<td style="text-align:left">Log<sub>10</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.PI</td>
-<td style="text-align:left">π</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT1_2</td>
-<td style="text-align:left">&radic;(1/2)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT2</td>
-<td style="text-align:left">&radic;2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="min-amp-amp-max"><a href="#min-amp-amp-max" class="headerlink" title="min() &amp;&amp; max()"></a>min() &amp;&amp; max()</h2><pre><code class="javascript">let max = Math.max(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 100.5
-let min = Math.min(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 1.2
-console.log(max);
-console.log(min);
+let propertyName = &quot;name&quot;;
+console.log(people[propertyName]); // Meng
 
-/* 使用扩展操作符 */
-let values = [5, 10, 4, 25, 7, 45];
-console.log(Math.max(...values)); // 45
+people[&quot;first name&quot;] = &quot;ZHAO&quot;;
+console.log(people[&quot;first name&quot;]); // ZHAO
 </code></pre>
-<h2 id="舍入方法"><a href="#舍入方法" class="headerlink" title="舍入方法"></a>舍入方法</h2><ul>
-<li>Math.ceil() 向上取整</li>
-<li>Math.floor() 向下取整</li>
-<li>Math.round() 四舍五入</li>
-<li>Math.fround() 返回数值最接近的单精度(32 位)浮点值表示</li>
+<h2 id="属性的类型"><a href="#属性的类型" class="headerlink" title="属性的类型"></a>属性的类型</h2><p>ECMA-262 使用一些内部特性来描述属性的特征。这些特征是由为 Javascript 实现引擎的规范定义的。因此开发者不能在 Javascript 中直接访问这些特征。为了将某个特性标识为内部特性，规范会用两个中括号括起来，比如[[Enumerable]]。</p>
+<h3 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h3><p>数据属性包含一个保存数据值的位置。值会从这个位置读取，也会写入到这个位置。数据属性有 4 个特征描述他们的行为。</p>
+<ul>
+<li>[[Configurable]]: 表示 属性是否可以通过 delete 删除并重新定义，是否可以修改他的特性，以及是否可以把它改为访问器属性。默认情况下，所有直接定义在对象上的属性的这个特性都是 true。</li>
+<li>[[Enumerable]]: 表示属性是否可以通过 for-in 循环返回。默认情况下，所有直接定义在对象上的属性的这个特性都是 true。</li>
+<li>[[Writable]]: 表示属性的值是否可以被修改。默认情况下，所有直接定义在对象上的属性的这个属性都是 true。</li>
+<li>[[Value]]: 包含属性实际的值。这个值默认值为 undefined。</li>
 </ul>
-<pre><code class="javascript">console.log(Math.ceil(25.5)); // 26
-console.log(Math.floor(25.5)); // 25
-console.log(Math.round(26.6)); // 27
-console.log(Math.fround(26.8)); // 26.799999237060547
+<p>要修改属性的默认特性，就必须用 Object.defineProperty()方法</p>
+<pre><code class="javascript">let person = {};
+Object.defineProperty(person, &quot;name&quot;, {
+    writable: false,
+    value: &quot;Kinsiy&quot;,
+});
+
+console.log(person.name); // Kinsiy
+person.name = &quot;Queen&quot;;
+console.log(person.name); // Kinsiy
 </code></pre>
-<h2 id="random"><a href="#random" class="headerlink" title="random()"></a>random()</h2><p>Math.random()返回一个 0~1 范围内的随机数，其中包含 0 不包含 1。[0,1)</p>
-<pre><code class="javascript">/* 随机数公式
-    number = Math.floor(Math.random() * total_number_of_choices + first_possible_value)
+<h3 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h3><p>访问器属性不包含数据值。相反，它们包含一个获取(getter)函数和一个设置(setter)函数，不过这两个函数不是必须的。在读取访问器属性时，会调用获取函数，这个函数的责任就是返回一个有效的值。在写入访问器属性时，会调用设置函数并传入新值，这个函数必须决定对数据做出什么修改。访问器属性有 4 个特性描述它们的行为。</p>
+<ul>
+<li>[[Configurable]]: 表示 属性是否可以通过 delete 删除并重新定义，是否可以修改它的特性，以及是否可以把它改为数据属性。默认情况下，所有直接定义在对象上的属性的这个特性都是 true。</li>
+<li>[[Enumerable]]: 表示属性是否可以通过 for-in 循环返回。默认情况下，所有直接定义在对象上的属性的这个特性都是 true。</li>
+<li>[[Get]]: 获取函数，在读取属性时调用。默认值为 undefined。</li>
+<li>[[Set]]：设置函数，在写入属性时调用。默认值为 undefined。</li>
+</ul>
+<p>访问器属性是不能直接定义的，必须使用 Object.defineProperty().</p>
+<pre><code class="javascript">let book = {
+    year_: 2020,
+    edition: 1,
+};
+
+Object.defineProperty(book, &quot;year&quot;, {
+    get() {
+        return this.year_;
+    },
+
+    set(newValue) {
+        if (newValue &gt; this.year_) {
+            this.year_ = newValue;
+            this.edition += newValue - 2020;
+        }
+    },
+});
+
+book.year = 2021;
+console.log(book.edition); // 2
+console.log(book.year_); // 2021
+</code></pre>
+<p>获取函数和设置函数不一定都要定义。只定义获取函数意味着属性是只读的，尝试修改属性会被忽略。</p>
+<h2 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h2><p>Object.defineProperties()。这个方法可以通过描述符一次性定义多个属性。它接收两个参数: 要为之添加或修改的对象和另一个描述符对象，其属性与要添加或修改的属性一一对应。</p>
+<pre><code class="javascript">let book = {};
+Object.defineProperties(book, {
+    year_: {
+        /* 只设置value，属性不可写。省缺值均为false */
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: 2020,
+    },
+
+    edition: {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: 1,
+    },
+
+    year: {
+        /*
+        value 和 get() 是同一个作用，只能同时用一个。
+        writable 和 set() 是同一个作用，用一个
+        */
+        configurable: true,
+        enumerable: true,
+        get() {
+            return this.year_;
+        },
+        set(newValue) {
+            if (newValue &gt; 2020) {
+                this.year_ = newValue;
+                this.edition += newValue - 2020;
+            }
+        },
+    },
+});
+
+book.year = 2022;
+console.log(book.edition); // 3
+console.log(book.year_); // 2022
+</code></pre>
+<h2 id="读取属性中的特性"><a href="#读取属性中的特性" class="headerlink" title="读取属性中的特性"></a>读取属性中的特性</h2><p>使用 Object.getOwnPropertyDescriptor()方法可以取得指定属性的属性描述符。这个方法接收两个参数：属性所在的对象和要取得其描述符的属性名。返回值是一个对象，对于访问器属性包含 configurable、enumerable、get 和 set 属性，对于数据属性包含 configurable、enumerable、writable 和 value 属性。</p>
+<pre><code class="javascript">// ...
+let descript = Object.getOwnPropertyDescriptor(book, &quot;year_&quot;);
+console.log(descript.configurable); // true
+console.log(descript.enumerable); // true
+console.log(descript.writable); // true
+console.log(descript.value); // 2022
+console.log(typeof descript.get); // undefined
+let descript_1 = Object.getOwnPropertyDescriptor(book, &quot;year&quot;);
+console.log(typeof descript_1.get); // function
+
+/* getOwnPropertyDescriptors */
+console.log(Object.getOwnPropertyDescriptors(book));
+/*
+    {
+      year_: {
+        value: 2022,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      },
+      edition: {
+        value: 3,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      },
+      year: {
+        enumerable: true,
+        configurable: true
+        get: ƒ get()
+        set: ƒ set(newValue)
+      }
+    }
+*/
+</code></pre>
+<h2 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h2><p>ECMAScript6 专门为合并对象提供了 Object.assign()方法。这个方法接收一个目标对象和一个或多个源对象作为参数，然后将每个源对象中可枚举(Object.propertyIsEnumerable()返回 true)和自用(Object.hasOwnProperty()返回 true)属性复制到目标对象。以字符串和符号为键的属性会被复制。对每个符合条件的属性，这个方法会使用源对象上的[[Get]]取得属性的值，然后谁用目标对象上的[[Set]]设置属性的值。</p>
+<pre><code class="javascript">let desc = {};
+
+/**
+ *  Object.assign()实际上对每个源对象执行的是浅复制。
+ *  如果多个源对象都有相同的属性，则使用最后一个复制的值
  */
-function selectFrom(lowerValue, upperValue) {
-    let choices = upperValue - lowerValue + 1;
-    return Math.floor(Math.random() * choices + lowerValue);
+let result = Object.assign(dest, { id: &quot;K&quot; }, { id: &quot;I&quot; }, { name: &quot;Kinsiy&quot; });
+
+console.log(desc === result); // true
+console.log(desc); // {id: &quot;I&quot;, name: &quot;Kinsiy&quot;}
+
+/**
+ *  如果赋值期间出错，则操作会中止并退出，同时抛出错误。
+ *  Object.assign()没有&quot;回滚&quot;之前赋值的概念，因此它是一个尽力而为、可能只会完成部分复的方法
+ */
+
+let dest = {};
+let scr = {
+    a: &quot;Queen&quot;,
+    get b() {
+        throw new Error();
+    },
+    c: &quot;Kinsiy&quot;,
+};
+
+try {
+    Object.assign(dest, scr);
+} catch (e) {}
+
+console.log(dest); // {a: &quot;Queen&quot;}
+</code></pre>
+<h2 id="对象标识及相等判定"><a href="#对象标识及相等判定" class="headerlink" title="对象标识及相等判定"></a>对象标识及相等判定</h2><pre><code class="javascript">console.log(Object.is(true, 1)); // false
+console.log(Object.is({}, {})); // false
+console.log(Object.is(&quot;2&quot;, 2)); // false
+
+console.log(Object.is(+0, -0)); // false
+console.log(Object.is(+0, 0)); // true
+console.log(Object.is(-0, 0)); // false
+
+console.log(Object.is(NaN, NaN)); // true
+
+/**
+ *  检查超过两个值
+ */
+
+function recursivelyCheckEaual(x, ...rest) {
+    return Object.is(x, rest[0]) &amp;&amp; (rest.length &lt; 2 || recursivelyCheckEaual(...rest));
+}
+</code></pre>
+<h2 id="增强的对象语法"><a href="#增强的对象语法" class="headerlink" title="增强的对象语法"></a>增强的对象语法</h2><h3 id="属性值简写"><a href="#属性值简写" class="headerlink" title="属性值简写"></a>属性值简写</h3><pre><code class="javascript">let name = &quot;Kinsiy&quot;,
+    age = 23;
+
+let person = {
+    name,
+    age,
+};
+
+console.log(`name: ${person.name}   age: ${person.age}`); // name: Kinsiy   age: 23
+</code></pre>
+<h3 id="可计算属性"><a href="#可计算属性" class="headerlink" title="可计算属性"></a>可计算属性</h3><p>可以在对象字面量中完成动态属性赋值。中括号包围的对象属性键告诉运行时将其作为 Javascript 表达式而不是字符串来求值</p>
+<pre><code class="javascript">const nameKey = &quot;name&quot;;
+const ageKey = &quot;age&quot;;
+const jobKey = &quot;job&quot;;
+let uniqueToken = 0;
+
+function getUniqueKey(key) {
+    return `${key}_${uniqueToken++}`;
 }
 
-let i = 0;
-while (i &lt; 5) {
-    console.log(selectFrom(5, 45)); // [5,45]
-    i++; // 8 17 28 17 11 (5个随机数)
-}
+let person = {
+    [getUniqueKey(nameKey)]: &quot;Kinsiy&quot;,
+    [getUniqueKey(ageKey)]: &quot;23&quot;,
+    [getUniqueKey(jobKey)]: &quot;Software engineer&quot;,
+};
+
+console.log(person); // {name_0: &quot;Kinsiy&quot;, age_1: &quot;23&quot;, job_2: &quot;Software engineer&quot;}
 </code></pre>
-<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.abs(x)</td>
-<td style="text-align:left">x 的绝对值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.exp(x)</td>
-<td style="text-align:left">e<sup>x</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.expm1(x)</td>
-<td style="text-align:left">e<sup>x</sup>-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log(x)</td>
-<td style="text-align:left">Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log1p(x)</td>
-<td style="text-align:left">1+Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(x, power)</td>
-<td style="text-align:left">x<sup>power</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(…nums)</td>
-<td style="text-align:left">&radic;(a<sup>2</sup>+b<sup>2</sup>+…+n<sup>2</sup>)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.clz32(x)</td>
-<td style="text-align:left">返回 32 位整数 x 的前置零的数量</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sign(x)</td>
-<td style="text-align:left">返回表示 x 符号的 1、0、-0 或-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.trunc(x)</td>
-<td style="text-align:left">取整</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sqrt(x)</td>
-<td style="text-align:left">&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cbrt(x)</td>
-<td style="text-align:left"><sup>3</sup>&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acos(x)</td>
-<td style="text-align:left">cos<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acosh(x)</td>
-<td style="text-align:left">反双曲余弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asin(x)</td>
-<td style="text-align:left">sin<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asinh(x)</td>
-<td style="text-align:left">反双曲正弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan(x)</td>
-<td style="text-align:left">tan<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atanh(x)</td>
-<td style="text-align:left">反双曲正切</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan2(y, x)</td>
-<td style="text-align:left">tan<sup>-1</sup>(y/x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sin(x)</td>
-<td style="text-align:left">sin(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cos(x)</td>
-<td style="text-align:left">cos(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.tan(x)</td>
-<td style="text-align:left">tan(x)</td>
-</tr>
-</tbody>
-</table>
+<h3 id="简写方法名"><a href="#简写方法名" class="headerlink" title="简写方法名"></a>简写方法名</h3><pre><code class="javascript">let person = {
+    name: &quot;Kinsiy&quot;,
+    sayName() {
+        console.log(this.name);
+    },
+};
+
+person.sayName(); // Kinsiy
+
+/**
+ *  与可计算属性键相互兼容
+ */
+const methodKey = &quot;sayAge&quot;;
+let person_2 = {
+    [methodKey](age) {
+        console.log(age);
+    },
+};
+
+person_2.sayAge(&quot;23&quot;); // 23
+</code></pre>
+<h2 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h2><pre><code class="javascript">let person = {
+    name: &quot;Kinsiy&quot;,
+    age: 23,
+};
+
+let { name: myName, age, job = &quot;Software engineer&quot; } = person;
+
+console.log(myName); // Kinsiy
+console.log(age); // 23
+console.log(job); // Software engineer
+
+/**
+ *  事先声明变量时
+ *  赋值表达式必须包含在一对括号中
+ */
+
+let OtherName, newAge;
+({ name: OtherName, age: newAge } = person);
+console.log(OtherName); // Kinsiy
+console.log(newAge); // 23
+</code></pre>
+<h3 id="嵌套解构"><a href="#嵌套解构" class="headerlink" title="嵌套解构"></a>嵌套解构</h3><pre><code class="javascript">let person = {
+    name: &quot;Kinsiy&quot;,
+    age: 23,
+    job: {
+        title: &quot;Software engineer&quot;,
+    },
+};
+let otherPerson = {};
+
+({ name: otherPerson.name, age: otherPerson.age, job: otherPerson.job } = person);
+person.job.title = &quot;Hacker&quot;;
+
+console.log(otherPerson); // {name: &quot;Kinsiy&quot;, age: 23, job: {Hacker}}
+console.log(person); // {name: &quot;Kinsiy&quot;, age: 23, job: {Hacker}}
+
+let {
+    job: { title: newTitle },
+} = person;
+console.log(newTitle); // Hacker
+
+// 在外层属性没有定义的情况下不能使用嵌套解构。无论对象还是目标对象都是一样
+let personCopy = {};
+// foo在源对象上是undefined
+({
+    foo: { bar: personCopy.bar },
+} = person)(
+    // Uncaught TypeError: Cannot read property &#39;bar&#39; of undefined
+
+    // job在目标对象上是undefined
+    ({
+        job: { titilt: personCopy.job.title },
+    } = person)
+);
+// Uncaught TypeError: Cannot set property &#39;title&#39; of undefined
+</code></pre>
+<h3 id="部分解构"><a href="#部分解构" class="headerlink" title="部分解构"></a>部分解构</h3><p>涉及多个属性的解构赋值时一个输出无关非顺序化操作。如果一个解构表达式涉及多个赋值，开始的赋值成功而后面的赋值出错，则整个解构赋值只会完成一部分。</p>
+<pre><code class="javascript">let person = {
+    name: &quot;Kinsiy&quot;,
+    age: 23,
+};
+
+let name, bar, age;
+try {
+    ({
+        name: name,
+        job: { bar: bar },
+        age: age,
+    } = person);
+} catch (e) {}
+
+console.log(name, bar, age); // Kinsiy undefined undefined
+</code></pre>
+<h3 id="参数上下文匹配"><a href="#参数上下文匹配" class="headerlink" title="参数上下文匹配"></a>参数上下文匹配</h3><p>在函数参数列表也可以进行解构赋值。对参数的解构赋值不会影响 arguments 对象，但可以在函数签名中声明函数体内使用局部变量：</p>
+<pre><code class="javascript">let person = {
+    name: &quot;Kinsiy&quot;,
+    age: 23,
+};
+
+function getPersonInfo(foo, { name, age }, bar) {
+    console.log(arguments);
+    console.log(name, age);
+}
+
+getPersonInfo(&quot;1st&quot;, person, &quot;2st&quot;);
+
+// [&quot;1st&quot;, {name: &quot;Kinsiy&quot;, age: 23}, &quot;2st&quot;]
+// Kinsiy 23
+</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -650,17 +685,17 @@ while (i &lt; 5) {
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/01/24/Javascript-Object-1/" rel="prev">
+            <a href="/2021/01/24/Javascript-Array/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-2.png">
                     
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                Javascript-Object.1[理解对象]</h3>
+                Javascript-Array</h3>
                 <hr>
               </div>
             </a>
@@ -670,17 +705,17 @@ while (i &lt; 5) {
           
             <div class="post-nepre half next">
           
-            <a href="/2021/01/18/Javascript-String/" rel="next">
+            <a href="/2021/01/23/built-in-object/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
                  
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Javascript-原始包装类型</h3>
+                Javascript-(Global &amp; Math)</h3>
                 <hr>
               </div>
             </a>

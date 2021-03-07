@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">集合引用类型(Object.1)-理解对象 | Kinsiy</title>
+  <title itemprop="name">Javascript-Proxy[捕获器与反射] | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -309,339 +309,473 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">集合引用类型(Object.1)-理解对象</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-24&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">Javascript-Proxy[捕获器与反射]</h1>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-3-7&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <h1 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h1><p>Object是ECMAScript中最常用的类型之一。虽然Object的实例没有多少功能，但很适合存储和在应用程序间交换数据。</p>
-<pre><code class="javascript">/* new Object() */
-let person = new Object();
-person.name = &quot;Kinsiy&quot;;
-person.age = 23;
+          <h1 id="代理捕获器与反射方法"><a href="#代理捕获器与反射方法" class="headerlink" title="代理捕获器与反射方法"></a>代理捕获器与反射方法</h1><h2 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h2><p>get()捕获器会在获取属性值得操作中被调用。对应的反射 API 方法为 Reflect.get()</p>
+<pre><code class="javascript">const myTarget = {};
 
-/* 对象字面量 */
-let people = {
-    name: &quot;Meng&quot;,
-    age: 24,
-    5: true
-}
-
-/* 存取 */
-console.log(people.name);       // Meng
-console.log(people[&quot;age&quot;]);     // 24
-
-let propertyName = &quot;name&quot;;
-console.log(people[propertyName]);  // Meng
-
-people[&quot;first name&quot;] = &quot;ZHAO&quot;;
-console.log(people[&quot;first name&quot;]);  // ZHAO
-</code></pre>
-<h2 id="属性的类型"><a href="#属性的类型" class="headerlink" title="属性的类型"></a>属性的类型</h2><p>ECMA-262 使用一些内部特性来描述属性的特征。这些特征是由为Javascript 实现引擎的规范定义的。因此开发者不能在Javascript 中直接访问这些特征。为了将某个特性标识为内部特性，规范会用两个中括号括起来，比如[[Enumerable]]。</p>
-<h3 id="数据属性"><a href="#数据属性" class="headerlink" title="数据属性"></a>数据属性</h3><p>数据属性包含一个保存数据值的位置。值会从这个位置读取，也会写入到这个位置。数据属性有4个特征描述他们的行为。</p>
-<ul>
-<li>[[Configurable]]: 表示 属性是否可以通过delete删除并重新定义，是否可以修改他的特性，以及是否可以把它改为访问器属性。默认情况下，所有直接定义在对象上的属性的这个特性都是true。</li>
-<li>[[Enumerable]]: 表示属性是否可以通过for-in 循环返回。默认情况下，所有直接定义在对象上的属性的这个特性都是true。</li>
-<li>[[Writable]]: 表示属性的值是否可以被修改。默认情况下，所有直接定义在对象上的属性的这个属性都是true。</li>
-<li>[[Value]]: 包含属性实际的值。这个值默认值为undefined。</li>
-</ul>
-<p>要修改属性的默认特性，就必须用Object.defineProperty()方法</p>
-<pre><code class="javascript">let person = {};
-Object.defineProperty(person,&quot;name&quot;,{
-    writable: false,
-    value: &quot;Kinsiy&quot;
-})
-
-console.log(person.name);       // Kinsiy
-person.name = &quot;Queen&quot;;
-console.log(person.name);       // Kinsiy
-</code></pre>
-<h3 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h3><p>访问器属性不包含数据值。相反，它们包含一个获取(getter)函数和一个设置(setter)函数，不过这两个函数不是必须的。在读取访问器属性时，会调用获取函数，这个函数的责任就是返回一个有效的值。在写入访问器属性时，会调用设置函数并传入新值，这个函数必须决定对数据做出什么修改。访问器属性有4个特性描述它们的行为。</p>
-<ul>
-<li>[[Configurable]]: 表示 属性是否可以通过delete删除并重新定义，是否可以修改它的特性，以及是否可以把它改为数据属性。默认情况下，所有直接定义在对象上的属性的这个特性都是true。</li>
-<li>[[Enumerable]]: 表示属性是否可以通过for-in 循环返回。默认情况下，所有直接定义在对象上的属性的这个特性都是true。</li>
-<li>[[Get]]: 获取函数，在读取属性时调用。默认值为undefined。</li>
-<li>[[Set]]：设置函数，在写入属性时调用。默认值为undefined。</li>
-</ul>
-<p>访问器属性是不能直接定义的，必须使用Object.defineProperty().</p>
-<pre><code class="javascript">let book = {
-    year_: 2020,
-    edition: 1
-};
-
-Object.defineProperty(book,&quot;year&quot;,{
-    get(){
-        return this.year_
+const proxy = new Proxy(myTarget, {
+    get(target, property, receiver) {
+        console.log(&quot;get()&quot;);
+        return Reflect.get(...arguments);
     },
-
-    set(newValue){
-        if (newValue &gt; this.year_){
-            this.year_ = newValue;
-            this.edition += newValue - 2020;
-        }
-    }
 });
 
-book.year = 2021;
-console.log(book.edition);      // 2
-console.log(book.year_);        // 2021
+proxy.id; // get()
 </code></pre>
-<p>获取函数和设置函数不一定都要定义。只定义获取函数意味着属性是只读的，尝试修改属性会被忽略。</p>
-<h2 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="定义多个属性"></a>定义多个属性</h2><p>Object.defineProperties()。这个方法可以通过描述符一次性定义多个属性。它接收两个参数: 要为之添加或修改的对象和另一个描述符对象，其属性与要添加或修改的属性一一对应。</p>
-<pre><code class="javascript">let book = {};
-Object.defineProperties(book,{
-    year_: {
-        /* 只设置value，属性不可写。省缺值均为false */
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: 2020
-    },
+<ol>
+<li>返回值<ul>
+<li>返回值无限制</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>proxy.property</li>
+<li>proxy[property]</li>
+<li>Object.create(proxy)[property]</li>
+<li>Reflect.get(proxy, property, receiver)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+<li>receiver：代理对象或继承代理对象的对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target.property 不可写且不可配置，则处理程序返回值必须与 target.property 匹配。</li>
+<li>如果 target.property 不可配置且[[Get]]特性为 undefined，处理程序的返回值也必须是 undefined。</li>
+</ul>
+</li>
+</ol>
+<h2 id="set"><a href="#set" class="headerlink" title="set()"></a>set()</h2><p>set()捕获器会在设置属性值得操作中被调用。对应的反射 API 方法为 Reflect.set()</p>
+<pre><code class="javascript">const myTarget = {};
 
-    edition: {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: 1
+const proxy = new Proxy(myTarget, {
+    set(target, property, value, receiver) {
+        console.log(&quot;set()&quot;);
+        return Reflect.set(...arguments);
     },
-
-    year: {
-        /*
-        value 和 get() 是同一个作用，只能同时用一个。
-        writable 和 set() 是同一个作用，用一个
-        */
-        configurable: true,
-        enumerable: true,
-        get(){
-            return this.year_;
-        },
-        set(newValue){
-            if (newValue &gt; 2020) {
-                this.year_ = newValue;
-                this.edition += newValue - 2020;
-            }
-        }
-    }
 });
 
-book.year = 2022;
-console.log(book.edition);  // 3
-console.log(book.year_)     // 2022
+proxy.id = &quot;Kinsiy&quot;; // set()
 </code></pre>
-<h2 id="读取属性中的特性"><a href="#读取属性中的特性" class="headerlink" title="读取属性中的特性"></a>读取属性中的特性</h2><p>使用Object.getOwnPropertyDescriptor()方法可以取得指定属性的属性描述符。这个方法接收两个参数：属性所在的对象和要取得其描述符的属性名。返回值是一个对象，对于访问器属性包含configurable、enumerable、get和set属性，对于数据属性包含configurable、enumerable、writable和value属性。</p>
-<pre><code class="javascript">// ...
-let descript = Object.getOwnPropertyDescriptor(book,&quot;year_&quot;);
-console.log(descript.configurable);     // true
-console.log(descript.enumerable);       // true
-console.log(descript.writable);         // true
-console.log(descript.value);            // 2022
-console.log(typeof descript.get);       // undefined
-let descript_1 = Object.getOwnPropertyDescriptor(book,&quot;year&quot;);
-console.log(typeof descript_1.get);       // function
+<ol>
+<li>返回值<ul>
+<li>返回 true 表示成功；返回 false 表示失败，严格模式下会抛出 TypeError</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>proxy.property = value</li>
+<li>proxy[property] = value</li>
+<li>Object.create(proxy)[property] = value</li>
+<li>Reflect.set(proxy, property, value, receiver)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+<li>value: 要赋给属性的值</li>
+<li>receiver：代理对象或继承代理对象的对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target.property 不可写且不可配置，则不能修改目标属性的值</li>
+<li>如果 target.property 不可配置且[[Set]]特性为 undefined，则不能修改目标属性的值</li>
+<li>在严格模式下，处理程序中返回 false 会抛出 TypeError</li>
+</ul>
+</li>
+</ol>
+<h2 id="has"><a href="#has" class="headerlink" title="has()"></a>has()</h2><p>set()捕获器会在 in 操作符中被调用。对应的反射 API 方法为 Reflect.has()</p>
+<pre><code class="javascript">const myTarget = {};
 
-/* getOwnPropertyDescriptors */
-console.log(Object.getOwnPropertyDescriptors(book));
-/*
-    {
-      year_: {
-        value: 2022,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      },
-      edition: {
-        value: 3,
-        writable: true,
-        enumerable: true,
-        configurable: true
-      },
-      year: {
-        enumerable: true,
-        configurable: true
-        get: ƒ get()
-        set: ƒ set(newValue)
-      }
-    }
-*/
-</code></pre>
-<h2 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h2><p>ECMAScript6 专门为合并对象提供了Object.assign()方法。这个方法接收一个目标对象和一个或多个源对象作为参数，然后将每个源对象中可枚举(Object.propertyIsEnumerable()返回true)和自用(Object.hasOwnProperty()返回true)属性复制到目标对象。以字符串和符号为键的属性会被复制。对每个符合条件的属性，这个方法会使用源对象上的[[Get]]取得属性的值，然后谁用目标对象上的[[Set]]设置属性的值。</p>
-<pre><code class="javascript">let desc = {};
-
-/**
- *  Object.assign()实际上对每个源对象执行的是浅复制。
- *  如果多个源对象都有相同的属性，则使用最后一个复制的值
- */
-let result = Object.assign(dest,{id: &quot;K&quot;}, {id: &quot;I&quot;}, {name: &quot;Kinsiy&quot;});
-
-console.log(desc === result);   // true
-console.log(desc);              // {id: &quot;I&quot;, name: &quot;Kinsiy&quot;}
-
-/** 
- *  如果赋值期间出错，则操作会中止并退出，同时抛出错误。
- *  Object.assign()没有&quot;回滚&quot;之前赋值的概念，因此它是一个尽力而为、可能只会完成部分复的方法
- */
-
-let dest = {};
-let scr = {
-    a: &quot;Queen&quot;,
-    get b(){
-        throw new Error();
+const proxy = new Proxy(myTarget, {
+    has(target, property) {
+        console.log(&quot;has()&quot;);
+        return Reflect.has(...arguments);
     },
-    c: &quot;Kinsiy&quot;
-};
+});
 
-try {
-    Object.assign(dest,scr);
-}catch(e) {}
-
-console.log(dest);      // {a: &quot;Queen&quot;}
+console.log(&quot;id&quot; in proxy); //has() false
 </code></pre>
-<h2 id="对象标识及相等判定"><a href="#对象标识及相等判定" class="headerlink" title="对象标识及相等判定"></a>对象标识及相等判定</h2><pre><code class="javascript">console.log(Object.is(true, 1));    // false
-console.log(Object.is({}, {}));     // false
-console.log(Object.is(&quot;2&quot;, 2));     // false
+<ol>
+<li>返回值<ul>
+<li>has()必须返回布尔值，表示属性是否存在。返回非布尔值会被转型为布尔值</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>property in proxy</li>
+<li>property in Object.create(proxy)</li>
+<li>With(proxy){(property;)}</li>
+<li>Reflect.has(proxy, property)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target.property 存在且不可配置，则处理程序必须返回 false</li>
+<li>如果 target.property 存在且目标对象不可扩展，则处理程序必须返回 true</li>
+</ul>
+</li>
+</ol>
+<h2 id="defineProperty"><a href="#defineProperty" class="headerlink" title="defineProperty()"></a>defineProperty()</h2><p>defineProperty()捕获器会在 Object.defineProperty()中被调用。对应的反射 API 方法为 Reflect.defineProperty()</p>
+<pre><code class="javascript">const myTarget = {};
 
-console.log(Object.is(+0, -0));     // false
-console.log(Object.is(+0, 0));      // true
-console.log(Object.is(-0, 0));      // false
+const proxy = new Proxy(myTarget, {
+    defineProperty(target, property, descriptor) {
+        console.log(&quot;defineProperty()&quot;);
+        return Reflect.defineProperty(...arguments);
+    },
+});
 
-console.log(Object.is(NaN, NaN));   // true
+Object.defineProperty(proxy, &quot;id&quot;, {
+    value: &quot;Queen&quot;,
+}); // defineProperty()
+
+console.log(proxy.id); // Queen
+</code></pre>
+<ol>
+<li>返回值<ul>
+<li>defineProperty()必须返回布尔值，表示属性是否成功定义。返回非布尔值会被转型为布尔值</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.defineProperty(peoxy, property, descriptor)</li>
+<li>Reflect.defineProperty(peoxy, property, descriptor)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+<li>descriptor: 包含可选的 enumerable、configurable、writable、value、get 和 set 定义的对象。</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果目标对象不可扩展，则无法定义属性</li>
+<li>如果目标对象有一个可配置的属性，则不能添加同名的不可配置属性</li>
+<li>如果目标对象有一个不可配置的属性，则不能添加同名的可配置属性</li>
+</ul>
+</li>
+</ol>
+<h2 id="getOwnPropertyDescriptor"><a href="#getOwnPropertyDescriptor" class="headerlink" title="getOwnPropertyDescriptor()"></a>getOwnPropertyDescriptor()</h2><p>getOwnPropertyDescriptor()捕获器会在 Object.getOwnPropertyDescriptor()中被调用。对应的反射 API 方法为 Reflect.getOwnPropertyDescriptor()</p>
+<pre><code class="javascript">const myTarget = {};
+
+const proxy = new Proxy(myTarget, {
+    getOwnPropertyDescriptor(target, property) {
+        console.log(&quot;getOwnPropertyDescriptor()&quot;);
+        return Reflect.getOwnPropertyDescriptor(...arguments);
+    },
+});
+
+Object.getOwnPropertyDescriptor(proxy, &quot;id&quot;); // getOwnperpertyDescriptor()
+</code></pre>
+<ol>
+<li>返回值<ul>
+<li>getOwnPropertyDescriptor()必须返回对象，或者属性不存在时返回 undefined。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.getOwnPropertyDescriptor(peoxy, property)</li>
+<li>Reflect.getOwnPropertyDescriptor(peoxy, property)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果自有的 target.property 存在且不可配置，则处理程序必须返回一个表示该属性存在的对象</li>
+<li>如果自有的 target.property 存在且可配置，则处理程序必须返回表示该属性可配置的对象</li>
+<li>如果自有的 target.property 存在且 target 不可扩展，则处理程序必须返回一个表示该属性存在的对象</li>
+<li>如果自有的 target.property 不存在，则处理程序不能返回表示该属性可配置的对象</li>
+</ul>
+</li>
+</ol>
+<h2 id="deleteProperty"><a href="#deleteProperty" class="headerlink" title="deleteProperty()"></a>deleteProperty()</h2><p>deleteProperty()捕获器会在 delete 操作符中被调用。对应的反射 API 方法为 Reflect.deleteProperty()</p>
+<pre><code class="javascript">const myTarget = {};
+
+const proxy = new Proxy(myTarget, {
+    deleteProperty(target, property) {
+        console.log(&quot;deleteProperty()&quot;);
+        return Reflect.deleteProperty(...arguments);
+    },
+});
+
+delete proxy.id; // deleteProperty()
+</code></pre>
+<ol>
+<li>返回值<ul>
+<li>defineProperty()必须返回布尔值，表示删除属性是否成功。返回非布尔值会被转型为布尔值。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>delete proxy.property</li>
+<li>delete proxy[property]</li>
+<li>Reflect.deleteProperty(peoxy, property)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>property: 引用的目标对象上的字符串属性</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果自有的 target.property 存在且不可配置，则处理程序不能删除这个属性</li>
+</ul>
+</li>
+</ol>
+<h2 id="ownKeys"><a href="#ownKeys" class="headerlink" title="ownKeys()"></a>ownKeys()</h2><p>ownKeys()捕获器会在 Object.keys() 及类似方法中被调用。对应的反射 API 方法为 Reflect.ownKeys()</p>
+<pre><code class="javascript">const myTarget = {};
+
+const proxy = new Proxy(myTarget, {
+    ownKeys(target) {
+        console.log(&quot;ownKeys()&quot;);
+        return Reflect.ownKeys(...arguments);
+    },
+});
+
+Object.keys(proxy); // ownKeys()
+</code></pre>
+<ol>
+<li>返回值<ul>
+<li>ownKeys()必须返回包含字符串或符号的可枚举对象</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.getOwnPropertyNames(proxy)</li>
+<li>Object.getOwnPropertySymbols(proxy)</li>
+<li>Object.keys(proxy)</li>
+<li>Reflect.ownKeys(peoxy)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>返回的可枚举对象必须包含 target 的所有不可配置的自有属性</li>
+<li>如果 target 不可扩展，则返回可枚举对象必须准确地包含自有属性键</li>
+</ul>
+</li>
+</ol>
+<h2 id="getPrototypeOf"><a href="#getPrototypeOf" class="headerlink" title="getPrototypeOf()"></a>getPrototypeOf()</h2><p>getPrototypeOf()捕获器会在 Object.getPrototypeOf() 中被调用。对应的反射 API 方法为 Reflect.getPrototypeOf()</p>
+<pre><code class="javascript">const myTarget = {};
+
+const proxy = new Proxy(myTarget, {
+    getPrototypeOf(target) {
+        console.log(&quot;getPrototypeOf()&quot;);
+        return Reflect.getPrototypeOf(...arguments);
+    },
+});
 
 /**
-*  检查超过两个值
-*/
-
-function recursivelyCheckEaual(x,...rest) {
-    return Object.is(x,rest[0]) &amp;&amp; (rest.length &lt; 2 || recursivelyCheckEaual(...rest))
-}
+ * Object.getPrototypeOf() 返回指定对象的原型，内部[[prototype]]属性的值
+ */
+Object.getPrototypeOf(proxy); // getPrototypeOf()
 </code></pre>
-<h2 id="增强的对象语法"><a href="#增强的对象语法" class="headerlink" title="增强的对象语法"></a>增强的对象语法</h2><h3 id="属性值简写"><a href="#属性值简写" class="headerlink" title="属性值简写"></a>属性值简写</h3><pre><code class="javascript">let name = &quot;Kinsiy&quot;, age = 23;
+<ol>
+<li>返回值<ul>
+<li>getPrototypeOf()必须返回对象或 null。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.getPrototypeOf(proxy)</li>
+<li>Reflect.getPrototypeOf(proxy)</li>
+<li>proxy.__proto__</li>
+<li>Object.prototype.isPrototypeOf(proxy)</li>
+<li>proxy instanceof Object</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target 不可扩展，则 Object.getPrototypeOf(proxy)唯一有效的返回值就是 Object.getPrototypeOf(target)的返回值</li>
+</ul>
+</li>
+</ol>
+<h2 id="setPrototypeOf"><a href="#setPrototypeOf" class="headerlink" title="setPrototypeOf()"></a>setPrototypeOf()</h2><p>setPrototypeOf()捕获器会在 Object.setPrototypeOf() 中被调用。对应的反射 API 方法为 Reflect.setPrototypeOf()</p>
+<pre><code class="javascript">const myTarget = {};
 
-let person = {
-    name,
-    age
-};
-
-console.log(`name: ${person.name}   age: ${person.age}`); // name: Kinsiy   age: 23
-</code></pre>
-<h3 id="可计算属性"><a href="#可计算属性" class="headerlink" title="可计算属性"></a>可计算属性</h3><p>可以在对象字面量中完成动态属性赋值。中括号包围的对象属性键告诉运行时将其作为Javascript表达式而不是字符串来求值</p>
-<pre><code class="javascript">const nameKey = &quot;name&quot;;
-const ageKey = &quot;age&quot;;
-const jobKey = &quot;job&quot;;
-let uniqueToken = 0;
-
-function getUniqueKey(key){
-    return `${key}_${uniqueToken++}`;
-}
-
-let person = {
-    [getUniqueKey(nameKey)]: &quot;Kinsiy&quot;,
-    [getUniqueKey(ageKey)]: &quot;23&quot;,
-    [getUniqueKey(jobKey)]: &quot;Software engineer&quot;,
-};
-
-console.log(person); // {name_0: &quot;Kinsiy&quot;, age_1: &quot;23&quot;, job_2: &quot;Software engineer&quot;}
-</code></pre>
-<h3 id="简写方法名"><a href="#简写方法名" class="headerlink" title="简写方法名"></a>简写方法名</h3><pre><code class="javascript">let person = {
-    name: &quot;Kinsiy&quot;,
-    sayName(){
-        console.log(this.name)
-    }
-}
-
-person.sayName();   // Kinsiy
+const proxy = new Proxy(myTarget, {
+    setPrototypeOf(target, prototype) {
+        console.log(&quot;setPrototypeOf()&quot;);
+        return Reflect.setPrototypeOf(...arguments);
+    },
+});
 
 /**
-*  与可计算属性键相互兼容
-*/
-const methodKey = &quot;sayAge&quot;;
-let person_2 = {
-    [methodKey](age){
-        console.log(age)
-    }
-}
-
-person_2.sayAge(&quot;23&quot;);  // 23
+ * Object.setPrototypeOf() 向实例的私有特性[[Prototype]]写入一个新值
+ */
+Object.getPropertypeOf(proxy, Object); // setPrototypeOf()
 </code></pre>
-<h2 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h2><pre><code class="javascript">let person = {
-    name: &quot;Kinsiy&quot;,
-    age: 23
-};
+<ol>
+<li>返回值<ul>
+<li>setPrototypeOf()必须返回布尔值，表示值原型赋值是否成功。返回非布尔值会被转型为布尔值。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.setPrototypeOf(proxy, prototype)</li>
+<li>Reflect.setPrototypeOf(proxy, prototype)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>prototype: target 的替代原型，如果是顶级原型则为 null</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target 不可扩展，则唯一有效的 prototype 参数就是 Object.getPrototypeOF(target)的返回值</li>
+</ul>
+</li>
+</ol>
+<h2 id="isExtensible"><a href="#isExtensible" class="headerlink" title="isExtensible()"></a>isExtensible()</h2><p>isExtensible()捕获器会在 Object.isExtensible() 中被调用。对应的反射 API 方法为 Reflect.isExtensible()</p>
+<pre><code class="javascript">const myTarget = {};
 
-let { name: myName, age, job = &quot;Software engineer&quot;} = person;
+const proxy = new Proxy(myTarget, {
+    isExtensible(target) {
+        console.log(&quot;isExtensible()&quot;);
+        return Reflect.isExtensible(...arguments);
+    },
+});
 
-console.log(myName);    // Kinsiy
-console.log(age);       // 23
-console.log(job);       // Software engineer
-
-/** 
-*  事先声明变量时
-*  赋值表达式必须包含在一对括号中
-*/
-
-let OtherName, newAge;
-({ name: OtherName, age: newAge} = person);
-console.log(OtherName);     // Kinsiy
-console.log(newAge);        // 23
+/**
+ * Object.isExtensible() 方法判断一个对象是否是可扩展的（是否可以在它上面添加新的属性）。
+ * Object.preventExtensions，Object.seal 或 Object.freeze 方法都可以标记一个对象为不可扩展（non-extensible）。
+ */
+Object.isExtensible(proxy); // isExtensible()
 </code></pre>
-<h3 id="嵌套解构"><a href="#嵌套解构" class="headerlink" title="嵌套解构"></a>嵌套解构</h3><pre><code class="javascript">let person = {
-    name: &quot;Kinsiy&quot;,
-    age: 23,
-    job: {
-        title: &quot;Software engineer&quot;
-    }
-};
-let otherPerson = {};
+<ol>
+<li>返回值<ul>
+<li>isExtensible()必须返回布尔值，表示 target 是否可扩展。返回非布尔值会被转型为布尔值。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.isExtensible(proxy)</li>
+<li>Reflect.isExtensible(proxy)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 target 可扩展，则处理程序必须返回 true</li>
+<li>如果 target 不可扩展，则处理程序必须返回 false</li>
+</ul>
+</li>
+</ol>
+<h2 id="preventExtensions"><a href="#preventExtensions" class="headerlink" title="preventExtensions()"></a>preventExtensions()</h2><p>preventExtensions()捕获器会在 Object.preventExtensions() 中被调用。对应的反射 API 方法为 Reflect.preventExtensions()</p>
+<pre><code class="javascript">const myTarget = {};
 
-({name: otherPerson.name, age: otherPerson.age, job: otherPerson.job} = person)
-person.job.title = &quot;Hacker&quot;;
+const proxy = new Proxy(myTarget, {
+    preventExtensions(target) {
+        console.log(&quot;preventExtensions()&quot;);
+        return Reflect.preventExtensions(...arguments);
+    },
+});
 
-console.log(otherPerson);   // {name: &quot;Kinsiy&quot;, age: 23, job: {Hacker}}
-console.log(person);        // {name: &quot;Kinsiy&quot;, age: 23, job: {Hacker}}
-
-let { job: {title: newTitle}} = person;
-console.log(newTitle)       // Hacker
-
-// 在外层属性没有定义的情况下不能使用嵌套解构。无论对象还是目标对象都是一样
-let personCopy = {};
-// foo在源对象上是undefined
-({foo: {bar: personCopy.bar}} = person)
-// Uncaught TypeError: Cannot read property &#39;bar&#39; of undefined
-
-// job在目标对象上是undefined
-({job: {titilt: personCopy.job.title}} = person)
-// Uncaught TypeError: Cannot set property &#39;title&#39; of undefined
+/**
+ * Object.preventExtensions()方法让一个对象变的不可扩展，也就是永远不能再添加新的属性。
+ */
+Object.preventExtensions(proxy); // preventExtensions()
 </code></pre>
-<h3 id="部分解构"><a href="#部分解构" class="headerlink" title="部分解构"></a>部分解构</h3><p>涉及多个属性的解构赋值时一个输出无关非顺序化操作。如果一个解构表达式涉及多个赋值，开始的赋值成功而后面的赋值出错，则整个解构赋值只会完成一部分。</p>
-<pre><code class="javascript">let person = {
-    name: &quot;Kinsiy&quot;,
-    age: 23
-};
+<ol>
+<li>返回值<ul>
+<li>preventExtensions()必须返回布尔值，表示 target 是否已经不可扩展。返回非布尔值会被转型为布尔值。</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>Object.preventExtensions(proxy)</li>
+<li>Reflect.preventExtensions(proxy)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>如果 Object.isExtensible(proxy)是 false，则处理程序必须返回 true</li>
+</ul>
+</li>
+</ol>
+<h2 id="apply"><a href="#apply" class="headerlink" title="apply()"></a>apply()</h2><p>apply()捕获器会在调用函数时被调用。对应的反射 API 方法为 Reflect.apply()</p>
+<pre><code class="javascript">const myTarget = () =&gt; {};
 
-let name,bar,age
-try {
-    ({name: name, job: {bar: bar}, age: age} = person);
-}catch(e) {};
+const proxy = new Proxy(myTarget, {
+    apply(target, thisArg, argumentsList) {
+        console.log(&quot;apply()&quot;);
+        return Reflect.apply(...arguments);
+    },
+});
 
-console.log(name,bar,age);  // Kinsiy undefined undefined
+proxy(); // apply()
 </code></pre>
-<h3 id="参数上下文匹配"><a href="#参数上下文匹配" class="headerlink" title="参数上下文匹配"></a>参数上下文匹配</h3><p>在函数参数列表也可以进行解构赋值。对参数的解构赋值不会影响arguments 对象，但可以在函数签名中声明函数体内使用局部变量：</p>
-<pre><code class="javascript">let person = {
-    name: &quot;Kinsiy&quot;,
-    age: 23
-}
+<ol>
+<li>返回值<ul>
+<li>无限值</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>proxy(…argumentsList)</li>
+<li>Function.prototype.apply(thisArg, argumentsList)</li>
+<li>Function.prototype.call(thisArg, …argumentsList)</li>
+<li>Reflect.apply(target, thisArgument, argumentsList)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>thisArg: 调用函数时的 this 参数</li>
+<li>argumentsList: 调用函数时的参数列表</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>target 必须是一个函数对象</li>
+</ul>
+</li>
+</ol>
+<h2 id="construct"><a href="#construct" class="headerlink" title="construct()"></a>construct()</h2><p>construct()捕获器会在 new 操作符中被调用。对应的反射 API 方法为 Reflect.construct()</p>
+<pre><code class="javascript">const myTarget = function () {};
 
-function getPersonInfo(foo,{name,age},bar){
-    console.log(arguments);
-    console.log(name,age);
-}
+const proxy = new Proxy(myTarget, {
+    construct(target, argumentsList, newTarget) {
+        console.log(&quot;construct()&quot;);
+        return Reflect.construct(...arguments);
+    },
+});
 
-getPersonInfo(&quot;1st&quot;,person,&quot;2st&quot;);
-
-// [&quot;1st&quot;, {name: &quot;Kinsiy&quot;, age: 23}, &quot;2st&quot;]
-// Kinsiy 23
+new proxy(); // construct()
 </code></pre>
+<ol>
+<li>返回值<ul>
+<li>construct()必须返回一个对象</li>
+</ul>
+</li>
+<li>拦截的操作<ul>
+<li>new proxy(…argumentsList)</li>
+<li>Reflect.construct(target, argumentsList, newTarget)</li>
+</ul>
+</li>
+<li>捕获器处理程序函数<ul>
+<li>target: 目标对象</li>
+<li>argumentsList: 调用函数时的参数列表</li>
+<li>newTarget: 最初被调用的构造函数</li>
+</ul>
+</li>
+<li>捕获器不变式<ul>
+<li>target 必须可以用作构造函数</li>
+</ul>
+</li>
+</ol>
 
         </div>
         <!-- .entry-content -->
@@ -673,17 +807,17 @@ getPersonInfo(&quot;1st&quot;,person,&quot;2st&quot;);
           
             <div class="post-nepre half previous">
           
-            <a href="/2021/01/24/Javascript-Array/" rel="prev">
+            <a href="/2021/03/07/Javascript-Proxy-3/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
                     
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                集合引用类型(Array)</h3>
+                Javascript-Proxy[代理模式]</h3>
                 <hr>
               </div>
             </a>
@@ -693,17 +827,17 @@ getPersonInfo(&quot;1st&quot;,person,&quot;2st&quot;);
           
             <div class="post-nepre half next">
           
-            <a href="/2021/01/23/built-in-object/" rel="next">
+            <a href="/2021/03/07/Javascript-Proxy-1/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-2.png">
                  
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                基本引用类型(单例内置对象)</h3>
+                Javascript-Proxy[代理基础]</h3>
                 <hr>
               </div>
             </a>

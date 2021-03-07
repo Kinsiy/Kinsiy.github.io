@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Javascript-(Global &amp; Math) | Kinsiy</title>
+  <title itemprop="name">Javascript-Proxy[代理模式] | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -309,316 +309,171 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">Javascript-(Global & Math)</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-23&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
+            <h1 class="entry-title">Javascript-Proxy[代理模式]</h1>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-3-7&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
 
             <hr>
           </header>
         
         <div class="entry-content">
-          <p>任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。</p>
-<h1 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h1><p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 Global 对象的属性。</p>
-<h2 id="URL-编码方法"><a href="#URL-编码方法" class="headerlink" title="URL 编码方法"></a>URL 编码方法</h2><p>encodeURI()和 encodeURIComponent()方法用于编码统一资源标识符(URI)，以便传给浏览器。</p>
-<pre><code class="javascript">/* 编码
-    encodeURI()
-    encondeURIComponent()
- */
-let uri = &quot;https://kinsiy.github.io?name=哈哈哈&quot;;
-let url_1 = encodeURI(uri);
-let url_2 = encodeURIComponent(uri);
-console.log(url_1); // https://kinsiy.github.io?name=%E5%93%88%E5%93%88%E5%93%88
-console.log(url_2); // https%3A%2F%2Fkinsiy.github.io%3Fname%3D%E5%93%88%E5%93%88%E5%93%88
+          <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>使用代理可以在代码中实现一些有用的编程模式</p>
+<h2 id="跟踪属性访问"><a href="#跟踪属性访问" class="headerlink" title="跟踪属性访问"></a>跟踪属性访问</h2><p>通过捕获 get、set 和 has 等操作，可以知道对象属性什么时候被访问、被查询。把实现相应捕获器的某个对象代理放在应用中，可以监控这个对象何时在何处被访问过。</p>
+<pre><code class="javascript">const user = {
+    name: &quot;Kinsiy&quot;,
+};
 
-/* 解码
-    decodeURI()
-    decondeURIComponent()
- */
-console.log(decodeURI(url_1)); // https://kinsiy.github.io?name=哈哈哈
-console.log(decodeURIComponent(url_2)); // https://kinsiy.github.io?name=哈哈哈
+const proxy = new Proxy(user, {
+    get(target, property, receiver) {
+        console.log(`Getting ${property}`);
+        return Reflect.get(...arguments);
+    },
+
+    set(target, property, value, receiver) {
+        console.log(`Setting ${property} = ${value}`);
+        return Reflect.set(...arguments);
+    },
+});
+
+proxy.name; // Getting name
+proxy.age = 23; // Setting age = 23
 </code></pre>
-<h2 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h2><p>这个方法就是一个完整的 EMCAScript 解释器，它接收一个参数，即一个要执行的 EMCAScript(Javascript)字符串。<br>通过 eval()定义的任何变量和函数都不会提升。</p>
-<pre><code class="javascript">let msg = &quot;hello world!&quot;;
-eval(&quot;console.log(msg)&quot;); // hello world!
-eval(&quot;function sayHi() { console.log(&#39;Hi&#39;); }&quot;);
-sayHi(); // Hi
-eval(&quot;var name = &#39;Kinsiy&#39;&quot;); // 此处使用let与const声明console.log()均为空，原因不明，作用域原因？
-console.log(name); // Kinsiy
+<h2 id="隐藏属性"><a href="#隐藏属性" class="headerlink" title="隐藏属性"></a>隐藏属性</h2><p>代理的内部实现对外部代码是不可见的，因此要隐藏目标对象上的属性也轻而易举。</p>
+<pre><code class="javascript">const hiddenProperties = [&quot;King&quot;, &quot;Queen&quot;];
+const targetObject = {
+    name: &quot;Kinsiy&quot;,
+    King: &quot;青睐&quot;,
+    Queen: &quot;Restituo&quot;,
+};
+
+const proxy = new Proxy(targetObject, {
+    get(target, property, receiver) {
+        if (hiddenProperties.includes(property)) {
+            return undefined;
+        } else {
+            return Reflect.get(...arguments);
+        }
+    },
+    has(target, property) {
+        if (hiddenProperties.includes(property)) {
+            return false;
+        } else {
+            return Reflect.has(...arguments);
+        }
+    },
+});
+
+// get
+console.log(proxy.name); // Kinsiy
+console.log(proxy.King); // undefined
+console.log(proxy.Queen); // undefined
+
+// has
+console.log(&quot;name&quot; in proxy); // true
+console.log(&quot;King&quot; in proxy); // false
+console.log(&quot;Queen&quot; in proxy); // false
 </code></pre>
-<h2 id="Global-属性"><a href="#Global-属性" class="headerlink" title="Global 属性"></a>Global 属性</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">undefined</td>
-<td style="text-align:left">特殊值 undefined</td>
-</tr>
-<tr>
-<td style="text-align:left">NaN</td>
-<td style="text-align:left">特殊值 NaN</td>
-</tr>
-<tr>
-<td style="text-align:left">Infinity</td>
-<td style="text-align:left">特殊值 Infinity</td>
-</tr>
-<tr>
-<td style="text-align:left">Object</td>
-<td style="text-align:left">Object 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Array</td>
-<td style="text-align:left">Array 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Function</td>
-<td style="text-align:left">Function 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Boolean</td>
-<td style="text-align:left">Boolean 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">String</td>
-<td style="text-align:left">String 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Number</td>
-<td style="text-align:left">Number 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Date</td>
-<td style="text-align:left">Date 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RegExp</td>
-<td style="text-align:left">RegExp 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Symbol</td>
-<td style="text-align:left">Symbol 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Error</td>
-<td style="text-align:left">Errot 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">EvalError</td>
-<td style="text-align:left">EvalError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RangeError</td>
-<td style="text-align:left">RangerError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">ReferenceError</td>
-<td style="text-align:left">RefenceError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">SyntaxError</td>
-<td style="text-align:left">SytaxError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">TypeError</td>
-<td style="text-align:left">TypeError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">URIError</td>
-<td style="text-align:left">URIError 的构造函数</td>
-</tr>
-</tbody>
-</table>
-<h2 id="window-对象"><a href="#window-对象" class="headerlink" title="window 对象"></a>window 对象</h2><p>虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global 对象的代理。因此，所有全局作用域声明的变量和函数都变成了 window 的属性。</p>
-<pre><code class="javascript">var color = &quot;red&quot;;
-function sayColor() {
-    console.log(window.color);
+<h2 id="属性验证"><a href="#属性验证" class="headerlink" title="属性验证"></a>属性验证</h2><p>因为所有属性操作都会触发 set()捕获器，所以可以根据所赋的值决定是允许还是拒绝</p>
+<pre><code class="javascript">const target = {
+    onlyNumbersGoHere: 0,
+};
+
+const proxy = new Proxy(target, {
+    set(target, property, value, receiver) {
+        if (typeof value !== &quot;number&quot;) {
+            return false;
+        } else {
+            return Reflect.set(...arguments);
+        }
+    },
+});
+
+proxy.onlyNumbersGoHere = 1;
+console.log(proxy.onlyNumbersGoHere); // 1
+proxy.onlyNumbersGoHere = &quot;2&quot;;
+console.log(proxy.onlyNumbersGoHere); // 1
+</code></pre>
+<h2 id="函数与构造函数参数验证"><a href="#函数与构造函数参数验证" class="headerlink" title="函数与构造函数参数验证"></a>函数与构造函数参数验证</h2><p>跟保护和验证对象属性类似，也可以对函数和构造函数参数进行审查。比如，可以让函数只接收某种类型的值</p>
+<pre><code class="javascript">function median(...nums) {
+    return nums.sort()[Math.floor(nums.length / 2)];
 }
 
-window.satColor(); // red
+const proxy = new Proxy(median, {
+    apply(target, thisArg, argumentsList) {
+        for (const arg of argumentsList) {
+            if (typeof arg !== &quot;number&quot;) {
+                throw new Error(&quot;参数中存在非数字！&quot;);
+            }
+        }
+        return Reflect.apply(...arguments);
+    },
+});
 
-/* 另一种获取Global对象的方式 */
-let global = (function () {
-    return this;
-})();
-</code></pre>
-<h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><h2 id="Math-对象属性"><a href="#Math-对象属性" class="headerlink" title="Math 对象属性"></a>Math 对象属性</h2><p>Math 有一些属性，主要用于保存数学中的一些特殊值。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.E</td>
-<td style="text-align:left">自然对数的基数 e 的值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN10</td>
-<td style="text-align:left">In10</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN2</td>
-<td style="text-align:left">In2</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG2E</td>
-<td style="text-align:left">Log<sub>2</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG10E</td>
-<td style="text-align:left">Log<sub>10</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.PI</td>
-<td style="text-align:left">π</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT1_2</td>
-<td style="text-align:left">&radic;(1/2)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT2</td>
-<td style="text-align:left">&radic;2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="min-amp-amp-max"><a href="#min-amp-amp-max" class="headerlink" title="min() &amp;&amp; max()"></a>min() &amp;&amp; max()</h2><pre><code class="javascript">let max = Math.max(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 100.5
-let min = Math.min(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 1.2
-console.log(max);
-console.log(min);
+console.log(proxy(1, 2, 4, 5)); // 4
+console.log(proxy(1, 2, 4, &quot;5&quot;)); // Error: 参数中存在非数字！
 
-/* 使用扩展操作符 */
-let values = [5, 10, 4, 25, 7, 45];
-console.log(Math.max(...values)); // 45
-</code></pre>
-<h2 id="舍入方法"><a href="#舍入方法" class="headerlink" title="舍入方法"></a>舍入方法</h2><ul>
-<li>Math.ceil() 向上取整</li>
-<li>Math.floor() 向下取整</li>
-<li>Math.round() 四舍五入</li>
-<li>Math.fround() 返回数值最接近的单精度(32 位)浮点值表示</li>
-</ul>
-<pre><code class="javascript">console.log(Math.ceil(25.5)); // 26
-console.log(Math.floor(25.5)); // 25
-console.log(Math.round(26.6)); // 27
-console.log(Math.fround(26.8)); // 26.799999237060547
-</code></pre>
-<h2 id="random"><a href="#random" class="headerlink" title="random()"></a>random()</h2><p>Math.random()返回一个 0~1 范围内的随机数，其中包含 0 不包含 1。[0,1)</p>
-<pre><code class="javascript">/* 随机数公式
-    number = Math.floor(Math.random() * total_number_of_choices + first_possible_value)
- */
-function selectFrom(lowerValue, upperValue) {
-    let choices = upperValue - lowerValue + 1;
-    return Math.floor(Math.random() * choices + lowerValue);
+// 类似地，可以要求实例化时必须给构造函数传参
+
+class Uesr {
+    constructor(id) {
+        this._id = id;
+    }
 }
 
-let i = 0;
-while (i &lt; 5) {
-    console.log(selectFrom(5, 45)); // [5,45]
-    i++; // 8 17 28 17 11 (5个随机数)
-}
+const proxy = new Proxy(User, {
+    construct(target, argumentsList, newTarget) {
+        if (argumentsList[0] === undefined) {
+            throw new Error(&quot;用户类必须提供id&quot;);
+        } else {
+            return Reflect.construc(...arguments);
+        }
+    },
+});
+
+new proxy(1);
+new proxy(); // Error: 用户类必须提供id
 </code></pre>
-<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.abs(x)</td>
-<td style="text-align:left">x 的绝对值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.exp(x)</td>
-<td style="text-align:left">e<sup>x</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.expm1(x)</td>
-<td style="text-align:left">e<sup>x</sup>-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log(x)</td>
-<td style="text-align:left">Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log1p(x)</td>
-<td style="text-align:left">1+Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(x, power)</td>
-<td style="text-align:left">x<sup>power</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(…nums)</td>
-<td style="text-align:left">&radic;(a<sup>2</sup>+b<sup>2</sup>+…+n<sup>2</sup>)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.clz32(x)</td>
-<td style="text-align:left">返回 32 位整数 x 的前置零的数量</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sign(x)</td>
-<td style="text-align:left">返回表示 x 符号的 1、0、-0 或-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.trunc(x)</td>
-<td style="text-align:left">取整</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sqrt(x)</td>
-<td style="text-align:left">&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cbrt(x)</td>
-<td style="text-align:left"><sup>3</sup>&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acos(x)</td>
-<td style="text-align:left">cos<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acosh(x)</td>
-<td style="text-align:left">反双曲余弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asin(x)</td>
-<td style="text-align:left">sin<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asinh(x)</td>
-<td style="text-align:left">反双曲正弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan(x)</td>
-<td style="text-align:left">tan<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atanh(x)</td>
-<td style="text-align:left">反双曲正切</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan2(y, x)</td>
-<td style="text-align:left">tan<sup>-1</sup>(y/x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sin(x)</td>
-<td style="text-align:left">sin(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cos(x)</td>
-<td style="text-align:left">cos(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.tan(x)</td>
-<td style="text-align:left">tan(x)</td>
-</tr>
-</tbody>
-</table>
+<h2 id="数据绑定与可观察对象"><a href="#数据绑定与可观察对象" class="headerlink" title="数据绑定与可观察对象"></a>数据绑定与可观察对象</h2><p>通过代理可以把运行时原本不相关的部分联系到一起。这样就可以实现各种模式，从而让不同代码互操作。</p>
+<pre><code class="javascript">const userList = [];
+
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+}
+// 还可以把集合绑定到一个事件分派程序，每次插入新实例时都会发送消息
+function log(newValue) {
+    console.log(newValue);
+}
+
+const proxy_1 = new Proxy(userList, {
+    set(target, property, receiver) {
+        const result = Reflect.set(...arguments);
+        if (result &amp;&amp; property !== &quot;length&quot;) {
+            // 这里控制一下新增元素后，数组长度变化的消息无需发送
+            log(Reflect.get(target, property, receiver));
+        }
+        return result;
+    },
+});
+
+// 可以将被代理的类绑定到一个全局实例集合，让所有创建的实例都被添加到这个集合中
+const proxy = new Proxy(User, {
+    construct(target, argumentsList, newTarget) {
+        const newUser = Reflect.construct(...arguments);
+        proxy_1.push(newUser); // 发送消息
+        return newUser;
+    },
+});
+
+new proxy(&quot;Kinsiy&quot;);
+new proxy(&quot;King&quot;);
+new proxy(&quot;Queen&quot;);
+
+// User {name: &quot;Kinsiy&quot;}
+// User {name: &quot;King&quot;}
+// User {name: &quot;Queen&quot;}
+console.log(userList); // [User, User, User]
+</code></pre>
 
         </div>
         <!-- .entry-content -->
@@ -647,40 +502,21 @@ while (i &lt; 5) {
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/01/24/Javascript-Object-1/" rel="prev">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
-                    
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                Javascript-Object.1[理解对象]</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2021/01/18/Javascript-String/" rel="next">
+            <a href="/2021/03/07/Javascript-Proxy-2/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png">
                  
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Javascript-原始包装类型</h3>
+                Javascript-Proxy[捕获器与反射]</h3>
                 <hr>
               </div>
             </a>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Javascript-(Global &amp; Math) | Kinsiy</title>
+  <title itemprop="name">Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -296,430 +296,130 @@
   </div>
 </header>
 
-      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
-<div class="pattern-center-blank"></div>
-
+      <div class="blank" style="padding-top: 0px;"></div>
 <div id="content" class="site-content">
+  
+  <div class="notice" style="margin-top:60px">
+    <i class="iconfont icon-notification">
+    </i>
+    <div class="notice-content">Nothing is true!</div>
+  </div>
+  
+  <div class="top-feature-row">
+  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
+  <i class="fa fa-anchor" aria-hidden="true">
+  </i>
+  Anchor</h1>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/2020/11/23/hello-world/" target="_blank">
+        <div class="img">
+          <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/startdash/top-1.png">
+        </div>
+        <div class="info">
+          <h3>Hello Word!</h3>
+          <p>天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/" target="_blank">
+        <div class="img">
+          <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/startdash/top-2.png">
+        </div>
+        <div class="info">
+          <h3>广告位</h3>
+          <p>广告位招租</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="/" target="_blank">
+        <div class="img">
+          <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/startdash/top-3.png">
+        </div>
+        <div class="info">
+          <h3>广告位</h3>
+          <p>广告位招租</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+</div>
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
-        
-          <header class="entry-header">
-            <h1 class="entry-title">Javascript-(Global & Math)</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-1-23&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p></p>
-
-            <hr>
-          </header>
-        
-        <div class="entry-content">
-          <p>任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。</p>
-<h1 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h1><p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 Global 对象的属性。</p>
-<h2 id="URL-编码方法"><a href="#URL-编码方法" class="headerlink" title="URL 编码方法"></a>URL 编码方法</h2><p>encodeURI()和 encodeURIComponent()方法用于编码统一资源标识符(URI)，以便传给浏览器。</p>
-<pre><code class="javascript">/* 编码
-    encodeURI()
-    encondeURIComponent()
- */
-let uri = &quot;https://kinsiy.github.io?name=哈哈哈&quot;;
-let url_1 = encodeURI(uri);
-let url_2 = encodeURIComponent(uri);
-console.log(url_1); // https://kinsiy.github.io?name=%E5%93%88%E5%93%88%E5%93%88
-console.log(url_2); // https%3A%2F%2Fkinsiy.github.io%3Fname%3D%E5%93%88%E5%93%88%E5%93%88
-
-/* 解码
-    decodeURI()
-    decondeURIComponent()
- */
-console.log(decodeURI(url_1)); // https://kinsiy.github.io?name=哈哈哈
-console.log(decodeURIComponent(url_2)); // https://kinsiy.github.io?name=哈哈哈
-</code></pre>
-<h2 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h2><p>这个方法就是一个完整的 EMCAScript 解释器，它接收一个参数，即一个要执行的 EMCAScript(Javascript)字符串。<br>通过 eval()定义的任何变量和函数都不会提升。</p>
-<pre><code class="javascript">let msg = &quot;hello world!&quot;;
-eval(&quot;console.log(msg)&quot;); // hello world!
-eval(&quot;function sayHi() { console.log(&#39;Hi&#39;); }&quot;);
-sayHi(); // Hi
-eval(&quot;var name = &#39;Kinsiy&#39;&quot;); // 此处使用let与const声明console.log()均为空，原因不明，作用域原因？
-console.log(name); // Kinsiy
-</code></pre>
-<h2 id="Global-属性"><a href="#Global-属性" class="headerlink" title="Global 属性"></a>Global 属性</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">undefined</td>
-<td style="text-align:left">特殊值 undefined</td>
-</tr>
-<tr>
-<td style="text-align:left">NaN</td>
-<td style="text-align:left">特殊值 NaN</td>
-</tr>
-<tr>
-<td style="text-align:left">Infinity</td>
-<td style="text-align:left">特殊值 Infinity</td>
-</tr>
-<tr>
-<td style="text-align:left">Object</td>
-<td style="text-align:left">Object 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Array</td>
-<td style="text-align:left">Array 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Function</td>
-<td style="text-align:left">Function 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Boolean</td>
-<td style="text-align:left">Boolean 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">String</td>
-<td style="text-align:left">String 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Number</td>
-<td style="text-align:left">Number 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Date</td>
-<td style="text-align:left">Date 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RegExp</td>
-<td style="text-align:left">RegExp 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Symbol</td>
-<td style="text-align:left">Symbol 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">Error</td>
-<td style="text-align:left">Errot 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">EvalError</td>
-<td style="text-align:left">EvalError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">RangeError</td>
-<td style="text-align:left">RangerError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">ReferenceError</td>
-<td style="text-align:left">RefenceError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">SyntaxError</td>
-<td style="text-align:left">SytaxError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">TypeError</td>
-<td style="text-align:left">TypeError 的构造函数</td>
-</tr>
-<tr>
-<td style="text-align:left">URIError</td>
-<td style="text-align:left">URIError 的构造函数</td>
-</tr>
-</tbody>
-</table>
-<h2 id="window-对象"><a href="#window-对象" class="headerlink" title="window 对象"></a>window 对象</h2><p>虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global 对象的代理。因此，所有全局作用域声明的变量和函数都变成了 window 的属性。</p>
-<pre><code class="javascript">var color = &quot;red&quot;;
-function sayColor() {
-    console.log(window.color);
-}
-
-window.satColor(); // red
-
-/* 另一种获取Global对象的方式 */
-let global = (function () {
-    return this;
-})();
-</code></pre>
-<h1 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h1><h2 id="Math-对象属性"><a href="#Math-对象属性" class="headerlink" title="Math 对象属性"></a>Math 对象属性</h2><p>Math 有一些属性，主要用于保存数学中的一些特殊值。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">属性</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.E</td>
-<td style="text-align:left">自然对数的基数 e 的值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN10</td>
-<td style="text-align:left">In10</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LN2</td>
-<td style="text-align:left">In2</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG2E</td>
-<td style="text-align:left">Log<sub>2</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.LOG10E</td>
-<td style="text-align:left">Log<sub>10</sub>e</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.PI</td>
-<td style="text-align:left">π</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT1_2</td>
-<td style="text-align:left">&radic;(1/2)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.SQRT2</td>
-<td style="text-align:left">&radic;2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="min-amp-amp-max"><a href="#min-amp-amp-max" class="headerlink" title="min() &amp;&amp; max()"></a>min() &amp;&amp; max()</h2><pre><code class="javascript">let max = Math.max(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 100.5
-let min = Math.min(5, 7, 48, 56.1, 54.6, 100, 1.2, 100.5); // 1.2
-console.log(max);
-console.log(min);
-
-/* 使用扩展操作符 */
-let values = [5, 10, 4, 25, 7, 45];
-console.log(Math.max(...values)); // 45
-</code></pre>
-<h2 id="舍入方法"><a href="#舍入方法" class="headerlink" title="舍入方法"></a>舍入方法</h2><ul>
-<li>Math.ceil() 向上取整</li>
-<li>Math.floor() 向下取整</li>
-<li>Math.round() 四舍五入</li>
-<li>Math.fround() 返回数值最接近的单精度(32 位)浮点值表示</li>
-</ul>
-<pre><code class="javascript">console.log(Math.ceil(25.5)); // 26
-console.log(Math.floor(25.5)); // 25
-console.log(Math.round(26.6)); // 27
-console.log(Math.fround(26.8)); // 26.799999237060547
-</code></pre>
-<h2 id="random"><a href="#random" class="headerlink" title="random()"></a>random()</h2><p>Math.random()返回一个 0~1 范围内的随机数，其中包含 0 不包含 1。[0,1)</p>
-<pre><code class="javascript">/* 随机数公式
-    number = Math.floor(Math.random() * total_number_of_choices + first_possible_value)
- */
-function selectFrom(lowerValue, upperValue) {
-    let choices = upperValue - lowerValue + 1;
-    return Math.floor(Math.random() * choices + lowerValue);
-}
-
-let i = 0;
-while (i &lt; 5) {
-    console.log(selectFrom(5, 45)); // [5,45]
-    i++; // 8 17 28 17 11 (5个随机数)
-}
-</code></pre>
-<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">方法</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Math.abs(x)</td>
-<td style="text-align:left">x 的绝对值</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.exp(x)</td>
-<td style="text-align:left">e<sup>x</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.expm1(x)</td>
-<td style="text-align:left">e<sup>x</sup>-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log(x)</td>
-<td style="text-align:left">Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.log1p(x)</td>
-<td style="text-align:left">1+Inx</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(x, power)</td>
-<td style="text-align:left">x<sup>power</sup></td>
-</tr>
-<tr>
-<td style="text-align:left">Math.pow(…nums)</td>
-<td style="text-align:left">&radic;(a<sup>2</sup>+b<sup>2</sup>+…+n<sup>2</sup>)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.clz32(x)</td>
-<td style="text-align:left">返回 32 位整数 x 的前置零的数量</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sign(x)</td>
-<td style="text-align:left">返回表示 x 符号的 1、0、-0 或-1</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.trunc(x)</td>
-<td style="text-align:left">取整</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sqrt(x)</td>
-<td style="text-align:left">&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cbrt(x)</td>
-<td style="text-align:left"><sup>3</sup>&radic;x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acos(x)</td>
-<td style="text-align:left">cos<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.acosh(x)</td>
-<td style="text-align:left">反双曲余弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asin(x)</td>
-<td style="text-align:left">sin<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.asinh(x)</td>
-<td style="text-align:left">反双曲正弦</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan(x)</td>
-<td style="text-align:left">tan<sup>-1</sup>x</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atanh(x)</td>
-<td style="text-align:left">反双曲正切</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.atan2(y, x)</td>
-<td style="text-align:left">tan<sup>-1</sup>(y/x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.sin(x)</td>
-<td style="text-align:left">sin(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.cos(x)</td>
-<td style="text-align:left">cos(x)</td>
-</tr>
-<tr>
-<td style="text-align:left">Math.tan(x)</td>
-<td style="text-align:left">tan(x)</td>
-</tr>
-</tbody>
-</table>
-
-        </div>
-        <!-- .entry-content -->
-        <div class="single-reward">
-          <div class="reward-open">赏
-            <div class="reward-main">
-              <ul class="reward-row">
-                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/AliPayQR.jpg"></li>
-                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WechatQR.png"></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
-        <footer class="post-footer">
-          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
-          <div class="post-tags">
-          </div>
-          <div class="post-share">
-            <div class="social-share sharehidden share-component"></div>
-            <i class="iconfont show-share icon-forward"></i>
-          </div>
-        </footer><!-- .entry-footer -->
-      </article>
-      <!-- #post-## -->
-      <div class="toc" style="background: none;"></div>
-      <section class="post-squares nextprev">
-        
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/01/24/Javascript-Object-1/" rel="prev">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
-                    
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                Javascript-Object.1[理解对象]</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2021/01/18/Javascript-String/" rel="next">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png">
-                 
-              </div>
-              <span class="label">
-              Next Post</span>
-              <div class="info">
-                <h3>
-                Javascript-原始包装类型</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-      </section>
+      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
+      <i class="fa fa-envira" aria-hidden="true"></i>
+      Discovery</h1>
       
-<div id="vcomments"></div>
-<script>
-  window.onload = function(){
-      var valine = new Valine();
-      valine.init({
-        el: '#vcomments',
-        appId: "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI",
-        appKey: "sdnc0TF9hEH64aiXJ6GFf6MS",
-        path: window.location.pathname,
-        placeholder: "你是我一生只会遇见一次的惊喜 ..."
-      })
-  }
-</script>
+  <!-- 首页默认取最最新文章集 -->
+  
+    
+<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="https://schema.org/BlogPosting">
 
-      <section class="author-profile">
-        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
-          <a href="https://kinsiy.github.io" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg" itemprop="image" alt="Kinsiy" height="70" width="70"></a>
-          <div class="meta">
-            <span class="title">Author</span>
-            <h3 itemprop="name">
-            <a href="https://kinsiy.github.io" itemprop="url" rel="author">Kinsiy</a>
-            </h3>
-          </div>
+  <div class="post-thumb">
+    <a href="/2020/11/23/hello-world/">
+      
+        <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png">
+      
+    </a>
+  </div>
+  <div class="post-content-wrap">
+    <div class="post-content">
+      <div class="post-date">
+        <i class="iconfont icon-time">
+        </i>2020-11-23 23:11</div>
+      <a href="/2020/11/23/hello-world/" class="post-title">
+        <h3>Hello World</h3>
+      </a>
+      <div class="post-meta">
+        <span><i class="fa fa-tags"></i>
+        
+        </span>
+        <span>
+          <i class="iconfont icon-file"></i>
+          
+            <a href="/categories/Think/">Think</a>
+          
+        </span>
+      </div>
+      <div class="float-content">
+        <p>
+          
+          天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
+          
+        </p>
+        <div class="post-bottom">
+          <a href="/2020/11/23/hello-world/" class="button-normal">
+            <i class="iconfont icon-caidan"></i>
+          </a>
         </div>
-        <hr>
-        <p><i class="iconfont icon-write"></i>I'm True</p>
-      </section>
-    </main><!-- #main -->
-  </div><!-- #primary -->
+      </div>
+    </div>
+  </div>
+</article>
+  
+
+
+    </main>
+      <!-- 首页默认取最最新文章集 -->
+    <!-- 
+      <nav class="navigator">
+        
+        <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-back"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      </nav>
+     -->
+  </div>
+  
 </div>
-
-
 
     </div>    
     <div class="ins-search">

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-05T13:34:23.643Z</updated>
+  <updated>2021-03-07T11:30:34.992Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,72 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-Proxy[代理模式]</title>
+    <link href="https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-3/"/>
+    <id>https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-3/</id>
+    <published>2021-03-07T11:28:44.000Z</published>
+    <updated>2021-03-07T11:30:34.992Z</updated>
+    
+    <summary type="html">
+    
+      代理模式轮子
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript-Proxy[捕获器与反射]</title>
+    <link href="https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-2/"/>
+    <id>https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-2/</id>
+    <published>2021-03-07T11:26:58.000Z</published>
+    <updated>2021-03-07T11:30:19.300Z</updated>
+    
+    <summary type="html">
+    
+      反射API
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Javascript-Proxy[代理基础]</title>
+    <link href="https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-1/"/>
+    <id>https://Kinsiy.github.io/2021/03/07/Javascript-Proxy-1/</id>
+    <published>2021-03-07T02:14:03.000Z</published>
+    <updated>2021-03-07T11:29:14.807Z</updated>
+    
+    <summary type="html">
+    
+      ECMAScript 6 新增的代理反射为开发者提供了拦截并向基本操作嵌入额外行为的能力。具体地说，可以给目标对象定义一个关联的代理对象，而这个代理对象可以作为抽象的目标对象来使用。
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript-class</title>
@@ -39,11 +105,11 @@
   </entry>
   
   <entry>
-    <title>Javascript中的继承</title>
+    <title>Javascript-继承</title>
     <link href="https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/"/>
     <id>https://Kinsiy.github.io/2021/03/02/Javascript-Inherit/</id>
     <published>2021-03-02T11:54:11.000Z</published>
-    <updated>2021-03-03T01:17:20.437Z</updated>
+    <updated>2021-03-07T11:36:25.016Z</updated>
     
     <summary type="html">
     
@@ -83,15 +149,15 @@
   </entry>
   
   <entry>
-    <title>集合引用类型(Object.2)-创建对象</title>
+    <title>Javascript-Object.2[创建对象]</title>
     <link href="https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/"/>
     <id>https://Kinsiy.github.io/2021/02/19/Javascript-Object-2/</id>
     <published>2021-02-19T14:22:00.000Z</published>
-    <updated>2021-02-28T09:14:19.253Z</updated>
+    <updated>2021-03-07T11:40:02.790Z</updated>
     
     <summary type="html">
     
-      创建对象(Object)
+      集合引用类型-创建对象Object
     
     </summary>
     
@@ -105,15 +171,15 @@
   </entry>
   
   <entry>
-    <title>迭代器与生成器</title>
+    <title>Javascript-迭代器与生成器</title>
     <link href="https://Kinsiy.github.io/2021/02/03/Javascript-Iterable-Iterator/"/>
     <id>https://Kinsiy.github.io/2021/02/03/Javascript-Iterable-Iterator/</id>
     <published>2021-02-02T17:13:43.000Z</published>
-    <updated>2021-02-06T17:01:49.687Z</updated>
+    <updated>2021-03-07T11:43:06.887Z</updated>
     
     <summary type="html">
     
-      理解于使用迭代器与生成器
+      理解使用迭代器与生成器
     
     </summary>
     
@@ -127,15 +193,15 @@
   </entry>
   
   <entry>
-    <title>集合引用类型(Map &amp; Set)</title>
+    <title>Javascript-(Map &amp; Set)</title>
     <link href="https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/"/>
     <id>https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/</id>
     <published>2021-01-29T14:31:45.000Z</published>
-    <updated>2021-01-31T06:39:09.499Z</updated>
+    <updated>2021-03-07T11:37:53.989Z</updated>
     
     <summary type="html">
     
-      Map()、WeakMap()、Set()、WeakSet()的使用
+      集合引用类型, Map()、WeakMap()、Set()、WeakSet()的使用
     
     </summary>
     
@@ -149,15 +215,15 @@
   </entry>
   
   <entry>
-    <title>集合引用类型(Array)</title>
+    <title>Javascript-Array</title>
     <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Array/"/>
     <id>https://Kinsiy.github.io/2021/01/24/Javascript-Array/</id>
     <published>2021-01-24T06:47:28.000Z</published>
-    <updated>2021-01-31T07:05:24.882Z</updated>
+    <updated>2021-03-07T11:46:08.323Z</updated>
     
     <summary type="html">
     
-      Array 的使用
+      集合引用类型, Array 的使用
     
     </summary>
     
@@ -171,15 +237,15 @@
   </entry>
   
   <entry>
-    <title>集合引用类型(Object.1)-理解对象</title>
-    <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Object/"/>
-    <id>https://Kinsiy.github.io/2021/01/24/Javascript-Object/</id>
+    <title>Javascript-Object.1[理解对象]</title>
+    <link href="https://Kinsiy.github.io/2021/01/24/Javascript-Object-1/"/>
+    <id>https://Kinsiy.github.io/2021/01/24/Javascript-Object-1/</id>
     <published>2021-01-23T17:44:54.000Z</published>
-    <updated>2021-02-19T14:24:02.981Z</updated>
+    <updated>2021-03-07T11:35:12.733Z</updated>
     
     <summary type="html">
     
-      理解对象Object
+      集合引用类型-理解对象Object
     
     </summary>
     
@@ -193,15 +259,15 @@
   </entry>
   
   <entry>
-    <title>基本引用类型(单例内置对象)</title>
+    <title>Javascript-(Global &amp; Math)</title>
     <link href="https://Kinsiy.github.io/2021/01/23/built-in-object/"/>
     <id>https://Kinsiy.github.io/2021/01/23/built-in-object/</id>
     <published>2021-01-23T14:57:33.000Z</published>
-    <updated>2021-01-23T17:44:07.101Z</updated>
+    <updated>2021-03-07T11:39:09.757Z</updated>
     
     <summary type="html">
     
-      介绍ECMA-262定义的两个单例内置对象：Global和Math
+      基本引用类型,介绍ECMA-262定义的两个单例内置对象：Global和Math
     
     </summary>
     
@@ -215,15 +281,15 @@
   </entry>
   
   <entry>
-    <title>基本引用类型(原始包装类型)</title>
+    <title>Javascript-原始包装类型</title>
     <link href="https://Kinsiy.github.io/2021/01/18/Javascript-String/"/>
     <id>https://Kinsiy.github.io/2021/01/18/Javascript-String/</id>
     <published>2021-01-18T13:33:05.000Z</published>
-    <updated>2021-02-28T11:45:13.207Z</updated>
+    <updated>2021-03-07T11:45:50.536Z</updated>
     
     <summary type="html">
     
-      原始包装类型：Boolean、Number、String对象的使用
+      基本引用类型-原始包装类型：Boolean、Number、String对象的使用
     
     </summary>
     
@@ -237,15 +303,15 @@
   </entry>
   
   <entry>
-    <title>基本引用类型(RegExp)</title>
+    <title>Javascript-RegExp</title>
     <link href="https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/"/>
     <id>https://Kinsiy.github.io/2021/01/17/Javascript-RegExp/</id>
     <published>2021-01-17T14:14:48.000Z</published>
-    <updated>2021-02-28T11:45:31.040Z</updated>
+    <updated>2021-03-07T11:46:00.420Z</updated>
     
     <summary type="html">
     
-      RegExp 对象的使用
+      基本引用类型, RegExp 对象的使用
     
     </summary>
     
@@ -259,15 +325,15 @@
   </entry>
   
   <entry>
-    <title>基本引用类型(Date)</title>
+    <title>Javascript-Date</title>
     <link href="https://Kinsiy.github.io/2021/01/13/Javascript-Date/"/>
     <id>https://Kinsiy.github.io/2021/01/13/Javascript-Date/</id>
     <published>2021-01-12T16:48:35.000Z</published>
-    <updated>2021-02-28T11:45:51.060Z</updated>
+    <updated>2021-03-07T11:39:40.907Z</updated>
     
     <summary type="html">
     
-      Date 对象的使用
+      基本引用类型, Date 对象的使用
     
     </summary>
     
@@ -281,15 +347,15 @@
   </entry>
   
   <entry>
-    <title>变量、作用域与内存</title>
+    <title>Javascript-变量、作用域与内存</title>
     <link href="https://Kinsiy.github.io/2021/01/10/Javascript-Variables/"/>
     <id>https://Kinsiy.github.io/2021/01/10/Javascript-Variables/</id>
     <published>2021-01-10T06:15:42.000Z</published>
-    <updated>2021-02-28T11:44:40.301Z</updated>
+    <updated>2021-03-07T11:40:24.417Z</updated>
     
     <summary type="html">
     
-      本章会剖析错综复杂的变量。
+      本章会剖析Javascript中错综复杂的变量。
     
     </summary>
     
@@ -303,11 +369,11 @@
   </entry>
   
   <entry>
-    <title>JavaScript语言基础</title>
+    <title>JavaScript-语言基础</title>
     <link href="https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/"/>
     <id>https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/</id>
     <published>2020-12-20T04:01:49.000Z</published>
-    <updated>2021-02-28T11:45:59.205Z</updated>
+    <updated>2021-03-07T11:37:04.840Z</updated>
     
     <summary type="html">
     
@@ -347,11 +413,11 @@
   </entry>
   
   <entry>
-    <title>HTML快速参考</title>
+    <title>HTML-快速参考</title>
     <link href="https://Kinsiy.github.io/2020/12/01/HTML-Reference/"/>
     <id>https://Kinsiy.github.io/2020/12/01/HTML-Reference/</id>
     <published>2020-11-30T16:25:37.000Z</published>
-    <updated>2021-02-28T11:46:07.657Z</updated>
+    <updated>2021-03-07T11:38:03.334Z</updated>
     
     <summary type="html">
     
@@ -369,11 +435,11 @@
   </entry>
   
   <entry>
-    <title>JavaScript错误处理与调试</title>
+    <title>JavaScript-错误处理与调试</title>
     <link href="https://Kinsiy.github.io/2020/11/25/JavaScript-error/"/>
     <id>https://Kinsiy.github.io/2020/11/25/JavaScript-error/</id>
     <published>2020-11-24T17:26:39.000Z</published>
-    <updated>2021-02-28T11:45:45.046Z</updated>
+    <updated>2021-03-07T11:36:32.415Z</updated>
     
     <summary type="html">
     
@@ -389,24 +455,6 @@
       <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
     
       <category term="debug" scheme="https://Kinsiy.github.io/tags/debug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://Kinsiy.github.io/2020/11/23/hello-world/"/>
-    <id>https://Kinsiy.github.io/2020/11/23/hello-world/</id>
-    <published>2020-11-23T15:00:00.000Z</published>
-    <updated>2021-03-02T11:53:10.474Z</updated>
-    
-    <summary type="html">
-    
-      天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。
-    
-    </summary>
-    
-      <category term="Think" scheme="https://Kinsiy.github.io/categories/Think/"/>
-    
     
   </entry>
   
