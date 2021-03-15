@@ -693,4 +693,4 @@ switch (true) {
 
 ## 函数
 
-见《函数专章》不好意思，还没写。
+见 <a herf="https://kinsiy.github.io/2021/03/14/Javascript-Function/">Javascript-Function</a>
