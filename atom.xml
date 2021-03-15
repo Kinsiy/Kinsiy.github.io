@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-07T11:30:34.992Z</updated>
+  <updated>2021-03-15T16:17:16.706Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-Function</title>
+    <link href="https://Kinsiy.github.io/2021/03/14/Javascript-Function/"/>
+    <id>https://Kinsiy.github.io/2021/03/14/Javascript-Function/</id>
+    <published>2021-03-14T06:54:52.000Z</published>
+    <updated>2021-03-15T16:17:16.706Z</updated>
+    
+    <summary type="html">
+    
+      Javascript函数
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/tags/SKILL/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript-Proxy[代理模式]</title>
@@ -373,7 +395,7 @@
     <link href="https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/"/>
     <id>https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/</id>
     <published>2020-12-20T04:01:49.000Z</published>
-    <updated>2021-03-07T11:37:04.840Z</updated>
+    <updated>2021-03-15T16:16:56.643Z</updated>
     
     <summary type="html">
     
@@ -431,30 +453,6 @@
       <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
     
       <category term="HTML" scheme="https://Kinsiy.github.io/tags/HTML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript-错误处理与调试</title>
-    <link href="https://Kinsiy.github.io/2020/11/25/JavaScript-error/"/>
-    <id>https://Kinsiy.github.io/2020/11/25/JavaScript-error/</id>
-    <published>2020-11-24T17:26:39.000Z</published>
-    <updated>2021-03-07T11:36:32.415Z</updated>
-    
-    <summary type="html">
-    
-      Javascript错误对象汇总、console、debugger、try-catch
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-      <category term="debug" scheme="https://Kinsiy.github.io/tags/debug/"/>
     
   </entry>
   
