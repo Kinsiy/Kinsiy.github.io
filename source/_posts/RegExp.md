@@ -138,7 +138,7 @@ photos:
 ### 没有回溯的正则
 
 举一个网上常见的例子，正则表达式/ab{1,3}c/g 去匹配文本'abbc'，我们接下来会通过 RegexBuddy 分析其中的匹配过程，后续的一个章节有关于 RegexBuddy 的使用介绍。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_1.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp1.png)
 如上图所示，让我们一步一步分解匹配过程：
 
 1. 正则引擎先匹配 a。
@@ -150,7 +150,7 @@ photos:
 ### 有正则回溯的正则
 
 让我们把上面的正则修改一下，/ab{1,3}c/g 改成/ab{1,3}bc/g，接下再通过 RegexBuddy 查看分析结果。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_2.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp2.png)
 我们再一步一步分解匹配过程：
 
 1. 正则引擎先匹配 a。
@@ -192,7 +192,7 @@ console.log(string.match(regex));
 
 贪婪是导致回溯的重要原因，那我们尽量以懒惰匹配的方式去匹配文本，是否就能避免回溯了呢？答案是否定的。
 让我们还是看回最初的例子，/ab{1,3}c/g 去匹配 abbc。接下来，我们再把正则修改一下，改成/ab{1,3}?c/g 去匹配 abbc，以懒惰匹配的方式去匹配文本，RegexBuddy 执行步骤如下图所示：
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_3.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp3.png)
 
 1. 正则引擎先匹配 a。
 2. 正则引擎尽可能少地(懒惰)匹配 b{1,3}中的 b。
@@ -208,7 +208,7 @@ console.log(string.match(regex));
 
 分支的匹配规则是：按照分支的顺序逐个匹配，当前面的分支满足要求了，则舍弃后面的分支。
 举个简单的分支栗子，使用正则表达式去匹配 /abcde|abc/g 文本 abcd，还是通过 RegexBuddy 查看执行步骤：
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_4.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp4.png)
 
 1. 正则引擎匹配 a。
 2. 正则引擎匹配 b。
@@ -228,28 +228,28 @@ RegexBuddy 是个十分强大的正则表达式学习、分析及调试工具。
 
 可以在 RegexBuddy 的[官方网站](https://www.regexbuddy.com/)下载及获取 RegexBuddy。
 下载完后，一步步点击安装即可。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_5.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp5.png)
 
 ## 工具界面介绍
 
 下图便是 RegexBuddy 界面的各个面板及相关功能。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_6.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp6.png)
 
 ## 创建正则
 
 为了方便使用，可以在布局设置那里将布局设置成 Side by Side Layout。
 在正则输入区输入你的正则 regex1，查看 Create 面板，就会发现面板上显示了正则的创建过程(或者说是匹配规则)，在 Test 面板区域输入你的测试文本，满足 regex1 匹配规则的部分会高亮显示，如下图所示。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_7.jpg)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp7.jpg)
 
 ## 使用 RegexBuddy 的 Debug 功能
 
 选中测试文本，点击 debug 就可以进入 RegexBuddy 的 debug 模式，个人觉得这是 RegexBuddy 最强大地方，因为它可以让你清楚地知道你输入的正则对测试文本的匹配过程，执行了多少步，哪里发生了回溯，哪里需要优化，你都能一目了然。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_8.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp8.png)
 
 ## 使用 RegexBuddy 的 Library 功能
 
 RegexBuddy 的正则库内置了很多常用正则，日常编码过程中需要的很多正则表达式都能在该正则库中找到。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_9.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp9.png)
 
 ## 更多工具推荐
 
@@ -265,9 +265,9 @@ RegexBuddy 的正则库内置了很多常用正则，日常编码过程中需要
 
 举个简单的例子对比：
 我们使用正则表达式/a*b/去匹配字符串 aaaaa，看下图 RegexBuddy 的执行过程：
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_10.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp10.png)
 我们将以上正则修改成/(a*)\*b/去匹配字符串 aaaaa，再看看 RegexBuddy 的执行结果过程：
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_11.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp11.png)
 以上两个正则的基本执行步骤可以简单认为是：
 
 1. 贪婪匹配
@@ -330,8 +330,8 @@ NFA 正则引擎中的括号主要有两个作用：
 ```
 
 有人可能认为以上没啥区别，实践出真知，让我们用以上两个正则表达式去匹配一下 that。
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_12.png)
-![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_13.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp12.png)
+![](https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp13.png)
 我们会发现第一个正则的执行步骤比第一个正则多两步，那是因为第一个正则的回溯路径比第二个正则的回溯路径更长了，最终导致执行步骤变长。
 
 ## 锚点优化
