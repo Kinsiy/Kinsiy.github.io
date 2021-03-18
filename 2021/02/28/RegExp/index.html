@@ -633,14 +633,14 @@
 <p>在最坏的情况下，回溯法会导致一次复杂度为指数时间的计算。</p>
 </blockquote>
 <h2 id="什么是正则回溯"><a href="#什么是正则回溯" class="headerlink" title="什么是正则回溯"></a>什么是正则回溯</h2><p>正则引擎主要可以分为两大类：一种是 DFA(Deterministic finite automaton 确定型有穷自动机)，另一种是 NFA（NFA Non-deterministic finite automaton 　非确定型有穷自动机）。NFA 速度较 DFA 更慢，并且实现复杂，但是它又有着比 DFA 强大的多的功能，比如支持反向引用等。像 javaScript、java、php、python、c#等语言的正则引擎都是 NFA 型，NFA 正则引擎的实现过程中使用了回溯。</p>
-<h3 id="没有回溯的正则"><a href="#没有回溯的正则" class="headerlink" title="没有回溯的正则"></a>没有回溯的正则</h3><p>举一个网上常见的例子，正则表达式/ab{1,3}c/g 去匹配文本’abbc’，我们接下来会通过 RegexBuddy 分析其中的匹配过程，后续的一个章节有关于 RegexBuddy 的使用介绍。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_1.png" alt><br>如上图所示，让我们一步一步分解匹配过程：</p>
+<h3 id="没有回溯的正则"><a href="#没有回溯的正则" class="headerlink" title="没有回溯的正则"></a>没有回溯的正则</h3><p>举一个网上常见的例子，正则表达式/ab{1,3}c/g 去匹配文本’abbc’，我们接下来会通过 RegexBuddy 分析其中的匹配过程，后续的一个章节有关于 RegexBuddy 的使用介绍。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp1.png" alt><br>如上图所示，让我们一步一步分解匹配过程：</p>
 <ol>
 <li>正则引擎先匹配 a。</li>
 <li>正则引擎尽可能多地(贪婪)匹配 b。</li>
 <li>正则引擎匹配 c，完成匹配。</li>
 </ol>
 <p>在这之中，匹配过程都很顺利，并没发生意外(回溯)。</p>
-<h3 id="有正则回溯的正则"><a href="#有正则回溯的正则" class="headerlink" title="有正则回溯的正则"></a>有正则回溯的正则</h3><p>让我们把上面的正则修改一下，/ab{1,3}c/g 改成/ab{1,3}bc/g，接下再通过 RegexBuddy 查看分析结果。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_2.png" alt><br>我们再一步一步分解匹配过程：</p>
+<h3 id="有正则回溯的正则"><a href="#有正则回溯的正则" class="headerlink" title="有正则回溯的正则"></a>有正则回溯的正则</h3><p>让我们把上面的正则修改一下，/ab{1,3}c/g 改成/ab{1,3}bc/g，接下再通过 RegexBuddy 查看分析结果。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp2.png" alt><br>我们再一步一步分解匹配过程：</p>
 <ol>
 <li>正则引擎先匹配 a。</li>
 <li>正则引擎尽可能多地(贪婪)匹配 b{1,3}中的 b。</li>
@@ -692,7 +692,7 @@ let regex = /(\d{1,3})(\d{1,3})/;
 console.log(string.match(regex));
 // =&gt; [&quot;12345&quot;, &quot;123&quot;, &quot;45&quot;, index: 0, input: &quot;12345&quot;]
 </code></pre>
-<h3 id="惰性量词"><a href="#惰性量词" class="headerlink" title="惰性量词"></a>惰性量词</h3><p>贪婪是导致回溯的重要原因，那我们尽量以懒惰匹配的方式去匹配文本，是否就能避免回溯了呢？答案是否定的。<br>让我们还是看回最初的例子，/ab{1,3}c/g 去匹配 abbc。接下来，我们再把正则修改一下，改成/ab{1,3}?c/g 去匹配 abbc，以懒惰匹配的方式去匹配文本，RegexBuddy 执行步骤如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_3.png" alt></p>
+<h3 id="惰性量词"><a href="#惰性量词" class="headerlink" title="惰性量词"></a>惰性量词</h3><p>贪婪是导致回溯的重要原因，那我们尽量以懒惰匹配的方式去匹配文本，是否就能避免回溯了呢？答案是否定的。<br>让我们还是看回最初的例子，/ab{1,3}c/g 去匹配 abbc。接下来，我们再把正则修改一下，改成/ab{1,3}?c/g 去匹配 abbc，以懒惰匹配的方式去匹配文本，RegexBuddy 执行步骤如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp3.png" alt></p>
 <ol>
 <li>正则引擎先匹配 a。</li>
 <li>正则引擎尽可能少地(懒惰)匹配 b{1,3}中的 b。</li>
@@ -703,7 +703,7 @@ console.log(string.match(regex));
 <li>正则引擎再去匹配 c，匹配成功，棒棒哒！</li>
 </ol>
 <p>本来是好端端不会发生回溯的正则，因为使用了惰性量词进行懒惰匹配后，反而产生了回溯了。所以说，惰性量词也不能瞎用，关键还是要看场景。</p>
-<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>分支的匹配规则是：按照分支的顺序逐个匹配，当前面的分支满足要求了，则舍弃后面的分支。<br>举个简单的分支栗子，使用正则表达式去匹配 /abcde|abc/g 文本 abcd，还是通过 RegexBuddy 查看执行步骤：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_4.png" alt></p>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>分支的匹配规则是：按照分支的顺序逐个匹配，当前面的分支满足要求了，则舍弃后面的分支。<br>举个简单的分支栗子，使用正则表达式去匹配 /abcde|abc/g 文本 abcd，还是通过 RegexBuddy 查看执行步骤：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp4.png" alt></p>
 <ol>
 <li>正则引擎匹配 a。</li>
 <li>正则引擎匹配 b。</li>
@@ -715,18 +715,18 @@ console.log(string.match(regex));
 <li>第二个分支正则引擎匹配 c，匹配成功！<br>由此，可以看出，分组匹配的过程，也是个试错的过程，中间是可能产生回溯的。</li>
 </ol>
 <h1 id="正则的分析与调试"><a href="#正则的分析与调试" class="headerlink" title="正则的分析与调试"></a>正则的分析与调试</h1><p>RegexBuddy 是个十分强大的正则表达式学习、分析及调试工具。RegexBuddy 支持 C++、Java、JavaScript、Python 等十几种主流编程语言。通过 RegexBuddy，能看到正则一步步创建的过程。结合测试文本，你能看到正则一步步执行匹配的过程，这对于理解正则回溯和对正则进行进一步优化，都有极大的帮助。</p>
-<h2 id="安装分析调试工具"><a href="#安装分析调试工具" class="headerlink" title="安装分析调试工具"></a>安装分析调试工具</h2><p>可以在 RegexBuddy 的<a href="https://www.regexbuddy.com/" target="_blank" rel="noopener">官方网站</a>下载及获取 RegexBuddy。<br>下载完后，一步步点击安装即可。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_5.png" alt></p>
-<h2 id="工具界面介绍"><a href="#工具界面介绍" class="headerlink" title="工具界面介绍"></a>工具界面介绍</h2><p>下图便是 RegexBuddy 界面的各个面板及相关功能。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_6.png" alt></p>
-<h2 id="创建正则"><a href="#创建正则" class="headerlink" title="创建正则"></a>创建正则</h2><p>为了方便使用，可以在布局设置那里将布局设置成 Side by Side Layout。<br>在正则输入区输入你的正则 regex1，查看 Create 面板，就会发现面板上显示了正则的创建过程(或者说是匹配规则)，在 Test 面板区域输入你的测试文本，满足 regex1 匹配规则的部分会高亮显示，如下图所示。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_7.jpg" alt></p>
-<h2 id="使用-RegexBuddy-的-Debug-功能"><a href="#使用-RegexBuddy-的-Debug-功能" class="headerlink" title="使用 RegexBuddy 的 Debug 功能"></a>使用 RegexBuddy 的 Debug 功能</h2><p>选中测试文本，点击 debug 就可以进入 RegexBuddy 的 debug 模式，个人觉得这是 RegexBuddy 最强大地方，因为它可以让你清楚地知道你输入的正则对测试文本的匹配过程，执行了多少步，哪里发生了回溯，哪里需要优化，你都能一目了然。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_8.png" alt></p>
-<h2 id="使用-RegexBuddy-的-Library-功能"><a href="#使用-RegexBuddy-的-Library-功能" class="headerlink" title="使用 RegexBuddy 的 Library 功能"></a>使用 RegexBuddy 的 Library 功能</h2><p>RegexBuddy 的正则库内置了很多常用正则，日常编码过程中需要的很多正则表达式都能在该正则库中找到。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_9.png" alt></p>
+<h2 id="安装分析调试工具"><a href="#安装分析调试工具" class="headerlink" title="安装分析调试工具"></a>安装分析调试工具</h2><p>可以在 RegexBuddy 的<a href="https://www.regexbuddy.com/" target="_blank" rel="noopener">官方网站</a>下载及获取 RegexBuddy。<br>下载完后，一步步点击安装即可。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp5.png" alt></p>
+<h2 id="工具界面介绍"><a href="#工具界面介绍" class="headerlink" title="工具界面介绍"></a>工具界面介绍</h2><p>下图便是 RegexBuddy 界面的各个面板及相关功能。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp6.png" alt></p>
+<h2 id="创建正则"><a href="#创建正则" class="headerlink" title="创建正则"></a>创建正则</h2><p>为了方便使用，可以在布局设置那里将布局设置成 Side by Side Layout。<br>在正则输入区输入你的正则 regex1，查看 Create 面板，就会发现面板上显示了正则的创建过程(或者说是匹配规则)，在 Test 面板区域输入你的测试文本，满足 regex1 匹配规则的部分会高亮显示，如下图所示。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp7.jpg" alt></p>
+<h2 id="使用-RegexBuddy-的-Debug-功能"><a href="#使用-RegexBuddy-的-Debug-功能" class="headerlink" title="使用 RegexBuddy 的 Debug 功能"></a>使用 RegexBuddy 的 Debug 功能</h2><p>选中测试文本，点击 debug 就可以进入 RegexBuddy 的 debug 模式，个人觉得这是 RegexBuddy 最强大地方，因为它可以让你清楚地知道你输入的正则对测试文本的匹配过程，执行了多少步，哪里发生了回溯，哪里需要优化，你都能一目了然。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp8.png" alt></p>
+<h2 id="使用-RegexBuddy-的-Library-功能"><a href="#使用-RegexBuddy-的-Library-功能" class="headerlink" title="使用 RegexBuddy 的 Library 功能"></a>使用 RegexBuddy 的 Library 功能</h2><p>RegexBuddy 的正则库内置了很多常用正则，日常编码过程中需要的很多正则表达式都能在该正则库中找到。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp9.png" alt></p>
 <h2 id="更多工具推荐"><a href="#更多工具推荐" class="headerlink" title="更多工具推荐"></a>更多工具推荐</h2><ul>
 <li>正则可视化-regexper</li>
 <li>正则可视化-regulex</li>
 <li>正则在线调试</li>
 </ul>
 <h1 id="正则性能优化"><a href="#正则性能优化" class="headerlink" title="正则性能优化"></a>正则性能优化</h1><p>正则是个很好用的利器，如果使用得当，如有神助，能省掉大量代码。当如果使用不当，则是处处埋坑。所以，本章节的重点就是总结如何写一个高性能的正则表达式。</p>
-<h2 id="避免量词嵌套"><a href="#避免量词嵌套" class="headerlink" title="避免量词嵌套"></a>避免量词嵌套</h2><p>举个简单的例子对比：<br>我们使用正则表达式/a<em>b/去匹配字符串 aaaaa，看下图 RegexBuddy 的执行过程：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_10.png" alt><br>我们将以上正则修改成/(a</em>)*b/去匹配字符串 aaaaa，再看看 RegexBuddy 的执行结果过程：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_11.png" alt><br>以上两个正则的基本执行步骤可以简单认为是：</p>
+<h2 id="避免量词嵌套"><a href="#避免量词嵌套" class="headerlink" title="避免量词嵌套"></a>避免量词嵌套</h2><p>举个简单的例子对比：<br>我们使用正则表达式/a<em>b/去匹配字符串 aaaaa，看下图 RegexBuddy 的执行过程：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp10.png" alt><br>我们将以上正则修改成/(a</em>)*b/去匹配字符串 aaaaa，再看看 RegexBuddy 的执行结果过程：<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp11.png" alt><br>以上两个正则的基本执行步骤可以简单认为是：</p>
 <ol>
 <li>贪婪匹配</li>
 <li>回溯</li>
@@ -752,7 +752,7 @@ console.log(string.match(regex));
 <pre><code>/this|that/;
 </code></pre><p>但上面其实完全可以优化成</p>
 <pre><code>/th(?:is|at)/;
-</code></pre><p>有人可能认为以上没啥区别，实践出真知，让我们用以上两个正则表达式去匹配一下 that。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_12.png" alt><br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp_13.png" alt><br>我们会发现第一个正则的执行步骤比第一个正则多两步，那是因为第一个正则的回溯路径比第二个正则的回溯路径更长了，最终导致执行步骤变长。</p>
+</code></pre><p>有人可能认为以上没啥区别，实践出真知，让我们用以上两个正则表达式去匹配一下 that。<br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp12.png" alt><br><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/KINSIY-PIC/RegExp13.png" alt><br>我们会发现第一个正则的执行步骤比第一个正则多两步，那是因为第一个正则的回溯路径比第二个正则的回溯路径更长了，最终导致执行步骤变长。</p>
 <h2 id="锚点优化"><a href="#锚点优化" class="headerlink" title="锚点优化"></a>锚点优化</h2><p>在能使用锚点的情况下尽量使用锚点。大部分正则引擎会在编译阶段做些额外分析, 判断是否存在成功匹配必须的字符或者字符串。类似^、$ 这类锚点匹配能给正则引擎更多的优化信息。<br>例如正则表达式 hello(hi)?$ 在匹配过程中只可能从字符串末尾倒数第 7 个字符开始, 所以正则引擎能够分析跳到那个位置, 略过目标字符串中许多可能的字符, 大大提升匹配速度。</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
 <li><a href="https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/?from=singlemessage" target="_blank" rel="noopener">正则表达式中的悲观回溯</a></li>
@@ -797,7 +797,7 @@ console.log(string.match(regex));
             <a href="/2021/03/02/Javascript-Inherit/" rel="prev">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-2.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png">
                     
               </div>
               <span class="label">
@@ -817,7 +817,7 @@ console.log(string.match(regex));
             <a href="/2021/02/19/Javascript-Object-2/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-2.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-3.png">
                  
               </div>
               <span class="label">
