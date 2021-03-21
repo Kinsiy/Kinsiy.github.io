@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Javascript-Proxy[代理模式] | Kinsiy</title>
+  <title itemprop="name">Javascript-Promise | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -309,8 +309,8 @@
         <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
           <header class="entry-header">
-            <h1 class="entry-title">Javascript-Proxy[代理模式]</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-3-7&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p>
+            <h1 class="entry-title">Javascript-Promise</h1>
+            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-3-21&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p>
             <!-- 开始添加字数统计-->
             
               <div style="margin-top: 10px">
@@ -319,7 +319,7 @@
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
 			<!-- 安装插件npm install hexo-wordcount --save -->
-			<span class="post-count">817字</span>
+			<span class="post-count">4.3k字</span>
 		</span>
 	</span>
 
@@ -328,7 +328,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">3分</span>
+			<span class="post-count">17分</span>
 		</span>
 	</span>
 </div>
@@ -339,163 +339,290 @@
           </header>
         
         <div class="entry-content">
-          <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>使用代理可以在代码中实现一些有用的编程模式</p>
-<h2 id="跟踪属性访问"><a href="#跟踪属性访问" class="headerlink" title="跟踪属性访问"></a>跟踪属性访问</h2><p>通过捕获 get、set 和 has 等操作，可以知道对象属性什么时候被访问、被查询。把实现相应捕获器的某个对象代理放在应用中，可以监控这个对象何时在何处被访问过。</p>
-<pre><code class="javascript">const user = {
-    name: &quot;Kinsiy&quot;,
+          <p>期约是对尚不存在的的结果的一个替身。ESMAScript 6 增加了对 Promise/A+规范的完善支持，即 Promise 类型。一经退出，Promise 就大受欢迎，成为了主导性的异步编程机制。所有的现代浏览器都支持 ES6 期约，很多其他浏览器 API(如 fetch()和电池 API)也以期约为基础。</p>
+<h1 id="期约基础"><a href="#期约基础" class="headerlink" title="期约基础"></a>期约基础</h1><p>ESMAScript 6 新增的引用类型 Promise，可以通过 new 操作符来实例化。创建新期约时需要传入执行器(executor)函数作为参数。</p>
+<h2 id="期约状态"><a href="#期约状态" class="headerlink" title="期约状态"></a>期约状态</h2><ul>
+<li>待定(pending)</li>
+<li>兑现(fulfilled，有时候也称为”解决”，resolved)</li>
+<li>拒绝(rejected)<br>待定(pending)是期约的最初始状态。在待定状态下，期约可以落定(settled)为代表成功的兑现(fulfilled)状态，或者代表失败的拒绝(rejected)状态。无论落定为那种状态都是不可逆的。只要从待定转换为兑现或拒绝，期约的状态就不再改变。而且，也不能保证期约必然会脱离待定(pending)状态。因此，组织合理的代码无论期约解决(resolve)还是拒绝(reject)，甚至是永远待定(pending)状态，都应该具有恰当的行为。</li>
+</ul>
+<h2 id="解决值、拒绝理由己期约用例"><a href="#解决值、拒绝理由己期约用例" class="headerlink" title="解决值、拒绝理由己期约用例"></a>解决值、拒绝理由己期约用例</h2><p>期约主要有两大用途。首先是抽象地表示一个异步操作。期约的状态代表期约是否完成。”待定”表示尚未开始或者正在执行中。”兑现”表示已经成功完成，而”拒绝”则表示没有成功完成。<br>每个期约只要状态切换为兑现，就会有一个私有的内部值(value)。类似的，每个期约只要状态切换为拒绝，就会有一个私有的内部理由(reason)。无论是值还是理由，都是包含原始值或对象的不可修改的引用。二者都是可选的，而且默认值为 undefined。在期约到达某个落定状态时执行的异步代码始终会收到这个值或理由。</p>
+<h2 id="通过执行函数控制期约状态"><a href="#通过执行函数控制期约状态" class="headerlink" title="通过执行函数控制期约状态"></a>通过执行函数控制期约状态</h2><p>由于期约的状态是私有的，所以只能在内部进行操作。内部操作在期约的执行器函数中完成。执行器函数主要有两项职责：初始化期约的异步行为和控制状态的最终转换。其中，控制期约状态的转换是通过调用它的两个函数参数实现的。这两个函数擦参数通常都命名为 resolve()和 reject()。调用 resolve()会把状态切换为兑现，调用 reject()会把状态切换为拒绝。另外，调用 reject()也会抛出错误(后面讨论)。</p>
+<pre><code class="javascript">let p = new Promise((resolve, reject) =&gt; {
+    setTimeout(reject, 10000); // 10 秒后调用reject
+});
+
+setTimeout(console.log, 0, p); // Promise
+setTimeout(console.log, 11000, p); // 11秒后再检查状态  Promise {&lt;rejected&gt;: undefined}
+</code></pre>
+<p><b>注意：</b>执行器函数是同步执行的</p>
+<h2 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h2><p>期约并非一开始就必须处于待定状态。然后通过执行器函数才能转换为落定状态。通过调用 Promise.resolve()静态方法，可以实例化为一个解决的期约。使用这个静态方法，实际上可以把任何值都转换为一个期约</p>
+<pre><code class="javascript">let p1 = new Promise((resolve, reject) =&gt; resolve());
+let p2 = Promise.resolve();
+
+setTimeout(console.log, 0, Promise.resolve()); // Promise {&lt;fulfilled&gt;: undefined}
+
+// 这个解决的期约的值对应着传给Promise.resolve()的第一个参数。多于的参数会忽略
+
+setTimeout(console.log, 0, Promise.resolve(1, 2, 3)); // Promise {&lt;fulfilled&gt;: 1}
+</code></pre>
+<p>对这个静态方法而言，如果传入的参数本身就是一个期约，那它的行为就类似一个空包装。因此，Promise.resolve()可以说是一个幂等方法。这个幂等性会保留传入期约的状态。</p>
+<h2 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h2><p>与 Promise.resolve()类似，Promise.reject()会实例化一个拒绝的期约并抛出一个异步错误(这个错误不能通过 try/catch 捕获，而只能通过拒绝处理程序捕获)</p>
+<pre><code class="javascript">let p1 = new Promise((resolve, reject) =&gt; reject());
+let p2 = Promise.reject();
+
+setTimeout(console.log, 0, Promise.reject()); // Promise {&lt;rejected&gt;: undefined}
+
+// 这个解决的期约的值对应着传给Promise.reject()的第一个参数。多于的参数会忽略
+
+setTimeout(console.log, 0, Promise.reject(1, 2, 3)); // Promise {&lt;rejected&gt;: 1}
+
+setTimeout(console.log, 0, Promise.reject(Promise.resolve())); // Promise {&lt;rejected&gt;: Promise}
+</code></pre>
+<p>关键在于，Promise.reject()并没有照搬 Promise.resolve()的幂等逻辑。如果给它传一个期约对象，则这个对象会成为它返回的拒绝期约的理由</p>
+<h2 id="同步-异步执行的二元性"><a href="#同步-异步执行的二元性" class="headerlink" title="同步/异步执行的二元性"></a>同步/异步执行的二元性</h2><p>Promise 的设计很大程度上会导致一种完全不同与 Javascript 的计算模式。</p>
+<pre><code class="javascript">try {
+    throw new Error(&quot;foo&quot;);
+} catch (e) {
+    console.log(e);
+}
+// Error: foo
+
+try {
+    Promise.reject(new Error(&quot;bar&quot;));
+} catch (e) {
+    console.log(e);
+}
+
+// Uncaught (in promise) Error: bar
+</code></pre>
+<p>拒绝期约的错误并没有抛到执行同步代码的线程里，而是通过浏览器异步消息队列来处理的。因此，try/catch 块并不能捕获该错误。代码一旦开始以异步模式执行，则唯一与之交互的方式就是使用异步结构——更具体地说，就是期约的方法。</p>
+<h1 id="期约的实例方法"><a href="#期约的实例方法" class="headerlink" title="期约的实例方法"></a>期约的实例方法</h1><p>期约实例的方法是连接外部同步代码与内部异步代码之间的桥梁，这些方法可以访问异步操作返回的数据，处理期约成功和返回的输出，连续对期约求值，或者添加只有期约进入终止状态时才会执行的代码。</p>
+<h2 id="实现-Thenable-接口"><a href="#实现-Thenable-接口" class="headerlink" title="实现 Thenable 接口"></a>实现 Thenable 接口</h2><p>在 ECMAScript 暴露的异步结构中，任何对象都有一个 then()方法。这个方法被认为实现了 Thenable()接口。ECMAScript 的 Promise 类型实现了 Thenable 接口</p>
+<h2 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h2><p>Promise.prototype.then()是为期约实例添加处理程序的主要方法。这个 then()方法接收最多两个参数：onResolved()处理程序和 onReject()处理程序。这两个参数都是可选的，如果提供的话，则会在期约分别进入”兑现”和拒绝”拒绝”状态时执行。传给 then()的任何非函数类型的参数都会被静默忽略。</p>
+<pre><code class="javascript">function onResolved(id) {
+    setTimeout(console.log, 0, id, &quot;resolved&quot;);
+}
+
+function onReject(id) {
+    setTimeout(console.log, 0, id, &quot;rejected&quot;);
+}
+
+let p1 = new Promise((resolve, reject) =&gt; setTimeout(resolve, 3000));
+let p2 = new Promise((resolve, reject) =&gt; setTimeout(reject, 3000));
+
+p1.then(
+    () =&gt; onResolved(&quot;p1&quot;),
+    () =&gt; onReject(&quot;p1&quot;)
+);
+// 这里使用箭头函数而不直接写onResolved(&quot;p1&quot;)的原因的，then是同步执行的，
+// 若直接使用函数名，函数会直接执行，而等到期约落定时不会执行任何函数
+
+// 不传onResolve()处理程序的规范写法
+p2.then(null, () =&gt; onReject(&quot;p2&quot;));
+
+// 3秒后
+// p1 resolved
+// p2 rejected
+</code></pre>
+<p>Promise.prototype.then()返回一个新的期约实例。这个新期约实例基于 onResovled 处理程序的返回值构建。换句话说，改处理程序的返回值会通过 Promise.resolve()包装来生成新期约。如果没有提供这个处理程序，则 Promise.resolve()就会包装上一个期约解决之后的值。</p>
+<pre><code class="javascript">let p1 = Promise.resolve(&quot;foo&quot;);
+
+let p2 = p1.then();
+setTimeout(console.log, 0, p2); // Promise {&lt;fulfilled&gt;: &quot;foo&quot;}
+setTimeout(console.log, 0, p1 === p2); // false
+
+// 如果有显式返回值，则Promise.resolve()会包装这个值
+let p3 = p1.then(() =&gt; &quot;bar&quot;);
+setTimeout(console.log, 0, p3); // Promise {&lt;fulfilled&gt;: &quot;bar&quot;}
+
+// 抛出异常会返回拒绝的期约
+let p4 = p1.then(() =&gt; {
+    throw &quot;baz&quot;;
+});
+setTimeout(console.log, 0, p4); // Promise {&lt;rejected&gt;: &quot;baz&quot;}
+
+// 而返回错误值不会触发拒绝行为
+let p5 = p1.then(() =&gt; new Error(&quot;kinsiy&quot;));
+setTimeout(console.log, 0, p5); // Promise {&lt;fulfilled&gt;: Error: kinsiy
+</code></pre>
+<p>onRejected()处理程序也与之类似：onRejected()处理程序返回的值也会被 Promise.resolve()包装。</p>
+<h2 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h2><p>Promise.prototype.catch()方法用于给期约添加拒绝处理程序。这个方法只接受一个参数：onRejected()处理程序。事实上，这个方法就是一个语法糖，调用它就相当于调用 Promise.prototype.then(null, onRejected)</p>
+<pre><code class="javascript">let p1 = Promise.reject();
+let onRejected = function () {
+    setTimeout(console.log, 0, &quot;rejected&quot;);
 };
 
-const proxy = new Proxy(user, {
-    get(target, property, receiver) {
-        console.log(`Getting ${property}`);
-        return Reflect.get(...arguments);
-    },
-
-    set(target, property, value, receiver) {
-        console.log(`Setting ${property} = ${value}`);
-        return Reflect.set(...arguments);
-    },
-});
-
-proxy.name; // Getting name
-proxy.age = 23; // Setting age = 23
+// 这两种添加拒绝处理程序的行为是一样的
+p1.then(null, onRejected); // rejected
+p1.catch(onRejected); // rejected
 </code></pre>
-<h2 id="隐藏属性"><a href="#隐藏属性" class="headerlink" title="隐藏属性"></a>隐藏属性</h2><p>代理的内部实现对外部代码是不可见的，因此要隐藏目标对象上的属性也轻而易举。</p>
-<pre><code class="javascript">const hiddenProperties = [&quot;King&quot;, &quot;Queen&quot;];
-const targetObject = {
-    name: &quot;Kinsiy&quot;,
-    King: &quot;青睐&quot;,
-    Queen: &quot;Restituo&quot;,
+<p>Promise.prototype.catch()返回一个新的期约实例，其行为与 Promise.prototype.then()的 onRejected 处理程序是一样的。</p>
+<h2 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h2><p>Promise.prototype.finally()方法用于给期约添加 onFinally()处理程序，这个处理程序在期约转换为解决或拒绝状态室都会执行。onFinally()处理程序没有办法知道期约的状态是解决还是拒绝，这个方法主要用于添加清理代码</p>
+<pre><code class="javascript">let p1 = Promise.resolve();
+let p2 = Promise.reject();
+let onFinally = function () {
+    setTimeout(console.log, 0, &quot;Finally!&quot;);
 };
 
-const proxy = new Proxy(targetObject, {
-    get(target, property, receiver) {
-        if (hiddenProperties.includes(property)) {
-            return undefined;
-        } else {
-            return Reflect.get(...arguments);
-        }
-    },
-    has(target, property) {
-        if (hiddenProperties.includes(property)) {
-            return false;
-        } else {
-            return Reflect.has(...arguments);
-        }
-    },
-});
-
-// get
-console.log(proxy.name); // Kinsiy
-console.log(proxy.King); // undefined
-console.log(proxy.Queen); // undefined
-
-// has
-console.log(&quot;name&quot; in proxy); // true
-console.log(&quot;King&quot; in proxy); // false
-console.log(&quot;Queen&quot; in proxy); // false
+// 这两种添加拒绝处理程序的行为是一样的
+p1.finally(onFinally); // Finally!
+p2.finally(onFinally); // Finally!
 </code></pre>
-<h2 id="属性验证"><a href="#属性验证" class="headerlink" title="属性验证"></a>属性验证</h2><p>因为所有属性操作都会触发 set()捕获器，所以可以根据所赋的值决定是允许还是拒绝</p>
-<pre><code class="javascript">const target = {
-    onlyNumbersGoHere: 0,
-};
+<p>Promise.prototype.finally()方法返回一个新的期约实例。这个新期约实例不同于 then()或 catch()方式返回的实例。因为 onFinally 被设计为一个状态无关的方法，所以多数情况下它都会原样后传父期约。无论父期约是解决还是拒绝，都会原样后传。</p>
+<h2 id="非重入期约方法"><a href="#非重入期约方法" class="headerlink" title="非重入期约方法"></a>非重入期约方法</h2><p>当期约进入落定状态时，与改状态相关的处理程序仅仅会被排期，而非立即执行。跟在添加这个处理程序的代码之后的同步代码一定会在处理程序之前先执行。即使期约一开始就是与附加程序关联的状态，执行顺序也是这样的。这个特性由 Javascript 运行时保证，被称为”非重入”(non-reentrancy)特性.</p>
+<pre><code class="javascript">let synchronousResolve;
 
-const proxy = new Proxy(target, {
-    set(target, property, value, receiver) {
-        if (typeof value !== &quot;number&quot;) {
-            return false;
-        } else {
-            return Reflect.set(...arguments);
-        }
-    },
+let p = new Promise((resolve) =&gt; {
+    synchronousResolve = function () {
+        console.log(&quot;1: invoking resolve&quot;);
+        resolve();
+        conosole.log(&quot;2: resolve returns&quot;);
+    };
 });
+console.log(&quot;Kinsiy test&quot;);
+p.then(() =&gt; console.log(&quot;4: then() handler executes&quot;));
 
-proxy.onlyNumbersGoHere = 1;
-console.log(proxy.onlyNumbersGoHere); // 1
-proxy.onlyNumbersGoHere = &quot;2&quot;;
-console.log(proxy.onlyNumbersGoHere); // 1
+synchronousResolve();
+console.log(&quot;3: synchronousResolve() returns&quot;);
+
+// 1: invoking resolve
+// 2: resolve returns
+// 3: synchronousResolve() returns
+// 4: then() handler executes
 </code></pre>
-<h2 id="函数与构造函数参数验证"><a href="#函数与构造函数参数验证" class="headerlink" title="函数与构造函数参数验证"></a>函数与构造函数参数验证</h2><p>跟保护和验证对象属性类似，也可以对函数和构造函数参数进行审查。比如，可以让函数只接收某种类型的值</p>
-<pre><code class="javascript">function median(...nums) {
-    return nums.sort()[Math.floor(nums.length / 2)];
-}
+<p>非重入适用于 onResolved/onRejected 处理程序、catch()处理程序和 finally()处理程序</p>
+<h2 id="邻近处理程序的执行顺序"><a href="#邻近处理程序的执行顺序" class="headerlink" title="邻近处理程序的执行顺序"></a>邻近处理程序的执行顺序</h2><p>如果给期约添加了多个处理程序，当期约状态变化时，相关处理程序会按照添加它们的顺序依次执行。无论是 then()、catch()还是 finally()添加的处理程序都是如此。</p>
+<pre><code class="javascript">let p1 = Promise.resolve();
+let p2 = Promise.resolve();
 
-const proxy = new Proxy(median, {
-    apply(target, thisArg, argumentsList) {
-        for (const arg of argumentsList) {
-            if (typeof arg !== &quot;number&quot;) {
-                throw new Error(&quot;参数中存在非数字！&quot;);
-            }
-        }
-        return Reflect.apply(...arguments);
-    },
-});
+p1.then(() =&gt; setTimeout(console.log, 0, 1));
+p1.then(() =&gt; setTimeout(console.log, 0, 2));
+// 1
+// 2
 
-console.log(proxy(1, 2, 4, 5)); // 4
-console.log(proxy(1, 2, 4, &quot;5&quot;)); // Error: 参数中存在非数字！
+p2.then(() =&gt; setTimeout(console.log, 0, 3));
+p2.then(() =&gt; setTimeout(console.log, 0, 4));
+// 3
+// 4
 
-// 类似地，可以要求实例化时必须给构造函数传参
+p2.catch(() =&gt; setTimeout(console.log, 0, 5));
+p2.catch(() =&gt; setTimeout(console.log, 0, 6));
+// 5
+// 6
 
-class Uesr {
-    constructor(id) {
-        this._id = id;
-    }
-}
-
-const proxy = new Proxy(User, {
-    construct(target, argumentsList, newTarget) {
-        if (argumentsList[0] === undefined) {
-            throw new Error(&quot;用户类必须提供id&quot;);
-        } else {
-            return Reflect.construc(...arguments);
-        }
-    },
-});
-
-new proxy(1);
-new proxy(); // Error: 用户类必须提供id
+p1.finally(() =&gt; setTimeout(console.log, 0, 7));
+p1.finally(() =&gt; setTimeout(console.log, 0, 8));
+// 7
+// 8
 </code></pre>
-<h2 id="数据绑定与可观察对象"><a href="#数据绑定与可观察对象" class="headerlink" title="数据绑定与可观察对象"></a>数据绑定与可观察对象</h2><p>通过代理可以把运行时原本不相关的部分联系到一起。这样就可以实现各种模式，从而让不同代码互操作。</p>
-<pre><code class="javascript">const userList = [];
+<h2 id="传递解决值与拒绝理由"><a href="#传递解决值与拒绝理由" class="headerlink" title="传递解决值与拒绝理由"></a>传递解决值与拒绝理由</h2><p>到了落定状态后，期约会提供其解决值(如果兑现)或其他拒绝理由(如果拒绝)给相关状态的处理程序。</p>
+<pre><code class="javascript">let p1 = new Promise((resolve) =&gt; resolve(&quot;foo&quot;));
+p1.then((value) =&gt; console.log(value)); // foo
 
-class User {
-    constructor(name) {
-        this.name = name;
-    }
-}
-// 还可以把集合绑定到一个事件分派程序，每次插入新实例时都会发送消息
-function log(newValue) {
-    console.log(newValue);
-}
+let p2 = new Promise((resolve, reject) =&gt; reject(&quot;bar&quot;));
+p2.catch((reason) =&gt; console.log(reason)); // bar
+</code></pre>
+<h2 id="拒绝期约与拒绝错误处理"><a href="#拒绝期约与拒绝错误处理" class="headerlink" title="拒绝期约与拒绝错误处理"></a>拒绝期约与拒绝错误处理</h2><p>拒绝期约类似于 throw()表达式，因为它们都代表一种程序状态，即需要中断或特殊处理。在期约的执行函数或处理程序中抛出错误会导致错误，对应的错误对象会成为拒绝的理由。<br>正常情况下，在通过 throw()关键字抛出错误时，Javascript 运行时的错误处理程序会停止执行抛出错误之后的任何指令。但是，在期约中抛出错误时，因为错误实际上是从消息队列中异步抛出的，所有并不会阻止运行时继续执行同步指令。</p>
+<pre><code class="javascript">// 正常情况下
+throw Error(&quot;foo&quot;);
+consle.log(&quot;bar&quot;); // 不会执行
 
-const proxy_1 = new Proxy(userList, {
-    set(target, property, receiver) {
-        const result = Reflect.set(...arguments);
-        if (result &amp;&amp; property !== &quot;length&quot;) {
-            // 这里控制一下新增元素后，数组长度变化的消息无需发送
-            log(Reflect.get(target, property, receiver));
-        }
-        return result;
-    },
+// 期约中
+new Promise((resolve, reject) =&gt; {
+    throw Error(&quot;foo&quot;);
+});
+console.log(&quot;bar&quot;); // bar
+// Uncaught (in promise) Error: foo
+</code></pre>
+<p>跟之前的 Promise.reject()示例所示，异步错误只能通过异步的 onRejected 处理程序捕获。<br>then()和 catch()的 onRejected 处理程序在语义上相当于 try/catch。出发点都是捕获错误后将其隔离，同时不影响正常逻辑执行。为此，onRejected 处理程序的任务应该是在捕获异步错误之后返回一个解决的期约。</p>
+<pre><code class="javascript">new Promise((resolve, reject) =&gt; {
+    consoel.log(&quot;开始异步执行&quot;);
+    reject(Error(&quot;kinsiy&quot;));
+})
+    .catch((e) =&gt; {
+        console.log(&quot;错误捕获: &quot;, e);
+    })
+    .then(() =&gt; {
+        console.log(&quot;继续异步执行&quot;);
+    });
+
+// 开始异步执行
+// 错误捕获:  Error: kinsiy
+// 继续异步执行
+</code></pre>
+<h1 id="期约连锁与期约合成"><a href="#期约连锁与期约合成" class="headerlink" title="期约连锁与期约合成"></a>期约连锁与期约合成</h1><p>多个期约组合在一起可以构成强大的代码逻辑。这种组合可以通过两种方式实现：期约连锁与期约合成。前者是一个期约接一个期约地拼接，后者则是多个期约组合为一个期约。</p>
+<h2 id="期约连锁"><a href="#期约连锁" class="headerlink" title="期约连锁"></a>期约连锁</h2><p>把期约逐个地串联起来是一种非常有用的编程模式。之所以可以这样做，是因为每个期约实例的方法(then(),catch(),finally())都会返回一个新的期约对象，而这个新期约又有自己的实例方法。这样连缀方法就可以构成所谓的”期约连锁”</p>
+<pre><code class="javascript">let p = new Promise((resolve, reject) =&gt; {
+    console.log(&quot;初始化拒绝期约&quot;);
+    reject();
 });
 
-// 可以将被代理的类绑定到一个全局实例集合，让所有创建的实例都被添加到这个集合中
-const proxy = new Proxy(User, {
-    construct(target, argumentsList, newTarget) {
-        const newUser = Reflect.construct(...arguments);
-        proxy_1.push(newUser); // 发送消息
-        return newUser;
-    },
-});
+p.catch(() =&gt; {
+    console.log(&quot;拒绝处理程序&quot;);
+})
+    .then(() =&gt; {
+        console.log(&quot;解决处理程序&quot;);
+    })
+    .finally(() =&gt; {
+        console.log(&quot;最终处理程序&quot;);
+    });
 
-new proxy(&quot;Kinsiy&quot;);
-new proxy(&quot;King&quot;);
-new proxy(&quot;Queen&quot;);
+// 初始化拒绝期约
+// 拒绝处理程序
+// 解决处理程序
+// 最终处理程序
+</code></pre>
+<h2 id="期约图"><a href="#期约图" class="headerlink" title="期约图"></a>期约图</h2><p>因为一个期约可以有任意多个处理程序，所以期约连锁可以构建有向非循环图的结构。这样每个期约都是图中的一个节点，而使用实例方法添加的处理处理程序则是有向顶点。因为图中的每个节点都会等待前一个节点落定，所以图的方向就是期约的解决或拒绝顺序</p>
+<h2 id="Promise-all-和-Promise-race"><a href="#Promise-all-和-Promise-race" class="headerlink" title="Promise.all()和 Promise.race()"></a>Promise.all()和 Promise.race()</h2><p>Promise 类提供两个将多个期约实例组合成一个期约的静态方法：Promise.all()和 Promise.race()。而合成后期约的行为取决于内部期约的行为。</p>
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h3><p>Promise.all()静态方法创建的期约会在一组期约全部解决之后再解决。这个静态方法接收一个可迭代对象，返回一个新期约</p>
+<pre><code class="javascript">// 合成的期约只会在每个包含的期约都解决之后才解决
+let p = Promise.all([Promise.resolve(), new Promise((resolve) =&gt; setTimeout(resolve, 1000))]);
 
-// User {name: &quot;Kinsiy&quot;}
-// User {name: &quot;King&quot;}
-// User {name: &quot;Queen&quot;}
-console.log(userList); // [User, User, User]
+p.then(() =&gt; setTimeout(console.log, 0, p)); // Promise {&lt;fulfilled&gt;: Array(2)}
+</code></pre>
+<p>如果所有期约都成功解决，则合成期约的解决值就是包含期约解决值得数组。<br>如果有期约拒绝，则第一个拒绝的期约会将自己的理由作为合成期约的拒绝理由。之后在拒绝的期约不会影响最终期约的拒绝理由。不过，这并不影响所有包含期约正常的拒绝操作。合成的期约会静默处理所有包含期约的拒绝操作。</p>
+<pre><code class="javascript">// 虽然只有第一个期约的拒绝理由会进入拒绝处理程序
+// 第二个期约的拒绝也会被静默处理，不会有错误跑掉
+let p = Promise.all([Promise.reject(8), new Promise((resolve, reject) =&gt; setTimeout(reject, 1000))]);
+
+p.catch((reason) =&gt; setTimeout(console.log, 0, reason));
+
+// 没有未处理的错误
+</code></pre>
+<h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h3><p>Promise.race()静态方法返回一个包装期约，是一组集合中最先解决或拒绝的期约的镜像。这个方法接收一个可迭代对象，返回一个新期约。Promise.race()不会对解决或拒绝的期约区别对待。无论是解决还是拒绝，只要是第一个落定的，Promise.race()就会包装其解决值或拒绝理由并返回新期约。</p>
+<pre><code class="javascript">// 解决先发生，超时的拒绝被忽略
+let p = Promise.race([Promise.resolve(6), new Promise((resolve, reject) =&gt; setTimeout(reject, 1000))]);
+
+p.then(() =&gt; setTimeout(console.log, 0, p)); // Promise {&lt;fulfilled&gt;: 6}
+</code></pre>
+<p>如果有一个期约拒绝，只要它是第一个落定的，就会成为拒绝合成期约的理由。之后在拒绝的期约不会影响最终期约的拒绝理由。不过，这并不影响所有包含期约正常的拒绝操作。与 Promise.all()类似，合成的期约会静默处理所有包含期约的拒绝操作。</p>
+<pre><code class="javascript">// 虽然只有第一个期约的拒绝理由会进入拒绝处理程序
+// 第二个期约的拒绝也会被静默处理，不会有错误跑掉
+let p = Promise.race([Promise.reject(4), new Promise((resolve, reject) =&gt; setTimeout(reject, 1000))]);
+
+p.catch((reason) =&gt; setTimeout(console.log, 0, reason)); // 4
+
+// 没有未处理的错误
+</code></pre>
+<h2 id="串行期约合成"><a href="#串行期约合成" class="headerlink" title="串行期约合成"></a>串行期约合成</h2><p>期约的另一个主要特性：异步产生值并将其传给处理程序。基于后续期约使用之前期约的返回值来串联期约是期约的基本功能。这很像函数合成，即将多个函数合成为一个函数</p>
+<pre><code class="javascript">function addTwo(x) {
+    return x + 2;
+}
+function addThree(x) {
+    return x + 3;
+}
+function addFive(x) {
+    return x + 5;
+}
+
+function compose(...fns) {
+    return (x) =&gt; fns.reduce((promise, fn) =&gt; promise.then(fn), Promise.resolve(x));
+}
+
+let addTen = compose(addTwo, addThree, addFive);
+
+addTen(9).then(console.log); // 19
 </code></pre>
 
         </div>
@@ -525,40 +652,21 @@ console.log(userList); // [User, User, User]
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/03/14/Javascript-Function/" rel="prev">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png">
-                    
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                Javascript-Function</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2021/03/07/Javascript-Proxy-2/" rel="next">
+            <a href="/2021/03/14/Javascript-Function/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-1.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
                  
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Javascript-Proxy[捕获器与反射]</h3>
+                Javascript-Function</h3>
                 <hr>
               </div>
             </a>

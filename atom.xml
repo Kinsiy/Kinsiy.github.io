@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-15T16:17:16.706Z</updated>
+  <updated>2021-03-21T17:11:13.852Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-Promise</title>
+    <link href="https://Kinsiy.github.io/2021/03/21/Javascript-Promise/"/>
+    <id>https://Kinsiy.github.io/2021/03/21/Javascript-Promise/</id>
+    <published>2021-03-21T12:25:55.000Z</published>
+    <updated>2021-03-21T17:11:13.852Z</updated>
+    
+    <summary type="html">
+    
+      期约与异步函数
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript-Function</title>
@@ -431,28 +453,6 @@
       <category term="Reprint" scheme="https://Kinsiy.github.io/tags/Reprint/"/>
     
       <category term="MySQL" scheme="https://Kinsiy.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HTML-快速参考</title>
-    <link href="https://Kinsiy.github.io/2020/12/01/HTML-Reference/"/>
-    <id>https://Kinsiy.github.io/2020/12/01/HTML-Reference/</id>
-    <published>2020-11-30T16:25:37.000Z</published>
-    <updated>2021-03-07T11:38:03.334Z</updated>
-    
-    <summary type="html">
-    
-      HTML 基本文档
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="HTML" scheme="https://Kinsiy.github.io/tags/HTML/"/>
     
   </entry>
   
