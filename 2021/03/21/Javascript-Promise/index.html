@@ -48,7 +48,7 @@
   /*End of Initial Variables*/
   </script>
   <script type="text/javascript">
-  var bg = "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-2.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-3.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-4.png".split(",");
+  var bg = "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png,https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-5.png".split(",");
   var bgindex = Math.floor(Math.random()*bg.length);
   if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
     alert('朋友，IE浏览器未适配哦~');
@@ -301,19 +301,31 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
 <div class="pattern-center-blank"></div>
 
-<div id="content" class="site-content">
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
-        
-          <header class="entry-header">
-            <h1 class="entry-title">Javascript-Promise</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-3-21&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p>
-            <!-- 开始添加字数统计-->
-            
-              <div style="margin-top: 10px">
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/Promise.png);" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/Promise.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Javascript-Promise</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://kinsiy.github.io">
+            <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://kinsiy.github.io">Kinsiy</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-3-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读
+      </p>
+      <!-- 开始添加字数统计-->
+      
+        <div style="margin-top: 10px">
 	<span class="post-time">
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
@@ -333,10 +345,17 @@
 	</span>
 </div>
 
-            
-            <!-- 添加完成 -->
-            <hr>
-          </header>
+      
+      <!-- 添加完成 -->
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
           <p>期约是对尚不存在的的结果的一个替身。ESMAScript 6 增加了对 Promise/A+规范的完善支持，即 Promise 类型。一经退出，Promise 就大受欢迎，成为了主导性的异步编程机制。所有的现代浏览器都支持 ES6 期约，很多其他浏览器 API(如 fetch()和电池 API)也以期约为基础。</p>
@@ -659,7 +678,7 @@ addTen(9).then(console.log); // 19
             <a href="/2021/03/14/Javascript-Function/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/Promise.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
                  
               </div>
               <span class="label">
