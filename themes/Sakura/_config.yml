@@ -48,9 +48,7 @@ homeArticleShown: 10
 # 背景图片 更好的修改
 bg:
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-2.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-3.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-4.png
+    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-5.png
 # 背景图片样式 空 原图效果 filter-dim 阴影 filter-grid 横条 filter-dot 点点
 bgclass: filter-dot
 
@@ -64,16 +62,22 @@ art:
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png
+    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-10.png
 # startdash url, title, desc img
 startdash:
     - {
-          url: /2020/11/23/hello-world/,
-          title: Hello Word!,
-          desc: 天命之谓信，率性之谓道，修道之谓教。道也者，不可须臾离也，可离非道也。,
+          url: /2021/02/19/Javascript-Object-2/,
+          title: Javascript-Object.2,
+          desc: 集合引用类型-创建对象Object,
           img: /img/startdash/top-1.png,
       }
-    - { url: /, title: 广告位, desc: 广告位招租, img: /img/startdash/top-2.png }
-    - { url: /, title: 广告位, desc: 广告位招租, img: /img/startdash/top-3.png }
+    - {
+          url: /2020/12/16/MySQL-index/,
+          title: MYSQL索引知识点总结,
+          desc: 从索引的数据结构、分类、关键概念及如何使用索引提高查找效率等方面对索引知识进行总结,
+          img: /img/startdash/top-2.png,
+      }
+    - { url: /2021/02/28/RegExp/, title: 正则表达式, desc: 一文掌握开发利器：正则表达式, img: /img/startdash/top-3.png }
 
 # your site build time or founded date
 siteBuildingTime: 23/11/2020

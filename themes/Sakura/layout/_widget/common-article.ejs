@@ -87,7 +87,7 @@
           <% } %>
             <a href="<%- url_for(post.prev.path) %>" rel="prev">
               <div class="background">
-                <% if(post.photos && post.photos.length){ %>
+                <% if(post.prev.photos && post.prev.photos.length){ %>
                   <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%- post.prev.photos[0]%>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
                 <% }else{ %>
                   <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= theme.art[Math.floor(Math.random() * theme.art.length)] || 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/image-404.png' %>">
@@ -111,8 +111,8 @@
           <% } %>
             <a href="<%- url_for(post.next.path) %>" rel="next">
               <div class="background">
-                <% if(post.photos && post.photos.length){ %>
-                  <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%- post.prev.photos[0]%>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+                <% if(post.next.photos && post.next.photos.length){ %>
+                  <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%- post.next.photos[0]%>" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
                 <% }else{ %>
                   <img class="lazyload" onerror="imgError(this,3)" src="<%- theme.lazyloadImg%>" data-src="<%= theme.art[Math.floor(Math.random() * theme.art.length)] || 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/other/image-404.png' %>">
                 <% } %> 
