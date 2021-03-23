@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-22T03:37:17.591Z</updated>
+  <updated>2021-03-23T03:09:40.245Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-async/await</title>
+    <link href="https://Kinsiy.github.io/2021/03/22/Javascript-async-await/"/>
+    <id>https://Kinsiy.github.io/2021/03/22/Javascript-async-await/</id>
+    <published>2021-03-22T14:41:38.000Z</published>
+    <updated>2021-03-23T03:09:40.245Z</updated>
+    
+    <summary type="html">
+    
+      异步函数
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript-Promise</title>
@@ -431,28 +453,6 @@
       <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
     
       <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MySQL索引知识点总结</title>
-    <link href="https://Kinsiy.github.io/2020/12/16/MySQL-index/"/>
-    <id>https://Kinsiy.github.io/2020/12/16/MySQL-index/</id>
-    <published>2020-12-15T16:19:51.000Z</published>
-    <updated>2021-02-28T11:44:53.261Z</updated>
-    
-    <summary type="html">
-    
-      本文将从一个案例开始，从索引的数据结构、分类、关键概念及如何使用索引提高查找效率等方面对索引知识进行总结
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Reprint" scheme="https://Kinsiy.github.io/tags/Reprint/"/>
-    
-      <category term="MySQL" scheme="https://Kinsiy.github.io/tags/MySQL/"/>
     
   </entry>
   

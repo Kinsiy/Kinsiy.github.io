@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Javascript-Object.2[创建对象] | Kinsiy</title>
+  <title itemprop="name">Javascript-async/await | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -301,25 +301,37 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
 <div class="pattern-center-blank"></div>
 
-<div id="content" class="site-content">
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
-        
-          <header class="entry-header">
-            <h1 class="entry-title">Javascript-Object.2[创建对象]</h1>
-            <p class="entry-census">Kinsiy&nbsp;·&nbsp;2021-2-19&nbsp;·&nbsp;<span id="busuanzi_value_page_pv"></span>次阅读</p>
-            <!-- 开始添加字数统计-->
-            
-              <div style="margin-top: 10px">
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/async.png);" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/async.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Javascript-async/await</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://kinsiy.github.io">
+            <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://kinsiy.github.io">Kinsiy</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-3-22<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读
+      </p>
+      <!-- 开始添加字数统计-->
+      
+        <div style="margin-top: 10px">
 	<span class="post-time">
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text"> 字数统计: </span>
 			<!-- 安装插件npm install hexo-wordcount --save -->
-			<span class="post-count">3.5k字</span>
+			<span class="post-count">1.5k字</span>
 		</span>
 	</span>
 
@@ -328,370 +340,230 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-hourglass-half"></i>
 			<span class="post-meta-item-text"> 阅读时长: </span>
-			<span class="post-count">14分</span>
+			<span class="post-count">6分</span>
 		</span>
 	</span>
 </div>
 
-            
-            <!-- 添加完成 -->
-            <hr>
-          </header>
+      
+      <!-- 添加完成 -->
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
         <div class="entry-content">
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>ECMAscript 5.1 并没有正式支持面向对象的结构，比如类或继承。ECMAscript 6 开始正式支持类和继承。ES6 的类旨在完全涵盖之前规范设计的基于原型的继承模式。不过，无论从那个方面看，ES6 的类都仅仅是封装了 ES5.1 构造函数加原型链继承的语法糖而已。</p>
-<h1 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h1><pre><code class="javascript">function createPerson(name, age, job) {
-    let o = new Object();
-    o.name = name;
-    o.age = age;
-    o.job = job;
-    o.sayName = function () {
-        console.log(this.name);
+          <p>异步函数，也称为”async/await”(语法关键字)，是 ES6 期约模式在 ECMAScript 函数中的引用。async/await 是 ES8 规范新增的。</p>
+<h1 id="异步函数"><a href="#异步函数" class="headerlink" title="异步函数"></a>异步函数</h1><p>ES8 的 async/await 旨在解决利用异步结构组织代码的问题。为此，ECMAScript 对函数进行就扩展，为其增加了两个新关键字: async 和 await。</p>
+<h2 id="async"><a href="#async" class="headerlink" title="async"></a>async</h2><p>async 关键字用于声明异步函数。这个关键字可以用在函数声明、函数表达式、箭头函数和方法上。使用 async 关键字可以让函数具有异步特性，但总体上其代码仍然是同步求值的。而在参数或闭包方面，异步函数仍然具有普通 Javascript 函数的正常行为。</p>
+<pre><code class="javascript">async function foo() {
+    console.log(&quot;foo&quot;);
+}
+
+foo();
+console.log(2);
+
+// foo
+// 2
+// foo()函数仍然会在后面的指令之前被求值
+</code></pre>
+<p>不给，异步函数如果使用 return 关键字返回了值(如果没有 return 则会返回 undefined)，这个值会被 Promise.resolve()包装成一个期约对象。异步函数始终会返回期约对象。在函数外部调用这个函数可以得到它返回的期约</p>
+<pre><code class="javascript">async function foo() {
+    console.log(&quot;1&quot;);
+    return 3;
+}
+
+// 给返回的期约添加一个解决处理程序
+foo().then(console.log);
+
+console.log(2);
+
+// 1
+// 2
+// 3
+</code></pre>
+<p>异步函数的返回值期待(但实际上并不要求)一个实现 thenable 接口的对象，但常规的值也可以。如果返回的是实现 thenable 接口的对象，则这个对象可以由提供给 then()的处理程序”解包”。如果不是，则返回值就被当作已经解决的期约。</p>
+<pre><code class="javascript">// 返回一个实现了thenable接口的非期约对象
+async function foo() {
+    const thenable = {
+        then(callback) {
+            callback(&quot;foo&quot;);
+        },
     };
-    return o;
+    return thenable;
 }
 
-let person_1 = createPerson(&quot;Kinsiy&quot;, 23, &quot;Software Engineer&quot;);
-let person_2 = createPerson(&quot;Greg&quot;, 27, &quot;Doctor&quot;);
+foo().then(console.log); // foo
+
+// 返回一个期约
+async function baz() {
+    return Promise.resolve(&quot;baz&quot;);
+}
+
+baz().then(console.log); // baz
+
+// 在异步函数中抛出错误会返回拒绝的期约
+async function king() {
+    console.log(1);
+    throw 3;
+}
+
+king().catch(console.log);
+console.log(2);
+
+// 1 -&gt; 2 -&gt; 3
+
+// 拒绝期约的错误不会被捕获
+async function queen() {
+    console.log(4);
+    Promise.reject(6);
+}
+
+queen().catch(console.log);
+console.log(5);
+
+// 4 -&gt; 5
+// Uncaught (in promise) 6
 </code></pre>
-<p>工厂模式解决创建多个类似对象的问题，但没有解决对象标识问题(即创建的对象是什么类型)。</p>
-<h1 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h1><pre><code class="javascript">/* 按照惯例，构造函数名称的首字母是要大写的，非构造函数则以小写字母开头 */
-function Person(name, age, job) {
-    // 使用函数表达式亦可 let Person = function(){ ... }
-    this.name = name;
-    this.age = age;
-    this.job = job;
-    this.sayName = function () {
-        console.log(this.Name);
+<h2 id="await"><a href="#await" class="headerlink" title="await"></a>await</h2><p>因为异步函数主要针对不会马上完成的任务，所以自然需要哦一种暂停和恢复执行的能力、使用 await 关键字可以暂停异步函数代码的执行，等待期约解决。</p>
+<pre><code class="javascript">async function foo() {
+    let p = new Promise((resolve, reject) =&gt; setTimeout(resolve, 1000, 3));
+    console.log(await p);
+}
+foo(); // 3
+</code></pre>
+<p>注意，await 关键字会暂停执行异步函数后面的代码，让出 Javascript 运行时的执行线程。这个行为与生成器函数中的 yeild 关键字是一样的。await 关键字同样是尝试”解包”对象的值，然后将这个值传给表达式，再异步恢复异步函数的行为。await 关键字的用法与 Javascript 的一元操作一样。它可以单独使用，也可以在表达式中使用。<br>await 关键字期待(但实际上并不要求)一个实现 thenable 接口的对象，但常规的值也可以。如果返回的是实现 thenable 接口的对象，则这个对象可以由 await 来”解包”。如果不是，则返回值就被当作已经解决的期约。</p>
+<pre><code class="javascript">// 等待一个原始值
+async function foo() {
+    console.log(await &quot;foo&quot;);
+}
+foo(); // foo
+
+// 等待一个实现了thenable接口的对象
+async function baz() {
+    const thenable = {
+        then(callback) {
+            callback(&quot;baz&quot;);
+        },
     };
+    console.log(await thenable);
 }
 
-let person_1 = new Person(&quot;Kinsiy&quot;, 23, &quot;Software Engineer&quot;);
-let person_2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);
+baz(); //baz
 
-console.log(person_1.constructor == Person); // true
-console.log(person_1 instanceof Object); // true     所有自定义对象都继承自Object
-console.log(person_1 instanceof Person); // true
-
-console.log(person_1.sayName == person_2.sayName); // false
-</code></pre>
-<p>实际上，Person()内部的代码跟 createPerson()基本是一样的，只是有如下区别</p>
-<ul>
-<li>没有显式的创建对象</li>
-<li>属性和方法直接赋值给了 this</li>
-<li>没有 return</li>
-</ul>
-<p>要创建 Person 的实例，应使用 new 操作符。以这种方式调用构造函数会执行如下操作</p>
-<ul>
-<li>在内存中创建一个新对象</li>
-<li>这个新对象内部的[[Prototype]] 特性被赋值为构造函数的 prototype 属性</li>
-<li>构造函数内部的 this 被赋值为这个新对象(即 this 指向新对象)</li>
-<li>执行构造函数内部的代码(给新对象添加属性)</li>
-<li>如果构造函数返回非空对象，则返回该对象；返回刚创建的新对象</li>
-</ul>
-<h2 id="构造函数也是函数"><a href="#构造函数也是函数" class="headerlink" title="构造函数也是函数"></a>构造函数也是函数</h2><p>构造函数与普通函数唯一的区别就是调用方式不同。</p>
-<pre><code class="javascript">/* ... */
-
-// 作为构造函数
-let person = new Person(&quot;Kinsiy&quot;, 23, &quot;Software Engineer&quot;);
-person.sayName();
-
-// 作为函数调用
-Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;); // 添加到window对象
-window.sayName();
-
-// 在另一个对象的作用域中调用
-let o = new Object();
-Person.call(o, &quot;Type&quot;, 20, &quot;Nurse&quot;);
-o.sayName();
-</code></pre>
-<h2 id="构造函数的问题"><a href="#构造函数的问题" class="headerlink" title="构造函数的问题"></a>构造函数的问题</h2><p>构造函数定义的方法会在每个实例上都创建一遍。对前面的例子而言，person_1 和 person_2 都有 sayName()的方法，但这两个方法不是同一个 Function 实例。逻辑上讲，这个构造函数实际上是这样的：</p>
-<pre><code class="javascript">function Person(name, age, job) {
-    // 使用函数表达式亦可 let Person = function(){ ... }
-    this.name = name;
-    this.age = age;
-    this.job = job;
-    this.sayName = new Function(&quot;console.log(this.name)&quot;); // 逻辑等价
-}
-</code></pre>
-<p>因此不同实例上的函数虽然同名却不相等。因为都是做一样的事，所以没必要定义两个不同的 Function 实例。况且，this 对象可以把函数与对象的绑定推迟到运行时。要解决这个问题，可以吧函数定义转移到构造函数外部：</p>
-<pre><code class="javascript">function Person(name, age, job) {
-    // 使用函数表达式亦可 let Person = function(){ ... }
-    this.name = name;
-    this.age = age;
-    this.job = job;
-    this.sayName = sayName;
+// 等待一个期约
+async function king() {
+    console.log(await Promise.resolve(&quot;king&quot;));
 }
 
-function sayName() {
-    console.log(this.name);
+king(); // king
+
+// 等待会抛出错误的同步操作，会返回拒绝的期约
+async function queen() {
+    console.log(1);
+    await (() =&gt; {
+        throw 3;
+    })();
 }
 
-let person_1 = new Person(&quot;Kinsiy&quot;, 23, &quot;Software Engineer&quot;);
-let person_2 = new Person(&quot;Greg&quot;, 27, &quot;Doctor&quot;);
+queen().catch(console.log);
+console.log(2);
 
-person_1.sayName(); // Kissiy
-person_2.sayName(); // Greg
-console.log(person_1.sayName == person_2.sayName); // true
+// 1 -&gt; 2 -&gt; 3
 </code></pre>
-<h1 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h1><p>每个函数都会创建一个 prototype 属性，这个属性时一个对象，包含应该由特定引用类型的实例共享的属性和方法。实际上这个对象就是通过调用构造函数创建的对象的原型。使用原型的好处是，在它上面定义的属性和方法可以被对象实例共享。原来在构造函数中直接赋给对象实例的值，可以直接赋值给他们的原型。</p>
-<pre><code class="javascript">let Person = function () {};
-Person.prototype.name = &quot;Kinsiy&quot;;
-Person.prototype.age = 24;
-Person.prototype.jonb = &quot;Software Engineer&quot;;
-Person.prototype.sayName = function () {
-    console.log(this.name);
-};
-
-let person_1 = new Person();
-person_1.sayName(); // Kinsiy
-
-let person_2 = new Person();
-person_2.sayName(); // Kinsiy
-
-console.log(person_1.sayName == person_2.sayName); // true
-</code></pre>
-<h2 id="理解原型"><a href="#理解原型" class="headerlink" title="理解原型"></a>理解原型</h2><p>无论何时，只要创建一个函数，就会按照特定的规则为这个函数创建一个 prototype 属性(指向原型对象)。默认情况下，所有原型对象自动获得一个名为 constructor 的属性，指回与之关联的构造函数。对前面的例子而言，Person.prototype.constructor 指向 Person。<br>在自定义构造函数时，原型对象默认只会获得 constructor 属性，其他的所有方法都继承自 Object。每次调用构造函数创建一个新实例，这个实例的内部[[Prototype]]指针就会被赋值为构造函数的原型对象。脚本中没有访问这个[[Prototype]]特性的标准方式，但 Firefox、Safari 和 Chrome 会在每个对象上暴露<strong>proto</strong>属性，通过这个属性可以访问对象的原型。</p>
-<pre><code class="javascript">function Person() {}
-
-console.log(typeof Person.prototype); // object
-console.log(Person.prototype);
-
-// {
-//      constructor: ƒ Person()
-//      __proto__: Object}
-// }
-
-console.log(Person.prototype.constructor == Person); // true
-
-// 正常的原型链都会终止与Object的原型对象
-
-console.log(Person.prototype.__proto__ === Object.prototype); // true
-console.log(Person.prototype.__proto__.constructor === Object); // true
-console.log(Person.prototype.__proto__.__proto__ === null); // true
-
-/**
- * 实例通过__proto__链接到原型对象，
- * 它实际上指向隐藏特性[[Prototype]]
- *
- * 构造函数通过prototype 属性链接到原型对象
- *
- * 实例与构造函数没有直接联系，与原型对象有直接联系
- */
-person_1 = new Person();
-console.log(person_1.__proto__ === Person.prototype); // true
-console.log(person_1.__proto__.constructor === Person); // true
-</code></pre>
-<p>可以使用 isPrototypeOf()方法确定两个对象之间的[[Prototype]]关系。本质上 isPrototypeOf()会在传入参数的[[Prototype]]指向调用它的对象室返回 true。</p>
-<pre><code class="javascript">function Person() {}
-person_1 = new Person();
-console.log(Person.prototype.isPrototypeOf(person_1)); // true
-
-/* ECMAScript 的Object类型有一个方法叫Object.getPrototypeOf()，返回参数的内部特性[[Prototype]]的值 */
-console.log(Object.getPrototypeOf(person_1) == Person.prototype); // true
-
-/* Object类型还有一个setPrototyprOf()方法，可以向实例的[[Prototype]]写入一个新值。这样可以重写一个对象的原型继承关系 */
-let object_1 = {
-    num: 2,
-};
-
-let person_2 = {
-    name: &quot;kinsiy&quot;,
-};
-
-Object.setPrototypeOf(person_2, object_1);
-console.log(person_2.num); // 2
-console.log(Object.getPrototypeOf(person_2) === object_1); // true
-
-/* Object.setPrototyprOf()可能会严重影响代码性能，可以通过Object.create()来创建一个新对象，同时指定为原型 */
-let object_2 = {
-    num: 5,
-};
-
-let person_3 = Object.create(object_2);
-person_3.name = &quot;Kinsiy&quot;;
-
-console.log(person_3.num); // 5
-console.log(Object.getPrototypeOf(person_3) === object_2); // true
-</code></pre>
-<h2 id="原型层级"><a href="#原型层级" class="headerlink" title="原型层级"></a>原型层级</h2><p>在通过对象访问属性时，会按照这个属性的名称开始搜索。搜索开始于对象实例本身。如果在这个实例上发现了给定的名称，则返回该名称对应的值。如果没有找到这个属性，则搜索会沿着指针进入原型对象，然后在原型对象上找到属性后，再返回对应的值。<br>虽然可以通过实例原型读取原型对象上的值，但不可能通过实例重写这些值。如果在实例上添加了一个与原型对象中同名的属性，那就会在实例上创建这个属性，这个属性会遮蔽原型对象上的属性。</p>
-<pre><code class="javascript">function Person() {}
-
-Person.prototype.name = &quot;Kinsiy&quot;;
-Person.prototype.age = 23;
-Person.prototype.job = &quot;Software Engineer&quot;;
-Person.prototype.sayName = function () {
-    console.log(this.name);
-};
-
-let person_1 = new Person();
-let person_2 = new Person();
-
-person_1.name = &quot;Restituo&quot;;
-console.log(person_1.name); // &quot;Restituo&quot;
-console.log(person_2.name); // &quot;Kinsiy&quot;
-
-/// hasOwnProperty() 方法
-console.log(person_1.hasOwnProperty(&quot;name&quot;)); // true
-console.log(person_2.hasOwnProperty(&quot;name&quot;)); // false
-
-/// delete 操作符
-delete person_1.name;
-console.log(person_1.name); // &quot;Kinsiy&quot;
-
-console.log(person_1.hasOwnProperty(&quot;name&quot;)); // false
-console.log(person_2.hasOwnProperty(&quot;name&quot;)); // false
-</code></pre>
-<p>只要给对象实例添加了一个属性，这个属性就会遮蔽(shadow)原型对象上的同名属性，也就是虽然不会修改它，但会屏蔽对它的访问。即使在实例上把这个属性设置为 null，也不会恢复它和原型的联系。不过使用 delete 操作符可以完全删除实例上的这个属性，从而让标识符解释过程能够继续搜索原型对象。<br>hasOwnProperty()方法用于确定某个属性在实例上还是在原型对象上。这个方法是继承自 Object 的，会在属性存在于调用他的对象实例上时返回 true。</p>
-<h2 id="原型和-in-操作符"><a href="#原型和-in-操作符" class="headerlink" title="原型和 in 操作符"></a>原型和 in 操作符</h2><p>有两种方式使用 in 操作符：单独使用和在 for-in 循环中使用。在单独使用时，in 操作符会在可以通过对象访问指定属性时放回 true，无论该属性是在实例上还是在原型上。</p>
-<pre><code class="javascript">...
-
-/**
- * @description: 检查属性是否在原型上未被遮蔽
- * @param {*} object
- * @param {*} name
- * @return {*} boolean
- */
-function hasPrototyProperty(object, name) {
-    return !object.hasOwnProperty(name) &amp;&amp; name in object;
+<p>单独的 Promise.reject()不会被异步含糊捕获，而会抛出未捕获错误。不过，对拒绝的期约使用 await 则会释放(unwrap)错误值(将拒绝期约返回)</p>
+<pre><code class="javascript">async function kinsiy() {
+    console.log(1);
+    await Promise.reject(&quot;3&quot;);
+    console.log(4); // 这行代码不会执行
 }
 
-console.log(hasPrototyProperty(person_1, &quot;name&quot;));      // &quot;false&quot;
-console.log(hasPrototyProperty(person_2, &quot;name&quot;));      // &quot;true&quot;
+kinsiy().catch(console.log);
+console.log(2);
+
+// // 1 -&gt; 2 -&gt; 3
 </code></pre>
-<p>在 for-in 循环中使用 in 操作符时，可以通过对象访问且可以被枚举的属性都会返回，包括实例属性和原型属性。遮蔽原型中不可枚举([[Enumerable]]特性被设置为 false)属性的实例属性也会在 for-in 循环中返回，因为默认情况下开发者定义的属性都是可以枚举的。<br>要获取对象上所有可枚举的实例属性，可以使用 Object.keys()方法。这个方法接收一个对象作为参数，返回包含该对象所有可枚举属性名称的字符串数组。<br>如果想列出所有实例属性，无论是否可以枚举，都可以使用 Object.getOwnPropertyNames()</p>
-<pre><code class="javascript">...
-for (const key in person_1) {
-    console.log(key);   // name age job sayName
+<h2 id="await-的限制"><a href="#await-的限制" class="headerlink" title="await 的限制"></a>await 的限制</h2><p>await 关键字必须在异步函数中使用，不能在顶级上下文如&lt;Script>标签或模块中使用。不过，定义并立即调用异步函数是没问题的。此外，异步函数的特质不会扩展到嵌套函数。因此，await 关键字也只能直接出现在异步函数的定义中。在同步函数内部使用 await 会抛出 SyntaxError。</p>
+<h1 id="停止和恢复执行"><a href="#停止和恢复执行" class="headerlink" title="停止和恢复执行"></a>停止和恢复执行</h1><p>async/await 中真正起作用的是 await。async 关键字，无论从哪方面来看，都不过是一个标识符。毕竟，异步函数如果不包含 await 关键字，其执行基本上跟普通函数没有什么区别。<br>Javascript 运行时碰到 await 关键字时，会记录在哪里暂停执行。等到 await 右边的值可用了，Javascript 运行时会向消息队列中推送一个任务，这个任务会恢复异步函数的执行。因此，即使 await 后面跟着一个立即可用的值，函数的其余部分也会被异步求值。</p>
+<pre><code class="javascript">async function foo() {
+    console.log(2);
+    await null;
+    console.log(4);
 }
 
-/// Object.keys()
+console.log(1);
+foo();
+console.log(3);
 
-let keys = Object.keys(Person.prototype);
-console.log(keys);    // [&quot;name&quot;, &quot;age&quot;, &quot;job&quot;, &quot;sayName&quot;]
-keys = Object.keys(person_1);
-console.log(keys);    // [&quot;name&quot;]
-
-/// Object.getOwnPropertyNames()
-keys = Object.getOwnPropertyNames(Person.prototype);
-console.log(keys);    //  [&quot;constructor&quot;, &quot;name&quot;, &quot;age&quot;, &quot;job&quot;, &quot;sayName&quot;]
+// 1 -&gt; 2 -&gt; 3 -&gt; 4
 </code></pre>
-<p>在 ECMAscript 6 新增符号类型之后，相应的出现了一个 Object.getOwnPropertyNames()的兄弟方法的需求，因为以符号为键的属性没有名称的概念。因此，Object.getOwnPropertySymbols()方法就出现了，这个方法与 Object.getOwnPropertyNames()类似，只是针对符号而已。</p>
-<h2 id="属性枚举顺序"><a href="#属性枚举顺序" class="headerlink" title="属性枚举顺序"></a>属性枚举顺序</h2><p>for-in 循环、Object.keys()、Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()以及 Object.assgin()在属性枚举顺序方面有很大区别。for-in 循环和 Object.keys()的枚举顺序是不确定的，取决于 Javascript 引擎，可能因浏览器而异。<br>Object.getOwnPropertyNames()、Object.getOwnPropertySymbols()以及 Object.assgin()的枚举顺序是确定的。先以升序枚举数值键，然后以插入顺序枚举字符串和符号键。</p>
-<pre><code class="javascript">let k1 = Symbol(&quot;k1&quot;);
-let k2 = Symbol(&quot;k2&quot;);
+<h1 id="异步函数策略"><a href="#异步函数策略" class="headerlink" title="异步函数策略"></a>异步函数策略</h1><h2 id="实现-sleep"><a href="#实现-sleep" class="headerlink" title="实现 sleep()"></a>实现 sleep()</h2><pre><code class="javascript">async function sleep(delay) {
+    return new Promise((resolve) =&gt; setTimeout(resolve, delay));
+}
 
-let o = {
-    1: 1,
-    first: &quot;first&quot;,
-    [k1]: &quot;sym1&quot;,
-    second: &quot;second&quot;,
-    0: 0,
-};
-o[k2] = &quot;sym2&quot;;
-o[3] = 3;
-o.third = &quot;third&quot;;
-o[2] = 2;
+async function foo() {
+    const t0 = Date.now();
+    await sleep(3000);
+    console.log(Date.now() - t0);
+}
 
-console.log(Object.getOwnPropertyNames(o)); // [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;first&quot;, &quot;second&quot;, &quot;third&quot;]
-console.log(Object.getOwnPropertySymbols(o)); // [Symbol(k1), Symbol(k2)]
+foo(); // 3014
 </code></pre>
-<h1 id="对象迭代"><a href="#对象迭代" class="headerlink" title="对象迭代"></a>对象迭代</h1><p>在 Javascript 有史以来的大部分时间内，迭代对象属性都是一个难题。ECMAscript 2017 新增了两个静态方法，用于将对象内容转换为序列化的——更重要的是可迭代的——格式。这两个静态方法 Object.values()和 Object.entries()接收一个对象，返回它们内容的数组。Object.values()返回对象值得数组，Object.entries()方法返回键/值对的数组。</p>
-<pre><code class="javascript">const o = {
-    foo: &quot;bar&quot;,
-    baz: 1,
-    qux: {},
-};
+<h2 id="利用平行执行"><a href="#利用平行执行" class="headerlink" title="利用平行执行"></a>利用平行执行</h2><pre><code class="javascript">async function randomDelay(id) {
+    // 延迟0~1000ms
+    const delay = Math.random() * 1000;
+    return new Promise((resolve) =&gt;
+        setTimeout(() =&gt; {
+            console.log(`${id} 完成`);
+        }, delay)
+    );
+}
 
-console.log(Object.values(o)); // [&quot;bar&quot;, 1, {…}]
-console.log(Object.entries(o)); // [[&quot;foo&quot;, &quot;bar&quot;], [&quot;baz&quot;, 1], [&quot;qux&quot;, {…}]]
-</code></pre>
-<p>注意，非字符串属性会被转换为字符串输出。另外，这两个方法执行对象的浅复制。符号属性会被忽略。</p>
-<h2 id="其他原型语法"><a href="#其他原型语法" class="headerlink" title="其他原型语法"></a>其他原型语法</h2><p>在前面的例子中，每次定义一个属性或方法都会把 Person.prototype 重写一遍。为了减少代码冗余，也为了从视觉上更好的封装原型功能，直接通过一个包含所有属性和方法的对象字面量来重写原型成为了一种常见的做法。</p>
-<pre><code class="javascript">function Person() {};
+async function foo() {
+    const t0 = Date.now();
+    const promises = Array(5)
+        .fill(null)
+        .map((_, i) =&gt; randomDelay(i));
 
-Person.prototype = {
-    name: &quot;Kinsiy&quot;,
-    age: 23,
-    sayName(){
-        console.log(this.name);
+    for (const p of promises) {
+        await p;
     }
+
+    console.log(`共耗时${Date.now() - t0}ms`); // ???? 为什么没有打印出来
 }
 
-/**
-* 这样重写之后，Person.property的constructor属性就不指向Person了。
-*/
-let person_1 = new Person;
-console.log(person_1 instanceof Object);
-console.log(person_1 instanceof Person);
-
-console.log(person_1.constructor == Person);
-console.log(person_1.constructor == Object);
-
-
-/**
-* 如果constructor的值很重要，则可以在重写原型对象时专门设置一下它的值
-* Person.prototype = {
-*    constructor: Person,
-*    name: &quot;Kinsiy&quot;,
-*    age: 23,
-*    sayName(){
-*        console.log(this.name);
-*    }
-* }
-* 但要注意，以这种方式恢复的constructor属性会创建一个[[Enumerable]]为true的属性。而原生constructor属性默认是不可枚举的
-* 可以改为使用Object.defineProperty()方法来定义constructor 属性
-*/
-
-Object.defineProperty(Person.property,&quot;contructor&quot;){
-    enumerable: false,
-    value: Person
-};
+foo();
+//4 完成
+//1 完成
+//2 完成
+//0 完成
+//3 完成
 </code></pre>
-<h2 id="原型的动态性"><a href="#原型的动态性" class="headerlink" title="原型的动态性"></a>原型的动态性</h2><p>因为从原型上搜索值得过程是动态的，所以即使实例在修改原型之前已经存在，任何时候对原型对象所做的修改也会在实例上反映出来。</p>
-<pre><code class="javascript">function Person() {}
+<h2 id="串行执行期约"><a href="#串行执行期约" class="headerlink" title="串行执行期约"></a>串行执行期约</h2><pre><code class="javascript">function addTwo(x) {
+    return x + 2;
+}
+function addThree(x) {
+    return x + 3;
+}
+function addFive(x) {
+    return x + 5;
+}
 
-let person_1 = new Person();
+async function addTen(x) {
+    for (const fn of [addTwo, addThree, addFive]) {
+        x = await fn(x);
+    }
+    return x;
+}
 
-Person.prototype.sayHi = function () {
-    console.log(&quot;Hi&quot;);
-};
-
-person_1.sayHi(); // &quot;Hi&quot;
+addTen(9).then(console.log); // 19
 </code></pre>
-<p>这与重写这个原型是两回事。实例的[[prototype]]指针是在调用构造函数时自动赋值的，这个指针即使把原型修改为不同的对象也不会变。重写整个原型会切断最初原型与构造函数的联系，但实例引用的仍然是最初的原型。</p>
-<pre><code class="javascript">function Person() {}
-
-let person_1 = new Person();
-
-Person.prototype = {
-    sayHi() {
-        console.log(&quot;Hi&quot;);
-    },
-};
-
-person_1.sayHi(); // TypeError
-</code></pre>
-<h2 id="原生对象原型"><a href="#原生对象原型" class="headerlink" title="原生对象原型"></a>原生对象原型</h2><p>所有原生引用类型的构造函数(包括 Object、Array、String 等)都在原型上定义了实例方法。比如，数组实例的 sort 方法就是 Array.prototype 上定义的。</p>
-<pre><code class="javascript">String.prototype.Kinsiy = function () {
-    console.log(&quot;Kinsiy&quot;);
-};
-
-const str = &quot;abc&quot;;
-
-str.Kinsiy();
-</code></pre>
-<h2 id="原型的问题"><a href="#原型的问题" class="headerlink" title="原型的问题"></a>原型的问题</h2><pre><code class="javascript">function Person() {}
-Person.prototype.friends = [&quot;Kinsiy&quot;, &quot;Restituo&quot;];
-
-let person_1 = new Person();
-let person_2 = new Person();
-
-person_1.friends.push(&quot;Type57&quot;);
-
-console.log(person_1.friends); // [&quot;Kinsiy&quot;, &quot;Restituo&quot;, &quot;Type57&quot;]
-console.log(person_2.friends); // [&quot;Kinsiy&quot;, &quot;Restituo&quot;, &quot;Type57&quot;]
-</code></pre>
+<h2 id="栈最最与内存管理"><a href="#栈最最与内存管理" class="headerlink" title="栈最最与内存管理"></a>栈最最与内存管理</h2><p>略</p>
 
         </div>
         <!-- .entry-content -->
@@ -720,40 +592,21 @@ console.log(person_2.friends); // [&quot;Kinsiy&quot;, &quot;Restituo&quot;, &qu
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2021/02/28/RegExp/" rel="prev">
-              <div class="background">
-                
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png">
-                    
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                正则表达式</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2021/02/03/Javascript-Iterable-Iterator/" rel="next">
+            <a href="/2021/03/21/Javascript-Promise/" rel="next">
               <div class="background">
                 
-                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png">
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/Promise.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
                  
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Javascript-迭代器与生成器</h3>
+                Javascript-Promise</h3>
                 <hr>
               </div>
             </a>
