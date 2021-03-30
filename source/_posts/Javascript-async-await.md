@@ -11,7 +11,7 @@ date: 2021-03-22 22:41:38
 tags: [Notes, Javascript]
 keywords:
 description: 异步函数
-photos: https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/async.png
+photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/async.png
 ---
 
 异步函数，也称为"async/await"(语法关键字)，是 ES6 期约模式在 ECMAScript 函数中的引用。async/await 是 ES8 规范新增的。
@@ -269,6 +269,6 @@ async function addTen(x) {
 addTen(9).then(console.log); // 19
 ```
 
-## 栈最最与内存管理
+## 栈追踪与内存管理
 
 略

@@ -48,21 +48,21 @@ homeArticleShown: 10
 # 背景图片 更好的修改
 bg:
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-1.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/cover/bg-5.png
+    - https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/bg-5.png
 # 背景图片样式 空 原图效果 filter-dim 阴影 filter-grid 横条 filter-dot 点点
 bgclass: filter-dot
 
 art:
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-1.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-2.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-3.png
+    - https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/art-03.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-4.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-5.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png
     - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-9.png
-    - https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-10.png
+    - https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/art-10.png
 # startdash url, title, desc img
 startdash:
     - {
