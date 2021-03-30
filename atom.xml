@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-30T08:33:28.592Z</updated>
+  <updated>2021-03-30T15:13:30.331Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-DOM-1</title>
+    <link href="https://Kinsiy.github.io/2021/03/30/Javascript-DOM-1/"/>
+    <id>https://Kinsiy.github.io/2021/03/30/Javascript-DOM-1/</id>
+    <published>2021-03-30T12:39:31.000Z</published>
+    <updated>2021-03-30T15:13:30.331Z</updated>
+    
+    <summary type="html">
+    
+      文档对象模型(DOM, Document Object Model)
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Javascript-async/await</title>
@@ -422,28 +440,6 @@
     <summary type="html">
     
       本章会剖析Javascript中错综复杂的变量。
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript-语言基础</title>
-    <link href="https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/"/>
-    <id>https://Kinsiy.github.io/2020/12/20/JavaScript-Basics/</id>
-    <published>2020-12-20T04:01:49.000Z</published>
-    <updated>2021-03-22T03:32:11.559Z</updated>
-    
-    <summary type="html">
-    
-      本文依据红宝书内容概括了Javascript的语言基础，分语法、关键字与保留字、变量、数据类型、操作符、语句、函数六部分。为个人读书笔记，可能会有错误的地方。
     
     </summary>
     
