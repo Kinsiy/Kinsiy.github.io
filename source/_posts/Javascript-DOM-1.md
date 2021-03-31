@@ -8,7 +8,7 @@ authorDesc: I'm True
 categories: SKILL
 comments: true
 date: 2021-03-30 20:39:31
-tags:
+tags: [SKILL, Javascript]
 keywords:
 description: 文档对象模型(DOM, Document Object Model)
 photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/dom-1.png
