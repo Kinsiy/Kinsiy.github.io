@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-03-30T15:13:30.331Z</updated>
+  <updated>2021-03-31T13:48:49.221Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Javascript-DOM-2</title>
+    <link href="https://Kinsiy.github.io/2021/03/31/Javascript-DOM-2/"/>
+    <id>https://Kinsiy.github.io/2021/03/31/Javascript-DOM-2/</id>
+    <published>2021-03-31T12:31:10.000Z</published>
+    <updated>2021-03-31T13:48:49.221Z</updated>
+    
+    <summary type="html">
+    
+      DOM 编程
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/tags/SKILL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Javascript-DOM-1</title>
     <link href="https://Kinsiy.github.io/2021/03/30/Javascript-DOM-1/"/>
     <id>https://Kinsiy.github.io/2021/03/30/Javascript-DOM-1/</id>
     <published>2021-03-30T12:39:31.000Z</published>
-    <updated>2021-03-30T15:13:30.331Z</updated>
+    <updated>2021-03-31T12:31:46.946Z</updated>
     
     <summary type="html">
     
@@ -31,6 +53,10 @@
     
       <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
     
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/tags/SKILL/"/>
     
   </entry>
   
@@ -418,28 +444,6 @@
     <summary type="html">
     
       基本引用类型, Date 对象的使用
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript-变量、作用域与内存</title>
-    <link href="https://Kinsiy.github.io/2021/01/10/Javascript-Variables/"/>
-    <id>https://Kinsiy.github.io/2021/01/10/Javascript-Variables/</id>
-    <published>2021-01-10T06:15:42.000Z</published>
-    <updated>2021-03-07T11:40:24.417Z</updated>
-    
-    <summary type="html">
-    
-      本章会剖析Javascript中错综复杂的变量。
     
     </summary>
     
