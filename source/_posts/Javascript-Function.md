@@ -393,7 +393,7 @@ ObjectSayColor(); // purple
 
 # 递归
 
-在编写递归函数时，arguments.callee 是引用当前函数的首选。在严格模式下科室使用命名函数表达式达到目的。
+在编写递归函数时，arguments.callee 是引用当前函数的首选。在严格模式下可以使用命名函数表达式达到目的。
 
 ```javascript
 const factorial = function f(num) {

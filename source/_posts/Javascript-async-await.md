@@ -37,7 +37,7 @@ console.log(2);
 // foo()函数仍然会在后面的指令之前被求值
 ```
 
-不给，异步函数如果使用 return 关键字返回了值(如果没有 return 则会返回 undefined)，这个值会被 Promise.resolve()包装成一个期约对象。异步函数始终会返回期约对象。在函数外部调用这个函数可以得到它返回的期约
+不过，异步函数如果使用 return 关键字返回了值(如果没有 return 则会返回 undefined)，这个值会被 Promise.resolve()包装成一个期约对象。异步函数始终会返回期约对象。在函数外部调用这个函数可以得到它返回的期约
 
 ```javascript
 async function foo() {
@@ -156,7 +156,7 @@ console.log(2);
 // 1 -> 2 -> 3
 ```
 
-单独的 Promise.reject()不会被异步含糊捕获，而会抛出未捕获错误。不过，对拒绝的期约使用 await 则会释放(unwrap)错误值(将拒绝期约返回)
+单独的 Promise.reject()不会被异步函数捕获，而会抛出未捕获错误。不过，对拒绝的期约使用 await 则会释放(unwrap)错误值(将拒绝期约返回)
 
 ```javascript
 async function kinsiy() {

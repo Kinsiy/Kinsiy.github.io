@@ -262,7 +262,7 @@ console.log(`colors: ${colors}      count: ${count}`); // colors: yellow,green,b
 ## 排序方法
 
 数组有两个方法可以用来对元素重新排序：reverse()和 sort();
-这两个方法都返回调用他了门的数组的引用。
+这两个方法都返回调用它们的数组的引用。
 
 ```javascript
 let arr_1 = [7, 5, 6, 1, 4, 12];
