@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Tag: Javascript | Kinsiy</title>
+  <title itemprop="name">Javascript-Event-2 | Kinsiy</title>
   
     <link rel="shortcut icon" href="/img/custom/avatar.jpg">
   
@@ -296,401 +296,321 @@
   </div>
 </header>
 
-      
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
 <div class="pattern-center-blank"></div>
-<div class="pattern-center ">
-  <div class="pattern-attachment-img">
-    <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="Javascript.img" class="lazyload" onerror="imgError(this,3)" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
-  </div>
-  <header class="pattern-header ">
-    <h1 class="cat-title">Javascript.zh</h1>
-    <span class="cat-des">
-      <p>Javascript.en</p>
-    </span>
-  </header>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-2.png);" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-2.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      Javascript-Event-2</h1>
+      <p class="entry-census">
+        <span>
+          <a href="https://kinsiy.github.io">
+            <img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg">
+          </a>
+        </span>
+        <span>
+          <a href="https://kinsiy.github.io">Kinsiy</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2021-4-6<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读
+      </p>
+      <!-- 开始添加字数统计-->
+      
+        <div style="margin-top: 10px">
+	<span class="post-time">
+		<span class="post-meta-item-icon">
+			<i class="fa fa-keyboard-o"></i>
+			<span class="post-meta-item-text"> 字数统计: </span>
+			<!-- 安装插件npm install hexo-wordcount --save -->
+			<span class="post-count">3.1k字</span>
+		</span>
+	</span>
+
+	<span class="post-time">
+		&nbsp; | &nbsp;
+		<span class="post-meta-item-icon">
+			<i class="fa fa-hourglass-half"></i>
+			<span class="post-meta-item-text"> 阅读时长: </span>
+			<span class="post-count">11分</span>
+		</span>
+	</span>
 </div>
+
+      
+      <!-- 添加完成 -->
+    </header>
+  </div>
+
 <div id="content" class="site-content">
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      
-  <!-- 首页默认取最最新文章集 -->
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/04/06/Javascript-Event-2/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-2.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/04/06/Javascript-Event-2/"> Javascript-Event-2</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-4-6
-		</div>
-		<p>DOM3 Events 事件类型及事件模拟</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/04/06/Javascript-Event-2/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/04/06/Javascript-Event-1/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-1.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/04/06/Javascript-Event-1/"> Javascript-Event-1</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-4-6
-		</div>
-		<p>Javascript与Html的交互是通过事件实现的，事件代表文档或浏览器窗口中某个有意义的时刻。</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/04/06/Javascript-Event-1/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/31/Javascript-DOM-2/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/dom-2.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/31/Javascript-DOM-2/"> Javascript-DOM-2</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-31
-		</div>
-		<p>DOM 编程</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/31/Javascript-DOM-2/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/30/Javascript-DOM-1/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/dom-1.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/30/Javascript-DOM-1/"> Javascript-DOM-1</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-30
-		</div>
-		<p>文档对象模型(DOM, Document Object Model)</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/30/Javascript-DOM-1/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/22/Javascript-async-await/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/async.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/22/Javascript-async-await/"> Javascript-async/await</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-22
-		</div>
-		<p>异步函数</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/22/Javascript-async-await/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/21/Javascript-Promise/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Promise.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/21/Javascript-Promise/"> Javascript-Promise</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-21
-		</div>
-		<p>期约与异步函数</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/21/Javascript-Promise/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/14/Javascript-Function/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-6.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/14/Javascript-Function/"> Javascript-Function</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-14
-		</div>
-		<p>Javascript函数</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/14/Javascript-Function/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/07/Javascript-Proxy-3/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-5.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/07/Javascript-Proxy-3/"> Javascript-Proxy[代理模式]</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-7
-		</div>
-		<p>代理模式轮子</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/07/Javascript-Proxy-3/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/07/Javascript-Proxy-2/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-8.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/07/Javascript-Proxy-2/"> Javascript-Proxy[捕获器与反射]</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-7
-		</div>
-		<p>反射API</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/07/Javascript-Proxy-2/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-    <article class="post post-list" itemscope="" itemtype="https://schema.org/BlogPosting">
-	<div class="post-entry">
-		<div class="feature">
-			<a href="/2021/03/07/Javascript-Proxy-1/">
-				<div class="overlay">
-					<i class="iconfont icon-text"> </i>
-				</div>
-				<img
-					width="150"
-					height="150"
-					src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/article/art-7.png"
-					class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-					alt=""
-				/>
-			</a>
-		</div>
-		<h1 class="entry-title">
-			<a href="/2021/03/07/Javascript-Proxy-1/"> Javascript-Proxy[代理基础]</a>
-		</h1>
-		<div class="p-time">
-			<i class="iconfont icon-time"> </i>
-			2021-3-7
-		</div>
-		<p>ECMAScript 6 新增的代理反射为开发者提供了拦截并向基本操作嵌入额外行为的能力。具体地说，可以给目标对象定义一个关联的代理对象，而这个代理对象可以作为抽象的目标对象来使用。</p>
-		<footer class="entry-footer">
-			<div class="post-more">
-				<a href="/2021/03/07/Javascript-Proxy-1/">
-					<i class="iconfont icon-caidan"> </i>
-				</a>
-			</div>
-		</footer>
-	</div>
-	<hr />
-</article>
-
-  
-
-
-      <div class="clearer">
-      </div>
-    </main>
-    <!-- 
-      <nav class="navigator">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"> --><!-- 套嵌目录使用（主要为了支援评论）-->
         
-        <span class="page-number current">1</span><a class="page-number" href="/tags/Javascript/page/2/">2</a><a class="page-number" href="/tags/Javascript/page/3/">3</a><a class="extend next" rel="next" href="/tags/Javascript/page/2/"><i class="iconfont icon-right"></i></a>
-      </nav>
-     -->
-    
-      <div id="pagination"><a href="/tags/Javascript/page/2/" class="">Previous</a></div>
-    
-  </div>
+        <div class="entry-content">
+          <h2 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h2><p>DOM3 Events 定义了如下事件类型</p>
+<ul>
+<li>用户界面事件(UIEvent): 涉及与 BOM 交互德尔通用浏览器事件</li>
+<li>焦点事件(FocusEvent): 在元素获得和失去焦点时触发</li>
+<li>鼠标事件(MouseEvent): 使用鼠标在页面上执行某些操作是触发</li>
+<li>滚轮事件(WheelEvent)：使用鼠标滚轮(或类似设备)时触发</li>
+<li>输入事件(InputEvent): 在文档中输入文本时触发</li>
+<li>键盘事件(KeyboardEvent): 使用键盘在页面上执行某些操作时触发</li>
+<li>合成事件(CompositionEvent): 在使用某种 IME(Input Method Editor, 输入法编辑器)输入字符时触发</li>
+</ul>
+<h3 id="用户界面事件"><a href="#用户界面事件" class="headerlink" title="用户界面事件"></a>用户界面事件</h3><ul>
+<li>load：在 window 上当页面加载完成后触发，在窗套(&lt;frameset>)上所有窗格(&lt;frame>)都加载完成后触发</li>
+<li>unload：在 window 上当页面完全卸载后触发，在窗套(&lt;frameset>)上当所有窗格(&lt;frame>)都卸载完成后触发，在&lt;object>元素上当相应对象卸载完成后触发</li>
+<li>abort：在&lt;object>元素上当相应对象加载完成前被用户提前终止下载时触发</li>
+<li>error：在 window 上当 Javascript 报错时触发，在&lt;img>元素上当无法加载指定图片时触发，在&lt;object>元素上当无法加载相应对象时触发，在窗套(&lt;frameset>)上当一个或多个窗格(&lt;frame>)无法加载时触发</li>
+<li>select：在文本框(&lt;input>或 textarea)上当用户选择了一个或多个字符时触发</li>
+<li>resize：在 window 或窗格上当窗口或窗格被缩放是触发</li>
+<li>scroll：当用户滚动包含滚动条的元素时在元素上触发。&lt;body>元素包含已加载页面的滚动条</li>
+<li>DOMActivate：元素被用户通过鼠标或键盘操作激活时触发(DOM3 Event 已废弃)</li>
+</ul>
+<h3 id="焦点事件"><a href="#焦点事件" class="headerlink" title="焦点事件"></a>焦点事件</h3><p>焦点事件在页面元素获得或失去焦点时触发。这些事件可以与 document.hasFocus()和 document.activeElement 一起为开发者提供用户在页面中的导航信息。</p>
+<ul>
+<li>blur：当元素失去焦点时触发。这个事件不冒泡，所有浏览器都支持</li>
+<li>focus：当元素获得焦点时触发。这个事件不冒泡，所有浏览器都支持</li>
+<li>focusout：当元素失去焦点时触发。这个事件是 blur 的通用版</li>
+<li>focusin：当元素获得焦点时触发。这个事件是 focus 的冒泡版</li>
+<li>DOMFocusOut：当元素失去焦点时触发。这个事件是 blur 的的通用版。Opera 是唯一支持这个事件的主流浏览器。DOM3 Events 废弃了 DOMFocusIn，推荐 focusout。</li>
+<li>DOMFocusIn：当元素获得焦点时触发。这个事件是 focus 的冒泡版。Opera 是唯一支持这个事件的主流浏览器。DOM3 Events 废弃了 DOMFocusIn，推荐 focusin。</li>
+</ul>
+<p>当焦点从页面中的一个元素移到另一个元素上时，会依次发生如下事件。</p>
+<ol>
+<li>focusout 在失去焦点的元素上触发</li>
+<li>focusin 在获得焦点的元素上触发</li>
+<li>blur 在失去焦点的元素上触发</li>
+<li>DOMFocusOut 在失去焦点的元素上触发</li>
+<li>focus 在获得焦点的元素上触发</li>
+<li>DOMFocusIn 在获得焦点的元素上触发</li>
+</ol>
+<p>blur、DOMFocusOut 和 focusout 的事件目标是失去焦点的元素，而 focus、DOMFocusIn 和 focusin 的事件目标是获得焦点的元素</p>
+<h3 id="鼠标和滚轮事件"><a href="#鼠标和滚轮事件" class="headerlink" title="鼠标和滚轮事件"></a>鼠标和滚轮事件</h3><ul>
+<li>click：在用户单击鼠标主键(通常是左键)或按键盘回车键时触发。这主要是基于无障碍的考虑，让键盘和鼠标都可以触发 onclick 事件处理程序</li>
+<li>dbclick：在用户双击鼠标主键(通常是左键)时触发</li>
+<li>mousedown：在用户按下任意鼠标键时触发。这个事件不能通过键盘触发</li>
+<li>mouseenter：在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不冒泡，也不会在光标经过后代元素时触发</li>
+<li>mouseleave：在用户把鼠标光标从元素内部移到元素外部时触发。这个事件不冒泡，也不会在光标经过后代元素时触发。</li>
+<li>mousemove：在鼠标光标在元素上移到时反复触发。这个事件不能通过键盘触发。</li>
+<li>mouseout：在用户把光标从一个元素移动到另一个元素上时触发。移到到的元素可以是原始元素的外部元素，也可以是原始元素的子元素。这个事件不能通过键盘触发</li>
+<li>mouseover：在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不能通过键盘触发</li>
+<li>mouseup：在用户释放鼠标键时触发。这个事件不能通过键盘触发。</li>
+</ul>
+<p>mousedown、mouseup、click、dbclick 四个事件永远会按照如下顺序触发</p>
+<ol>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>dbclick</li>
+</ol>
+<p>使用 event.shiftKey/ctrlKey/altKey/metaKey 可以检测出用户是否按下了某个修饰键。<br>对于 mouseover 和 mouseout 事件而言，还存在与事件相关的其他元素。对 mouseover 事件来说，事件的主要目标是获得光标的元素，相关元素是失去光标的元素。mouseout 则相反，DOM 通过 event 对象的 relatedTarget 属性提供了相关元素的信息。这个属性只有在 mouseover 和 mouseout 事件发生时才有包含值，其他所有事件的这个属性的值都是 null。</p>
+<h3 id="键盘和输入事件"><a href="#键盘和输入事件" class="headerlink" title="键盘和输入事件"></a>键盘和输入事件</h3><p>键盘事件是用户操作键盘时触发的</p>
+<ul>
+<li>keydown：用户按下键盘某个键时触发，而且持续按住会重复触发</li>
+<li>keypress，用户按下键盘上某个键并产生字符时触发，而且持续按住会重发触发。Esc 键也会触发这个事件。DOM3 Events 废弃了 keypress 事件，而推荐 textInput 事件。</li>
+<li>keyup，用户释放键盘上某个键时触发</li>
+</ul>
+<p>输入事件只有一个，即 textInput。这个事件是对 keypress 事件的扩展，用于在文本显示给用户之前更方便地截取文本输入。textInput 会在文本被插入到文本框之前触发。</p>
+<h3 id="合成事件"><a href="#合成事件" class="headerlink" title="合成事件"></a>合成事件</h3><p>合成事件是 DOM3 Events 中新增的，用于处理通常使用 IME 输入时的复杂输入序列。IME 可以让用户输入物理键盘上没有的字符。例如，使用拉丁字母键盘的用户还可以使用 IME 输入日文。IME 通常需要同时按下多个键才能输入一个字符。合成事件用于监测和控制这种输入。</p>
+<ul>
+<li>compositionstart: 在 IME 的文本合成系统打开时触发，表示输入即将开始</li>
+<li>compositionupdate： 在新字符插入输入字段时触发</li>
+<li>compositionend：在 IME 的文本合成系统关时触发，表示恢复正常键盘输入。</li>
+</ul>
+<p>合成事件在很多方面与输入事件很类似。在合成事件触发时，事件目标是接收文本的输入字段。唯一增加的事件属性是 data，其中包含的值视情况而异：</p>
+<ul>
+<li>compositionstart 事件中，包含正在编辑的文本(例如，已经选择了文本但还没替换)</li>
+<li>compositionupdate 事件中，包含要插入的新字符</li>
+<li>compositionend 事件中，包含本次合成过程中输入的全部内容</li>
+</ul>
+<h3 id="HTML5-事件"><a href="#HTML5-事件" class="headerlink" title="HTML5 事件"></a>HTML5 事件</h3><h4 id="contextmenu-事件"><a href="#contextmenu-事件" class="headerlink" title="contextmenu 事件"></a>contextmenu 事件</h4><p>contextmenu 事件专门用于表示何时该显示上下文菜单，从而允许开发者取消默认的上下文菜单并提供自定义菜单。contextmenu 事件冒泡，因此只要给 document 指定一个事件处理程序就可以处理页面上的所用同类事件。</p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;title&gt;事件冒泡示例&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;myDiv&quot;&gt;此处右键获取特有上下文菜单，别处右键获取默认上下文菜单&lt;/div&gt;
+        &lt;ul id=&quot;myMenu&quot; style=&quot;position: absolute;visibility: hidden;background-color: silver;&quot;&gt;
+            &lt;li&gt;菜单1&lt;/li&gt;
+            &lt;li&gt;菜单2&lt;/li&gt;
+            &lt;li&gt;菜单3&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;script&gt;
+            window.addEventListener(&quot;load&quot;, (event) =&gt; {
+                let div = document.getElementById(&quot;myDiv&quot;);
+
+                div.addEventListener(&quot;contextmenu&quot;, (event) =&gt; {
+                    event.preventDefault();
+                    let menu = document.getElementById(&quot;myMenu&quot;);
+                    menu.style.left = event.clientX + &quot;px&quot;;
+                    menu.style.top = event.clientY + &quot;px&quot;;
+                    menu.style.visibility = &quot;visible&quot;;
+                });
+
+                document.addEventListener(&quot;click&quot;, (event) =&gt; {
+                    document.getElementById(&quot;myMenu&quot;).style.visibility = &quot;hidden&quot;;
+                });
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="beforeunload-事件"><a href="#beforeunload-事件" class="headerlink" title="beforeunload 事件"></a>beforeunload 事件</h4><p>beforeunload 事件会在 window 上触发，用意是给开发者提供阻止页面被卸载的机会。这个事件会在页面即将从浏览器中卸载时触发，如果页面要继续使用，则可以不被卸载。这个事件不能取消，否则就意味着可以把用户永久阻拦在一个页面上。相反，这个事件会向用户显示一个确认框，其中的消息表明浏览器即将卸载页面，并请用户确认是希望关闭页面，还是继续留在页面上</p>
+<pre><code class="javascript">window.addEventListener(&quot;beforeunload&quot;, (event) =&gt; {
+    let message = &quot;我会想你的！🔈🔉🔊&quot;;
+    event.returnValue = message;
+    return message;
+});
+
+// 在chrome这样子写上并不能显示message的信息(应该是限制了)，但确实阻止了页面卸载(会弹出确认框)
+</code></pre>
+<h4 id="DOMContentLoaded-事件"><a href="#DOMContentLoaded-事件" class="headerlink" title="DOMContentLoaded 事件"></a>DOMContentLoaded 事件</h4><p>window 的 load 事件会在页面完全加载后触发，因为要等待很多外部资源加载完成，所以会花费较长时间。而 DOMContentLoaded 事件会在 DOM 树构建完成后立即触发，而不用等待图片、Javascript 文件、CSS 文件或者其他资源加载完成。相对于 load 事件，DOMContentLoaded 可以让开发者在外部资源下载的同时就能指定事件处理程序，从而让用户能够更快地与界面交互。</p>
+<h4 id="readystatechange-事件"><a href="#readystatechange-事件" class="headerlink" title="readystatechange 事件"></a>readystatechange 事件</h4><p>支持 readystatechange 事件的每个对象都有一个 readyState 属性，该属性具有一个以下列出的可能的字符串值</p>
+<ul>
+<li>uninitialized：对象存在并尚未初始化</li>
+<li>loading：对象正在加载数据</li>
+<li>loaded：对象已经加载完数据</li>
+<li>interactive：对象可以交互，但尚未加载完成</li>
+<li>complete：对象加载完成</li>
+</ul>
+<pre><code class="javascript">document.addEventListener(&quot;readystatechange&quot;, (event) =&gt; {
+    if (document.readyState == &quot;interactive&quot;) {
+        console.log(&quot;Content loaded&quot;);
+    }
+});
+</code></pre>
+<h4 id="hashchange-事件"><a href="#hashchange-事件" class="headerlink" title="hashchange 事件"></a>hashchange 事件</h4><p>HTML5 增加了 hashchange 事件，用于在 URL 散列值(URL 最后#后面的部分)发生变化时通知开发者。onhashchange 事件处理程序必须添加给 window，每次 URL 散列值发生变化时会调用它。</p>
+<h3 id="设备事件"><a href="#设备事件" class="headerlink" title="设备事件"></a>设备事件</h3><p>暂略</p>
+<h2 id="模拟事件"><a href="#模拟事件" class="headerlink" title="模拟事件"></a>模拟事件</h2><h3 id="DOM-事件模拟"><a href="#DOM-事件模拟" class="headerlink" title="DOM 事件模拟"></a>DOM 事件模拟</h3><p>任何时候，都可以使用 document.creatEvent()方法创建一个 event 事件。这个方法接收一个参数，此参数是一个表示要创建事件类型的字符串。<br>可用的字符串值是以下值之一</p>
+<ul>
+<li>“UIEvents”(DOM3 中是”UIEvent”): 通用用户界面事件(鼠标事件和键盘事件都继承自这个事件)</li>
+<li>“MouseEvents”(DOM3 中是”MouseEvent”): 通用鼠标事件</li>
+<li>“HTMLEvents”(DOM3 中没有): 通用 HTML 事件(HTML 事件已经分散到了其他事件大类中)</li>
+</ul>
+<p>创建 event 事件之后，需要使用事件相关的信息来初始化。每种类型的 event 对象都有特定的方法，可以使用相应数据来完成初始化。方法的名字并不相同，这取决于调用 createEvent()时传入的参数。<br>事件模拟的最后一步是触发事件。为此要使用 dispatchEvent()方法，这个方法存在于所有支持事件的 DOM 节点之上。dispatchEvent()方法接收一个参数，即表示要触发事件的 event 对象。调用 dispatchEvent()方法之后，事件就”转正”了,接着便冒泡并触发事件处理程序执行。</p>
+<pre><code class="javascript">// 模拟鼠标事件
+let btn = document.getElementById(&quot;myBtn&quot;);
+let event = document.createEvent(&quot;MouseEvents&quot;);
+
+// 初始化event对象(参数含义暂略，需要时再查)
+event.initMouseEvent(&quot;click&quot;, true, true, document.defaulyView, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+// 触发事件
+btn.dispatchEvent(event);
+
+// 模拟键盘事件
+let textbox = document.getElementById(&quot;myTextbox&quot;),
+    event;
+
+// 按照DOM3 的方式创建event对象
+if (document.implementation.hasFeature(&quot;KeyboardEvents&quot;, &quot;3.0&quot;)) {
+    event = document.createEvent(&quot;KeyboardEvent&quot;);
+
+    // 初始化event对象(参数含义暂略，需要时再查)
+    event.initKeyboardEvent(&quot;keydown&quot;, true, true, document.defaulyView, &quot;a&quot;, 0, &quot;Shift&quot;, 0);
+}
+// 触发事件
+textbox.dispatchEvent(event);
+</code></pre>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/AliPayQR.jpg"></li>
+                <li class="wechat-code"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/donate/WechatQR.png"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2021/04/06/Javascript-Event-1/" rel="next">
+              <div class="background">
+                
+                  <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-1.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+                 
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                Javascript-Event-1</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "0YYEDI2FePwwdhaNXSIcQFfX-MdYXbMMI",
+        appKey: "sdnc0TF9hEH64aiXJ6GFf6MS",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="https://schema.org/Person">
+          <a href="https://kinsiy.github.io" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg" itemprop="image" alt="Kinsiy" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="https://kinsiy.github.io" itemprop="url" rel="author">Kinsiy</a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>I'm True</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
+
     </div>    
     <div class="ins-search">
     <div class="ins-search-mask"></div>
