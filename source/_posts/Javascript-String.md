@@ -1,5 +1,5 @@
 ---
-title: Javascript-原始包装类型
+title: Javascript-String
 date: 2021-1-18 21:33:05
 author: Kinsiy
 avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
@@ -220,7 +220,7 @@ while (pos > -1) {
 console.log(position); // [25,46,52]
 ```
 
-#### 包含-startWith(), endsWith(), includes()
+#### 包含-starstWith(), endsWith(), includes()
 
 用于判断字符串中是否包含另一个字符串，这些方法都会从字符串中搜索传入的字符串，并返回表示是否包含的布尔值。区别在于，startsWith()检查目标字符串是否以传入字符串开头，endsWith()检查目标字符串是否以传入字符串结尾，includes()检查目标字符串是否包含传入字符串。
 

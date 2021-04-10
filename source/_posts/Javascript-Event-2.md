@@ -1,8 +1,8 @@
 ---
 title: Javascript-Event-2
 author: Kinsiy
-avatar: 'https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg'
-authorLink: 'https://kinsiy.github.io'
+avatar: "https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/avatar.jpg"
+authorLink: "https://kinsiy.github.io"
 authorAbout: I'm True
 authorDesc: I'm True
 categories: SKILL
@@ -10,9 +10,10 @@ comments: true
 date: 2021-04-06 23:13:39
 tags: [SKILL, Javascript]
 keywords:
-description: DOM3 Events 事件类型即事件模拟
+description: DOM3 Events 事件类型及事件模拟
 photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-2.png
 ---
+
 ## 事件类型
 
 DOM3 Events 定义了如下事件类型
@@ -216,16 +217,16 @@ event.initMouseEvent("click", true, true, document.defaulyView, 0, 0, 0, 0, 0, f
 // 触发事件
 btn.dispatchEvent(event);
 
-
 // 模拟键盘事件
-let textbox = document.getElementById("myTextbox"),event;
+let textbox = document.getElementById("myTextbox"),
+	event;
 
 // 按照DOM3 的方式创建event对象
-if (document.implementation.hasFeature("KeyboardEvents","3.0")){
+if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
 	event = document.createEvent("KeyboardEvent");
 
-    // 初始化event对象(参数含义暂略，需要时再查)
-    event.initKeyboardEvent("keydown", true, true, document.defaulyView, "a", 0, "Shift", 0);
+	// 初始化event对象(参数含义暂略，需要时再查)
+	event.initKeyboardEvent("keydown", true, true, document.defaulyView, "a", 0, "Shift", 0);
 }
 // 触发事件
 textbox.dispatchEvent(event);
