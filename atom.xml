@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-04-10T12:46:39.645Z</updated>
+  <updated>2021-04-18T06:51:04.128Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Javascript-BOM-1</title>
+    <link href="https://Kinsiy.github.io/2021/04/18/Javascript-BOM/"/>
+    <id>https://Kinsiy.github.io/2021/04/18/Javascript-BOM/</id>
+    <published>2021-04-18T03:03:39.000Z</published>
+    <updated>2021-04-18T06:51:04.128Z</updated>
+    
+    <summary type="html">
+    
+      浏览器对象模型BOM，是使用Javascript开发Web应用程序的核心。本文对window对象及窗口关系进行学习
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>Javascript-Event-2</title>
@@ -238,10 +260,10 @@
   
   <entry>
     <title>Javascript-class</title>
-    <link href="https://Kinsiy.github.io/2021/03/04/Javascript-class/"/>
-    <id>https://Kinsiy.github.io/2021/03/04/Javascript-class/</id>
+    <link href="https://Kinsiy.github.io/2021/03/04/Javascript-Class/"/>
+    <id>https://Kinsiy.github.io/2021/03/04/Javascript-Class/</id>
     <published>2021-03-04T13:07:28.000Z</published>
-    <updated>2021-03-05T13:34:23.643Z</updated>
+    <updated>2021-04-18T03:04:37.611Z</updated>
     
     <summary type="html">
     
@@ -348,10 +370,10 @@
   
   <entry>
     <title>Javascript-(Map &amp; Set)</title>
-    <link href="https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/"/>
-    <id>https://Kinsiy.github.io/2021/01/29/javascriopt-Map-Set/</id>
+    <link href="https://Kinsiy.github.io/2021/01/29/Javascriopt-Map-Set/"/>
+    <id>https://Kinsiy.github.io/2021/01/29/Javascriopt-Map-Set/</id>
     <published>2021-01-29T14:31:45.000Z</published>
-    <updated>2021-03-07T11:37:53.989Z</updated>
+    <updated>2021-04-18T03:02:01.977Z</updated>
     
     <summary type="html">
     
@@ -414,36 +436,14 @@
   
   <entry>
     <title>Javascript-(Global &amp; Math)</title>
-    <link href="https://Kinsiy.github.io/2021/01/23/built-in-object/"/>
-    <id>https://Kinsiy.github.io/2021/01/23/built-in-object/</id>
+    <link href="https://Kinsiy.github.io/2021/01/23/Javascript-Math/"/>
+    <id>https://Kinsiy.github.io/2021/01/23/Javascript-Math/</id>
     <published>2021-01-23T14:57:33.000Z</published>
-    <updated>2021-03-07T11:39:09.757Z</updated>
+    <updated>2021-04-18T03:01:50.313Z</updated>
     
     <summary type="html">
     
       基本引用类型,介绍ECMA-262定义的两个单例内置对象：Global和Math
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript-String</title>
-    <link href="https://Kinsiy.github.io/2021/01/18/Javascript-String/"/>
-    <id>https://Kinsiy.github.io/2021/01/18/Javascript-String/</id>
-    <published>2021-01-18T13:33:05.000Z</published>
-    <updated>2021-04-10T12:46:36.740Z</updated>
-    
-    <summary type="html">
-    
-      基本引用类型-原始包装类型：Boolean、Number、String对象的使用
     
     </summary>
     
