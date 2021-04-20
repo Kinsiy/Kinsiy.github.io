@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Kinsiy.github.io/"/>
-  <updated>2021-04-18T06:51:04.128Z</updated>
+  <updated>2021-04-20T04:18:40.364Z</updated>
   <id>https://Kinsiy.github.io/</id>
   
   <author>
@@ -17,11 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Javascript-BOM-2</title>
+    <link href="https://Kinsiy.github.io/2021/04/20/Javascript-BOM-2/"/>
+    <id>https://Kinsiy.github.io/2021/04/20/Javascript-BOM-2/</id>
+    <published>2021-04-20T02:11:29.000Z</published>
+    <updated>2021-04-20T04:18:40.364Z</updated>
+    
+    <summary type="html">
+    
+      BOM中的location与navigator对象
+    
+    </summary>
+    
+      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
+    
+    
+      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
+    
+      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Javascript-BOM-1</title>
-    <link href="https://Kinsiy.github.io/2021/04/18/Javascript-BOM/"/>
-    <id>https://Kinsiy.github.io/2021/04/18/Javascript-BOM/</id>
+    <link href="https://Kinsiy.github.io/2021/04/18/Javascript-BOM-1/"/>
+    <id>https://Kinsiy.github.io/2021/04/18/Javascript-BOM-1/</id>
     <published>2021-04-18T03:03:39.000Z</published>
-    <updated>2021-04-18T06:51:04.128Z</updated>
+    <updated>2021-04-20T02:11:48.115Z</updated>
     
     <summary type="html">
     
@@ -422,28 +444,6 @@
     <summary type="html">
     
       集合引用类型-理解对象Object
-    
-    </summary>
-    
-      <category term="SKILL" scheme="https://Kinsiy.github.io/categories/SKILL/"/>
-    
-    
-      <category term="Notes" scheme="https://Kinsiy.github.io/tags/Notes/"/>
-    
-      <category term="Javascript" scheme="https://Kinsiy.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Javascript-(Global &amp; Math)</title>
-    <link href="https://Kinsiy.github.io/2021/01/23/Javascript-Math/"/>
-    <id>https://Kinsiy.github.io/2021/01/23/Javascript-Math/</id>
-    <published>2021-01-23T14:57:33.000Z</published>
-    <updated>2021-04-18T03:01:50.313Z</updated>
-    
-    <summary type="html">
-    
-      基本引用类型,介绍ECMA-262定义的两个单例内置对象：Global和Math
     
     </summary>
     
