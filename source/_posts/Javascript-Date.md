@@ -72,43 +72,43 @@ console.log(now.toUTCString()); // 1610472Tue, 12 Jan 2021 17:39:22 GMT551838
 
 ### 日期/时间组件方法
 
-```javascript
-/*
-getTime()               返回日期的毫秒数；与valueOf()相同
-setTime(milliseconds)   设置日期的毫秒数，从而修改整个日期
-getFullYear()           返回四位年数(即2021而不是21)
-getUTCFullYear()        返回UTC日期的四位年数
-setFullYear(year)       设置日期的年(year必须是4位数) 
-setUTCFullYear(year)    设置UTC时间的年(year必须是四位数)
-getMonth()          ....
-getUTCMonth()
-setMonth(month)
-setUTCMonth(month)
-getDate()
-getUTCDate()
-setDate(date)
-setUTCDate(date)
-getDay()
-getUTCDay()
-getHours()
-getUTCHours()
-setHours(hours)
-setUTCHours(hours)
-getMinutes()
-getUTCMinutes()
-setMinutes(minutes)
-setUTCMinutes(minutes)
-getSeconds()
-getUTCSeconds()
-setSeconds(seconds)
-setUTCSeconds(seconds)
-getMillseconds()
-getUTCMillseconds()
-setMillseconds(millseconds)
-setUTCMillseconds(millseconds)
-getTimezoneOffset()             返回以分钟计的UTC与本地时区的偏移量
-*/
+| 函数                           | 说明                                                   |
+| :----------------------------- | :----------------------------------------------------- |
+| getTime()                      | 返回日期的毫秒数；与 valueOf()相同                     |
+| setTime(milliseconds)          | 设置日期的毫秒数，从而修改整个日期                     |
+| getFullYear()                  | 返回四位年数(即 2021 而不是 21)                        |
+| getUTCFullYear()               | 返回 UTC 日期的四位年数                                |
+| setFullYear(year)              | 设置日期的年(year 必须是 4 位数)                       |
+| setUTCFullYear(year)           | 设置 UTC 日期的年(year 必须是四位数)                   |
+| getMonth()                     | 返回日期的月(0 表示 1 月，11 表示 12 月)               |
+| getUTCMonth()                  | 返回 UTC 日期的月(0 表示 1 月，11 表示 12 月)          |
+| setMonth(month)                | 设置日期的月(month 为大于 0 的数值，大于 11 加年)      |
+| setUTCMonth(month)             | 设置 UTC 日期的月(month 为大于 0 的数值，大于 11 加年) |
+| getDate()                      | 返回日期中的日(1~31)                                   |
+| getUTCDate()                   | 返回 UTC 日期中的日(1~31)                              |
+| setDate(date)                  | 设置日期的日(如果 date 大于该月天数，则加月)           |
+| setUTCDate(date)               | 设置 UTC 日期的日(如果 date 大于该月天数，则加月)      |
+| getDay()                       | 返回日期中表示周几的数值(0 表示周日，6 表示周六)       |
+| getUTCDay()                    | 返回 UTC 日期中表示周几的数值(0 表示周日，6 表示周六)  |
+| getHours()                     | 返回日期中的时(0~23)                                   |
+| getUTCHours()                  | 返回 UTC 日期中的时(0~23)                              |
+| setHours(hours)                | 设置日期中的时(如果 hours 大于 23，则加日)             |
+| setUTCHours(hours)             | 设置 UTC 日期中的时(如果 hours 大于 23，则加日)        |
+| getMinutes()                   | 返回日期中的分(0~59)                                   |
+| getUTCMinutes()                | 返回 UTC 日期中的分(0~59)                              |
+| setMinutes(minutes)            | 设置日期中的分(如果 minutes 大于 59，则加时)           |
+| setUTCMinutes(minutes)         | 设置 UTC 日期中的分(如果 minutes 大于 59，则加时)      |
+| getSeconds()                   | 返回日期中的秒(0~59)                                   |
+| getUTCSeconds()                | 返回 UTC 日期中的秒(0~59)                              |
+| setSeconds(seconds)            | 设置日期中的秒(如果 seconds 大于 59，则加分)           |
+| setUTCSeconds(seconds)         | 设置 UTC 日期中的秒(如果 seconds 大于 59，则加分)      |
+| getMillseconds()               | 返回日期中的毫秒                                       |
+| getUTCMillseconds()            | 返回 UTC 日期中的毫秒                                  |
+| setMillseconds(millseconds)    | 设置日期中的毫秒                                       |
+| setUTCMillseconds(millseconds) | 设置 UTC 日期中的毫秒                                  |
+| getTimezoneOffset()            | 返回以分钟计的 UTC 与本地时区的偏移量                  |
 
+```javascript
 let now = new Date();
 console.log(now.getTime()); // 1610474569539
 console.log(now.setTime(now.getTime() / 2)); // Sun Jul 09 1995 05:01:24 GMT+0800 (中国标准时间)
