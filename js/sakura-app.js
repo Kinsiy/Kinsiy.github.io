@@ -1161,13 +1161,15 @@ var home = location.href,
 		},
 		TOC: function () {
 			if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
-        var id = 1;
-        $(".entry-content").children("h1,h2,h3,h4,h5").each(function() {
-            //var hyphenated = $(this).text().replace(/\s/g, '-');
-            var hyphenated = "kinsiy-" + id;
-            $(this).attr('id', hyphenated);
-            id++;
-        });
+				var id = 1;
+				$(".entry-content")
+					.children("h1,h2,h3,h4,h5")
+					.each(function () {
+						//var hyphenated = $(this).text().replace(/\s/g, '-');
+						var hyphenated = "kinsiy-" + id;
+						$(this).attr("id", hyphenated);
+						id++;
+					});
 				if ($(".pattern-center").length > 0) {
 					//有图的情况
 					tocbot.init({
@@ -1191,7 +1193,7 @@ var home = location.href,
 						scrollSmooth: true,
 						headingSelector: "h1, h2, h3, h4, h5", // 需要索引的标题级别
 						headingsOffset: -85,
-            scrollSmoothOffset: -85
+						scrollSmoothOffset: -85,
 					});
 				}
 				var offsetTop = $(".toc").offset().top - 135;
@@ -1794,9 +1796,9 @@ $(function () {
 	$(document).on("click", ".specsZan", function () {
 		$(this).postLike();
 	});
-	console.log("%c Mashiro %c", "background:#24272A; color:#ffffff", "", "https://2heng.xin/");
-	console.log("%c hojun %c", "background:#24272A; color:#ffffff", "", "https://www.hojun.cn/");
-	console.log("%c Github %c", "background:#24272A; color:#ffffff", "", "https://github.com/honjun/hexo-theme-sakura");
+	// console.log("%c Mashiro %c", "background:#24272A; color:#ffffff", "", "https://2heng.xin/");
+	// console.log("%c hojun %c", "background:#24272A; color:#ffffff", "", "https://www.hojun.cn/");
+	// console.log("%c Github %c", "background:#24272A; color:#ffffff", "", "https://github.com/honjun/hexo-theme-sakura");
 });
 var isWebkit = navigator.userAgent.toLowerCase().indexOf("webkit") > -1,
 	isOpera = navigator.userAgent.toLowerCase().indexOf("opera") > -1,
