@@ -137,3 +137,8 @@ function deepCopy(value) {
 	return baseCopy(value);
 }
 ```
+
+## 参考
+
+[1] [重拾 JS——防抖与节流](https://juejin.cn/post/6844904144466083853)
+[2] [Javascriipt 深拷贝](https://segmentfault.com/a/1190000015455662)

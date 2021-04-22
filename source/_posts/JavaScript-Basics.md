@@ -693,4 +693,4 @@ switch (true) {
 
 ## 函数
 
-见 <a herf="https://kinsiy.github.io/2021/03/14/Javascript-Function/">Javascript-Function</a>
+见 [Javascript-Function](../../../../2021/03/14/Javascript-Function/)
