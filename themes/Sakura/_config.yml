@@ -2,7 +2,7 @@
 prefixName: Kinsiy
 siteName:
 # favicon and site master avatar
-favicon: /img/custom/avatar.jpg
+favicon: https://cdn.jsdelivr.net/gh/Kinsiy/cdn/img/custom/sakura.svg
 avatar: /img/custom/avatar.jpg
 url: https://kinsiy.github.io/
 description: slipped the surly bonds of earth to touch the face of God
