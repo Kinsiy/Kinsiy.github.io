@@ -1,0 +1,98 @@
+@import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+
+body {
+    min-height: 100vh;
+    min-width: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #88828E;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.custom-post {
+    position: relative;
+    padding: 40px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.06),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+
+.post .custom-post-header-img {
+    position: absolute;
+    height: calc(10em + 40px);
+    width: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+.index .custom-post-header-img {
+    height: 10em;
+    position: absolute;
+    right: 40px;
+    top: 10px;
+    width: 10em;
+    object-fit: cover;
+}
+
+// .index .post-header.custom-post-header>.post-title,.index .post-meta.custom-post-meta{
+//     text-align: start;
+// }
+
+// .post .post-header.custom-post-header>.post-title,.post .post-meta.custom-post-meta{
+//     color: #fff
+// }
+
+.content-wrap.custom-content-wrap {
+    background: transparent;
+    padding: 0;
+}
+
+.content-wrap.custom-content-wrap > .content{
+    margin: 1px 0 0 0;
+    padding: 0;
+}
+.content-wrap.custom-content-wrap > .comments{
+    margin-top: 12px;
+}
+
+.content-wrap.custom-content-wrap > * > *{
+    background-color: var(--content-bg-color);
+}
+
+.content-wrap.custom-content-wrap .pagination{
+    background-color: var(--body-bg-color);
+    margin-top: 12px
+}
+
+.header-inner {
+    background: var(--content-bg-color);
+    border-radius: initial;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.sidebar-inner {
+    background: var(--content-bg-color);
+    border-radius: initial;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+p{
+    text-indent: 2em;
+}
+ .note p, ul p{
+     text-indent: unset;
+}
+
+th{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.katex-block{
+    overflow: overlay
+}
