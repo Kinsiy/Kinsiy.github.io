@@ -4,5 +4,5 @@ date: {{ date }}
 keywords: 
 description: 
 comments: false
-photos: 
+photos:
 ---

@@ -4,7 +4,7 @@ date: 2021-04-20 10:11:29
 categories: [学习笔记, Javascript]
 tags: [JS红宝书, BOM]
 description:
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/bom-2.png
+photos:
 ---
 
 ## location 对象

@@ -5,7 +5,7 @@ categories: [学习笔记, Javascript]
 tags: [JS红宝书, async/await]
 keywords:
 description:
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/async.png
+photos:
 ---
 
 异步函数，也称为"async/await"(语法关键字)，是 ES6 期约模式在 ECMAScript 函数中的引用。async/await 是 ES8 规范新增的。

@@ -5,7 +5,7 @@ categories: [学习笔记, Javascript]
 tags: [JS红宝书, Promise]
 keywords:
 description:
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Promise.png
+photos:
 ---
 
 期约是对尚不存在的的结果的一个替身。ESMAScript 6 增加了对 Promise/A+规范的完善支持，即 Promise 类型。一经退出，Promise 就大受欢迎，成为了主导性的异步编程机制。所有的现代浏览器都支持 ES6 期约，很多其他浏览器 API(如 fetch()和电池 API)也以期约为基础。

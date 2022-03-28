@@ -5,7 +5,7 @@ categories: [学习笔记, Javascript]
 tags: [JS红宝书, BOM]
 keywords:
 description: 浏览器对象模型BOM，是使用Javascript开发Web应用程序的核心。本文对window对象及窗口关系进行学习
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/bom-1.png
+photos:
 ---
 
 ## window 对象

@@ -1,5 +1,5 @@
 ---
-title: Javascript-动画与图形-中
+title: Javascript-动画与图形-下
 date: 2021-10-28 22:36:59
 tags: [JS红宝书]
 categories: [学习笔记, Javascript]
@@ -23,26 +23,26 @@ Canvas API 主要聚焦于 2D 图形。而同样使用<canvas\>元素的 WebGL A
 
 ```javascript
 /**
-        <canvas id="drawing" width="200" height="200">A drawing of something.</canvas>
+  <canvas id="drawing" width="200" height="200">A drawing of something.</canvas>
 */
 
 let drawing = document.getElementById("drawing");
 
 // 确保浏览器支持<canvas>
 if (drawing.getContext) {
-	// 取得图像的数据 URI
-	let imgURI = drawing.toDataURL("image/png");
+  // 取得图像的数据 URI
+  let imgURI = drawing.toDataURL("image/png");
 
-	// 显示图片
-	let image = document.createElement("img");
-	image.src = imgURI;
-	document.body.appendChild(image);
+  // 显示图片
+  let image = document.createElement("img");
+  image.src = imgURI;
+  document.body.appendChild(image);
 }
 ```
 
 ## 2D 绘图上下文
 
-2D 绘图上下文提供了绘制 2D 图形的方法，包括矩形、弧形和路径。2D 上下文的坐标原点(0, 0)在<canvas>元素的左上角。所有坐标值都相对于该点计算，因此 x 坐标向右增长，y 坐标向下增长。默认情况下，width 和 height 表示两个方向上像素的最大值
+2D 绘图上下文提供了绘制 2D 图形的方法，包括矩形、弧形和路径。2D 上下文的坐标原点(0, 0)在<canvas\>元素的左上角。所有坐标值都相对于该点计算，因此 x 坐标向右增长，y 坐标向下增长。默认情况下，width 和 height 表示两个方向上像素的最大值
 
 ### 填充与描边
 
@@ -54,9 +54,9 @@ if (drawing.getContext) {
 let drawing = document.getElementById("drawing");
 // 确保浏览器支持<canvas>
 if (drawing.getContext) {
-	let context = drawing.getContext("2d");
-	context.strokeStyle = "red";
-	context.fillStyle = "#0000ff";
+  let context = drawing.getContext("2d");
+  context.strokeStyle = "red";
+  context.fillStyle = "#0000ff";
 }
 ```
 
@@ -68,27 +68,27 @@ if (drawing.getContext) {
 let drawing = document.getElementById("drawing");
 // 确保浏览器支持<canvas>
 if (drawing.getContext) {
-	let context = drawing.getContext("2d");
+  let context = drawing.getContext("2d");
 
-	// fillRect()方法用于以指定颜色在画布上绘制并填充矩形。填充的颜色使用 fillStyle 属性指定
-	// 绘制红色矩形
-	context.fillStyle = "#ff0000";
-	context.fillRect(10, 10, 50, 50);
+  // fillRect()方法用于以指定颜色在画布上绘制并填充矩形。填充的颜色使用 fillStyle 属性指定
+  // 绘制红色矩形
+  context.fillStyle = "#ff0000";
+  context.fillRect(10, 10, 50, 50);
 
-	// strokeRect()方法使用通过 strokeStyle 属性指定的颜色绘制矩形轮廓
-	// 绘制半透明蓝色轮廓的矩形
-	context.strokeStyle = "rgba(0,0,255,0.5)";
-	context.strokeRect(30, 30, 50, 50);
+  // strokeRect()方法使用通过 strokeStyle 属性指定的颜色绘制矩形轮廓
+  // 绘制半透明蓝色轮廓的矩形
+  context.strokeStyle = "rgba(0,0,255,0.5)";
+  context.strokeRect(30, 30, 50, 50);
 
-	// 使用 clearRect()方法可以擦除画布中某个区域。该方法用于把绘图上下文中的某个区域变透明。
-	// 在前两个矩形重叠的区域擦除一个矩形区域
-	context.clearRect(40, 40, 10, 10);
+  // 使用 clearRect()方法可以擦除画布中某个区域。该方法用于把绘图上下文中的某个区域变透明。
+  // 在前两个矩形重叠的区域擦除一个矩形区域
+  context.clearRect(40, 40, 10, 10);
 }
 ```
 
 ### 绘制路径
 
-D 绘图上下文支持很多在画布上绘制路径的方法。通过路径可以创建复杂的形状和线条。要绘制路径，必须首先调用 beginPath()方法以表示要开始绘制新路径。然后，再调用下列方法来绘制路径
+2D 绘图上下文支持很多在画布上绘制路径的方法。通过路径可以创建复杂的形状和线条。要绘制路径，必须首先调用 beginPath()方法以表示要开始绘制新路径。然后，再调用下列方法来绘制路径
 
 -   arc(x, y, radius, startAngle, endAngle, counterclockwise): 以坐标(x ,y)为圆心，以 radius 为半径绘制一条弧线，起始角度为 startAngle，结束角度为 endAngle(都是弧度)。最后一个参数 counterclockwise 表示是否逆时针计算其实角度和结束角度(默认为顺时针)
 -   arcTo(x1, y1, x2, y2, radius): 以给定半径 radius，经由(x1, y1)绘制一条从上一点到(x2, y2)的弧线
@@ -154,8 +154,8 @@ measureText()方法使用 font、textAlign 和 textBaseline 属性当前的值�
 let fontSize = 100;
 context.font = fontSize + "px Arial";
 while (context.measureText("Hello world!").width > 140) {
-	fontSize--;
-	context.font = fontSize + "px Arial";
+  fontSize--;
+  context.font = fontSize + "px Arial";
 }
 context.fillText("Hello world!", 10, 10);
 context.fillText("Font size is " + fontSize + "px", 10, 50);
@@ -165,16 +165,22 @@ context.fillText("Font size is " + fontSize + "px", 10, 50);
 
 上下文变换可以操作绘制在画布上的图像。2D 绘图上下文支持所有常见的绘制变换。在创建绘制上下文时，会以默认值初始化变换矩阵，从而让绘制操作如实应用到绘制结果上。对绘制上下文应用变换，可以导致以不同的变换矩阵应用绘制操作，从而产生不同的结果
 
--   rotate(angle)：围绕**原点**把图像旋转 angle 弧度。
--   scale(scaleX, scaleY)：通过在 x 轴乘以 scaleX、在 y 轴乘以 scaleY 来缩放图像。scaleX
-    和 scaleY 的默认值都是 1.0。
--   translate(x, y)：把原点移动到(x, y)。执行这个操作后，坐标(0, 0)就会变成(x, y)。
--   transform(m1_1, m1_2, m2_1, m2_2, dx, dy)：像下面这样通过矩阵乘法直接修改矩阵。
-    m1_1 m1_2 dx
-    m2_1 m2_2 dy
-    0 0 1
--   setTransform(m1_1, m1_2, m2_1, m2_2, dx, dy)：把矩阵重置为默认值，再以传入的
-    参数调用 transform()
+- rotate(angle)：围绕**原点**把图像旋转 angle 弧度。
+
+- scale(scaleX, scaleY)：通过在 x 轴乘以 scaleX、在 y 轴乘以 scaleY 来缩放图像。scaleX 和 scaleY 的默认值都是 1.0。
+
+- translate(x, y)：把原点移动到(x, y)。执行这个操作后，坐标(0, 0)就会变成(x, y)。
+
+- transform(m1_1, m1_2, m2_1, m2_2, dx, dy)：像下面这样通过矩阵乘法直接修改矩阵。
+  $$
+  \begin{matrix}
+     m1_1 & m1_2 & dx \\
+     m2_1 & m2_2 & dy \\
+     0 & 0 & 1
+  \end{matrix}
+  $$
+
+- setTransform(m1_1, m1_2, m2_1, m2_2, dx, dy)：把矩阵重置为默认值，再以传入的参数调用 transform()
 
 所有这些变换，包括 fillStyle 和 strokeStyle 属性，会一直保留在上下文中，直到再次修改它们。虽然没有办法明确地将所有值都重置为默认值，但有两个方法可以帮我们跟踪变化。如果想着什么时候再回到当前的属性和变换状态，可以调用 save()方法。调用这个方法后，所有这一时刻的设置会被放到一个暂存栈中。保存之后，可以继续修改上下文。而在需要恢复之前的上下文时，可以调用 restore()方法。这个方法会从暂存栈中取出并恢复之前保存的设置。多次调用 save()方法可以在暂存栈中存储多套设置，然后通过 restore()可以系统地恢复
 
@@ -203,24 +209,20 @@ context.fillRect(0, 0, 100, 200); // 在(0, 0)绘制红色矩形
 ```JavaScript
 let image = document.images[0];
 
-
 // 获取了文本中的第一个图像，然后在画布上的坐标(10, 10)处将它绘制了出来
 context.drawImage(image, 10, 10);
-
 
 // 图像会缩放到 20 像素宽、30 像素高
 context.drawImage(image, 50, 10, 20, 30)
 
-
 /**
-        要绘制的图像、源图像 x 坐标、源图像 y 坐标、源图像宽度、源图像高度、
-                                目标区域 x 坐标、目标区域 y 坐标、目标区域宽度和目标区域高度
+  要绘制的图像、源图像 x 坐标、源图像 y 坐标、源图像宽度、源图像高度、目标区域 x 坐标、目标区域 y 坐标、目标区域宽度和目标区域高度
 */
 context.drawImage(image, 0, 10, 50, 50, 0, 100, 40, 60);
 /**
-        原始图像中只有一部分会绘制到画布上。
-        这一部分从(0, 10)开始，50 像素宽、50 像素高。
-        而绘制到画布上时，会从(0, 100)开始，变成 40 像素宽、60 像素高
+  原始图像中只有一部分会绘制到画布上。
+  这一部分从(0, 10)开始，50 像素宽、50 像素高。
+  而绘制到画布上时，会从(0, 100)开始，变成 40 像素宽、60 像素高
 */
 ```
 
@@ -344,8 +346,7 @@ context.fillRect(30, 30, 50, 50);
 context.globalAlpha = 0;
 ```
 
-globalCompositionOperation 属性表示新绘制的形状如何与上下文中已有的形状融合。这个属
-性是一个字符串，可以取下列值
+globalCompositionOperation 属性表示新绘制的形状如何与上下文中已有的形状融合。这个属性是一个字符串，可以取下列值
 
 -   source-over：默认值，新图形绘制在原有图形上面。
 -   source-in：新图形只绘制出与原有图形重叠的部分，画布上其余部分全部透明。

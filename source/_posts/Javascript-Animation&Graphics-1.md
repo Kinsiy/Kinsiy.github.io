@@ -5,7 +5,7 @@ tags: [JS红宝书]
 categories: [学习笔记, Javascript]
 keywords:
 description:
-photos: https://w.wallhaven.cc/full/8o/wallhaven-8o91yy.jpg
+photos:
 ---
 
 图形和动画已经日益成为浏览器中现代 Web 应用程序的必备功能，但实现起来仍然比较困难

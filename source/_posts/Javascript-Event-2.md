@@ -5,7 +5,7 @@ categories: [学习笔记, Javascript]
 tags: [JS红宝书, Event]
 keywords:
 description:
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Event-2.png
+photos:
 ---
 
 ## 事件类型

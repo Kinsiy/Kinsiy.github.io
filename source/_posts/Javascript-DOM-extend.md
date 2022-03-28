@@ -5,7 +5,7 @@ tags: [JS红宝书, DOM]
 categories: [学习笔记, Javascript]
 keywords:
 description: 尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/js-dom-extend.png
+photos:
 ---
 
 

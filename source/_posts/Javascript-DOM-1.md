@@ -5,7 +5,7 @@ tags: [JS红宝书, DOM]
 categories: [学习笔记, Javascript]
 keywords:
 description: 
-photos: https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/dom-1.png
+photos:
 ---
 
 ## 节点层级
