@@ -15,12 +15,12 @@ photos:
 ```javascript
 // 函数声明
 function sum_1(val_1, val_2) {
-	return val_1 + val_2;
+  return val_1 + val_2;
 }
 
 // 函数表达式
 let sum_2 = function (val_1, val_2) {
-	return val_1 + val_2;
+  return val_1 + val_2;
 };
 
 // 箭头函数
@@ -54,7 +54,7 @@ let sum = (a,b,c) => a+b+c
 
 ```javascript
 function sum(num_1, num_2) {
-	return num_1 + num_2;
+  return num_1 + num_2;
 }
 
 let anthorSum = sum;
@@ -76,14 +76,14 @@ function queen() {}
 console.log(queen.bind(null).name); // bound queen
 
 let person = {
-	year_: 2021,
-	get year() {
-		return this.year_;
-	},
-	set year(newYear) {
-		console.log(`oldYear: ${this.year_}`);
-		this.year_ = newYear;
-	},
+  year_: 2021,
+  get year() {
+    return this.year_;
+  },
+  set year(newYear) {
+    console.log(`oldYear: ${this.year_}`);
+    this.year_ = newYear;
+  },
 };
 
 let propertyDescriptor = Object.getOwnPropertyDescriptor(person, "year");
@@ -98,16 +98,16 @@ ECMAScript 函数的参数在内部表现为一个数组。在使用 function �
 
 ```javascript
 function sum(val_1, val_2) {
-	if (arguments.length == 1) {
-		arguments[1] = 66;
-		console.log(val_1 + 10);
-		console.log(val_2);
-	} else {
-		arguments[1] = 88;
-		console.log(val_2);
-		val_2 = 100;
-		console.log(arguments[1]);
-	}
+  if (arguments.length == 1) {
+    arguments[1] = 66;
+    console.log(val_1 + 10);
+    console.log(val_2);
+  } else {
+    arguments[1] = 88;
+    console.log(val_2);
+    val_2 = 100;
+    console.log(arguments[1]);
+  }
 }
 
 // arguments 对象的长度由传入的命名参数数量决定。
@@ -132,13 +132,13 @@ ECMAScript 函数不能像传统编程那样重载。在其他语言比如 Java 
 ```javascript
 // ES 5
 function makeKing(name) {
-	name = typeof name !== "undefined" ? name : "Kinsiy";
-	return `King ${name} VII`;
+  name = typeof name !== "undefined" ? name : "Kinsiy";
+  return `King ${name} VII`;
 }
 
 // ES 6
 function makeQueen(name = "QingLai") {
-	return `Queen ${name} VII`;
+  return `Queen ${name} VII`;
 }
 
 // 在使用默认参数时，arguments 对象的值不反应参数的默认值，只反映传给函数的参数
@@ -152,15 +152,15 @@ function makeQueen(name = "QingLai") {
 ```javascript
 // 报错 ReferenceError
 function marry(king = queen, queen = "QingLai") {
-	return `king ${king} queen ${queen}`;
+  return `king ${king} queen ${queen}`;
 }
 
 // 参数也存在于自己的作用域中，它们不能引用函数体的作用域
 
 // 报错 ReferenceError
 function makeMarry(name = "Kinsiy", age = num) {
-	let num = 18;
-	console.log(`age ${age}`);
+  let num = 18;
+  console.log(`age ${age}`);
 }
 ```
 
@@ -174,7 +174,7 @@ ECMAScript 6 新增了扩展操作符，使用它可以非常简洁地操作和�
 let values = [1, 2, 3, 4];
 
 function countArguments() {
-	console.log(arguments.length);
+  console.log(arguments.length);
 }
 
 countArguments(-1, ...values); // 5
@@ -186,7 +186,7 @@ countArguments(-1, ...values); // 5
 
 ```javascript
 function getSum(...values) {
-	return values.reduce((x, y) => x + y, 0);
+  return values.reduce((x, y) => x + y, 0);
 }
 
 console.log(getSum(1, 2, 3, 4, 5, 6)); // 21
@@ -200,13 +200,13 @@ console.log(getSum(1, 2, 3, 4, 5, 6)); // 21
 console.log(sum(10, 5)); // 15
 
 function sum(num_1, num_2) {
-	return num_1 + num_2;
+  return num_1 + num_2;
 }
 
 console.log(sum_1(20, 5)); // ReferenceError: Cannot access 'sum_1' before initialization
 let sum_1 = function (num_1, num_2) {
-	// 使用var 也是一样的
-	return num_1 + num_2;
+  // 使用var 也是一样的
+  return num_1 + num_2;
 };
 ```
 
@@ -218,23 +218,23 @@ let sum_1 = function (num_1, num_2) {
 
 ```javascript
 function createComparisonFunction(propertyName) {
-	return function (obj_1, obj_2) {
-		let value_1 = obj_1[propertyName];
-		let value_2 = obj_2[propertyName];
+  return function (obj_1, obj_2) {
+    let value_1 = obj_1[propertyName];
+    let value_2 = obj_2[propertyName];
 
-		if (value_1 < value_2) {
-			return -1;
-		} else if (value_1 > value_2) {
-			return 1;
-		} else {
-			return 0;
-		}
-	};
+    if (value_1 < value_2) {
+      return -1;
+    } else if (value_1 > value_2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
 }
 
 data = [
-	{ name: "Kinsiy", age: 22 },
-	{ name: "QingLai", age: 21 },
+  { name: "Kinsiy", age: 22 },
+  { name: "QingLai", age: 21 },
 ];
 
 data.sort(createComparisonFunction("age"));
@@ -252,11 +252,11 @@ arguments 前面已经说过很多次了，这里主要讲一下 arguments 对�
 
 ```javascript
 function factorial(num) {
-	if (num <= 1) {
-		return 1;
-	} else {
-		return num * arguments.callee(num - 1); // 递归函数逻辑与函数名解耦
-	}
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * arguments.callee(num - 1); // 递归函数逻辑与函数名解耦
+  }
 }
 
 console.log(factorial(5)); // 120
@@ -273,11 +273,11 @@ this 在标准函数和箭头函数中有不同的行为。
 window.color = "purple";
 
 let o = {
-	color: "orange",
+  color: "orange",
 };
 
 function sayColor() {
-	console.log(this.color);
+  console.log(this.color);
 }
 
 let sayColor_1 = () => console.log(this.color);
@@ -298,11 +298,11 @@ o.sayColor_1(); // purple
 
 ```javascript
 function outer() {
-	inner();
+  inner();
 }
 
 function inner() {
-	console.log(arguments.callee.caller);
+  console.log(arguments.callee.caller);
 }
 
 outer(); // ƒ outer()
@@ -314,10 +314,10 @@ outer(); // ƒ outer()
 
 ```javascript
 function King() {
-	if (!new.target) {
-		throw new Error("King 必须new");
-	}
-	console.log(`new King`);
+  if (!new.target) {
+    throw new Error("King 必须new");
+  }
+  console.log(`new King`);
 }
 
 new King(); // new King
@@ -330,15 +330,15 @@ King(); // Error: King 必须new
 
 ```javascript
 function sayName(name) {
-	console.log(name);
+  console.log(name);
 }
 
 function sum(num_1, num_2) {
-	return num_1 + num_2;
+  return num_1 + num_2;
 }
 
 function sayHi() {
-	console.log("Hi");
+  console.log("Hi");
 }
 
 console.log(sayName.length); // 1
@@ -350,16 +350,16 @@ console.log(sayHi.length); // 0
 
 ```javascript
 function sum(num_1, num_2) {
-	console.log(this);
-	return num_1 + num_2;
+  console.log(this);
+  return num_1 + num_2;
 }
 
 function applysum(num_1, num_2) {
-	return sum.apply(this, arguments);
+  return sum.apply(this, arguments);
 }
 
 function callsum(num_1, num_2) {
-	return sum.call(this, num_1, num_2);
+  return sum.call(this, num_1, num_2);
 }
 
 sum(1, 2); // window
@@ -371,11 +371,11 @@ applysum.call(object, 3, 4); // {}
 
 window.color = "orange";
 let o = {
-	color: "purple",
+  color: "purple",
 };
 
 function sayColor() {
-	console.log(this.color);
+  console.log(this.color);
 }
 
 let ObjectSayColor = sayColor.bind(o);
@@ -393,11 +393,11 @@ ObjectSayColor(); // purple
 
 ```javascript
 const factorial = function f(num) {
-	if (num <= 1) {
-		return 1;
-	} else {
-		return num * f(num - 1);
-	}
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * f(num - 1);
+  }
 };
 
 console.log(factorial(5)); // 120
@@ -414,18 +414,18 @@ ES 6 规范新增了一项内存管理优化机制，让 javascript 引擎在满
 
 ```javascript
 function createComparisonFunction(propertyName) {
-	return function (obj_1, obj_2) {
-		let value_1 = obj_1[propertyName];
-		let value_2 = obj_2[propertyName];
+  return function (obj_1, obj_2) {
+    let value_1 = obj_1[propertyName];
+    let value_2 = obj_2[propertyName];
 
-		if (value_1 < value_2) {
-			return -1;
-		} else if (value_1 > value_2) {
-			return 1;
-		} else {
-			return 0;
-		}
-	};
+    if (value_1 < value_2) {
+      return -1;
+    } else if (value_1 > value_2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
 }
 
 let compare = createComparisonFunction("name");
@@ -439,12 +439,12 @@ compare 函数就是一个闭包，他的作用域链包含本身函数的的作
 ```javascript
 window.identity = "the window";
 let object = {
-	identity: "my object",
-	getIdentity() {
-		return function () {
-			console.log(this.identity); // 内部函数永远不可能直接访问外部函数的this与arguments
-		};
-	},
+  identity: "my object",
+  getIdentity() {
+    return function () {
+      console.log(this.identity); // 内部函数永远不可能直接访问外部函数的this与arguments
+    };
+  },
 };
 
 console.log(object.getIdentity()()); // the window
@@ -460,14 +460,14 @@ console.log(object.getIdentity()()); // the window
 
 ```javascript
 (function () {
-	// 块级作用域
+  // 块级作用域
 })()(
-	// ES5 中常用来隔离块级作用域
-	function () {
-		for (var i = 0; i < 3; i++) {
-			console.log(i);
-		}
-	}
+  // ES5 中常用来隔离块级作用域
+  function () {
+    for (var i = 0; i < 3; i++) {
+      console.log(i);
+    }
+  }
 )(); // 0,1,2
 ```
 

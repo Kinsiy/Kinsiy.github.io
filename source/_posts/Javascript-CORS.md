@@ -1,4 +1,4 @@
-﻿---
+---
 title: Javascript-CORS
 date: 2021-10-29 19:08:39
 tags:
@@ -134,7 +134,7 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 ```js
 let img = new Image();
 img.onload = img.onerror = function () {
-	console.log("Done!");
+  console.log("Done!");
 };
 img.src = "Http://www.example.com/test?name=Nicholas";
 ```

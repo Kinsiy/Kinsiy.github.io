@@ -1,4 +1,4 @@
-﻿---
+---
 title: Javascript-动画与图形-上
 date: 2021-10-25 21:08:28
 tags: [JS红宝书]
@@ -16,12 +16,12 @@ photos:
 
 ```javascript
 (function () {
-	function updateAnimations() {
-		doAnimation1();
-		doAnimation2();
-		// 其他任务
-	}
-	setInterval(updateAnimations, 100);
+  function updateAnimations() {
+    doAnimation1();
+    doAnimation2();
+    // 其他任务
+  }
+  setInterval(updateAnimations, 100);
 })();
 ```
 
@@ -63,22 +63,22 @@ cancelAnimationFrame(requestId);
 
 ```javascript
 function animate({ timing, draw, duration }) {
-	let start = performance.now();
+  let start = performance.now();
 
-	requestAnimationFrame(function animate(time) {
-		// timeFraction 从 0 增加到 1
-		let timeFraction = (time - start) / duration;
-		if (timeFraction > 1) timeFraction = 1;
+  requestAnimationFrame(function animate(time) {
+    // timeFraction 从 0 增加到 1
+    let timeFraction = (time - start) / duration;
+    if (timeFraction > 1) timeFraction = 1;
 
-		// 计算当前动画状态
-		let progress = timing(timeFraction);
+    // 计算当前动画状态
+    let progress = timing(timeFraction);
 
-		draw(progress); // 绘制
+    draw(progress); // 绘制
 
-		if (timeFraction < 1) {
-			requestAnimationFrame(animate);
-		}
-	});
+    if (timeFraction < 1) {
+      requestAnimationFrame(animate);
+    }
+  });
 }
 ```
 

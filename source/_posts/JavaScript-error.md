@@ -98,18 +98,18 @@ console.groupEnd();
 
 //console.table()
 var contacts = {
-	London: {
-		Tel: "110",
-		Country: "UK",
-	},
-	Syfeny: {
-		Tel: "120",
-		Country: "CN",
-	},
-	Kinsiy: {
-		Tel: "119",
-		Country: "USA",
-	},
+  London: {
+    Tel: "110",
+    Country: "UK",
+  },
+  Syfeny: {
+    Tel: "120",
+    Country: "CN",
+  },
+  Kinsiy: {
+    Tel: "119",
+    Country: "USA",
+  },
 };
 console.table(contacts);
 
@@ -131,7 +131,7 @@ width = $("#width").val();
 height = $("#height").val();
 area = width * height;
 if (area < 20) {
-	debugger;
+  debugger;
 }
 ```
 
@@ -165,17 +165,17 @@ throw new Error('message')
 var width = 12;
 var height = "Test";
 function calculateArea(width, height) {
-	try {
-		var area = width * height;
-		if (!isNaN(area)) {
-			return area;
-		} else {
-			throw new Error("calculateArea() 入参无效！");
-		}
-	} catch (e) {
-		var errorMessage = e.name + " " + e.message;
-		console.log(erroeMessage);
-		return "无法计算！";
-	}
+  try {
+    var area = width * height;
+    if (!isNaN(area)) {
+      return area;
+    } else {
+      throw new Error("calculateArea() 入参无效！");
+    }
+  } catch (e) {
+    var errorMessage = e.name + " " + e.message;
+    console.log(erroeMessage);
+    return "无法计算！";
+  }
 }
 ```

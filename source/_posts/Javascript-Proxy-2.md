@@ -18,10 +18,10 @@ get()捕获器会在获取属性值得操作中被调用。对应的反射 API �
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	get(target, property, receiver) {
-		console.log("get()");
-		return Reflect.get(...arguments);
-	},
+  get(target, property, receiver) {
+    console.log("get()");
+    return Reflect.get(...arguments);
+  },
 });
 
 proxy.id; // get()
@@ -52,10 +52,10 @@ set()捕获器会在设置属性值得操作中被调用。对应的反射 API �
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	set(target, property, value, receiver) {
-		console.log("set()");
-		return Reflect.set(...arguments);
-	},
+  set(target, property, value, receiver) {
+    console.log("set()");
+    return Reflect.set(...arguments);
+  },
 });
 
 proxy.id = "Kinsiy"; // set()
@@ -86,10 +86,10 @@ set()捕获器会在 in 操作符中被调用。对应的反射 API 方法为 Re
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	has(target, property) {
-		console.log("has()");
-		return Reflect.has(...arguments);
-	},
+  has(target, property) {
+    console.log("has()");
+    return Reflect.has(...arguments);
+  },
 });
 
 console.log("id" in proxy); //has() false
@@ -117,14 +117,14 @@ defineProperty()捕获器会在 Object.defineProperty()中被调用。对应的�
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	defineProperty(target, property, descriptor) {
-		console.log("defineProperty()");
-		return Reflect.defineProperty(...arguments);
-	},
+  defineProperty(target, property, descriptor) {
+    console.log("defineProperty()");
+    return Reflect.defineProperty(...arguments);
+  },
 });
 
 Object.defineProperty(proxy, "id", {
-	value: "Queen",
+  value: "Queen",
 }); // defineProperty()
 
 console.log(proxy.id); // Queen
@@ -152,10 +152,10 @@ getOwnPropertyDescriptor()捕获器会在 Object.getOwnPropertyDescriptor()中�
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	getOwnPropertyDescriptor(target, property) {
-		console.log("getOwnPropertyDescriptor()");
-		return Reflect.getOwnPropertyDescriptor(...arguments);
-	},
+  getOwnPropertyDescriptor(target, property) {
+    console.log("getOwnPropertyDescriptor()");
+    return Reflect.getOwnPropertyDescriptor(...arguments);
+  },
 });
 
 Object.getOwnPropertyDescriptor(proxy, "id"); // getOwnperpertyDescriptor()
@@ -183,10 +183,10 @@ deleteProperty()捕获器会在 delete 操作符中被调用。对应的反射 A
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	deleteProperty(target, property) {
-		console.log("deleteProperty()");
-		return Reflect.deleteProperty(...arguments);
-	},
+  deleteProperty(target, property) {
+    console.log("deleteProperty()");
+    return Reflect.deleteProperty(...arguments);
+  },
 });
 
 delete proxy.id; // deleteProperty()
@@ -212,10 +212,10 @@ ownKeys()捕获器会在 Object.keys() 及类似方法中被调用。对应的�
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	ownKeys(target) {
-		console.log("ownKeys()");
-		return Reflect.ownKeys(...arguments);
-	},
+  ownKeys(target) {
+    console.log("ownKeys()");
+    return Reflect.ownKeys(...arguments);
+  },
 });
 
 Object.keys(proxy); // ownKeys()
@@ -242,10 +242,10 @@ getPrototypeOf()捕获器会在 Object.getPrototypeOf() 中被调用。对应的
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	getPrototypeOf(target) {
-		console.log("getPrototypeOf()");
-		return Reflect.getPrototypeOf(...arguments);
-	},
+  getPrototypeOf(target) {
+    console.log("getPrototypeOf()");
+    return Reflect.getPrototypeOf(...arguments);
+  },
 });
 
 /**
@@ -275,10 +275,10 @@ setPrototypeOf()捕获器会在 Object.setPrototypeOf() 中被调用。对应的
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	setPrototypeOf(target, prototype) {
-		console.log("setPrototypeOf()");
-		return Reflect.setPrototypeOf(...arguments);
-	},
+  setPrototypeOf(target, prototype) {
+    console.log("setPrototypeOf()");
+    return Reflect.setPrototypeOf(...arguments);
+  },
 });
 
 /**
@@ -306,10 +306,10 @@ isExtensible()捕获器会在 Object.isExtensible() 中被调用。对应的反�
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	isExtensible(target) {
-		console.log("isExtensible()");
-		return Reflect.isExtensible(...arguments);
-	},
+  isExtensible(target) {
+    console.log("isExtensible()");
+    return Reflect.isExtensible(...arguments);
+  },
 });
 
 /**
@@ -338,10 +338,10 @@ preventExtensions()捕获器会在 Object.preventExtensions() 中被调用。对
 const myTarget = {};
 
 const proxy = new Proxy(myTarget, {
-	preventExtensions(target) {
-		console.log("preventExtensions()");
-		return Reflect.preventExtensions(...arguments);
-	},
+  preventExtensions(target) {
+    console.log("preventExtensions()");
+    return Reflect.preventExtensions(...arguments);
+  },
 });
 
 /**
@@ -368,10 +368,10 @@ apply()捕获器会在调用函数时被调用。对应的反射 API 方法为 R
 const myTarget = () => {};
 
 const proxy = new Proxy(myTarget, {
-	apply(target, thisArg, argumentsList) {
-		console.log("apply()");
-		return Reflect.apply(...arguments);
-	},
+  apply(target, thisArg, argumentsList) {
+    console.log("apply()");
+    return Reflect.apply(...arguments);
+  },
 });
 
 proxy(); // apply()
@@ -399,10 +399,10 @@ construct()捕获器会在 new 操作符中被调用。对应的反射 API 方�
 const myTarget = function () {};
 
 const proxy = new Proxy(myTarget, {
-	construct(target, argumentsList, newTarget) {
-		console.log("construct()");
-		return Reflect.construct(...arguments);
-	},
+  construct(target, argumentsList, newTarget) {
+    console.log("construct()");
+    return Reflect.construct(...arguments);
+  },
 });
 
 new proxy(); // construct()

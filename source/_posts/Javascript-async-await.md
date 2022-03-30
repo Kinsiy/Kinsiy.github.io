@@ -22,7 +22,7 @@ async 关键字用于声明异步函数。这个关键字可以用在函数声�
 
 ```javascript
 async function foo() {
-	console.log("foo");
+  console.log("foo");
 }
 
 foo();
@@ -37,8 +37,8 @@ console.log(2);
 
 ```javascript
 async function foo() {
-	console.log("1");
-	return 3;
+  console.log("1");
+  return 3;
 }
 
 // 给返回的期约添加一个解决处理程序
@@ -56,27 +56,27 @@ console.log(2);
 ```javascript
 // 返回一个实现了thenable接口的非期约对象
 async function foo() {
-	const thenable = {
-		then(callback) {
-			callback("foo");
-		},
-	};
-	return thenable;
+  const thenable = {
+    then(callback) {
+      callback("foo");
+    },
+  };
+  return thenable;
 }
 
 foo().then(console.log); // foo
 
 // 返回一个期约
 async function baz() {
-	return Promise.resolve("baz");
+  return Promise.resolve("baz");
 }
 
 baz().then(console.log); // baz
 
 // 在异步函数中抛出错误会返回拒绝的期约
 async function king() {
-	console.log(1);
-	throw 3;
+  console.log(1);
+  throw 3;
 }
 
 king().catch(console.log);
@@ -86,8 +86,8 @@ console.log(2);
 
 // 拒绝期约的错误不会被捕获
 async function queen() {
-	console.log(4);
-	Promise.reject(6);
+  console.log(4);
+  Promise.reject(6);
 }
 
 queen().catch(console.log);
@@ -103,8 +103,8 @@ console.log(5);
 
 ```javascript
 async function foo() {
-	let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3));
-	console.log(await p);
+  let p = new Promise((resolve, reject) => setTimeout(resolve, 1000, 3));
+  console.log(await p);
 }
 foo(); // 3
 ```
@@ -115,35 +115,35 @@ await 关键字期待(但实际上并不要求)一个实现 thenable 接口的�
 ```javascript
 // 等待一个原始值
 async function foo() {
-	console.log(await "foo");
+  console.log(await "foo");
 }
 foo(); // foo
 
 // 等待一个实现了thenable接口的对象
 async function baz() {
-	const thenable = {
-		then(callback) {
-			callback("baz");
-		},
-	};
-	console.log(await thenable);
+  const thenable = {
+    then(callback) {
+      callback("baz");
+    },
+  };
+  console.log(await thenable);
 }
 
 baz(); //baz
 
 // 等待一个期约
 async function king() {
-	console.log(await Promise.resolve("king"));
+  console.log(await Promise.resolve("king"));
 }
 
 king(); // king
 
 // 等待会抛出错误的同步操作，会返回拒绝的期约
 async function queen() {
-	console.log(1);
-	await (() => {
-		throw 3;
-	})();
+  console.log(1);
+  await (() => {
+    throw 3;
+  })();
 }
 
 queen().catch(console.log);
@@ -156,9 +156,9 @@ console.log(2);
 
 ```javascript
 async function kinsiy() {
-	console.log(1);
-	await Promise.reject("3");
-	console.log(4); // 这行代码不会执行
+  console.log(1);
+  await Promise.reject("3");
+  console.log(4); // 这行代码不会执行
 }
 
 kinsiy().catch(console.log);
@@ -178,9 +178,9 @@ Javascript 运行时碰到 await 关键字时，会记录在哪里暂停执行�
 
 ```javascript
 async function foo() {
-	console.log(2);
-	await null;
-	console.log(4);
+  console.log(2);
+  await null;
+  console.log(4);
 }
 
 console.log(1);
@@ -196,13 +196,13 @@ console.log(3);
 
 ```javascript
 async function sleep(delay) {
-	return new Promise((resolve) => setTimeout(resolve, delay));
+  return new Promise((resolve) => setTimeout(resolve, delay));
 }
 
 async function foo() {
-	const t0 = Date.now();
-	await sleep(3000);
-	console.log(Date.now() - t0);
+  const t0 = Date.now();
+  await sleep(3000);
+  console.log(Date.now() - t0);
 }
 
 foo(); // 3014
@@ -212,26 +212,26 @@ foo(); // 3014
 
 ```javascript
 async function randomDelay(id) {
-	// 延迟0~1000ms
-	const delay = Math.random() * 1000;
-	return new Promise((resolve) =>
-		setTimeout(() => {
-			console.log(`${id} 完成`);
-		}, delay)
-	);
+  // 延迟0~1000ms
+  const delay = Math.random() * 1000;
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      console.log(`${id} 完成`);
+    }, delay)
+  );
 }
 
 async function foo() {
-	const t0 = Date.now();
-	const promises = Array(5)
-		.fill(null)
-		.map((_, i) => randomDelay(i));
+  const t0 = Date.now();
+  const promises = Array(5)
+    .fill(null)
+    .map((_, i) => randomDelay(i));
 
-	for (const p of promises) {
-		await p;
-	}
+  for (const p of promises) {
+    await p;
+  }
 
-	console.log(`共耗时${Date.now() - t0}ms`); // ???? 为什么没有打印出来
+  console.log(`共耗时${Date.now() - t0}ms`); // ???? 为什么没有打印出来
 }
 
 foo();
@@ -246,20 +246,20 @@ foo();
 
 ```javascript
 function addTwo(x) {
-	return x + 2;
+  return x + 2;
 }
 function addThree(x) {
-	return x + 3;
+  return x + 3;
 }
 function addFive(x) {
-	return x + 5;
+  return x + 5;
 }
 
 async function addTen(x) {
-	for (const fn of [addTwo, addThree, addFive]) {
-		x = await fn(x);
-	}
-	return x;
+  for (const fn of [addTwo, addThree, addFive]) {
+    x = await fn(x);
+  }
+  return x;
 }
 
 addTen(9).then(console.log); // 19

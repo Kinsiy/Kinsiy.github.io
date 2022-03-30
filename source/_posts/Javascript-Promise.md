@@ -34,7 +34,7 @@ ESMAScript 6 新增的引用类型 Promise，可以通过 new 操作符来实例
 
 ```javascript
 let p = new Promise((resolve, reject) => {
-	setTimeout(reject, 10000); // 10 秒后调用reject
+  setTimeout(reject, 10000); // 10 秒后调用reject
 });
 
 setTimeout(console.log, 0, p); // Promise
@@ -85,16 +85,16 @@ Promise 的设计很大程度上会导致一种完全不同与 Javascript 的计
 
 ```javascript
 try {
-	throw new Error("foo");
+  throw new Error("foo");
 } catch (e) {
-	console.log(e);
+  console.log(e);
 }
 // Error: foo
 
 try {
-	Promise.reject(new Error("bar"));
+  Promise.reject(new Error("bar"));
 } catch (e) {
-	console.log(e);
+  console.log(e);
 }
 
 // Uncaught (in promise) Error: bar
@@ -116,19 +116,19 @@ Promise.prototype.then()是为期约实例添加处理程序的主要方法。�
 
 ```javascript
 function onResolved(id) {
-	setTimeout(console.log, 0, id, "resolved");
+  setTimeout(console.log, 0, id, "resolved");
 }
 
 function onReject(id) {
-	setTimeout(console.log, 0, id, "rejected");
+  setTimeout(console.log, 0, id, "rejected");
 }
 
 let p1 = new Promise((resolve, reject) => setTimeout(resolve, 3000));
 let p2 = new Promise((resolve, reject) => setTimeout(reject, 3000));
 
 p1.then(
-	() => onResolved("p1"),
-	() => onReject("p1")
+  () => onResolved("p1"),
+  () => onReject("p1")
 );
 // 这里使用箭头函数而不直接写onResolved("p1")的原因的，then是同步执行的，
 // 若直接使用函数名，函数会直接执行，而等到期约落定时不会执行任何函数
@@ -156,7 +156,7 @@ setTimeout(console.log, 0, p3); // Promise {<fulfilled>: "bar"}
 
 // 抛出异常会返回拒绝的期约
 let p4 = p1.then(() => {
-	throw "baz";
+  throw "baz";
 });
 setTimeout(console.log, 0, p4); // Promise {<rejected>: "baz"}
 
@@ -174,7 +174,7 @@ Promise.prototype.catch()方法用于给期约添加拒绝处理程序。这个�
 ```javascript
 let p1 = Promise.reject();
 let onRejected = function () {
-	setTimeout(console.log, 0, "rejected");
+  setTimeout(console.log, 0, "rejected");
 };
 
 // 这两种添加拒绝处理程序的行为是一样的
@@ -192,7 +192,7 @@ Promise.prototype.finally()方法用于给期约添加 onFinally()处理程序�
 let p1 = Promise.resolve();
 let p2 = Promise.reject();
 let onFinally = function () {
-	setTimeout(console.log, 0, "Finally!");
+  setTimeout(console.log, 0, "Finally!");
 };
 
 // 这两种添加拒绝处理程序的行为是一样的
@@ -210,11 +210,11 @@ Promise.prototype.finally()方法返回一个新的期约实例。这个新期�
 let synchronousResolve;
 
 let p = new Promise((resolve) => {
-	synchronousResolve = function () {
-		console.log("1: invoking resolve");
-		resolve();
-		conosole.log("2: resolve returns");
-	};
+  synchronousResolve = function () {
+    console.log("1: invoking resolve");
+    resolve();
+    conosole.log("2: resolve returns");
+  };
 });
 console.log("Kinsiy test");
 p.then(() => console.log("4: then() handler executes"));
@@ -283,7 +283,7 @@ consle.log("bar"); // 不会执行
 
 // 期约中
 new Promise((resolve, reject) => {
-	throw Error("foo");
+  throw Error("foo");
 });
 console.log("bar"); // bar
 // Uncaught (in promise) Error: foo
@@ -294,15 +294,15 @@ then()和 catch()的 onRejected 处理程序在语义上相当于 try/catch。�
 
 ```javascript
 new Promise((resolve, reject) => {
-	consoel.log("开始异步执行");
-	reject(Error("kinsiy"));
+  consoel.log("开始异步执行");
+  reject(Error("kinsiy"));
 })
-	.catch((e) => {
-		console.log("错误捕获: ", e);
-	})
-	.then(() => {
-		console.log("继续异步执行");
-	});
+  .catch((e) => {
+    console.log("错误捕获: ", e);
+  })
+  .then(() => {
+    console.log("继续异步执行");
+  });
 
 // 开始异步执行
 // 错误捕获:  Error: kinsiy
@@ -319,19 +319,19 @@ new Promise((resolve, reject) => {
 
 ```javascript
 let p = new Promise((resolve, reject) => {
-	console.log("初始化拒绝期约");
-	reject();
+  console.log("初始化拒绝期约");
+  reject();
 });
 
 p.catch(() => {
-	console.log("拒绝处理程序");
+  console.log("拒绝处理程序");
 })
-	.then(() => {
-		console.log("解决处理程序");
-	})
-	.finally(() => {
-		console.log("最终处理程序");
-	});
+  .then(() => {
+    console.log("解决处理程序");
+  })
+  .finally(() => {
+    console.log("最终处理程序");
+  });
 
 // 初始化拒绝期约
 // 拒绝处理程序
@@ -400,17 +400,17 @@ p.catch((reason) => setTimeout(console.log, 0, reason)); // 4
 
 ```javascript
 function addTwo(x) {
-	return x + 2;
+  return x + 2;
 }
 function addThree(x) {
-	return x + 3;
+  return x + 3;
 }
 function addFive(x) {
-	return x + 5;
+  return x + 5;
 }
 
 function compose(...fns) {
-	return (x) => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+  return (x) => fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
 }
 
 let addTen = compose(addTwo, addThree, addFive);

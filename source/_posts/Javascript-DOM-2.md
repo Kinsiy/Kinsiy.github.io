@@ -103,8 +103,8 @@ document.body.appendChild(table);
 let divs = document.getElementByTagName("div");
 
 for (let i = divs.length - 1; i >= 0; --i) {
-	let div = document.createElement("div");
-	document.body.appendChild(div);
+  let div = document.createElement("div");
+  document.body.appendChild(div);
 }
 ```
 

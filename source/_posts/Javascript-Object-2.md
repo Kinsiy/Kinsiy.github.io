@@ -18,14 +18,14 @@ ECMAscript 5.1 并没有正式支持面向对象的结构，比如类或继承�
 
 ```javascript
 function createPerson(name, age, job) {
-	let o = new Object();
-	o.name = name;
-	o.age = age;
-	o.job = job;
-	o.sayName = function () {
-		console.log(this.name);
-	};
-	return o;
+  let o = new Object();
+  o.name = name;
+  o.age = age;
+  o.job = job;
+  o.sayName = function () {
+    console.log(this.name);
+  };
+  return o;
 }
 
 let person_1 = createPerson("Kinsiy", 23, "Software Engineer");
@@ -39,13 +39,13 @@ let person_2 = createPerson("Greg", 27, "Doctor");
 ```javascript
 /* 按照惯例，构造函数名称的首字母是要大写的，非构造函数则以小写字母开头 */
 function Person(name, age, job) {
-	// 使用函数表达式亦可 let Person = function(){ ... }
-	this.name = name;
-	this.age = age;
-	this.job = job;
-	this.sayName = function () {
-		console.log(this.Name);
-	};
+  // 使用函数表达式亦可 let Person = function(){ ... }
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = function () {
+    console.log(this.Name);
+  };
 }
 
 let person_1 = new Person("Kinsiy", 23, "Software Engineer");
@@ -99,11 +99,11 @@ o.sayName();
 
 ```javascript
 function Person(name, age, job) {
-	// 使用函数表达式亦可 let Person = function(){ ... }
-	this.name = name;
-	this.age = age;
-	this.job = job;
-	this.sayName = new Function("console.log(this.name)"); // 逻辑等价
+  // 使用函数表达式亦可 let Person = function(){ ... }
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = new Function("console.log(this.name)"); // 逻辑等价
 }
 ```
 
@@ -111,15 +111,15 @@ function Person(name, age, job) {
 
 ```javascript
 function Person(name, age, job) {
-	// 使用函数表达式亦可 let Person = function(){ ... }
-	this.name = name;
-	this.age = age;
-	this.job = job;
-	this.sayName = sayName;
+  // 使用函数表达式亦可 let Person = function(){ ... }
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this.sayName = sayName;
 }
 
 function sayName() {
-	console.log(this.name);
+  console.log(this.name);
 }
 
 let person_1 = new Person("Kinsiy", 23, "Software Engineer");
@@ -140,7 +140,7 @@ Person.prototype.name = "Kinsiy";
 Person.prototype.age = 24;
 Person.prototype.jonb = "Software Engineer";
 Person.prototype.sayName = function () {
-	console.log(this.name);
+  console.log(this.name);
 };
 
 let person_1 = new Person();
@@ -201,11 +201,11 @@ console.log(Object.getPrototypeOf(person_1) == Person.prototype); // true
 
 /* Object类型还有一个setPrototyprOf()方法，可以向实例的[[Prototype]]写入一个新值。这样可以重写一个对象的原型继承关系 */
 let object_1 = {
-	num: 2,
+  num: 2,
 };
 
 let person_2 = {
-	name: "kinsiy",
+  name: "kinsiy",
 };
 
 Object.setPrototypeOf(person_2, object_1);
@@ -214,7 +214,7 @@ console.log(Object.getPrototypeOf(person_2) === object_1); // true
 
 /* Object.setPrototyprOf()可能会严重影响代码性能，可以通过Object.create()来创建一个新对象，同时指定为原型 */
 let object_2 = {
-	num: 5,
+  num: 5,
 };
 
 let person_3 = Object.create(object_2);
@@ -236,7 +236,7 @@ Person.prototype.name = "Kinsiy";
 Person.prototype.age = 23;
 Person.prototype.job = "Software Engineer";
 Person.prototype.sayName = function () {
-	console.log(this.name);
+  console.log(this.name);
 };
 
 let person_1 = new Person();
@@ -295,13 +295,13 @@ for (const key in person_1) {
 /// Object.keys()
 
 let keys = Object.keys(Person.prototype);
-console.log(keys);	// ["name", "age", "job", "sayName"]
+console.log(keys);  // ["name", "age", "job", "sayName"]
 keys = Object.keys(person_1);
-console.log(keys);	// ["name"]
+console.log(keys);  // ["name"]
 
 /// Object.getOwnPropertyNames()
 keys = Object.getOwnPropertyNames(Person.prototype);
-console.log(keys);	//  ["constructor", "name", "age", "job", "sayName"]
+console.log(keys);  //  ["constructor", "name", "age", "job", "sayName"]
 ```
 
 在 ECMAscript 6 新增符号类型之后，相应的出现了一个 Object.getOwnPropertyNames()的兄弟方法的需求，因为以符号为键的属性没有名称的概念。因此，Object.getOwnPropertySymbols()方法就出现了，这个方法与 Object.getOwnPropertyNames()类似，只是针对符号而已。
@@ -316,11 +316,11 @@ let k1 = Symbol("k1");
 let k2 = Symbol("k2");
 
 let o = {
-	1: 1,
-	first: "first",
-	[k1]: "sym1",
-	second: "second",
-	0: 0,
+  1: 1,
+  first: "first",
+  [k1]: "sym1",
+  second: "second",
+  0: 0,
 };
 o[k2] = "sym2";
 o[3] = 3;
@@ -337,9 +337,9 @@ console.log(Object.getOwnPropertySymbols(o)); // [Symbol(k1), Symbol(k2)]
 
 ```javascript
 const o = {
-	foo: "bar",
-	baz: 1,
-	qux: {},
+  foo: "bar",
+  baz: 1,
+  qux: {},
 };
 
 console.log(Object.values(o)); // ["bar", 1, {…}]
@@ -404,7 +404,7 @@ function Person() {}
 let person_1 = new Person();
 
 Person.prototype.sayHi = function () {
-	console.log("Hi");
+  console.log("Hi");
 };
 
 person_1.sayHi(); // "Hi"
@@ -418,9 +418,9 @@ function Person() {}
 let person_1 = new Person();
 
 Person.prototype = {
-	sayHi() {
-		console.log("Hi");
-	},
+  sayHi() {
+    console.log("Hi");
+  },
 };
 
 person_1.sayHi(); // TypeError
@@ -432,7 +432,7 @@ person_1.sayHi(); // TypeError
 
 ```javascript
 String.prototype.Kinsiy = function () {
-	console.log("Kinsiy");
+  console.log("Kinsiy");
 };
 
 const str = "abc";

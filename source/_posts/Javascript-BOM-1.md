@@ -65,16 +65,16 @@ document.documentElement.clientWidth 和 document.documentElement.clientHeight �
 
 ```javascript
 let pageWidth = window.innerWidth,
-	pageHeight = window.innerHeight;
+  pageHeight = window.innerHeight;
 
 if (typeof pageWidth != "number") {
-	if (document.compatMode == "CSS1Compat") {
-		pageWidth = document.documentElement.clientWidth;
-		pageHeight = document.documentElement.clientHeight;
-	} else {
-		pageWidth = document.body.clientWidth;
-		pageHeight = document.body.clientHeight;
-	}
+  if (document.compatMode == "CSS1Compat") {
+    pageWidth = document.documentElement.clientWidth;
+    pageHeight = document.documentElement.clientHeight;
+  } else {
+    pageWidth = document.body.clientWidth;
+    pageHeight = document.body.clientHeight;
+  }
 }
 
 console.log(pageWidth, " ", pageHeight); // 690 " " 875
@@ -102,16 +102,16 @@ window.scrollTo(100, 100);
 
 // 正常滚动
 window.scrollTo({
-	left: 100,
-	top: 100,
-	behavior: "auto",
+  left: 100,
+  top: 100,
+  behavior: "auto",
 });
 
 // 平滑滚动
 window.scrollTo({
-	left: 100,
-	top: 100,
-	behavior: "smooth",
+  left: 100,
+  top: 100,
+  behavior: "smooth",
 });
 ```
 
@@ -155,15 +155,15 @@ window.open()方法返回一个对新建窗口的引用。这个对象与普通 
 let blocked = false;
 
 try {
-	let baiduWin = window.open("http://www.baidu.com", "_blank");
-	if (baiduWin == null) {
-		blocked = true;
-	}
+  let baiduWin = window.open("http://www.baidu.com", "_blank");
+  if (baiduWin == null) {
+    blocked = true;
+  }
 } catch (ex) {
-	blocked = true;
+  blocked = true;
 }
 if (blocked) {
-	console.log("弹窗被屏蔽了");
+  console.log("弹窗被屏蔽了");
 }
 ```
 
@@ -219,9 +219,9 @@ alert()接收一个要显示给用户的字符串。与 console.log()可以接�
 
 ```javascript
 if (confirm("Are you sure?")) {
-	alert("I'm so glad you're sure!");
+  alert("I'm so glad you're sure!");
 } else {
-	alert("I'm sorry to hear you're not sure.");
+  alert("I'm sorry to hear you're not sure.");
 }
 ```
 
@@ -231,7 +231,7 @@ if (confirm("Are you sure?")) {
 let result = prompt("What is your name?", "");
 
 if (result != null) {
-	alert("Welcome, " + result);
+  alert("Welcome, " + result);
 }
 ```
 

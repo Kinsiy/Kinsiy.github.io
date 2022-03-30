@@ -1,8 +1,8 @@
 ---
-title: Javascript-继承
+title: Javascript - 继承方式
 date: 2021-03-02 19:54:11
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Inherit]
+tags: [Classes]
 keywords:
 description:
 photos:
@@ -12,32 +12,32 @@ photos:
 
 ECMA-262 把原型链定义为 ECMAScript 的主要继承方式。其基本思想就是通过原型继承多个引用类型的属性和方法。
 
-<!--more-->
-
 ```javascript
 // 后续代码以次段为基础
 function SuperType() {
-	this.property = true;
+  this.property = true;
 }
 
 SuperType.prototype.getSuperValue = function () {
-	return this.property;
+  return this.property;
 };
 
 function SubType() {
-	this.subproperty = false;
+  this.subproperty = false;
 }
 
 SubType.prototype = new SuperType(); // SubType 的原型是另一个类型的实例
 
 SubType.prototype.getSubValue = function () {
-	return this.subproperty;
+  return this.subproperty;
 };
 
 let instance = new SubType();
 
 console.log(instance.getSuperValue()); // true
 ```
+
+<!--more-->
 
 ### 默认原型
 
@@ -69,7 +69,7 @@ console.log(SubType.prototype.isPrototypeOf(instance)); // true
 ```javascript
 // 覆盖已有的方法
 SubType.prototype.getSuperValue = function () {
-	return false;
+  return false;
 };
 
 let instance = new SubType();
@@ -81,13 +81,13 @@ console.log(instance.getSuperValue()); // false
 
 ```javascript
 SubType.prototype = {
-	getSubValue() {
-		return this.subproperty;
-	},
+  getSubValue() {
+    return this.subproperty;
+  },
 
-	someOtherMethod() {
-		return false;
-	},
+  someOtherMethod() {
+    return false;
+  },
 };
 
 let instance = new SubType();
@@ -106,11 +106,11 @@ console.log(instance.getSuperValue()); // TypeError
 
 ```javascript
 function SuperType() {
-	this.language = ["Python", "Javascript", "C"];
+  this.language = ["Python", "Javascript", "C"];
 }
 
 function SubType() {
-	SuperType.call(this);
+  SuperType.call(this);
 }
 
 let instance_1 = new SubType();
@@ -127,12 +127,12 @@ console.log(inatance_2); // ["Python", "Javascript", "C"]
 
 ```javascript
 function SuperType(v) {
-	this.value = v;
+  this.value = v;
 }
 
 function SubType(v) {
-	SuperType.call(this, this.v);
-	this.sex = "girl";
+  SuperType.call(this, this.v);
+  this.sex = "girl";
 }
 
 let instance_1 = new SubType("Kinsiy");
@@ -156,23 +156,23 @@ console.log(`value: ${instance_2.value}     sex: ${instance_2.sex}`);
 
 ```javascript
 function SuperType(v) {
-	this.value = v;
-	this.language = ["Java", "Python", "Go"];
+  this.value = v;
+  this.language = ["Java", "Python", "Go"];
 }
 
 SuperType.prototype.sayName = function () {
-	console.log(this.value);
+  console.log(this.value);
 };
 
 function SubType(v, n) {
-	SuperType.call(this, v);
-	this.age = n;
+  SuperType.call(this, v);
+  this.age = n;
 }
 
 SubType.prototype = new SuperType();
 
 SubType.prototype.sayAge = function () {
-	console.log(this.age);
+  console.log(this.age);
 };
 
 let instance_1 = new SubType("Kinsiy", 24);
@@ -192,9 +192,9 @@ instance_2.sayAge(); // 23
 
 ```javascript
 function object(o) {
-	function F() {}
-	F.prototype = o;
-	return new F();
+  function F() {}
+  F.prototype = o;
+  return new F();
 }
 ```
 
@@ -204,8 +204,8 @@ EMCAScript5 通过增加 Object.create()方法将原型式继承的概念规范�
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	friends: ["Restituo", "Type57"],
+  name: "Kinsiy",
+  friends: ["Restituo", "Type57"],
 };
 
 let anotherPerson = Object.create(person);
@@ -219,9 +219,9 @@ anOtherPerson.friends.push("witcher");
 console.log(yetAnthorPerson.friends); //  ["Restituo", "Type57", "King", "witcher"]
 
 let person_3 = Object.create(person, {
-	name: {
-		value: "Queen",
-	},
+  name: {
+    value: "Queen",
+  },
 });
 
 console.log(person_3.name); // Queen
@@ -233,17 +233,17 @@ console.log(person_3.name); // Queen
 
 ```javascript
 function createAnother(original) {
-	let clone = Object.create(original);
-	clone.sayHi = function () {
-		console.log("Hi");
-	};
+  let clone = Object.create(original);
+  clone.sayHi = function () {
+    console.log("Hi");
+  };
 
-	return clone;
+  return clone;
 }
 
 let person = {
-	name: "Kinsiy",
-	language: ["Javascript", "Python"],
+  name: "Kinsiy",
+  language: ["Javascript", "Python"],
 };
 
 let someone = createAnother(person);
@@ -256,29 +256,29 @@ someone.sayHi(); // Hi
 
 ```javascript
 function inheritPrototype(SubType, SuperType) {
-	let prototype = Object.create(SuperType.prototype);
-	prototype.constructor = SubType;
-	SubType.prototype = prototype;
+  let prototype = Object.create(SuperType.prototype);
+  prototype.constructor = SubType;
+  SubType.prototype = prototype;
 }
 
 function SuperType(name) {
-	this.name = name;
-	this.colors = ["red", "green", "blue"];
+  this.name = name;
+  this.colors = ["red", "green", "blue"];
 }
 
 SuperType.prototype.sayName = function () {
-	console.log(this.name);
+  console.log(this.name);
 };
 
 function SubType(v, n) {
-	SuperType.call(this, v);
-	this.age = n;
+  SuperType.call(this, v);
+  this.age = n;
 }
 
 inheritPrototype(SubType, SuperType);
 
 SubType.prototype.sayAge = function () {
-	console.log(this.age);
+  console.log(this.age);
 };
 
 let me = new SubType("Kinsiy", 23);

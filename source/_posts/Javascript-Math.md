@@ -84,14 +84,14 @@ console.log(name); // Kinsiy
 ```javascript
 var color = "red";
 function sayColor() {
-	console.log(window.color);
+  console.log(window.color);
 }
 
 window.satColor(); // red
 
 /* 另一种获取Global对象的方式 */
 let global = (function () {
-	return this;
+  return this;
 })();
 ```
 
@@ -148,14 +148,14 @@ Math.random()返回一个 0~1 范围内的随机数，其中包含 0 不包含 1
     number = Math.floor(Math.random() * total_number_of_choices + first_possible_value)
  */
 function selectFrom(lowerValue, upperValue) {
-	let choices = upperValue - lowerValue + 1;
-	return Math.floor(Math.random() * choices + lowerValue);
+  let choices = upperValue - lowerValue + 1;
+  return Math.floor(Math.random() * choices + lowerValue);
 }
 
 let i = 0;
 while (i < 5) {
-	console.log(selectFrom(5, 45)); // [5,45]
-	i++; // 8 17 28 17 11 (5个随机数)
+  console.log(selectFrom(5, 45)); // [5,45]
+  i++; // 8 17 28 17 11 (5个随机数)
 }
 ```
 

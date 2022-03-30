@@ -102,7 +102,7 @@ console.log(m); // {"PYTHON" => 0, "C" => 1, "JAVASCRIPT" => 2}
 class KinsiyArray extends Array {}
 let KinsiyArr = new KinsiyArray("Html", "Xml", "Hxml");
 for (let el of KinsiyArr) {
-	console.log(el); // Html Xml Hxml
+  console.log(el); // Html Xml Hxml
 }
 ```
 
@@ -145,29 +145,29 @@ console.log(iter_1.next()); // {value: "Java", done: false}
 
 ```javascript
 class Kinsiy {
-	constructor(limit) {
-		this.limit = limit;
-	}
+  constructor(limit) {
+    this.limit = limit;
+  }
 
-	[Symbol.iterator]() {
-		let count = 1,
-			limit = this.limit;
-		return {
-			next() {
-				if (count < limit) {
-					return { done: false, value: count++ };
-				} else {
-					return { done: true, value: undefined };
-				}
-			},
-		};
-	}
+  [Symbol.iterator]() {
+    let count = 1,
+      limit = this.limit;
+    return {
+      next() {
+        if (count < limit) {
+          return { done: false, value: count++ };
+        } else {
+          return { done: true, value: undefined };
+        }
+      },
+    };
+  }
 }
 
 let me = new Kinsiy(3);
 
 for (let i of me) {
-	console.log(i); // 1, 2
+  console.log(i); // 1, 2
 }
 ```
 
@@ -237,7 +237,7 @@ console.log(g.next); // ƒ next() { [native code] }
 console.log(g.next()); // {value: undefined, done: true}
 
 function* generatorFn_1() {
-	return "foo";
+  return "foo";
 }
 
 let g_1 = generatorFn_1();
@@ -246,7 +246,7 @@ console.log(g_1.next()); // {value: "foo", done: true}
 
 /* 生成器函数只会在初次调用next()方法后开始执行 */
 function* generatorFn_2() {
-	console.log("running");
+  console.log("running");
 }
 
 // 初次调用生成器函数并不会打印日志
@@ -266,9 +266,9 @@ yield 关键字可以让生成器停止和开始执行，也是生成器最有�
 ```javascript
 /* 通过yield 关键字退出的生成器函数会处在done: false 状态; 通过return关键字退出的生成器函数会处于done: true 状态 */
 function* generatorFn() {
-	yield "Kinsiy";
-	yield "Hey";
-	return "Live";
+  yield "Kinsiy";
+  yield "Hey";
+  return "Live";
 }
 
 let g = generatorFn();
@@ -282,13 +282,13 @@ console.log(g.next()); // {value: "Live", done: true}
  */
 // 有效
 function* gen_1() {
-	yield;
+  yield;
 }
 // 无效
 function* gen_2() {
-	function a() {
-		yield;
-	}
+  function a() {
+    yield;
+  }
 }
 // [ chrome(88.0.4324.146)未见报错，但yield 确实无效 ]
 ```
@@ -297,13 +297,13 @@ function* gen_2() {
 
 ```javascript
 function* genertorFn() {
-	for (let i = 0; i < 3; i++) {
-		yield i;
-	}
+  for (let i = 0; i < 3; i++) {
+    yield i;
+  }
 }
 
 for (let x of genertorFn()) {
-	console.log(`x is : ${x}`);
+  console.log(`x is : ${x}`);
 }
 // x is : 0
 // x is : 1
@@ -317,9 +317,9 @@ for (let x of genertorFn()) {
 
 ```javascript
 function* genertorFn(initial) {
-	console.log(initial);
-	console.log(yield);
-	console.log(yield);
+  console.log(initial);
+  console.log(yield);
+  console.log(yield);
 }
 
 let g = genertorFn("Chinese");
@@ -329,7 +329,7 @@ console.log(g.next("English")); // English
 
 /* 同时用于输入和输出 */
 function* genertorFn_1() {
-	return yield "Kinsiy";
+  return yield "Kinsiy";
 }
 
 let g_1 = genertorFn_1();
@@ -343,21 +343,21 @@ console.log(g_1.next("Queen")); // {value: "Queen", done: true}
 
 ```javascript
 function* genertorFn_1() {
-	yield* [6, 7];
-	return 8;
+  yield* [6, 7];
+  return 8;
 }
 
 /* yield* 的值是关联迭代器返回done: true 时的value的值。
     使用console.log(yield*)的原因是 for-of 循环等内置语言结构会忽略状态为done: true 的IteratorObject 内部返回的值 
  */
 function* genertorFn_2() {
-	yield* [1, 2, 3, ,];
-	console.log(yield* [4, 5]); // 打印yield*
-	console.log(yield* genertorFn_1()); // 打印yield*
+  yield* [1, 2, 3, ,];
+  console.log(yield* [4, 5]); // 打印yield*
+  console.log(yield* genertorFn_1()); // 打印yield*
 }
 
 for (let x of genertorFn_2()) {
-	console.log(x);
+  console.log(x);
 }
 // 1
 // 2
@@ -375,14 +375,14 @@ for (let x of genertorFn_2()) {
 
 ```javascript
 function* nTimes(n) {
-	if (n > 0) {
-		yield* nTimes(n - 1);
-		yield n - 1;
-	}
+  if (n > 0) {
+    yield* nTimes(n - 1);
+    yield n - 1;
+  }
 }
 
 for (let x of nTimes(3)) {
-	console.log(x); // 0 1 2
+  console.log(x); // 0 1 2
 }
 ```
 
@@ -419,7 +419,7 @@ retrun()方法会强制生成器进入关闭状态。提供给 return()方法的
 
 ```javascript
 function* genertorFn() {
-	yield* [1, 2, 3, 4, 5];
+  yield* [1, 2, 3, 4, 5];
 }
 
 const g = genertorFn();
@@ -436,15 +436,15 @@ throw()方法会在暂停的时候将一个提供的错误注入到生成器对�
 
 ```javascript
 function* genertorFn_1() {
-	yield* [1, 2, 3];
+  yield* [1, 2, 3];
 }
 
 const g = genertorFn_1();
 console.log(g); // genertorFn_1 {<suspended>}
 try {
-	g.throw("Kinsiy");
+  g.throw("Kinsiy");
 } catch (e) {
-	console.log(e); // Kinsiy
+  console.log(e); // Kinsiy
 }
 console.log(g); // genertorFn_1 {<closed>}
 ```
@@ -453,13 +453,13 @@ console.log(g); // genertorFn_1 {<closed>}
 
 ```javascript
 function* genertorFn_2() {
-	for (let x of [4, 5, 6]) {
-		try {
-			yield x;
-		} catch (e) {
-			// yield e
-		}
-	}
+  for (let x of [4, 5, 6]) {
+    try {
+      yield x;
+    } catch (e) {
+      // yield e
+    }
+  }
 }
 
 const g = genertorFn_2();

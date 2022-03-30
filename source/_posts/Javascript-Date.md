@@ -1,14 +1,10 @@
 ---
-title: Javascript-Date
+title: Javascript - Date
 date: 2021-01-13 00:48:35
 description: 基本引用类型, Date 对象的使用
 categories: [学习笔记, Javascript]
 tags: [JS红宝书, Date]
 ---
-
-引用值(或者对象)是某个特定引用对象的实例。
-
-<!-- more -->
 
 ## Date
 
@@ -39,6 +35,8 @@ let stop = Date.now();
 let result = stop - start;
 console.log(result); // 0
 ```
+
+<!-- more -->
 
 ### toLocaleString()-toString()-valueof()-...
 

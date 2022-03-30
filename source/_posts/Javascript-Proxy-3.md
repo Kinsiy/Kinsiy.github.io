@@ -20,19 +20,19 @@ photos:
 
 ```javascript
 const user = {
-	name: "Kinsiy",
+  name: "Kinsiy",
 };
 
 const proxy = new Proxy(user, {
-	get(target, property, receiver) {
-		console.log(`Getting ${property}`);
-		return Reflect.get(...arguments);
-	},
+  get(target, property, receiver) {
+    console.log(`Getting ${property}`);
+    return Reflect.get(...arguments);
+  },
 
-	set(target, property, value, receiver) {
-		console.log(`Setting ${property} = ${value}`);
-		return Reflect.set(...arguments);
-	},
+  set(target, property, value, receiver) {
+    console.log(`Setting ${property} = ${value}`);
+    return Reflect.set(...arguments);
+  },
 });
 
 proxy.name; // Getting name
@@ -48,26 +48,26 @@ proxy.age = 23; // Setting age = 23
 ```javascript
 const hiddenProperties = ["King", "Queen"];
 const targetObject = {
-	name: "Kinsiy",
-	King: "青睐",
-	Queen: "Restituo",
+  name: "Kinsiy",
+  King: "青睐",
+  Queen: "Restituo",
 };
 
 const proxy = new Proxy(targetObject, {
-	get(target, property, receiver) {
-		if (hiddenProperties.includes(property)) {
-			return undefined;
-		} else {
-			return Reflect.get(...arguments);
-		}
-	},
-	has(target, property) {
-		if (hiddenProperties.includes(property)) {
-			return false;
-		} else {
-			return Reflect.has(...arguments);
-		}
-	},
+  get(target, property, receiver) {
+    if (hiddenProperties.includes(property)) {
+      return undefined;
+    } else {
+      return Reflect.get(...arguments);
+    }
+  },
+  has(target, property) {
+    if (hiddenProperties.includes(property)) {
+      return false;
+    } else {
+      return Reflect.has(...arguments);
+    }
+  },
 });
 
 // get
@@ -87,17 +87,17 @@ console.log("Queen" in proxy); // false
 
 ```javascript
 const target = {
-	onlyNumbersGoHere: 0,
+  onlyNumbersGoHere: 0,
 };
 
 const proxy = new Proxy(target, {
-	set(target, property, value, receiver) {
-		if (typeof value !== "number") {
-			return false;
-		} else {
-			return Reflect.set(...arguments);
-		}
-	},
+  set(target, property, value, receiver) {
+    if (typeof value !== "number") {
+      return false;
+    } else {
+      return Reflect.set(...arguments);
+    }
+  },
 });
 
 proxy.onlyNumbersGoHere = 1;
@@ -112,18 +112,18 @@ console.log(proxy.onlyNumbersGoHere); // 1
 
 ```javascript
 function median(...nums) {
-	return nums.sort()[Math.floor(nums.length / 2)];
+  return nums.sort()[Math.floor(nums.length / 2)];
 }
 
 const proxy = new Proxy(median, {
-	apply(target, thisArg, argumentsList) {
-		for (const arg of argumentsList) {
-			if (typeof arg !== "number") {
-				throw new Error("参数中存在非数字！");
-			}
-		}
-		return Reflect.apply(...arguments);
-	},
+  apply(target, thisArg, argumentsList) {
+    for (const arg of argumentsList) {
+      if (typeof arg !== "number") {
+        throw new Error("参数中存在非数字！");
+      }
+    }
+    return Reflect.apply(...arguments);
+  },
 });
 
 console.log(proxy(1, 2, 4, 5)); // 4
@@ -132,19 +132,19 @@ console.log(proxy(1, 2, 4, "5")); // Error: 参数中存在非数字！
 // 类似地，可以要求实例化时必须给构造函数传参
 
 class Uesr {
-	constructor(id) {
-		this._id = id;
-	}
+  constructor(id) {
+    this._id = id;
+  }
 }
 
 const proxy = new Proxy(User, {
-	construct(target, argumentsList, newTarget) {
-		if (argumentsList[0] === undefined) {
-			throw new Error("用户类必须提供id");
-		} else {
-			return Reflect.construc(...arguments);
-		}
-	},
+  construct(target, argumentsList, newTarget) {
+    if (argumentsList[0] === undefined) {
+      throw new Error("用户类必须提供id");
+    } else {
+      return Reflect.construc(...arguments);
+    }
+  },
 });
 
 new proxy(1);
@@ -159,33 +159,33 @@ new proxy(); // Error: 用户类必须提供id
 const userList = [];
 
 class User {
-	constructor(name) {
-		this.name = name;
-	}
+  constructor(name) {
+    this.name = name;
+  }
 }
 // 还可以把集合绑定到一个事件分派程序，每次插入新实例时都会发送消息
 function log(newValue) {
-	console.log(newValue);
+  console.log(newValue);
 }
 
 const proxy_1 = new Proxy(userList, {
-	set(target, property, receiver) {
-		const result = Reflect.set(...arguments);
-		if (result && property !== "length") {
-			// 这里控制一下新增元素后，数组长度变化的消息无需发送
-			log(Reflect.get(target, property, receiver));
-		}
-		return result;
-	},
+  set(target, property, receiver) {
+    const result = Reflect.set(...arguments);
+    if (result && property !== "length") {
+      // 这里控制一下新增元素后，数组长度变化的消息无需发送
+      log(Reflect.get(target, property, receiver));
+    }
+    return result;
+  },
 });
 
 // 可以将被代理的类绑定到一个全局实例集合，让所有创建的实例都被添加到这个集合中
 const proxy = new Proxy(User, {
-	construct(target, argumentsList, newTarget) {
-		const newUser = Reflect.construct(...arguments);
-		proxy_1.push(newUser); // 发送消息
-		return newUser;
-	},
+  construct(target, argumentsList, newTarget) {
+    const newUser = Reflect.construct(...arguments);
+    proxy_1.push(newUser); // 发送消息
+    return newUser;
+  },
 });
 
 new proxy("Kinsiy");

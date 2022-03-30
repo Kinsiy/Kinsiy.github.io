@@ -24,31 +24,31 @@ photos:
 
 ```js
 function debounce(fn, delay) {
-	let timer = null;
-	return function (...args) {
-		if (timer) {
-			clearTimeout(timer);
-		}
-		timer = setTimeout(() => {
-			fn.apply(this, args);
-		}, delay);
-	};
+  let timer = null;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
 }
 
 // 前缘防抖
 function debounceBefore(fn, delay) {
-	let timer = null;
-	return function (...args) {
-		if (timer) {
-			clearTimeout(timer);
-		}
-		if (!timer) {
-			fn.apply(this, args);
-		}
-		timer = setTimeout(() => {
-			timer = null;
-		}, delay);
-	};
+  let timer = null;
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    if (!timer) {
+      fn.apply(this, args);
+    }
+    timer = setTimeout(() => {
+      timer = null;
+    }, delay);
+  };
 }
 ```
 
@@ -64,34 +64,34 @@ function debounceBefore(fn, delay) {
 
 ```js
 function thorttle(fn, delay) {
-	let working = false;
-	return function (...args) {
-		if (working) {
-			return;
-		}
-		working = true;
-		setTimeout(() => {
-			fn.apply(this, args);
-			working = false;
-		}, delay);
-	};
+  let working = false;
+  return function (...args) {
+    if (working) {
+      return;
+    }
+    working = true;
+    setTimeout(() => {
+      fn.apply(this, args);
+      working = false;
+    }, delay);
+  };
 }
 
 // 前缘节流
 function thorttleBefore(fn, delay) {
-	let working = false;
-	return function (...args) {
-		if (working) {
-			return;
-		}
-		if (!working) {
-			fn.apply(this, args);
-		}
-		working = true;
-		setTimeout(() => {
-			working = false;
-		}, delay);
-	};
+  let working = false;
+  return function (...args) {
+    if (working) {
+      return;
+    }
+    if (!working) {
+      fn.apply(this, args);
+    }
+    working = true;
+    setTimeout(() => {
+      working = false;
+    }, delay);
+  };
 }
 ```
 
@@ -105,50 +105,50 @@ function thorttleBefore(fn, delay) {
 
 ```js
 function isPrimitive(value) {
-	return (
-		typeof value === "string" ||
-		typeof value === "number" ||
-		typeof value === "symbol" ||
-		typeof value === "boolean"
-	);
+  return (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "symbol" ||
+    typeof value === "boolean"
+  );
 }
 
 function isObject(value) {
-	return Object.prototype.toString.call(value) === "[object Object]";
+  return Object.prototype.toString.call(value) === "[object Object]";
 }
 
 function isRegExp(value) {
-	return Object.prototype.toString.call(value) === "[object RegExp]";
+  return Object.prototype.toString.call(value) === "[object RegExp]";
 }
 
 function deepCopy(value) {
-	// debugger;
-	let memo = {};
+  // debugger;
+  let memo = {};
 
-	function baseCopy(value) {
-		let res;
-		if (isPrimitive(value) || isRegExp(value)) {
-			return value;
-		} else if (Array.isArray(value)) {
-			res = [...value];
-		} else if (isObject) {
-			res = { ...value };
-		}
+  function baseCopy(value) {
+    let res;
+    if (isPrimitive(value) || isRegExp(value)) {
+      return value;
+    } else if (Array.isArray(value)) {
+      res = [...value];
+    } else if (isObject) {
+      res = { ...value };
+    }
 
-		Reflect.ownKeys(res).forEach((key) => {
-			if (typeof res[key] === "object" && typeof res[key] != null) {
-				if (memo[res[key]]) {
-					res[key] = memo[res[key]];
-				} else {
-					memo[res[key]] = res[key];
-					res[key] = arguments.callee(res[key]);
-				}
-			}
-		});
-		return res;
-	}
+    Reflect.ownKeys(res).forEach((key) => {
+      if (typeof res[key] === "object" && typeof res[key] != null) {
+        if (memo[res[key]]) {
+          res[key] = memo[res[key]];
+        } else {
+          memo[res[key]] = res[key];
+          res[key] = arguments.callee(res[key]);
+        }
+      }
+    });
+    return res;
+  }
 
-	return baseCopy(value);
+  return baseCopy(value);
 }
 ```
 

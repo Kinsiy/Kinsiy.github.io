@@ -172,9 +172,9 @@ Element 类型是唯一使用 attributes 属性的 DOM 节点类型。attribute 
 
 ```html
 <ul>
-	<li>item1</li>
-	<li>item2</li>
-	<li>item3</li>
+  <li>item1</li>
+  <li>item2</li>
+  <li>item3</li>
 </ul>
 ```
 

@@ -1,8 +1,8 @@
 ---
-title: Javascript-Class
+title: Javascript - Classes
 date: 2021-03-04 21:07:28
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Class]
+tags: [Classes]
 keywords:
 description: 类(class)是 ECMAScript 中新的基础性语法糖结构。虽然 ECMAScript6 类表面上看起来可以支持正式的面向对象编程，但实际上它背后使用的仍然是原型和构造函数的概念。
 photos:
@@ -10,8 +10,7 @@ photos:
 
 # 类定义
 
-与函数类型相似，定义类也有两种主要方式：类声明和类表达式。这两种方式都使用 class 关键字加大括号。
-与函数表达式类似，类表达式在它们被求值前也不能引用。不过，与函数定义不同的是，虽然函数声明可以提升，但类定义不能。另外一个跟函数声明不同的是，函数受函数作用域限制，而类受块作用域限制。
+与函数类型相似，定义类也有两种主要方式：类声明和类表达式。这两种方式都使用 class 关键字加大括号。与函数表达式类似，类表达式在它们被求值前也不能引用。不过，与函数定义不同的是，虽然函数声明可以提升，但类定义不能。另外一个跟函数声明不同的是，函数受函数作用域限制，而类受块作用域限制。
 
 ```javascript
 // 类声明
@@ -25,8 +24,8 @@ class ClassDeclaration {}
 console.log(ClassDeclaration); // class ClassDeclaration {}
 
 {
-	function FunctionDeclaration() {}
-	class ClassDeclaration {}
+  function FunctionDeclaration() {}
+  class ClassDeclaration {}
 }
 
 console.log(FunctionDeclaration); // ƒ FunctionDeclaration() {}
@@ -39,9 +38,9 @@ console.log(ClassDeclaration); // ReferenceError: ClassDeclaration is not define
 
 ```javascript
 let Person = class PersonName {
-	identify() {
-		console.log(Person.name, PersonName.name);
-	}
+  identify() {
+    console.log(Person.name, PersonName.name);
+  }
 };
 
 let p = new Person();
@@ -58,8 +57,7 @@ constructor 关键字用于在类定义块内部创建类的构造函数。方�
 
 ## 实例化
 
-使用 new 操作符实例化 Person 的操作等于使用 new 调用其构造函数。唯一可感知的不同之处就是，Javascript 解释器知道使用 new 和类意味着应该使用 constructor 函数进行实例化。
-使用 new 调用类的构造函数会执行如下操作。
+使用 new 操作符实例化 Person 的操作等于使用 new 调用其构造函数。唯一可感知的不同之处就是，Javascript 解释器知道使用 new 和类意味着应该使用 constructor 函数进行实例化。使用 new 调用类的构造函数会执行如下操作。
 
 1. 在内存中创建一个新对象
 2. 这个新对象内部的[[Prototype]]指针被赋值为构造函数的 prototype 属性。
@@ -70,15 +68,15 @@ constructor 关键字用于在类定义块内部创建类的构造函数。方�
 ```javascript
 class Animal {}
 class Person {
-	constructor() {
-		console.log("person ctor");
-	}
+  constructor() {
+    console.log("person ctor");
+  }
 }
 
 class Vegetable {
-	constructor() {
-		this.color = "orange";
-	}
+  constructor() {
+    this.color = "orange";
+  }
 }
 
 let a = new Animal();
@@ -88,16 +86,17 @@ console.log(c.color); // orange
 ```
 
 类实例化时传入的参数会用作构造函数的参数。如果不需要参数，则类名后面的括号也是可选的。
+
 默认情况下，类构造函数会在执行之后返回 this 对象。构造函数返回的对象会被用作实例化的对象，如果没用引用新创建的 this 对象，那么这个对象会被销毁。不过，如果返回的不是 this 对象，而是其他对象，那么这个对象不会通过 instanceof 操作符监测出跟类有关联，因为这个对象的原型指针没有被修改。
 
 ```javascript
 class Person {
-	constructor(override) {
-		this.foo = "foo";
-		if (override) {
-			return { bar: "bar" };
-		}
-	}
+  constructor(override) {
+    this.foo = "foo";
+    if (override) {
+      return { bar: "bar" };
+    }
+  }
 }
 
 let p1 = new Person();
@@ -125,8 +124,8 @@ console.log(p3 instanceof Person); // true
 
 ## 把类当成特殊函数
 
-ECMAScript 中没有正式的类这个类型。从各方面来看，ECMAScript 类就是一种特殊函数。声明一个类后，通过 typeof 操作符检测类标识符，表面他是一个函数。
-类标签符有 prototype 属性，而这个原型也有一个 constructor 属性指向类自身。
+ECMAScript 中没有正式的类这个类型。从各方面来看，ECMAScript 类就是一种特殊函数。声明一个类后，通过 typeof 操作符检测类标识符，表面他是一个函数。类标签符有 prototype 属性，而这个原型也有一个 constructor 属性指向类自身。
+
 在类的上下文中，类本身在使用 new 调用时就会被当成构造函数。重点在于，类中定义的 constructor 方法不会被当成构造函数，在对它使用 instanceof 操作符会返回 false。但是，如果在创建实例时直接将类构造函数当成普通构造函数来使用，那么 instanceof 操作符的返回值会反转。
 
 ```javascript
@@ -155,11 +154,11 @@ console.log(p_2 instanceof Person.constructor); // true
 
 ```javascript
 class Person {
-	constructor() {
-		this.name = new String("Kinsiy");
-		this.sayName = () => console.log(this.name);
-		this.nickNames = ["King", "Queen"];
-	}
+  constructor() {
+    this.name = new String("Kinsiy");
+    this.sayName = () => console.log(this.name);
+    this.nickNames = ["King", "Queen"];
+  }
 }
 
 let p_1 = new Person();
@@ -185,15 +184,15 @@ p_2.sayName(); // Queen
 
 ```javascript
 class Person {
-	constructor() {
-		// 添加到this的所有内容都会存在于不同的实例上
-		this.locate = () => console.log("instance");
-	}
+  constructor() {
+    // 添加到this的所有内容都会存在于不同的实例上
+    this.locate = () => console.log("instance");
+  }
 
-	// 在类块中定义的所有内容都会定义在类的原型上
-	locate() {
-		console.log("prototype");
-	}
+  // 在类块中定义的所有内容都会定义在类的原型上
+  locate() {
+    console.log("prototype");
+  }
 }
 
 let p = new Person();
@@ -208,13 +207,13 @@ Person.prototype.locate(); // prototype
  */
 
 class Car {
-	set name(newName) {
-		this.name_ = newName;
-	}
+  set name(newName) {
+    this.name_ = newName;
+  }
 
-	get name() {
-		return this.name_;
-	}
+  get name() {
+    return this.name_;
+  }
 }
 
 let p_2 = new Person();
@@ -225,22 +224,21 @@ console.log(p_2.name); // Kinsiy
 
 ## 静态类方法
 
-可以在类上定义静态方法。这些方法通常用于执行不特定与实例的操作，也不要求存在类的实例。与原型成员类似，每个类只能有一个静态成员。
-静态类方法非常适合作为实例工厂
+可以在类上定义静态方法。这些方法通常用于执行不特定与实例的操作，也不要求存在类的实例。与原型成员类似，每个类只能有一个静态成员。静态类方法非常适合作为实例工厂
 
 ```javascript
 class Person {
-	constructor(age) {
-		this.age_ = age;
-	}
+  constructor(age) {
+    this.age_ = age;
+  }
 
-	sayAge() {
-		console.log(this.age_);
-	}
+  sayAge() {
+    console.log(this.age_);
+  }
 
-	static create() {
-		return new Person(Math.floor(Math.random() * 100));
-	}
+  static create() {
+    return new Person(Math.floor(Math.random() * 100));
+  }
 }
 
 console.log(Person.create()); // Person {age_: 50}
@@ -252,9 +250,9 @@ console.log(Person.create()); // Person {age_: 50}
 
 ```javascript
 class Person {
-	sayName() {
-		console.log(`${Person.greeting} ${this.name}`);
-	}
+  sayName() {
+    console.log(`${Person.greeting} ${this.name}`);
+  }
 }
 
 // 在类上定义数据成员。无法通过this引用
@@ -311,17 +309,18 @@ ECMAScript 新增特性中最出色的一个就是原生支持了类继承机制
 ## 继承基础
 
 ES6 类支持单继承。使用 extends 关键字，就可以继承任何拥有[[Construct]]和原型的对象。很大程度上，这意味着不禁可以继承一个类，也可以继承普通的构造函数(保持向后兼容)
+
 类和原型上定义的方法都会带到派生类。this 的值会反映调用相应方法的实例或者类
 
 ```javascript
 class Vehicle {
-	identifyPrototype(id) {
-		console.log(id, this);
-	}
+  identifyPrototype(id) {
+    console.log(id, this);
+  }
 
-	static identifyClass(id) {
-		console.log(id, this);
-	}
+  static identifyClass(id) {
+    console.log(id, this);
+  }
 }
 
 class Bus extends Vehicle {}
@@ -342,50 +341,51 @@ Bus.identifyClass("Bus"); // Bus class Bus extends Vehicle {}
 ## 构造函数、HomeObject 和 Super()
 
 派生类的方法可以通过 super 关键字引用它们的原型。这个关键字只能在派生类中使用，而且仅限于类构造函数、实例方法和静态方法内部。在类构造函数中使用 super 可以调用父类构造函数。
+
 ES6 给类构造函数和静态方法添加了内部特性[[HomeObject]]，这个特性是一个指针，指向定义该方法的对象。这个指针是自动赋值的，而且只能在 Javascript 引擎内部访问，super 始终定义为[[HomeObject]]的原型。
 
 ```javascript
 // super只能在派生类构造函数和静态方法中使用
 class Vehicle {
-	constructor() {
-		super();
-		// SyntaxError: 'super' keyword unexpected here
-	}
+  constructor() {
+    super();
+    // SyntaxError: 'super' keyword unexpected here
+  }
 }
 
 // 不能单独引用super关键字，要么用它调用构造函数，要么用它引用静态方法
 class A {}
 
 class B extends A {
-	constructor() {
-		console.log(super);
-		// SyntaxError: 'super' keyword unexpected here
-	}
+  constructor() {
+    console.log(super);
+    // SyntaxError: 'super' keyword unexpected here
+  }
 }
 
 // 调用super()会调用父类构造函数，并将返回的实例赋值给this
 class C {}
 
 class D extends C {
-	constructor() {
-		super();
-		console.log(this instanceof C);
-	}
+  constructor() {
+    super();
+    console.log(this instanceof C);
+  }
 }
 
 let d = new D(); // true
 
 // super()的行为如同调用构造函数，如果需要给父类构造函数传参，则需要手动传入。
 class E {
-	constructor(v) {
-		this.flag = v;
-	}
+  constructor(v) {
+    this.flag = v;
+  }
 }
 
 class F extends E {
-	constructor(subV) {
-		super(subV);
-	}
+  constructor(subV) {
+    super(subV);
+  }
 }
 
 console.log(new F("Kinsiy")); // F {flag: "Kinsiy"}
@@ -397,18 +397,18 @@ console.log(new G("Type57")); // G {flag: "Type57"}
 
 // 在类构造函数中，不能在调用super()之前引用this
 class H extends E {
-	constructor() {
-		console.log(this);
-	}
+  constructor() {
+    console.log(this);
+  }
 }
 
 new H(); // ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
 
 // 如果在派生类中显示定义了构造函数，则要么必须在其中调用super()，要么必须在其中返回一个对象
 class I extends E {
-	constructor() {
-		return {}; // 这个对象不会通过 instanceof 操作符监测出跟类有关联
-	}
+  constructor() {
+    return {}; // 这个对象不会通过 instanceof 操作符监测出跟类有关联
+  }
 }
 
 let i = new I();
@@ -417,26 +417,28 @@ console.log(i instanceof I); // fasle
 
 ## 抽象基类
 
-有时候可能需要爱定义这样一个类，它可供其他类继承，但本身不会被实例化。虽然 ECMAScript 没有专门支持这种类的语法，但通过 new.target 也容易实现。new.target 保存通过 new 关键字调用的类或函数。另外在抽象基类构造函数中进行检查，可以要求派生类必须定义某个方法。因为原型方法在调用类构造函数之前就已经存在了，所以可以通过 this 关键字来检查相应的方法
+有时候可能需要爱定义这样一个类，它可供其他类继承，但本身不会被实例化。虽然 ECMAScript 没有专门支持这种类的语法，但通过 new.target 也容易实现。
+
+new.target 保存通过 new 关键字调用的类或函数。另外在抽象基类构造函数中进行检查，可以要求派生类必须定义某个方法。因为原型方法在调用类构造函数之前就已经存在了，所以可以通过 this 关键字来检查相应的方法
 
 ```javascript
 // 抽象基类
 class Vehicle {
-	constructor() {
-		console.log(new.target); // class Bus extends Vehicle {}
-		if (new.target === Vehicle) {
-			throw new Error("Vehicle 不能被实例化！");
-		}
+  constructor() {
+    console.log(new.target); // class Bus extends Vehicle {}
+    if (new.target === Vehicle) {
+      throw new Error("Vehicle 不能被实例化！");
+    }
 
-		if (!this.foo) {
-			throw new Error("Vehicle 派生类必须实现foo()");
-		}
-	}
+    if (!this.foo) {
+      throw new Error("Vehicle 派生类必须实现foo()");
+    }
+  }
 }
 
 // 派生类
 class Bus extends Vehicle {
-	foo() {}
+  foo() {}
 }
 class Biclcye extends Vehicle {}
 
@@ -451,13 +453,13 @@ ES6 类为继承内置引用类型提供顺畅的机制，开发者可以方便�
 
 ```javascript
 class SuperArray extends Array {
-	// 洗牌算法
-	shuffle() {
-		for (let i = this.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[this[i], this[j]] = [this[j], this[i]];
-		}
-	}
+  // 洗牌算法
+  shuffle() {
+    for (let i = this.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this[i], this[j]] = [this[j], this[i]];
+    }
+  }
 }
 
 let a = new SuperArray(1, 2, 3, 4, 5);
@@ -475,9 +477,9 @@ console.log(a_1); // SuperArray(3) [1, 3, 5]
 console.log(a_1 instanceof SuperArray); // true
 
 class SuperArray_1 extends SuperArray {
-	static get [Symbol.species]() {
-		return Array;
-	}
+  static get [Symbol.species]() {
+    return Array;
+  }
 }
 
 let b = new SuperArray_1(1, 2, 3, 4, 5);
@@ -496,31 +498,31 @@ console.log(b_1 instanceof Array); // true
 class Vehicle{}
 
 let FooMixin = (SuperClass) => class extends SuperClass{
-	foo(){
-		console.log("foo")
-	}
+  foo(){
+    console.log("foo")
+  }
 }
 
 let BarMixin = (SuperClass) => class extends SuperClass{
-	bar(){
-		console.log("bar")
-	}
+  bar(){
+    console.log("bar")
+  }
 }
 
 let BzaMixin = (SuperClass) => class extends SuperClass{
-	baz(){
-		console.log("baz")
-	}
+  baz(){
+    console.log("baz")
+  }
 }
 
 function mix(Baseclass,...Mixins){
-	return Mixins.reduce((accumulator, current) => current(accumulator),Baseclass)
+  return Mixins.reduce((accumulator, current) => current(accumulator),Baseclass)
 }
 
 class Bus extends mix(Vehicle,FooMixin,BarMixin,BzaMixin){}
 
 let b = new Bus
-b.foo();	// foo
-b.bar();	// bar
-b.baz();	// baz
+b.foo();  // foo
+b.bar();  // bar
+b.baz();  // baz
 ```

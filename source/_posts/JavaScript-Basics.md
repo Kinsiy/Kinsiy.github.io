@@ -43,7 +43,7 @@ ECMAScript 中一切都区分大小写。无论是变量、函数名、还是操
 "use strict"; //对整个脚本启用严格模式
 
 function doSomething() {
-	"use strict"; // 在指定函数中启用严格模式
+  "use strict"; // 在指定函数中启用严格模式
 }
 ```
 
@@ -56,8 +56,8 @@ let sum = a + b; //没有分号也有效，但不推荐
 let sum = a - b; //加分号有效，推荐
 /* 代码块 */
 if (test) {
-	test = false;
-	console.log(test);
+  test = false;
+  console.log(test);
 }
 /* if 之类的控制语句只在执行多条语句时要求必须有代码块。不过，最佳实践是始终在控制语句中使用代码块，即使要执行的只有一条语句 */
 ```
@@ -100,12 +100,12 @@ message = "hi"; // 合法，但不推荐
     在使用var声明变量时，变量会自动添加到最接近的上下文中(参见《变量、作用域与内存》，不好意思还没写！) */
 
 function doSomething() {
-	var firstName = "Kinsiy"; //局部变量
-	secondName = "Kinsiy"; //全局变量。不推荐，难维护
+  var firstName = "Kinsiy"; //局部变量
+  secondName = "Kinsiy"; //全局变量。不推荐，难维护
 
-	console.log(sex); //不会报错
-	var sex = "boy"; //使用var这个关键字声明的变量会自动提升到函数作用域的顶部
-	var sex = "girl"; //反复多次使用var声明一个变量也没有问题
+  console.log(sex); //不会报错
+  var sex = "boy"; //使用var这个关键字声明的变量会自动提升到函数作用域的顶部
+  var sex = "girl"; //反复多次使用var声明一个变量也没有问题
 }
 console.log(firstName); //ReferenceError
 console.log(secondName); //Kinsiy
@@ -124,15 +124,15 @@ console.log(window.car); //civic
 console.log(window.house); //undefined
 
 if (true) {
-	console.log(myName); //undefined     myName变量提升
-	console.log(anotherName); //ReferenceError    anotherName不会被提升   暂时性死区
+  console.log(myName); //undefined     myName变量提升
+  console.log(anotherName); //ReferenceError    anotherName不会被提升   暂时性死区
 
-	var myName = "Kinsiy";
-	let anotherName = "Restituo";
-	let anotherName = "QING"; //SyntaxError; 标识符anotherName已经声明过了
+  var myName = "Kinsiy";
+  let anotherName = "Restituo";
+  let anotherName = "QING"; //SyntaxError; 标识符anotherName已经声明过了
 
-	console.log(myName); //Kinsiy
-	console.log(anotherName); //Restituo
+  console.log(myName); //Kinsiy
+  console.log(anotherName); //Restituo
 }
 
 console.log(myName); //Kinsiy
@@ -141,16 +141,16 @@ console.log(anotherName); //ReferenceError     作用域仅作用与块内部
 // 条件声明
 /* let 不能依赖条件声明模式，即使使用try/catch或typeof也不能解决 */
 if (typeof Testname === "undefined") {
-	let Testname;
+  let Testname;
 }
 /* Testname 被限制在 if { } 块的作用域中
     这个声明形同下面这个全局声明 */
 Testname;
 
 try {
-	console.log(sex);
+  console.log(sex);
 } catch (error) {
-	let sex = "boy";
+  let sex = "boy";
 }
 /* sex 被限制在 catch { } 块的作用域中
     这个声明形同下面这个全局声明 */
@@ -171,7 +171,7 @@ const name = "Kinsiy"; //SyntaxError
 //const 的作用域也是块
 const sex = "girl";
 if (true) {
-	const sex = "boy";
+  const sex = "boy";
 }
 console.log(sex); //girl
 /* const 声明的限制只适用与它指向的变量的引用 */
@@ -338,7 +338,7 @@ console.log(resultStr); //5的5倍是25
 
 //原始字符串
 /* 使用模板字面量也可以直接获取原始的模板字面量内容(如换行符或Unicode字符)，而不是被转义后的字符表示。 */
-console.log(`\u00A9`); //	©
+console.log(`\u00A9`); //  ©
 console.log(String.raw`\u00A9`); // \u00A9
 ```
 
@@ -536,8 +536,8 @@ let max = num1 > num2 ? num1 : num2;
 
 ```javascript
 let num1 = 1,
-	num2 = 2,
-	num3 = 3;
+  num2 = 2,
+  num3 = 3;
 let num = (5, 1, 4, 8, 0); //num = 0
 ```
 
@@ -590,7 +590,7 @@ for-in 语句是一种严格的迭代语句，<b>用于枚举对象中的非符�
 
 ```javascript
 for (const proName in window) {
-	console.log(proName);
+  console.log(proName);
 }
 ```
 
@@ -604,7 +604,7 @@ for-of 语句是一种严格的迭代语句，<b>用于遍历可迭代对象的�
 
 ```javascript
 for (const el of [1, 5, 4, 6]) {
-	console.log(el);
+  console.log(el);
 }
 ```
 
@@ -616,12 +616,12 @@ for-of 会按照可迭代对象的 next()方法产生值得顺序迭代元素。
 let num = 0;
 
 outermost: for (let i = 0; i < 10; i++) {
-	for (let j = 0; j < 10; j++) {
-		if (i == 5 && j == 5) {
-			continue outermost;
-		}
-		num++;
-	}
+  for (let j = 0; j < 10; j++) {
+    if (i == 5 && j == 5) {
+      continue outermost;
+    }
+    num++;
+  }
 }
 console.log(num); //95
 ```
@@ -637,9 +637,9 @@ let hostName = location.hostname;
 let url = location.herf;
 // 上方代码等同于
 with (location) {
-	let qs = search.substring(1);
-	let hostName = hostname;
-	let url = href;
+  let qs = search.substring(1);
+  let hostName = hostname;
+  let url = href;
 }
 ```
 
@@ -659,30 +659,30 @@ with (location) {
     }
 */
 switch (i) {
-	case 25:
-	/* 跳过 */
-	case 35:
-		console.log("25 或 35");
-		break;
-	case 45:
-		console.log("45");
-	default:
-		console.log("其他");
+  case 25:
+  /* 跳过 */
+  case 35:
+    console.log("25 或 35");
+    break;
+  case 45:
+    console.log("45");
+  default:
+    console.log("其他");
 }
 /* switch语句可以用于所有数据类型，可以使用字符串甚至对象、条件的值不需要是常量，也可以是变量或表达式。 */
 let num = 25;
 switch (true) {
-	case num < 0:
-		console.log("(-∞，0)");
-		break;
-	case num >= 0 && num <= 10:
-		console.log("[0,10]");
-		break;
-	case num > 10 && num <= 20:
-		console.log("(10,20]");
-		break;
-	default:
-		console.log("(20,+∞)");
+  case num < 0:
+    console.log("(-∞，0)");
+    break;
+  case num >= 0 && num <= 10:
+    console.log("[0,10]");
+    break;
+  case num > 10 && num <= 20:
+    console.log("(10,20]");
+    break;
+  default:
+    console.log("(20,+∞)");
 }
 ```
 

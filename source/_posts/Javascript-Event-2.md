@@ -113,34 +113,34 @@ contextmenu 事件专门用于表示何时该显示上下文菜单，从而允�
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>事件冒泡示例</title>
-	</head>
-	<body>
-		<div id="myDiv">此处右键获取特有上下文菜单，别处右键获取默认上下文菜单</div>
-		<ul id="myMenu" style="position: absolute;visibility: hidden;background-color: silver;">
-			<li>菜单1</li>
-			<li>菜单2</li>
-			<li>菜单3</li>
-		</ul>
-		<script>
-			window.addEventListener("load", (event) => {
-				let div = document.getElementById("myDiv");
+  <head>
+    <title>事件冒泡示例</title>
+  </head>
+  <body>
+    <div id="myDiv">此处右键获取特有上下文菜单，别处右键获取默认上下文菜单</div>
+    <ul id="myMenu" style="position: absolute;visibility: hidden;background-color: silver;">
+      <li>菜单1</li>
+      <li>菜单2</li>
+      <li>菜单3</li>
+    </ul>
+    <script>
+      window.addEventListener("load", (event) => {
+        let div = document.getElementById("myDiv");
 
-				div.addEventListener("contextmenu", (event) => {
-					event.preventDefault();
-					let menu = document.getElementById("myMenu");
-					menu.style.left = event.clientX + "px";
-					menu.style.top = event.clientY + "px";
-					menu.style.visibility = "visible";
-				});
+        div.addEventListener("contextmenu", (event) => {
+          event.preventDefault();
+          let menu = document.getElementById("myMenu");
+          menu.style.left = event.clientX + "px";
+          menu.style.top = event.clientY + "px";
+          menu.style.visibility = "visible";
+        });
 
-				document.addEventListener("click", (event) => {
-					document.getElementById("myMenu").style.visibility = "hidden";
-				});
-			});
-		</script>
-	</body>
+        document.addEventListener("click", (event) => {
+          document.getElementById("myMenu").style.visibility = "hidden";
+        });
+      });
+    </script>
+  </body>
 </html>
 ```
 
@@ -150,9 +150,9 @@ beforeunload 事件会在 window 上触发，用意是给开发者提供阻止�
 
 ```javascript
 window.addEventListener("beforeunload", (event) => {
-	let message = "我会想你的！🔈🔉🔊";
-	event.returnValue = message;
-	return message;
+  let message = "我会想你的！🔈🔉🔊";
+  event.returnValue = message;
+  return message;
 });
 
 // 在chrome这样子写上并不能显示message的信息(应该是限制了)，但确实阻止了页面卸载(会弹出确认框)
@@ -174,9 +174,9 @@ window 的 load 事件会在页面完全加载后触发，因为要等待很多�
 
 ```javascript
 document.addEventListener("readystatechange", (event) => {
-	if (document.readyState == "interactive") {
-		console.log("Content loaded");
-	}
+  if (document.readyState == "interactive") {
+    console.log("Content loaded");
+  }
 });
 ```
 
@@ -215,14 +215,14 @@ btn.dispatchEvent(event);
 
 // 模拟键盘事件
 let textbox = document.getElementById("myTextbox"),
-	event;
+  event;
 
 // 按照DOM3 的方式创建event对象
 if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
-	event = document.createEvent("KeyboardEvent");
+  event = document.createEvent("KeyboardEvent");
 
-	// 初始化event对象(参数含义暂略，需要时再查)
-	event.initKeyboardEvent("keydown", true, true, document.defaulyView, "a", 0, "Shift", 0);
+  // 初始化event对象(参数含义暂略，需要时再查)
+  event.initKeyboardEvent("keydown", true, true, document.defaulyView, "a", 0, "Shift", 0);
 }
 // 触发事件
 textbox.dispatchEvent(event);

@@ -21,12 +21,12 @@ IE 事件流被称为事件冒泡，这是因为事件被定义为从最具体�
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>事件冒泡示例</title>
-	</head>
-	<body>
-		<div id="myDiv">Click Me</div>
-	</body>
+  <head>
+    <title>事件冒泡示例</title>
+  </head>
+  <body>
+    <div id="myDiv">Click Me</div>
+  </body>
 </html>
 ```
 
@@ -71,9 +71,9 @@ DOM2 Event 规范规定事件流分为 3 个阶段：事件捕获、到达目标
 
 <!-- 作为事件处理程序执行的代码可以访问全局作用域中的一切 -->
 <script>
-	function showMessage() {
-		console.log("Hello world!");
-	}
+  function showMessage() {
+    console.log("Hello world!");
+  }
 </script>
 <input type="button" value="Click Me" onclick="showMessage()" />
 
@@ -90,8 +90,8 @@ DOM2 Event 规范规定事件流分为 3 个阶段：事件捕获、到达目标
 
 <!-- 如果这个元素是一个表单输入框，则作用域中还会包含表单元素 -->
 <form method="post">
-	<input type="text" name="username" value="" />
-	<input type="button" value="Click Me" onclick="console.log(username.value)" />
+  <input type="text" name="username" value="" />
+  <input type="button" value="Click Me" onclick="console.log(username.value)" />
 </form>
 <!-- 点击会显示出文本框中包含的文本。注意，这里直接引用了username -->
 ```
@@ -103,7 +103,7 @@ DOM2 Event 规范规定事件流分为 3 个阶段：事件捕获、到达目标
 ```javascript
 let btn = document.getElementById("myBtn");
 btn.onclick = function () {
-	console.log(this.id); // "myBtn"
+  console.log(this.id); // "myBtn"
 };
 /* 事件处理程序会在元素的作用域中运行，即this等于元素 */
 
@@ -119,7 +119,7 @@ DOM2 Events 为事件处理程序的赋值和移除定义了两个方法：addEv
 ```javascript
 let btn = document.getElementById("myBtn");
 let handler = function () {
-	console.log(this.id);
+  console.log(this.id);
 };
 btn.addEventListener("click", handler, false);
 
@@ -137,7 +137,7 @@ IE 实现了与 DOM 类似的方法，即 attachEvent()和 detachEvent()。这�
 ```javascript
 let btn = document.getElementById("myBtn");
 let handler = function () {
-	console.log(this.id);
+  console.log(this.id);
 };
 btn.attachEvent("onclick", handler); // 这里第一个参数是 onclick 而不是 click
 
@@ -161,7 +161,7 @@ btn.detachEvent("onclick", handler); // 这里第一个参数是 onclick 而不�
 ```javascript
 let btn = document.getElementById("myBtn");
 let handler = function (event) {
-	console.log(event.type);
+  console.log(event.type);
 };
 btn.addEventListener("click", handler);
 
@@ -196,12 +196,12 @@ btn.addEventListener("click", handler);
 let btn = document.getElementById("myBtn");
 
 btn.onclick = function () {
-	let event = window.event;
-	console.log(event.type); // click
+  let event = window.event;
+  console.log(event.type); // click
 };
 
 btn.attachEvent("onclick", function (event) {
-	console.log(event.type); // click
+  console.log(event.type); // click
 });
 ```
 

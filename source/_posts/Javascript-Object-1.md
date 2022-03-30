@@ -22,9 +22,9 @@ person.age = 23;
 
 /* 对象字面量 */
 let people = {
-	name: "Meng",
-	age: 24,
-	5: true,
+  name: "Meng",
+  age: 24,
+  5: true,
 };
 
 /* 存取 */
@@ -56,8 +56,8 @@ ECMA-262 使用一些内部特性来描述属性的特征。这些特征是由�
 ```javascript
 let person = {};
 Object.defineProperty(person, "name", {
-	writable: false,
-	value: "Kinsiy",
+  writable: false,
+  value: "Kinsiy",
 });
 
 console.log(person.name); // Kinsiy
@@ -78,21 +78,21 @@ console.log(person.name); // Kinsiy
 
 ```javascript
 let book = {
-	year_: 2020,
-	edition: 1,
+  year_: 2020,
+  edition: 1,
 };
 
 Object.defineProperty(book, "year", {
-	get() {
-		return this.year_;
-	},
+  get() {
+    return this.year_;
+  },
 
-	set(newValue) {
-		if (newValue > this.year_) {
-			this.year_ = newValue;
-			this.edition += newValue - 2020;
-		}
-	},
+  set(newValue) {
+    if (newValue > this.year_) {
+      this.year_ = newValue;
+      this.edition += newValue - 2020;
+    }
+  },
 });
 
 book.year = 2021;
@@ -109,38 +109,38 @@ Object.defineProperties()。这个方法可以通过描述符一次性定义多�
 ```javascript
 let book = {};
 Object.defineProperties(book, {
-	year_: {
-		/* 只设置value，属性不可写。省缺值均为false */
-		configurable: true,
-		enumerable: true,
-		writable: true,
-		value: 2020,
-	},
+  year_: {
+    /* 只设置value，属性不可写。省缺值均为false */
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    value: 2020,
+  },
 
-	edition: {
-		configurable: true,
-		enumerable: true,
-		writable: true,
-		value: 1,
-	},
+  edition: {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    value: 1,
+  },
 
-	year: {
-		/*
+  year: {
+    /*
         value 和 get() 是同一个作用，只能同时用一个。
         writable 和 set() 是同一个作用，用一个
         */
-		configurable: true,
-		enumerable: true,
-		get() {
-			return this.year_;
-		},
-		set(newValue) {
-			if (newValue > 2020) {
-				this.year_ = newValue;
-				this.edition += newValue - 2020;
-			}
-		},
-	},
+    configurable: true,
+    enumerable: true,
+    get() {
+      return this.year_;
+    },
+    set(newValue) {
+      if (newValue > 2020) {
+        this.year_ = newValue;
+        this.edition += newValue - 2020;
+      }
+    },
+  },
 });
 
 book.year = 2022;
@@ -212,15 +212,15 @@ console.log(desc); // {id: "I", name: "Kinsiy"}
 
 let dest = {};
 let scr = {
-	a: "Queen",
-	get b() {
-		throw new Error();
-	},
-	c: "Kinsiy",
+  a: "Queen",
+  get b() {
+    throw new Error();
+  },
+  c: "Kinsiy",
 };
 
 try {
-	Object.assign(dest, scr);
+  Object.assign(dest, scr);
 } catch (e) {}
 
 console.log(dest); // {a: "Queen"}
@@ -244,7 +244,7 @@ console.log(Object.is(NaN, NaN)); // true
  */
 
 function recursivelyCheckEaual(x, ...rest) {
-	return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEaual(...rest));
+  return Object.is(x, rest[0]) && (rest.length < 2 || recursivelyCheckEaual(...rest));
 }
 ```
 
@@ -254,11 +254,11 @@ function recursivelyCheckEaual(x, ...rest) {
 
 ```javascript
 let name = "Kinsiy",
-	age = 23;
+  age = 23;
 
 let person = {
-	name,
-	age,
+  name,
+  age,
 };
 
 console.log(`name: ${person.name}   age: ${person.age}`); // name: Kinsiy   age: 23
@@ -275,13 +275,13 @@ const jobKey = "job";
 let uniqueToken = 0;
 
 function getUniqueKey(key) {
-	return `${key}_${uniqueToken++}`;
+  return `${key}_${uniqueToken++}`;
 }
 
 let person = {
-	[getUniqueKey(nameKey)]: "Kinsiy",
-	[getUniqueKey(ageKey)]: "23",
-	[getUniqueKey(jobKey)]: "Software engineer",
+  [getUniqueKey(nameKey)]: "Kinsiy",
+  [getUniqueKey(ageKey)]: "23",
+  [getUniqueKey(jobKey)]: "Software engineer",
 };
 
 console.log(person); // {name_0: "Kinsiy", age_1: "23", job_2: "Software engineer"}
@@ -291,10 +291,10 @@ console.log(person); // {name_0: "Kinsiy", age_1: "23", job_2: "Software enginee
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	sayName() {
-		console.log(this.name);
-	},
+  name: "Kinsiy",
+  sayName() {
+    console.log(this.name);
+  },
 };
 
 person.sayName(); // Kinsiy
@@ -304,9 +304,9 @@ person.sayName(); // Kinsiy
  */
 const methodKey = "sayAge";
 let person_2 = {
-	[methodKey](age) {
-		console.log(age);
-	},
+  [methodKey](age) {
+    console.log(age);
+  },
 };
 
 person_2.sayAge("23"); // 23
@@ -316,8 +316,8 @@ person_2.sayAge("23"); // 23
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	age: 23,
+  name: "Kinsiy",
+  age: 23,
 };
 
 let { name: myName, age, job = "Software engineer" } = person;
@@ -341,11 +341,11 @@ console.log(newAge); // 23
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	age: 23,
-	job: {
-		title: "Software engineer",
-	},
+  name: "Kinsiy",
+  age: 23,
+  job: {
+    title: "Software engineer",
+  },
 };
 let otherPerson = {};
 
@@ -356,24 +356,17 @@ console.log(otherPerson); // {name: "Kinsiy", age: 23, job: {Hacker}}
 console.log(person); // {name: "Kinsiy", age: 23, job: {Hacker}}
 
 let {
-	job: { title: newTitle },
+  job: { title: newTitle },
 } = person;
 console.log(newTitle); // Hacker
 
 // 在外层属性没有定义的情况下不能使用嵌套解构。无论对象还是目标对象都是一样
 let personCopy = {};
 // foo在源对象上是undefined
-({
-	foo: { bar: personCopy.bar },
-} = person)(
-	// Uncaught TypeError: Cannot read property 'bar' of undefined
+({foo: { bar: personCopy.bar }} = person); // Uncaught TypeError: Cannot read property 'bar' of undefined
 
-	// job在目标对象上是undefined
-	({
-		job: { titilt: personCopy.job.title },
-	} = person)
-);
-// Uncaught TypeError: Cannot set property 'title' of undefined
+// job在目标对象上是undefined
+({job: { titilt: personCopy.job.title }} = person); // Uncaught TypeError: Cannot set property 'title' of undefined
 ```
 
 ### 部分解构
@@ -382,17 +375,17 @@ let personCopy = {};
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	age: 23,
+  name: "Kinsiy",
+  age: 23,
 };
 
 let name, bar, age;
 try {
-	({
-		name: name,
-		job: { bar: bar },
-		age: age,
-	} = person);
+  ({
+    name: name,
+    job: { bar: bar },
+    age: age,
+  } = person);
 } catch (e) {}
 
 console.log(name, bar, age); // Kinsiy undefined undefined
@@ -404,13 +397,13 @@ console.log(name, bar, age); // Kinsiy undefined undefined
 
 ```javascript
 let person = {
-	name: "Kinsiy",
-	age: 23,
+  name: "Kinsiy",
+  age: 23,
 };
 
 function getPersonInfo(foo, { name, age }, bar) {
-	console.log(arguments);
-	console.log(name, age);
+  console.log(arguments);
+  console.log(name, age);
 }
 
 getPersonInfo("1st", person, "2st");

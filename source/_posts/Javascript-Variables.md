@@ -129,11 +129,11 @@ changeColor();
 
 ```javascript
 function testWith() {
-	let qs = "?debug=ture";
-	with (location) {
-		let url = href + qs; // 相当于location.href
-	}
-	return url; // ReferenceError: url is not defined   使用let定义把url限制在了{}中，换做var可增强作用域
+  let qs = "?debug=ture";
+  with (location) {
+    let url = href + qs; // 相当于location.href
+  }
+  return url; // ReferenceError: url is not defined   使用let定义把url限制在了{}中，换做var可增强作用域
 }
 console.log(testWith());
 
@@ -148,8 +148,8 @@ console.log(testWith());
 ```javascript
 /* var */
 function add(num1, num2) {
-	var sum = num1 + num2; //若省略var，下方console.log不会报错
-	return sum;
+  var sum = num1 + num2; //若省略var，下方console.log不会报错
+  return sum;
 }
 
 let result = add(10, 20);
@@ -164,11 +164,11 @@ ES6 新增的 let 关键字与 var 很相似，但它作用域是块级的，这
 
 ```javascript
 if (true) {
-	let a;
+  let a;
 }
 
 {
-	let b;
+  let b;
 }
 
 console.log(a); //ReferenceError: a is not defined
@@ -210,11 +210,11 @@ console.log(o3.name); //undefined
 var color = "red";
 
 function getColor() {
-	let color = "pink";
-	{
-		let color = "green";
-		return color;
-	}
+  let color = "pink";
+  {
+    let color = "green";
+    return color;
+  }
 }
 
 console.log(getColor()); //green

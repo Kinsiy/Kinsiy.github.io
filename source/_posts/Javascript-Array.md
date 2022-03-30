@@ -49,7 +49,7 @@ console.log(arr_1 === arr_2); // false
 
 // 转换arguments 对象
 function getArgsArray() {
-	return Array.from(arguments);
+  return Array.from(arguments);
 }
 
 console.log(getArgsArray(8, 9, 4, 5)); // [8, 9, 4, 5]
@@ -58,14 +58,14 @@ console.log(getArgsArray(8, 9, 4, 5)); // [8, 9, 4, 5]
 // 还可以接收第三个可选参数, 用于指定映射函数中this的值。(在剪头函数中不适用)
 const arr_3 = [1, 2, 3, 4];
 const arr_4 = Array.from(arr_3, (x) => {
-	return x ** 2;
+  return x ** 2;
 });
 const arr_5 = Array.from(
-	arr_3,
-	function (x) {
-		return x ** this.exponent;
-	},
-	{ exponent: 3 }
+  arr_3,
+  function (x) {
+    return x ** this.exponent;
+  },
+  { exponent: 3 }
 );
 console.log(arr_3); // [1, 2, 3, 4]
 console.log(arr_4); // [1, 4, 9, 16]
@@ -83,7 +83,7 @@ console.log(Array.of(undefined)); // [undefined]
 ```javascript
 const options = [5, , , , 4];
 for (const val of Array.from(options)) {
-	console.log(val === undefined); // false true true true false
+  console.log(val === undefined); // false true true true false
 }
 ```
 
@@ -151,7 +151,7 @@ const arr_1Entries = Array.from(arr_1.entries());
 console.log(arr_1Entries); // [[0,"Java"], [1,"Javascript"], [2,"Python"], [3,"C"], [4,"C++"]]
 
 for (const [i, e] of arr_1.entries()) {
-	console.log(`i: ${i}    e: ${e}`);
+  console.log(`i: ${i}    e: ${e}`);
 }
 // i: 0    e: Java
 // i: 1    e: Javascript
@@ -207,7 +207,7 @@ arr.copyWithin(target, [start=0], [end=array.length]])
 
 ```javascript
 let inst,
-	reset = () => (inst = [9, 8, 7, 6, 5]);
+  reset = () => (inst = [9, 8, 7, 6, 5]);
 reset();
 
 // 在源索引或目标索引到达数组边界时停止
@@ -337,14 +337,14 @@ let arr_1 = [7, 5, 6, 1, 4, 12];
 console.log(arr_1.sort()); // [1, 12, 4, 5, 6, 7]     默认转字符串后按升序排序
 
 function compare(value_1, value_2) {
-	switch (true) {
-		case value_1 < value_2:
-			return -1;
-		case value_1 > value_2:
-			return 1;
-		default:
-			return 0;
-	}
+  switch (true) {
+    case value_1 < value_2:
+      return -1;
+    case value_1 > value_2:
+      return 1;
+    default:
+      return 0;
+  }
 }
 
 console.log(arr_1.sort(compare)); // [1, 4, 5, 6, 7, 12]
@@ -515,14 +515,14 @@ find()和 findIndex()方法使用了断言函数。这两个方法都是从数�
 
 ```javascript
 const people = [
-	{
-		name: "Kinsiy",
-		age: 18,
-	},
-	{
-		name: "Restituo",
-		age: 22,
-	},
+  {
+    name: "Kinsiy",
+    age: 18,
+  },
+  {
+    name: "Restituo",
+    age: 22,
+  },
 ];
 
 console.log(people.find((e, i, arr) => e.age > 20)); // {name: "Restituo", age: 22}
@@ -531,10 +531,10 @@ console.log(people.findIndex((e, i, arr) => e.age > 20)); // 1
 // 找到匹配项后，这两个方法都不在继续搜索
 const arr_1 = [2, 3, 4];
 arr_1.find((e, i, arr) => {
-	console.log(e);
-	console.log(i);
-	console.log(arr);
-	return e === 3;
+  console.log(e);
+  console.log(i);
+  console.log(arr);
+  return e === 3;
 });
 // 2
 // 0
@@ -571,7 +571,7 @@ result = num.map((e, i, a) => e ** 2);
 console.log(result); // [1, 4, 9, 16, 25, 36, 49, 64, 81]
 
 num.forEach((e, i, a) => {
-	console.log(`i: ${i}    e: ${e}`);
+  console.log(`i: ${i}    e: ${e}`);
 });
 // i: 0    e: 1
 // ...
@@ -629,23 +629,23 @@ console.log(colors.toString()); // red,bule,pink,yellow
 alert(colors); // red,bule,pink,yellow     alert()期待字符串，后台调用toString()
 
 let person_1 = {
-	toLocaleString() {
-		return "Kinsiy";
-	},
+  toLocaleString() {
+    return "Kinsiy";
+  },
 
-	toString() {
-		return "Kinsiy";
-	},
+  toString() {
+    return "Kinsiy";
+  },
 };
 
 let person_2 = {
-	toLocaleString() {
-		return "Restituo";
-	},
+  toLocaleString() {
+    return "Restituo";
+  },
 
-	toString() {
-		return "Type57";
-	},
+  toString() {
+    return "Type57";
+  },
 };
 
 let people = [person_1, person_2];

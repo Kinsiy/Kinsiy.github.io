@@ -1,5 +1,5 @@
-﻿---
-title: Javascript-DOM扩展
+---
+title: Javascript - DOM扩展
 date: 2021-10-21 21:33:28
 tags: [JS红宝书, DOM]
 categories: [学习笔记, Javascript]

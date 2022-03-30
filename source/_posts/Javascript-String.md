@@ -159,8 +159,8 @@ console.log(String.fromCodePoint(97, 98, 129315, 100, 101)); // ab🤣de
 
 ```javascript
 let a = String.fromCharCode(0x00c5),
-	b = String.fromCharCode(0x212b),
-	c = String.fromCharCode(0x0041, 0x030a);
+  b = String.fromCharCode(0x212b),
+  c = String.fromCharCode(0x0041, 0x030a);
 console.log(`a: ${a} b: ${b} c: ${c}`); // a: Å b: Å c: Å
 
 console.log(a === b); // false
@@ -211,8 +211,8 @@ let position = [];
 let pos = strValue.indexOf("f");
 
 while (pos > -1) {
-	position.push(pos);
-	pos = strValue.indexOf("f", ++pos);
+  position.push(pos);
+  pos = strValue.indexOf("f", ++pos);
 }
 console.log(position); // [25,46,52]
 ```
@@ -280,7 +280,7 @@ console.log(stringIterator.next()); //{value: undefined, done: true}
 
 /* 在for-of 循环中可以通过这个迭代器按序访问每个字符 */
 for (const c of "abcde") {
-	console.log(c);
+  console.log(c);
 }
 
 /* 使用解构操作符解构为数组 */
@@ -359,18 +359,18 @@ console.log(result); // word (cat), word (bat), word (sat), word (fat)
  */
 
 function htmlEscape(text) {
-	return text.replace(/[<>"&]/g, function (match, pos, originalText) {
-		switch (match) {
-			case "<":
-				return "&lt;";
-			case ">":
-				return "&gt;";
-			case "&":
-				return "&amp;";
-			case '"':
-				return "&quot;";
-		}
-	});
+  return text.replace(/[<>"&]/g, function (match, pos, originalText) {
+    switch (match) {
+      case "<":
+        return "&lt;";
+      case ">":
+        return "&gt;";
+      case "&":
+        return "&amp;";
+      case '"':
+        return "&quot;";
+    }
+  });
 }
 
 console.log(htmlEscape('<p class="greeting">Hello World!</p>'));

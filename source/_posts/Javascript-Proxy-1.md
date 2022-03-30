@@ -20,7 +20,7 @@ photos:
 
 ```javascript
 const target = {
-	id: "Kinsiy",
+  id: "Kinsiy",
 };
 
 const handler = {};
@@ -54,13 +54,13 @@ console.log(proxy === target); // false
 
 ```javascript
 const target = {
-	language: "Javascript",
+  language: "Javascript",
 };
 
 const handler = {
-	get() {
-		return "handler override";
-	},
+  get() {
+    return "handler override";
+  },
 };
 
 const proxy = new Proxy(target, handler);
@@ -79,18 +79,18 @@ console.log(target.language); // Javascript
 
 ```javascript
 const target = {
-	id: "Kinsiy",
-	info: "man never cay!",
+  id: "Kinsiy",
+  info: "man never cay!",
 };
 
 const handler = {
-	get(trapTarget, property, receiver) {
-		let decoration = "";
-		if (property === "id") {
-			decoration = " may cry!";
-		}
-		return Reflect.get(...arguments) + decoration;
-	},
+  get(trapTarget, property, receiver) {
+    let decoration = "";
+    if (property === "id") {
+      decoration = " may cry!";
+    }
+    return Reflect.get(...arguments) + decoration;
+  },
 };
 
 const proxy = new Proxy(target, handler);
@@ -111,13 +111,13 @@ Proxy 也暴露了 revocable()方法，这个方法支持撤销代理对象与�
 
 ```javascript
 const target = {
-	id: "king",
+  id: "king",
 };
 
 const handler = {
-	get() {
-		return "Queen";
-	},
+  get() {
+    return "Queen";
+  },
 };
 
 const { proxy, revoke } = Proxy.revocable(target, handler);
@@ -153,17 +153,17 @@ console.log(proxy.id); // TypeError: Cannot perform 'get' on a proxy that has be
 const o = {};
 
 try {
-	Object.defineProperty(o, "id", "King");
-	console.log("success");
+  Object.defineProperty(o, "id", "King");
+  console.log("success");
 } catch {
-	console.log("failure");
+  console.log("failure");
 }
 
 // 重构
 if (Reflect.defineProperty(o, "age", { value: 23 })) {
-	console.log("success");
+  console.log("success");
 } else {
-	console.log("failure");
+  console.log("failure");
 }
 ```
 
@@ -194,22 +194,22 @@ Reflect.apply(myFunc, thisVal, argumentList);
 
 ```javascript
 const target = {
-	id: 1,
-	name: "Kinsiy",
+  id: 1,
+  name: "Kinsiy",
 };
 
 const firstProxy = new Proxy(target, {
-	get() {
-		console.log("first proxy");
-		return Reflect.get(...arguments) + " first";
-	},
+  get() {
+    console.log("first proxy");
+    return Reflect.get(...arguments) + " first";
+  },
 });
 
 const secondProxy = new Proxy(firstProxy, {
-	get() {
-		console.log("second proxy");
-		return Reflect.get(...arguments) + " second.";
-	},
+  get() {
+    console.log("second proxy");
+    return Reflect.get(...arguments) + " second.";
+  },
 });
 
 console.log(secondProxy.name);
@@ -229,9 +229,9 @@ console.log(secondProxy.name);
 
 ```javascript
 const target = {
-	thisValEqualsProxys() {
-		return this === proxy;
-	},
+  thisValEqualsProxys() {
+    return this === proxy;
+  },
 };
 
 const proxy = new Proxy(targer, {});

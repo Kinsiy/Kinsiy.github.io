@@ -11,12 +11,12 @@ HTML 基本文档
 
 ```html
 <html>
-	<head>
-		<title>HTML快速参考</title>
-	</head>
-	<body>
-		<p>段落：可见文本</p>
-	</body>
+  <head>
+    <title>HTML快速参考</title>
+  </head>
+  <body>
+    <p>段落：可见文本</p>
+  </body>
 </html>
 ```
 
@@ -62,7 +62,7 @@ HTML 基本文档
 ```html
 <img src="girl.jpg" alt="girl" border="0" usemap="#grilmap" width="200" height="200" />
 <map name="grilmap" id="grilmap">
-	<area shape="circle" coords="100,150,10" href="https://www.baidu.com" alt="baidu" target="_blank" />
+  <area shape="circle" coords="100,150,10" href="https://www.baidu.com" alt="baidu" target="_blank" />
 </map>
 ```
 
@@ -78,21 +78,21 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <table frame="box" border="1">
-	<tr>
-		<th rowspan="2">标题1，横跨两行</th>
-		<td>数据格</td>
-	</tr>
-	<tr>
-		<td>数据格</td>
-	</tr>
-	<tr>
-		<th colspan="2">标题2，横跨两列</th>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<!-- 空格占位符 -->
-		<td>数据格</td>
-	</tr>
+  <tr>
+    <th rowspan="2">标题1，横跨两行</th>
+    <td>数据格</td>
+  </tr>
+  <tr>
+    <td>数据格</td>
+  </tr>
+  <tr>
+    <th colspan="2">标题2，横跨两列</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <!-- 空格占位符 -->
+    <td>数据格</td>
+  </tr>
 </table>
 ```
 
@@ -114,10 +114,10 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <ol>
-	<li>有序列表1</li>
-	<li>有序列表2</li>
-	<li>有序列表3</li>
-	<li>有序列表4</li>
+  <li>有序列表1</li>
+  <li>有序列表2</li>
+  <li>有序列表3</li>
+  <li>有序列表4</li>
 </ol>
 ```
 
@@ -125,10 +125,10 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <ul>
-	<li>无序列表1</li>
-	<li>无序列表2</li>
-	<li>无序列表3</li>
-	<li>无序列表4</li>
+  <li>无序列表1</li>
+  <li>无序列表2</li>
+  <li>无序列表3</li>
+  <li>无序列表4</li>
 </ul>
 ```
 
@@ -136,12 +136,12 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <dl>
-	<dt>Java</dt>
-	<dd>Java是一种非常强大的语言</dd>
-	<dt>Python</dt>
-	<dd>Python是一种脚本语言</dd>
-	<dt>Javascript</dt>
-	<dd>Javascript也是一种脚本语言</dd>
+  <dt>Java</dt>
+  <dd>Java是一种非常强大的语言</dd>
+  <dt>Python</dt>
+  <dd>Python是一种脚本语言</dd>
+  <dt>Javascript</dt>
+  <dd>Javascript也是一种脚本语言</dd>
 </dl>
 ```
 
@@ -151,14 +151,14 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <h1>
-	,
-	<p>,</p>
-	<ul>
-		,
-		<table>
-			<!-- 块元素 -->
-		</table>
-	</ul>
+  ,
+  <p>,</p>
+  <ul>
+    ,
+    <table>
+      <!-- 块元素 -->
+    </table>
+  </ul>
 </h1>
 ```
 
@@ -170,14 +170,14 @@ ismap 可将图片转换为图像映射。点击图片任意位置访问时在�
 
 ```html
 <b
-	>,
-	<td>
-		,
-		<a
-			>, <img />
-			<!-- 块元素 --></a
-		>
-	</td></b
+  >,
+  <td>
+    ,
+    <a
+      >, <img />
+      <!-- 块元素 --></a
+    >
+  </td></b
 >
 ```
 
@@ -199,39 +199,39 @@ HTML <span\> 元素是内联元素，可用作文本的容器。
 
 ```html
 <form action="#">
-	<fieldset>
-		<legend>Html边框测试</legend>
-		<label for="sex">性别：</label>
-		<input type="text" name="sex" />
-		<br />
-		<label for="name">姓名：</label>
-		<input type="text" name="name" />
-		<br />
-		<label for="password">密码：</label>
-		<input type="password" name="password" />
-		<br />
-		<input type="radio" value="male" />Male
-		<br />
-		<input type="radio" value="female" checked />Female
-		<br />
-		<input type="checkbox" value="1" checked />男生
-		<br />
-		<input type="checkbox" value="0" />女生
-		<br />
-		<input type="submit" />
-		<br />
-		<input type="reset" />
-		<br />
-		<input type="hidden" />
-		<select name="cars" id="cars">
-			<option value="1">大众</option>
-			<optgroup label="豪车">
-				<option value="2">宝马</option>
-				<option value="3" selected>奔驰</option>
-			</optgroup>
-			<option value="4">东风</option>
-		</select>
-	</fieldset>
+  <fieldset>
+    <legend>Html边框测试</legend>
+    <label for="sex">性别：</label>
+    <input type="text" name="sex" />
+    <br />
+    <label for="name">姓名：</label>
+    <input type="text" name="name" />
+    <br />
+    <label for="password">密码：</label>
+    <input type="password" name="password" />
+    <br />
+    <input type="radio" value="male" />Male
+    <br />
+    <input type="radio" value="female" checked />Female
+    <br />
+    <input type="checkbox" value="1" checked />男生
+    <br />
+    <input type="checkbox" value="0" />女生
+    <br />
+    <input type="submit" />
+    <br />
+    <input type="reset" />
+    <br />
+    <input type="hidden" />
+    <select name="cars" id="cars">
+      <option value="1">大众</option>
+      <optgroup label="豪车">
+        <option value="2">宝马</option>
+        <option value="3" selected>奔驰</option>
+      </optgroup>
+      <option value="4">东风</option>
+    </select>
+  </fieldset>
 </form>
 ```
 
@@ -246,16 +246,16 @@ HTML <span\> 元素是内联元素，可用作文本的容器。
 
 ```html
 <frameset rows="50%,50%">
-	<frame src="frame_a.html" />
-	<frameset cols="25%,75%">
-		<frame src="frame_b.html" />
-		<frame src="frame_c.html" />
-	</frameset>
-	<noframes>
-		<body>
-			您的浏览器无法处理框架！
-		</body>
-	</noframes>
+  <frame src="frame_a.html" />
+  <frameset cols="25%,75%">
+    <frame src="frame_b.html" />
+    <frame src="frame_c.html" />
+  </frameset>
+  <noframes>
+    <body>
+      您的浏览器无法处理框架！
+    </body>
+  </noframes>
 </frameset>
 <!-- 内联框架 -->
 <iframe src="key.html" width="100%" height="30%" frameborder="0" name="iframe_a"></iframe>

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Javascript-XHR
 date: 2021-10-28 22:46:59
 tags: [JS红宝书, XHR]
@@ -49,9 +49,9 @@ send()方法接收一个参数，是作为请求体发送的数据。如果不�
 xhr.open("get", "example.txt", false);
 xhr.send(null);
 if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-	alert(xhr.responseText);
+  alert(xhr.responseText);
 } else {
-	alert("Request was unsuccessful: " + xhr.status);
+  alert("Request was unsuccessful: " + xhr.status);
 }
 ```
 
@@ -70,13 +70,13 @@ if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
 ```javascript
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
-	if (xhr.readyState == 4) {
-		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-			alert(xhr.responseText);
-		} else {
-			alert("Request was unsuccessful: " + xhr.status);
-		}
-	}
+  if (xhr.readyState == 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      alert(xhr.responseText);
+    } else {
+      alert("Request was unsuccessful: " + xhr.status);
+    }
+  }
 };
 xhr.open("get", "example.txt", true);
 xhr.send(null);
@@ -136,9 +136,9 @@ let allHeaders xhr.getAllResponseHeaders();
 
 ```javascript
 function addURLParam(url, name, value) {
-	url += url.indexOf("?") == -1 ? "?" : "&";
-	url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
-	return url;
+  url += url.indexOf("?") == -1 ? "?" : "&";
+  url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
+  return url;
 }
 
 let url = "example.php";
@@ -199,13 +199,13 @@ data.append("name", "Nicholas");
  */
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
-	if (xhr.readyState == 4) {
-		if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-			alert(xhr.responseText);
-		} else {
-			alert("Request was unsuccessful: " + xhr.status);
-		}
-	}
+  if (xhr.readyState == 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      alert(xhr.responseText);
+    } else {
+      alert("Request was unsuccessful: " + xhr.status);
+    }
+  }
 };
 xhr.open("post", "postexample.php", true);
 
@@ -277,11 +277,11 @@ Firefox 最初在实现 XHR 的时候，曾致力于简化交互模式。最终�
 ```javascript
 let xhr = new XMLHttpRequest();
 xhr.onload = function () {
-	if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-		console.log(xhr.responseText);
-	} else {
-		alert("Request was unsuccessful: " + xhr.status);
-	}
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+    console.log(xhr.responseText);
+  } else {
+    alert("Request was unsuccessful: " + xhr.status);
+  }
 };
 xhr.open("get", "altevents.php", true);
 xhr.send(null);
@@ -294,18 +294,18 @@ Mozilla 在 XHR 对象上另一个创新是 progress 事件，在浏览器接收
 ```javascript
 let xhr = new XMLHttpRequest();
 xhr.onload = function (event) {
-	if ((xhr.status >= 200 && xhr.status < 300) || xhr.statu == 304) {
-		console.log(xhr.responseText);
-	} else {
-		console.log("Request was unsuccessful: " + xhr.status);
-	}
+  if ((xhr.status >= 200 && xhr.status < 300) || xhr.statu == 304) {
+    console.log(xhr.responseText);
+  } else {
+    console.log("Request was unsuccessful: " + xhr.status);
+  }
 };
 
 xhr.onprogress = function (event) {
-	let divStatus = document.getElementById("status");
-	if (event.lengthComputable) {
-		divStatus.innerHTML = "Received " + event.position + " of " + event.totalSize + " bytes.";
-	}
+  let divStatus = document.getElementById("status");
+  if (event.lengthComputable) {
+    divStatus.innerHTML = "Received " + event.position + " of " + event.totalSize + " bytes.";
+  }
 };
 
 xhr.open("get", "altevents.php", true);

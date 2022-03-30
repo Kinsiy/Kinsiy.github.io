@@ -34,21 +34,21 @@ location 的多数信息都可以通过上面的属性获取。但是 URL 中的
 
 ```javascript
 let getQueryStringArgs = function () {
-	// 取得没有开头问号的查询字符串
-	let qs = location.search.length > 0 ? location.search.substring(1) : "";
-	// 保存数据的对象
-	args = {};
+  // 取得没有开头问号的查询字符串
+  let qs = location.search.length > 0 ? location.search.substring(1) : "";
+  // 保存数据的对象
+  args = {};
 
-	// 把每个参数添加到args对象
-	for (let item of qs.split("&").map((kv) => kv.split("="))) {
-		let name = decodeURIComponent(item[0]),
-			value = decodeURIComponent(item[1]);
-		if (name.length) {
-			args[name] = value;
-		}
-	}
+  // 把每个参数添加到args对象
+  for (let item of qs.split("&").map((kv) => kv.split("="))) {
+    let name = decodeURIComponent(item[0]),
+      value = decodeURIComponent(item[1]);
+    if (name.length) {
+      args[name] = value;
+    }
+  }
 
-	return args;
+  return args;
 };
 ```
 
@@ -70,7 +70,7 @@ searchParams.set("lover", "someone");
 console.log(searchParams.toString()); // name=kinsiy&age=24&lover=someone
 // 能够迭代
 for (let param of searchParams) {
-	console.log(param); // ["name", "kinsiy"] ["age", "24"] ["lover", "someone"]
+  console.log(param); // ["name", "kinsiy"] ["age", "24"] ["lover", "someone"]
 }
 ```
 
@@ -98,7 +98,7 @@ location.reload(true); // 重新加载，从服务器加载
 
 ## navigator 对象
 
-navigator 对象的属性通常用于确定浏览器的类型
+xxxxxxxxxx class Vehicle{}​let FooMixin = (SuperClass) => class extends SuperClass{  foo(){    console.log("foo")  }}​let BarMixin = (SuperClass) => class extends SuperClass{  bar(){    console.log("bar")  }}​let BzaMixin = (SuperClass) => class extends SuperClass{  baz(){    console.log("baz")  }}​function mix(Baseclass,...Mixins){  return Mixins.reduce((accumulator, current) => current(accumulator),Baseclass)}​class Bus extends mix(Vehicle,FooMixin,BarMixin,BzaMixin){}​let b = new Busb.foo();  // foob.bar();  // barb.baz();  // bazJavascript
 
 | 属性/方法                     | 说明                                                             |
 | :---------------------------- | :--------------------------------------------------------------- |
@@ -155,13 +155,13 @@ plugins 数组的每一项都包含如下属性
 
 ```javascript
 let hasPlugin = function (name) {
-	name = name.toLowerCase();
-	for (let plugin of window.navigator.plugins) {
-		if (plugin.name.toLowerCase().indexOf(name) > -1) {
-			return true;
-		}
-	}
-	return false;
+  name = name.toLowerCase();
+  for (let plugin of window.navigator.plugins) {
+    if (plugin.name.toLowerCase().indexOf(name) > -1) {
+      return true;
+    }
+  }
+  return false;
 };
 
 // 检测QuickTime
@@ -220,7 +220,7 @@ history 对象还有一个 length 属性，表示历史记录中有多个条目�
 
 ```js
 if (history.length == 1) {
-	// 这是用户窗口的第一个页面
+  // 这是用户窗口的第一个页面
 }
 ```
 

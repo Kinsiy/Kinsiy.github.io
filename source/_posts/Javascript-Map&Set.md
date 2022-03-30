@@ -20,9 +20,9 @@ Map 是一种新的集合类型，为 Javascript 带来了真正的键/值存储
 const m_1 = new Map(); // 创建空映射
 
 const m_2 = new Map([
-	["key_1", "val_1"],
-	["key_2", "val_2"],
-	["key_3", "val_3"],
+  ["key_1", "val_1"],
+  ["key_2", "val_2"],
+  ["key_3", "val_3"],
 ]); // 创建的同时初始化实例
 console.log(m_2.size); // 3
 
@@ -35,8 +35,8 @@ console.log(m_3.get(undefined)); // undefined
 
 ```javascript
 const m_4 = new Map([
-	["firstName", "Kinsiy"],
-	["lastName", "Restituo"],
+  ["firstName", "Kinsiy"],
+  ["lastName", "Restituo"],
 ]);
 
 m_4.set("age", "23");
@@ -57,9 +57,9 @@ console.log(m_4); // {}
 ```javascript
 const m_5 = new Map();
 const obj_key = {},
-	obj_val = {},
-	arr_key = [],
-	arr_val = [];
+  obj_val = {},
+  arr_key = [],
+  arr_val = [];
 
 m_5.set(obj_key, obj_val).set(arr_key, arr_val);
 
@@ -78,26 +78,26 @@ console.log(m_5.get(arr_key)); // ["Restituo"]
 
 ```javascript
 const m_6 = new Map([
-	["one", "Javascript"],
-	["two", "Java"],
-	["three", "Python"],
-	["four", "C"],
+  ["one", "Javascript"],
+  ["two", "Java"],
+  ["three", "Python"],
+  ["four", "C"],
 ]);
 console.log(m_6.entries === m_6[Symbol.iterator]); // true
 
 /* entries(),keys(),values() */
 for (let [key, value] of m_6.entries()) {
-	console.log(`key: ${key}    value: ${value}`);
+  console.log(`key: ${key}    value: ${value}`);
 }
 // key: one    value: Javascript
 // key: two    value: Java
 // key: three    value: Python
 // key: four    value: C
 for (let key of m_6.keys()) {
-	console.log(key); // one two three four
+  console.log(key); // one two three four
 }
 for (let value of m_6.values()) {
-	console.log(value); // Javascript Java Python C
+  console.log(value); // Javascript Java Python C
 }
 
 console.log([...m_6]); //[["one", "Javascript"], ["two", "Java"], ["three", "Python"], ["four", "C"]]
@@ -110,9 +110,9 @@ const obj_key = { id: 1 };
 const m_7 = new Map([[obj_key, "Kinsiy"]]);
 
 for (let key of m_7.keys()) {
-	key.id = 8;
-	console.log(key); // {id: 8}
-	console.log(m_7.get(key)); // Kinsiy
+  key.id = 8;
+  console.log(key); // {id: 8}
+  console.log(m_7.get(key)); // Kinsiy
 }
 ```
 
@@ -133,15 +133,15 @@ WeakMap 是 Map 的"兄弟"类型，其 API 也是 Map 的子集。WeakMap 中�
 
 ```javascript
 const obj_1 = { id: 1 },
-	obj_2 = { id: 2 },
-	obj_3 = { id: 3 };
+  obj_2 = { id: 2 },
+  obj_3 = { id: 3 };
 /* 初始化是全有或全无的操作
     只要有一个键无效就会抛出错误，导致整个初始化失败
  */
 const m_1 = new WeakMap([
-	[obj_1, "value_1"],
-	["Str_obj_2", "value_2"],
-	[obj_3, "value_3"],
+  [obj_1, "value_1"],
+  ["Str_obj_2", "value_2"],
+  [obj_3, "value_3"],
 ]); // TypeError: Invalid value used as weak map key
 ```
 
@@ -159,12 +159,12 @@ const wm_1 = new WeakMap([[{}, "value_1"]]);
     如果调用了remove_Reference，就会摧毁对象的最后一个引用，垃圾回收程序会把这个键值对清理掉
  */
 const container = {
-	key: {},
+  key: {},
 };
 const wm_2 = new WeakMap([[container.key, "value_2"]]);
 
 function remove_Reference() {
-	container.key = null;
+  container.key = null;
 }
 ```
 
@@ -176,33 +176,33 @@ function remove_Reference() {
 
 ```javascript
 const User = (() => {
-	const wm = new WeakMap();
+  const wm = new WeakMap();
 
-	class User {
-		constructor(id) {
-			this.idProperty = Symbol("id");
-			this.setId(id);
-		}
+  class User {
+    constructor(id) {
+      this.idProperty = Symbol("id");
+      this.setId(id);
+    }
 
-		setPrivate(property, value) {
-			const privateMemers = wm.get(this) || {};
-			privateMemers[property] = value;
-			wm.set(this, privateMembers);
-		}
+    setPrivate(property, value) {
+      const privateMemers = wm.get(this) || {};
+      privateMemers[property] = value;
+      wm.set(this, privateMembers);
+    }
 
-		getPrivate(property) {
-			return wm.get(this)[property];
-		}
+    getPrivate(property) {
+      return wm.get(this)[property];
+    }
 
-		setId(id) {
-			this.setPrivate(this.idProperty, id);
-		}
+    setId(id) {
+      this.setPrivate(this.idProperty, id);
+    }
 
-		getId(id) {
-			return this.getPrivate(this.idProperty);
-		}
-	}
-	return User;
+    getId(id) {
+      return this.getPrivate(this.idProperty);
+    }
+  }
+  return User;
 })();
 
 const user = new User(123);
@@ -244,8 +244,8 @@ const s_2 = new Set(["Kinsiy", "Restituo", "Supreman"]);
 
 console.log(s_2); // {"Kinsiy", "Restituo", "Supreman"}
 for (let v of s_2.entries()) {
-	console.log(v); // ["Kinsiy", "Kinsiy"] ["Restituo", "Restituo"] ["Supreman", "Supreman"]
-	v = "Super"; // 修改集合中值得属性不会影响其作为集合值得身份
+  console.log(v); // ["Kinsiy", "Kinsiy"] ["Restituo", "Restituo"] ["Supreman", "Supreman"]
+  v = "Super"; // 修改集合中值得属性不会影响其作为集合值得身份
 }
 console.log(s_2); // {"Kinsiy", "Restituo", "Supreman"}
 ```
@@ -304,8 +304,8 @@ console.log(arr_3);
 
 /* 对于期待可迭代对象的构造函数，只要传入一个可迭代对象就可以实现复制 */
 let map_1 = new Map([
-	["key_1", "1"],
-	["key_2", "2"],
+  ["key_1", "1"],
+  ["key_2", "2"],
 ]);
 let map_2 = new Map(map_1);
 console.log(map_2); // {"key_1" => "1", "key_2" => "2"}
