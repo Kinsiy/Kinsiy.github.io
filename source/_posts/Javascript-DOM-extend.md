@@ -39,18 +39,15 @@ let body = document.querySelector("body");
 // 取得 ID 为"myDiv"的元素
 let myDiv = document.querySelector("#myDiv"); 
 
-
 // 取得类名为"selected"的第一个元素
 let selected = document.querySelector(".selected"); 
 // 取得类名为"button"的图片
 let img = document.body.querySelector("img.button"); 
 ```
 
-
 在 Document 上使用 querySelector()方法时，会从文档元素开始搜索；在 Element 上使用 querySelector()方法时，则只会从当前元素的后代中查询。
 
-
- 用于查询模式的 CSS 选择符可繁可简，依需求而定。如果选择符有语法错误或碰到不支持的选择符， 则 querySelector()方法会抛出错误。
+用于查询模式的 CSS 选择符可繁可简，依需求而定。如果选择符有语法错误或碰到不支持的选择符， 则 querySelector()方法会抛出错误。
 
 
 ### querySelectorAll()
@@ -59,13 +56,10 @@ let img = document.body.querySelector("img.button");
 querySelectorAll()方法跟 querySelector()一样，也接收一个用于查询的参数，但它会返回 所有匹配的节点，而不止一个。**这个方法返回的是一个 NodeList 的静态实例**。
 
 
- 再强调一次，querySelectorAll()返回的 NodeList 实例一个属性和方法都不缺，但它是一 个静态的“快照”，而非“实时”的查询。这样的底层实现避免了使用 NodeList 对象可能造成的性 能问题。 
+ 再强调一次，querySelectorAll()返回的 NodeList 实例一个属性和方法都不缺，但它是一 个静态的“快照”，而非“实时”的查询。这样的底层实现避免了使用 NodeList 对象可能造成的性能问题。 
 
 
-以有效 CSS 选择符调用 querySelectorAll()都会返回 NodeList，无论匹配多少个元素都可以。 如果没有匹配项，则返回空的 NodeList 实例。 
-
-
-与 querySelector()一样，querySelectorAll()也可以在 Document、DocumentFragment 和 Element 类型上使用。下面是几个例子：
+以有效 CSS 选择符调用 querySelectorAll()都会返回 NodeList，无论匹配多少个元素都可以。 如果没有匹配项，则返回空的 NodeList 实例。 与 querySelector()一样，querySelectorAll()也可以在 Document、DocumentFragment 和 Element 类型上使用。下面是几个例子：
 
 
 ```javascript
@@ -159,7 +153,7 @@ let selected = document.getElementById("myDiv").getElementsByClassName("selected
 ```
 
 
-这个<div>元素有 3 个类名。要想删除其中一个，就得先把 className 拆开，删除不想要的那个， 再把包含剩余类的字符串设置回去。比如:
+这个<div\>元素有 3 个类名。要想删除其中一个，就得先把 className 拆开，删除不想要的那个， 再把包含剩余类的字符串设置回去。比如:
 
 
 ```javascript
@@ -327,7 +321,7 @@ if (div.dataset.myname){
 ### 插入标记
 
 
-DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插入大量 HTML 时还是比较麻烦。 相比先创建一堆节点，再把它们以正确的顺序连接起来，直接插入一个 HTML 字符串要简单（快速） 得多。HTML5 已经通过以下 DOM 扩展将这种能力标准化了
+DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插入大量 HTML 时还是比较麻烦。 相比先创建一堆节点，再把它们以正确的顺序连接起来，直接插入一个 HTML 字符串要简单（快速） 得多。HTML5 已经通过以下 DOM 扩展将这种能力标准化了.
 
 
 #### innerHTML
@@ -346,9 +340,7 @@ DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插
  </ul> 
 </div> 
 
-
 <!-- 对于这里的<div>元素而言，其 innerHTML 属性会返回以下字符串：-->
-
 
 <p>This is a <strong>paragraph</strong> with a list following it.</p> 
 <ul> 
@@ -365,7 +357,7 @@ DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插
 在写入模式下，赋给 innerHTML 属性的值会被解析为 DOM 子树，并替代元素之前的所有节点。 因为所赋的值默认为 HTML，所以其中的所有标签都会以浏览器处理 HTML 的方式转换为元素（同样， 转换结果也会因浏览器不同而不同）。如果赋值中不包含任何 HTML 标签，则直接生成一个文本节点
 
 
-在所有现代浏览器中，通过 innerHTML 插入的<script>标签是不会执行的。
+在所有现代浏览器中，通过 innerHTML 插入的<script\>标签是不会执行的。
 
 
 #### outerHTML
@@ -382,21 +374,16 @@ DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插
 </div>
 */
 
-
 let container = document.getElementById("container");
 let d = document.getElementById("d");
-
 
 console.log(container.firstChild.nodeName);
 // logs "div"
 
-
 d.outerHTML = "<p>This paragraph replaced the original div.</p>";
-
 
 console.log(container.firstChild.nodeName);
 // logs "P"
-
 
 /*
     #d div不再是文档树的一部分，新段替换了它。
@@ -417,11 +404,10 @@ console.log(container.firstChild.nodeName);
 #### 跨站点脚本
 
 
-尽管 innerHTML 不会执行自己创建的<script>标签，但仍然向恶意用户暴露了很大的攻击面，因为通过它可以毫不费力地创建元素并执行 onclick 之类的属性。
+尽管 innerHTML 不会执行自己创建的<script\>标签，但仍然向恶意用户暴露了很大的攻击面，因为通过它可以毫不费力地创建元素并执行 onclick 之类的属性。
 
 
-如果页面中要使用用户提供的信息，则不建议使用 innerHTML。与使用 innerHTML 获得的方便相
-比，防止 XSS 攻击更让人头疼。此时一定要隔离要插入的数据，在插入页面前必须毫不犹豫地使用相关的库对它们进行转义。
+如果页面中要使用用户提供的信息，则不建议使用 innerHTML。与使用 innerHTML 获得的方便相比，防止 XSS 攻击更让人头疼。此时一定要隔离要插入的数据，在插入页面前必须毫不犹豫地使用相关的库对它们进行转义。
 
 
 ### scrollIntoView()
@@ -462,7 +448,7 @@ document.forms[0].scrollIntoView({behavior: 'smooth', block: 'start'});
 ## 专有扩展
 
 
-### children 属性
+### children 
 
 
 children 属性是一个 HTMLCollection，只包含元素的 Element 类型的子节点。如果元素的子节点类型全部是元素类型，那 children 和 childNodes 中包含的节点应该是一样的
@@ -474,7 +460,7 @@ let firstChild = element.children[0];
 ```
 
 
-### contains() 方法
+### contains() 
 
 
 DOM 编程中经常需要确定一个元素是不是另一个元素的后代。IE 首先引入了 contains()方法， 让开发者可以在不遍历 DOM 的情况下获取这个信息。contains()方法应该在要搜索的祖先元素上调 用，参数是待确定的目标节点
@@ -483,17 +469,14 @@ DOM 编程中经常需要确定一个元素是不是另一个元素的后代。I
 如果目标节点是被搜索节点的后代，contains()返回 true，否则返回 false另外，使用 DOM Level 3 的 compareDocumentPosition()方法也可以确定节点间的关系。这个 方法会返回表示两个节点关系的位掩码
 
 
-| 掩码 | 节点关系                                  |
-| ---- | ----------------------------------------- |
-| 0x1  | 断开(传入的节点不在文档中)                |
-| 0x2  | 领先(传入的节点在DOM树中位于参考节点之前) |
-| 0x4  | 落后(传入的节点在DOM树中位于参考节点之后) |
-| 0x8  | 包含(传入的节点是参考节点的祖先)          |
-| 0x10 | 被包含(传入的节点是参考节点的后代)        |
-
-
-
-
+| 掩码 |十进制| 节点关系                                  |
+| :--: |:-:| :---------------------------------------- |
+| 0x1  |1| 断开(传入的节点不在文档中)                |
+| 0x2  |2| 领先(传入的节点在DOM树中位于参考节点之前) |
+| 0x4  |4| 落后(传入的节点在DOM树中位于参考节点之后) |
+| 0x8  |8| 包含(传入的节点是参考节点的祖先)          |
+| 0x10 |16| 被包含(传入的节点是参考节点的后代)        |
+|0x20|32|待定|
 
 
 ```JavaScript
@@ -509,11 +492,16 @@ console.log(!!(result & 0x10));
  */
 ```
 
+{% note info %}
+
+这里是模仿contains才与 0x10 进行按位与运算. 判断其他关系使用相应位掩码按位与即可
+
+{% endnote %}
 
 ### 插入标记
 
 
-HTML5 将 IE 发明的 innerHTML 和 outerHTML 纳入了标准，但还有两个属性没有入选。这两个剩 下的属性是 innerText 和 outerText。
+HTML5 将 IE 发明的 innerHTML 和 outerHTML 纳入了标准，但还有两个属性没有入选。这两个剩下的属性是 innerText 和 outerText。
 
 
 #### innerText 属性

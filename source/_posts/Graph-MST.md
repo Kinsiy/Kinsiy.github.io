@@ -12,7 +12,7 @@ photos:
 
 > **最小生成树**是一副[连通](https://zh.wikipedia.org/wiki/连通图)[加权无向图](https://zh.wikipedia.org/wiki/图_(数学))中一棵权值最小的[生成树](https://zh.wikipedia.org/wiki/生成树)。
 >
-> 在一给定的无向图 $G = (V,E)$中，$(u,v)$代表连接顶点$u$与顶点$v$的边(即$(u,v)\in E$)，而$w(u,v)$代表此边的权重，若存在$T$为$E$的字迹(即$T \subset E$)且$(V,T)$为树，使得
+> 在一给定的无向图 $G = (V,E)$中，$(u,v)$代表连接顶点$u$与顶点$v$的边(即$(u,v)\in E$)，而$w(u,v)$代表此边的权重，若存在$T$为$E$的子集(即$T \subset E$)且$(V,T)$为树，使得
 > $$
 > w(T) = \sum_{\mathclap{(u,v)\in T}} w(u,v)
 > $$
@@ -53,7 +53,6 @@ class QueueNode {
   }
 }
 
-
 function primsMst(Graph) {
   const nodes = [...Graph.nodes.values()]; // 图所有节点的数组形式
   const mstVertex = new Array(Graph.nodes.size).fill(false); // 标志已经遍历过的顶点
@@ -62,45 +61,36 @@ function primsMst(Graph) {
     (_, i) => new QueueNode(i, Infinity)
   ); // 优先队列节点数组
 
-
   const parent = new Array(Graph.nodes.size).fill(-1); // 以下标标识边，parent[n] → n
-
 
   mstVertex[0] = true; // 初始化，从下标为 0 的顶点开始生成
   queueNodes[0].key = 0; // 初始化，队首节点key(weight)最小
 
-
   const queue = [...queueNodes]; // 优先队列
-
 
   // 当优先队列不为空
   while (queue.length !== 0) {
     const curQueueNode = queue.shift(); // 出队key(weight)最小的节点
 
-
     mstVertex[curQueueNode.vertex] = true; // 此顶点选中为最小生成树顶点(标志遍历)
-
 
     // 遍历此顶点的邻接顶点
     for (const [adjacent, weight] of nodes[curQueueNode.vertex].getAdjacents()) {
       const curIndex = nodes.indexOf(adjacent); // 获取邻接顶点在顶点数组中的下标
       if (mstVertex[curIndex]) continue; // 邻接顶点在选中最小生成树顶点中(已遍历过)
 
-
       if (queueNodes[curIndex].key <= weight) continue;
       queueNodes[curIndex].key = weight; // 更新优先队列节点key(weight)
-      queue.sort((a, b) => a.key - b.key); // 排序优先队列，保证在队首的是已选出的连通子图里的顶点
       parent[curIndex] = curQueueNode.vertex; // 记录邻接顶点权值最小的边
     }
+    queue.sort((a, b) => a.key - b.key); // 排序优先队列，保证在队首的是已选出的连通子图里的顶点
   }
   for (let i = 1; i < parent.length; i++) {
     console.log(nodes[parent[i]].value + " - " + nodes[i].value + " - " + queueNodes[i].key);
   }
 }
 
-
 const graph = new Graph(Graph.UNDIRECTED);
-
 
 graph.addEdge(0, 1, 4);
 graph.addEdge(0, 7, 8);
@@ -146,10 +136,8 @@ primsMst(graph);
 function KruskalMST(vertexs, edges) {
   edges.sort((a, b) => a[2] - b[2]);
 
-
   const parent = Array(vertexs.length).fill(0);
   const result = [];
-
 
   let src, dest;
   for (let i = 0; i < edges.length; i++) {
@@ -162,7 +150,6 @@ function KruskalMST(vertexs, edges) {
   }
   return result;
 
-
   function find(parent, index) {
     while (parent[index] > 0) {
       index = parent[index];
@@ -170,7 +157,6 @@ function KruskalMST(vertexs, edges) {
     return index;
   }
 }
-
 
 const vertexs = [0, 1, 2, 7, 8];
 const edges = [
@@ -208,7 +194,6 @@ class Node {
     this.adjacents = new Map(); // 邻接链表
   }
 
-
   /**
    * @description: 新增邻接节点
    * @param {Node} node 邻接节点
@@ -218,7 +203,6 @@ class Node {
     this.adjacents.set(node, weight);
   }
 
-
   /**
    * @description: 移除邻接节点
    * @param {Node} node
@@ -226,7 +210,6 @@ class Node {
   removeAdjacent(node) {
     this.adjacents.delete(node);
   }
-
 
   /**
    * @description: 节点是否与node邻接
@@ -236,7 +219,6 @@ class Node {
     this.adjacents.has(node);
   }
 
-
   /**
    * @description: 获取所有邻接节点
    * @return {Array} 邻接节点数组
@@ -244,7 +226,6 @@ class Node {
   getAdjacents() {
     return [...this.adjacents.entries()];
   }
-
 
   /**
    * @description: 获取某邻接节点边权重
@@ -255,7 +236,6 @@ class Node {
     return this.adjacents.get(node);
   }
 }
-
 
 //
 // 图 - 邻接表实现
@@ -269,7 +249,6 @@ class Graph {
     this.nodes = new Map();
     this.edgeDirection = edgeDirection;
   }
-
 
   /**
    * @description: 向图中增加顶点
@@ -286,7 +265,6 @@ class Graph {
     }
   }
 
-
   /**
    * @description: 从图中移除值为value的顶点
    * @param {*} value 顶点值
@@ -302,7 +280,6 @@ class Graph {
     return this.nodes.delete(value);
   }
 
-
   /**
    * @description: 在图中创建边/弧
    * @param {*} source
@@ -313,18 +290,14 @@ class Graph {
     const sourceNode = this.addVertex(source);
     const destinationNode = this.addVertex(destination);
 
-
     sourceNode.addAdjacent(destinationNode, weight);
-
 
     if (this.edgeDirection === Graph.UNDIRECTED) {
       destinationNode.addAdjacent(sourceNode, weight);
     }
 
-
     return [sourceNode, destinationNode, weight];
   }
-
 
   /**
    * @description: 从图中移除边/弧
@@ -337,7 +310,6 @@ class Graph {
     const destinationNode = this.nodes.get(destination);
     let weight;
 
-
     if (sourceNode && destinationNode) {
       weight = sourceNode.getAdjacentWeight(destinationNode);
       sourceNode.removeAdjacent(destinationNode);
@@ -348,10 +320,8 @@ class Graph {
       }
     }
 
-
     return [sourceNode, destinationNode, weight];
   }
-
 
   /**
    * @description: 判断两节点是否邻接
@@ -363,11 +333,9 @@ class Graph {
     const sourceNode = this.nodes.get(source);
     const destinationNode = this.nodes.get(destination);
 
-
     if (sourceNode && destinationNode) {
       return sourceNode.isAdjacent(destinationNode);
     }
-
 
     return false;
   }

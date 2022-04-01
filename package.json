@@ -7,7 +7,8 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "_deploy": "hexo clean && hexo generate && hexo deploy"
+    "_deploy": "hexo clean && hexo generate && hexo deploy",
+    "push": "git push github HEAD:backup"
   },
   "hexo": {
     "version": "6.1.0"
