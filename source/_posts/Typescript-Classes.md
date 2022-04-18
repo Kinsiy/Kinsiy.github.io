@@ -8,15 +8,15 @@ description:
 photos:
 ---
 
-Ts完全支持Es2015中的`class`关键字
+Ts完全支持Es2015中的`class`关键字.
 
 {% note info%}
 
-学习ES6中的类[Javascript-Class](https://kinsiy.github.io/Javascript-Class/?highlight=%E7%B1%BB)、[MDN. Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+学习ES6中的类[Javascript - Class](https://kinsiy.github.io/Javascript-Class/?highlight=%E7%B1%BB)、[MDN. Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+
+本文参考Typescript官网[Docs - Handbook - Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)自翻译而来, 仅供个人参考学习使用.一切请以官网为准!
 
 {% endnote %}
-
-<!--more-->
 
 ## 类成员
 
@@ -42,6 +42,8 @@ point.z = "3" // [4] Error: Type 'string' is not assignable to type 'number'.
 point.j = "xxx" // [3] Error: Property 'j' does not exist on type 'Point'.
 
 ```
+
+<!--more-->
 
 通过示例中的四个错误, 学习 Ts 类
 

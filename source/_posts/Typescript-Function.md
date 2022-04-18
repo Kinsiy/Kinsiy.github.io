@@ -14,9 +14,9 @@ photos:
 
 学习[JavaScript - Function](https://kinsiy.github.io/Javascript-Function/)
 
-{% endnote %}
+本文参考Typescript官网[Docs - Handbook - More onFunction](https://www.typescriptlang.org/docs/handbook/2/functions.html)自翻译而来, 仅供个人参考学习使用.一切请以官网为准!
 
-<!--more-->
+{% endnote %}
 
 ## 函数声明
 
@@ -41,6 +41,8 @@ function greeter(fn: GreetFunction) {
   // ...
 }
 ```
+
+<!--more-->
 
 `(a: string) => void`的意思是, 一个拥有一个string类型的参数a,不返回任何值的函数.
 
@@ -131,7 +133,7 @@ const parsed = map(["1", "2", "3"], (n) => parseInt(n))
 
 {% endnote %}
 
-### 约束类型
+### 泛型约束
 
 当函数需要处理不同类型的对象时,在函数中我们可能只需要读/写特定的属性.只要某对象存在这些属性,就应该可以成为函数的合法参数.举例来说, 比较两个参数的`length: number`属性, 只要参数存在`length: number`属性即可比较,无其他约束.
 

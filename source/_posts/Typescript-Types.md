@@ -24,7 +24,6 @@ let isDone: boolean = false
 let kinsiyName: string = "Kinsiy"
 let kinsiyAge: number = 24
 
-
 kinsiyName = 17
 // Type 'number' is not assignable to type 'string'.
 ```
@@ -39,7 +38,6 @@ kinsiyName = 17
 ```typescript
 let isDone: boolean = false
 let age: number = 24
-
 
 isDone = undefined
 age = null
@@ -58,7 +56,6 @@ let notSure: any = "kinsiy"
 notSure = 24        
 // ok
 
-
 function foo(): void{
   console.log('return void')
 }
@@ -74,21 +71,17 @@ unknown表示一种**匿名**类型，某个值存在某种类型，只是我不
 ```typescript
 let notKnown: unknown = 5
 
-
 let a: number = notKnown + 1
 // Operator '+' cannot be applied to types 'unknown' and '1'.
-
 
 let notSure: any = 5
 
 
 notSure = notKnown
 
-
 function fail(msg: string): never {        // 走不到终点的函数
   throw new Error(msg);
 }
-
 
 function fn(x: string | number) {
   if (typeof x === "string") {
@@ -117,7 +110,7 @@ let array2: Array<string> = ["1", "2", "3"]
 ### 元组类型
 
 
-元组可用于定义具有**有限数量**的未命名属性的类型
+元组类型是另一种数组类型，它确切地知道它包含多少元素，以及在特定位置包含哪些类型。
 
 
 ```typescript
@@ -125,7 +118,6 @@ let tuple: [number, string] = [24, 'kinsiy']
 tuple[1] = 17
 // 类型不匹配
 // Type 'number' is not assignable to type 'string'.
-
 
 tuple[2] = 'lai'
 // 越界类型为undefin
@@ -149,6 +141,7 @@ enum Direction {
   Left,
   Right,
 }
+
 // 字符串枚举
 enum Direction {
   Up = "UP",
@@ -156,6 +149,7 @@ enum Direction {
   Left = "LEFT",
   Right = "RIGHT",
 }
+
 // 异构枚举 避免使用
 enum BooleanLikeHeterogeneousEnum {
   No = 0,
@@ -174,7 +168,6 @@ enum BooleanLikeHeterogeneousEnum {
 let kinsiyEle = document.getElementById("kinsiy")        
 kinsiyEle.getContext('2d')
 //Property 'getContext' does not exist on type 'HTMLElement'.
-
 
 // 第一种方式使用 as
 let kinsiyEle = document.getElementById("kinsiy") as HTMLCanvasElement
@@ -204,7 +197,6 @@ const kinsiy = 'kinsiy' as number
 Conversion of type 'string' to type 'number' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
 */
 
-
 class A{
   a: string
 }
@@ -215,13 +207,10 @@ class C{
   c: string
 }
 
-
 let b = new B() as A        // ok 缩小
 let a = new A() as B  // ok 放大
 
-
 let _c = new C() as B        // error miss b
-
 
 let c = (new C as any) as B        // 强制更改。any 与 unknown 是任何类型的超集
 ```
@@ -243,9 +232,6 @@ interface Circle {
  
 type ColorfulCircle = Colorful & Circle;
 
-
-
-
 function draw(circle: ColorfulCircle) {
   console.log(`Color was ${circle.color}`);
   console.log(`Radius was ${circle.radius}`);
@@ -256,7 +242,6 @@ draw({ color: "blue", radius: 42 });
  
 // oops
 draw({ color: "red", raidus: 42 });
-
 
 /**
 Argument of type '{ color: string; raidus: number; }' is not assignable to parameter of type 'ColorfulCircle'.
@@ -274,7 +259,6 @@ Argument of type '{ color: string; raidus: number; }' is not assignable to param
 ```typescript
 let numAndStr: number | string
 
-
 numAndStr = "kinsiy"        // ok
 numAndStr = 24        // ok
 numAndStr = true
@@ -286,12 +270,10 @@ interface Bird {
   layEggs: () => void
 }
 
-
 interface Fish {
   swim: () => void
   layEggs: () => void
 }
-
 
 function getSmallPet(): Fish | Bird {
   let result: Fish | Bird
@@ -308,7 +290,6 @@ function getSmallPet(): Fish | Bird {
   }
   return result
 }
-
 
 let pet = getSmallPet();
 pet.layEggs(); // okay        

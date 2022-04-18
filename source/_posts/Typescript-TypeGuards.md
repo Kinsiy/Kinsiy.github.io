@@ -8,6 +8,11 @@ description:
 photos:
 ---
 
+{% note info%}
+
+本文参考Typescript官网[Docs - Handbook - Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)自翻译而来, 仅供个人参考学习使用.一切请以官网为准!
+
+{% endnote %}
 
 考虑下面这段代码，能否通过Ts编译？
 

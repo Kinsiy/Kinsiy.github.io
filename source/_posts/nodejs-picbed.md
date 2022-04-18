@@ -75,6 +75,7 @@ if (req.url === "/upload" && req.method.toLowerCase() === "post") {
     res.end(result);
     return;
   });
+  return;
 }
 ```
 
