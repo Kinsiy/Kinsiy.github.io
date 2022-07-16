@@ -10,7 +10,9 @@ photos:
 
 最近有需要向别人分享markdown文档的需求,然而文档上面插入了一些本地图片,这些图片又不好上传到外网图床上.导致在非本机环境中打开文档,均无法查看图片.
 
-既然无法使用外网图床,在本机搭建一个局域网图床不就行了? 在github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.[Github. My-Easy-Pic-Bed](https://github.com/fslongjin/My-Easy-Pic-Bed)
+既然无法使用外网图床,在本机搭建一个局域网图床不就行了?
+
+ 在Github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.[Github. My-Easy-Pic-Bed](https://github.com/fslongjin/My-Easy-Pic-Bed)
 
 我寻思着这也没必要上Flask,只要能起web服务的就行,而且我并不需要网页上传入口,通过`curl`命令行上传图片就行,这下`html`页面也省了
 
