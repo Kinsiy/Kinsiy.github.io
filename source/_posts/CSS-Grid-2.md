@@ -8,7 +8,7 @@ description:
 photos:
 ---
 
-承接上篇[CSS - 栅格布局 - Ⅰ](https://kinsiy.github.io/CSS-Grid/) , 上篇说了如何定义栅格轨道及如何将栅格元素附加到栅格轨道/区域上.这篇主要说下栅格流/栏距/栅格的对齐方式等
+承接上篇[CSS - 栅格布局 - Ⅰ](https://kinsiy.github.io/CSS-Grid-1/) , 上篇说了如何定义栅格轨道及如何将栅格元素附加到栅格轨道/区域上.这篇主要说下栅格流/栏距/栅格的对齐方式等
 
 ## 栅格流
 
@@ -37,7 +37,7 @@ photos:
 </style>
 ```
 
-![image-20220717203504024](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717203504024.png)
+![image-20220717203504024](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717203504024.png)
 
 ```css
 .grid {
@@ -45,7 +45,7 @@ photos:
 }
 ```
 
-![image-20220717203632833](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717203632833.png)
+![image-20220717203632833](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717203632833.png)
 
 对栅格元素的尺寸,如果没有显示设定,元素的尺寸将自动调整,以便附加到所定义的栅格线上.
 
@@ -56,13 +56,13 @@ photos:
 }
 ```
 
-![image-20220717204038058](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717204038058.png)
+![image-20220717204038058](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717204038058.png)
 
 对比为栅格元素设定尺寸前后两张图,不难发现每个栅格的起始位置是一致的,但结束位置不一致.这表面,栅格流其实放置的是栅格区域,然后再把栅格元素附加到栅格区域中.
 
 自动附加的栅格元素不会考虑其他其他栅格元素的存在,观察下面的图,可以发现,有些图被覆盖了.
 
-![image-20220717210745862](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717210745862.png)
+![image-20220717210745862](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717210745862.png)
 
 可以通过为占据多个轨道的栅格元素添加适合的类名,指定其跨度,得到不重叠的布局
 
@@ -76,7 +76,7 @@ photos:
 }
 ```
 
-![image-20220717212225412](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717212225412.png)
+![image-20220717212225412](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717212225412.png)
 
 注意上图, 05 右边存在空白, 这是因为我们设定的栅格流设定的是`row`. 行流在每一行从左向右排,如果有足够的空间放下一个栅格元素,那就把该栅格元素方在哪儿,如果放不下或栅格单元被其他栅格元素占据了,就挑个那个栅格单元. 
 
@@ -90,7 +90,7 @@ photos:
 }
 ```
 
-![image-20220717212949221](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220717212949221.png)
+![image-20220717212949221](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717212949221.png)
 
 ## 自动增加栅格线
 
@@ -106,7 +106,7 @@ photos:
 }
 ```
 
-![image-20220718211818826](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220718211818826.png)
+![image-20220718211818826](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220718211818826.png)
 
 ```css
 .grid {
@@ -114,7 +114,7 @@ photos:
 }
 ```
 
-![image-20220718212044968](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220718212044968.png)
+![image-20220718212044968](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220718212044968.png)
 
 ## grid简写属性
 
@@ -195,7 +195,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 }
 ```
 
-![image-20220718220605124](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220718220605124.png)
+![image-20220718220605124](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220718220605124.png)
 
 ### margin
 
@@ -232,7 +232,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 `justify-self`各个值的取值情况, `align-self`除方向不一致外,这8个取值效果完全一样
 
-![image-20220719220231406](D:\CSS\image-20220719220231406.png)
+![image-20220719220231406](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220719220231406.png)
 
 另外纵向对齐还可以使用`baseline`,`last-baseline`.这两个值把栅格元素中的第一条或最后一条基线与栅格轨道中最高或最低的基线对齐. 
 
@@ -244,7 +244,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 `justify-content`/`align-content`的作用与`flex`布局中的作用类似, 用于分配剩余空间.
 
-![image-20220719222614834](C:\Users\Kinsiy\AppData\Roaming\Typora\typora-user-images\image-20220719222614834.png)
+![image-20220719222614834](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220719222614834.png)
 
 分配多出的空间其实就是调整栅格栏距的尺寸.如果没有声明栏距,那么分配的空间将成为栏距.如果声明了栏距,其尺寸将根据分配的情况调整
 
