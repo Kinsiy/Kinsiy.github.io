@@ -49,7 +49,7 @@ class Graph{
 
   isCyclicUtil(key, visited, recStack) {
     if (recStack.get(key)) return true;
-    if (visited.get(key)) return true;
+    if (visited.get(key)) return false;
 
 
     visited.set(key, true);
