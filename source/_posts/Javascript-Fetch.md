@@ -32,10 +32,10 @@ let response = fetch(url, [options])
 ```
 
 
-- `url`——要访问的URL
-- `options`——可选参数: method, header 等；具体参数可以参考 [MDN. Fetch.](https://developer.mozilla.org/zh-CN/docs/Web/API/fetch) 或 [Request class](https://fetch.spec.whatwg.org/#request-class)
+- {% label primary@url %}——要访问的URL
+- {% label primary@options %}——可选参数: method, header 等；
 
-没有`options`，那就是一个简单的GET请求，下载`url`的内容
+具体参数参考 [MDN. Fetch.](https://developer.mozilla.org/zh-CN/docs/Web/API/fetch) 或 [Request class](https://fetch.spec.whatwg.org/#request-class);  没有{% label primary@options %}，那就是一个简单的GET请求，下载{% label primary@url %}的内容
 
 <!-- more -->
 
@@ -46,11 +46,11 @@ let response = fetch(url, [options])
 为了获取response body， 我们需要使用一个其他的方法调用
 
 
-- `response.text()`——读取response，并以文本形式返回response
-- `response.json()`——将response解析为JSON
-- `response.formData()`——以`FromData`对象的形式返回response
-- `response.blob()`——以  [Blob](https://zh.javascript.info/blob) (具有类型的二进制数据)形式返回response
-- `response.arrayBuffer()` —— 以 [ArrayBuffer](https://zh.javascript.info/arraybuffer-binary-arrays)（低级别的二进制数据）形式返回 response
+- response.text() ——读取response，并以文本形式返回response
+- response.json() ——将response解析为JSON
+- response.formData() ——以{% label primary@FromData %}对象的形式返回response
+- response.blob() ——以  [Blob](https://zh.javascript.info/blob) (具有类型的二进制数据)形式返回response
+- response.arrayBuffer()  —— 以 [ArrayBuffer](https://zh.javascript.info/arraybuffer-binary-arrays)（低级别的二进制数据）形式返回 response
 
 
 response.body 是一个ReadableStream对象，它允许你逐块读取body
@@ -74,7 +74,7 @@ alert(commits[0].author.login);
 我们只能选择一种读取 body 的方法。
 
 
-如果我们已经使用了 `response.text()` 方法来获取 response，那么如果再用`response.json()` 则不会生效，因为 body 内容已经被处理过了
+如果我们已经使用了 {% label primary@response.text() %} 方法来获取 response，那么如果再用{% label primary@response.json() %} 则不会生效，因为 body 内容已经被处理过了
 
 
 要多次读取包含响应体的同一个 Response 对象，必须在第一次读取前调用 clone()
@@ -136,7 +136,7 @@ fetch('/does-not-exist')
 ## Response header
 
 
-Response header 位于 `response.headers` 中的一个类似于 Map 的 header 对象。它不是真正的 Map，但是它具有类似的方法，我们可以按名称（name）获取各个 header，或迭代它们：
+Response header 位于 {% label primary@response.headers %} 中的一个类似于 Map 的 header 对象。它不是真正的 Map，但是它具有类似的方法，我们可以按名称（name）获取各个 header，或迭代它们：
 
 
 ```javascript
@@ -157,7 +157,7 @@ for (let [key, value] of response.headers) {
 ## Request header
 
 
-要在 `fetch` 中设置 request header，我们可以使用 `headers` 选项。它有一个带有输出 header 的对象
+要在 {% label primary@fetch %} 中设置 request header，我们可以使用 {% label primary@headers %} 选项。它有一个带有输出 header 的对象
 
 
 ```javascript

@@ -317,7 +317,7 @@ function King() {
   if (!new.target) {
     throw new Error("King 必须new");
   }
-  console.log(`new King`);
+  console.log({% label primary@new King %});
 }
 
 new King(); // new King

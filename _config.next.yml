@@ -357,8 +357,8 @@ codeblock:
   # Code Highlight theme
   # All available themes: https://theme-next.js.org/highlight/
   theme:
-    light: default
-    dark: stackoverflow-dark
+    light: atom-one-dark
+    dark: atom-one-dark
   prism:
     light: prism
     dark: prism-dark
@@ -428,7 +428,7 @@ font:
   global:
     external: true
     family: Lato
-    size:
+    size: 1
 
   # Font settings for site title (.site-title).
   title:
@@ -451,6 +451,7 @@ font:
   codes:
     external: true
     family: Fira Code
+    size: 1.25
 
 # ---------------------------------------------------------------
 # SEO Settings

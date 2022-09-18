@@ -32,13 +32,13 @@ tags: [MySQL]
 表结构
 
 ```sql
-CREATE TABLE T_Mch******Stat (`FStatDate` int unsigned NOT NULL DEFAULT 19700101 COMMENT '统计日期',
-`FMerchantId` bigint unsigned NOT NULL DEFAULT 0 COMMENT '商户ID',
-`FVersion` int unsigned NOT NULL DEFAULT 0 COMMENT '数据版本号',
-`FBatch` bigint unsigned NOT NULL DEFAULT 0 COMMENT '统计批次',
-`FTradeAmount` bigint NOT NULL DEFAULT 0 COMMENT '交易金额'
-PRIMARY KEY (`FStatDate`,`FMerchantId`,`FVersion`),
-INDEX i_FStatDate_FVersion (`FStatDate`,`FVersion`))
+CREATE TABLE T_Mch******Stat ({% label primary@FStatDate %} int unsigned NOT NULL DEFAULT 19700101 COMMENT '统计日期',
+{% label primary@FMerchantId %} bigint unsigned NOT NULL DEFAULT 0 COMMENT '商户ID',
+{% label primary@FVersion %} int unsigned NOT NULL DEFAULT 0 COMMENT '数据版本号',
+{% label primary@FBatch %} bigint unsigned NOT NULL DEFAULT 0 COMMENT '统计批次',
+{% label primary@FTradeAmount %} bigint NOT NULL DEFAULT 0 COMMENT '交易金额'
+PRIMARY KEY ({% label primary@FStatDate %},{% label primary@FMerchantId %},{% label primary@FVersion %}),
+INDEX i_FStatDate_FVersion ({% label primary@FStatDate %},{% label primary@FVersion %}))
 DEFAULT CHARSET = utf8 ENGINE = InnoDB;
 ```
 
@@ -241,16 +241,16 @@ select * from T where k between 3 and 5;
 MySQL 5.7,建表语句：
 
 ```sql
-CREATE TABLE `employees` (
-  `emp_no` int(11) NOT NULL,
-  `birth_date` date NOT NULL,
-  `first_name` varchar(14) NOT NULL,
-  `last_name` varchar(16) NOT NULL,
-  `gender` enum('M','F') NOT NULL,
-  `hire_date` date NOT NULL,
-  PRIMARY KEY (`emp_no`),
-  KEY `i_first_name` (`first_name`),
-  KEY `i_hire_date` (`hire_date`)
+CREATE TABLE {% label primary@employees %} (
+  {% label primary@emp_no %} int(11) NOT NULL,
+  {% label primary@birth_date %} date NOT NULL,
+  {% label primary@first_name %} varchar(14) NOT NULL,
+  {% label primary@last_name %} varchar(16) NOT NULL,
+  {% label primary@gender %} enum('M','F') NOT NULL,
+  {% label primary@hire_date %} date NOT NULL,
+  PRIMARY KEY ({% label primary@emp_no %}),
+  KEY {% label primary@i_first_name %} ({% label primary@first_name %}),
+  KEY {% label primary@i_hire_date %} ({% label primary@hire_date %})
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 

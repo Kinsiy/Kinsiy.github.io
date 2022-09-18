@@ -58,7 +58,7 @@ ls | Rename-Item -NewName {$_.name.substring(0,$_.BaseName.length-N) + $_.Extens
 
 ### 指令
 
-关键在`System.String.substring`函数，第一个入参代表**提取起点**，第二个入参代表**要提取的长度**。包含起点，下标从0开始
+关键在{% label primary@System.String.substring %}函数，第一个入参代表**提取起点**，第二个入参代表**要提取的长度**。包含起点，下标从0开始
 
 ### 效果
 

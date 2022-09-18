@@ -30,10 +30,10 @@ function padLeft(padding: number | string, input: string) {
 <!--more-->
 
 
-答案是可以。为什么？我们明明指定 padding 的类型是 number | string ，而 number 类型是没有 slice 方法的，却能通过编译？关键在于`typeof padding === "number"`这一句，这一特殊的检查被TypeScript称作**类型保护(type guards)**。
+答案是可以。为什么？我们明明指定 padding 的类型是 number | string ，而 number 类型是没有 slice 方法的，却能通过编译？关键在于{% label primary@typeof padding === "number" %}这一句，这一特殊的检查被TypeScript称作**类型保护(type guards)**。
 
 
-在`typeof padding === "number"` 分支中，padding 的类型缩小至 number ，并发现最后一句`return padding.slice(0) + input;`是不可到达的，则在分支外去掉 padding 的 number 类型。在调用 slice 方法时， padding 的类型已经被缩小至 string ，自然也就能够通过编译。
+在{% label primary@typeof padding === "number" %} 分支中，padding 的类型缩小至 number ，并发现最后一句{% label primary@return padding.slice(0) + input; %}是不可到达的，则在分支外去掉 padding 的 number 类型。在调用 slice 方法时， padding 的类型已经被缩小至 string ，自然也就能够通过编译。
 
 
 ## typeof 操作符
@@ -136,7 +136,7 @@ function multiplyValue(container: Container, factor: number) {
 ## in 运算符
 
 
-我们知道在JavaScript中，如果指定的属性在指定的对象或其原型链中，则**`in` 运算符**返回 true。在Ts中也可以利用这个特性来缩小类型范围。举例来说
+我们知道在JavaScript中，如果指定的属性在指定的对象或其原型链中，则 **{% label primary@in %} 运算符** 返回 true。在Ts中也可以利用这个特性来缩小类型范围。举例来说
 
 
 ```typescript
@@ -153,7 +153,7 @@ function move(animal: Fish | Bird) {
 ```
 
 
-形如 `"value" in x`， value是一段字符串，x是某种联合类型，对于真值，x 缩小为包含"value"属性的**联合类型**(不一定缩小至唯一，因为 x 中不一定只有一种类型包含 "value" 属性)，反之，假值这缩小为不含"value"属性的联合属性。若value 是某类型的可选属性，这两分支中均包含 该类型
+形如 {% label primary@"value" in x %}， value是一段字符串，x是某种联合类型，对于真值，x 缩小为包含"value"属性的**联合类型**(不一定缩小至唯一，因为 x 中不一定只有一种类型包含 "value" 属性)，反之，假值这缩小为不含"value"属性的联合属性。若value 是某类型的可选属性，这两分支中均包含 该类型
 
 
 ```typescript
@@ -215,7 +215,7 @@ x = true
 ## 控制流分析
 
 
-正如开篇的例子一般，Ts判断`if`分支外能否到达来推断变量的类型。Ts可以通过分析`if`、`while`等控制流进行类型推断。变量可以通过一遍又一遍的控制流分析在程序的不同的位置展现出不同的类型
+正如开篇的例子一般，Ts判断{% label primary@if %}分支外能否到达来推断变量的类型。Ts可以通过分析{% label primary@if %}、{% label primary@while %}等控制流进行类型推断。变量可以通过一遍又一遍的控制流分析在程序的不同的位置展现出不同的类型
 
 
 ```typescript

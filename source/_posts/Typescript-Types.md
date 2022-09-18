@@ -161,7 +161,7 @@ enum BooleanLikeHeterogeneousEnum {
 ## 类型断言
 
 
-有时候我们会比Typescript更清楚一个值的类型。可以使用类型断言去更改其类型。比如`let kinsiyEle = document.getElementById("kinsiy")` Typescript只知道 `kinsiyEle`  是一个`HTMLElement`类型的变量，但我们可能清楚的知道他是一个`HTMLCanvasElement`类型的元素。在使用`HTMLCanvasElement`的属性或方法时我们就需要用到类型断言。
+有时候我们会比Typescript更清楚一个值的类型。可以使用类型断言去更改其类型。比如{% label primary@let kinsiyEle = document.getElementById("kinsiy") %} Typescript只知道 {% label primary@kinsiyEle %}  是一个{% label primary@HTMLElement %}类型的变量，但我们可能清楚的知道他是一个{% label primary@HTMLCanvasElement %}类型的元素。在使用{% label primary@HTMLCanvasElement %}的属性或方法时我们就需要用到类型断言。
 
 
 ```typescript
@@ -306,7 +306,7 @@ Property 'swim' does not exist on type 'Bird | Fish'.
 ## 类型别名
 
 
-可以使用`type`关键字对类型设置别名
+可以使用{% label primary@type %}关键字对类型设置别名
 
 
 ```typescript

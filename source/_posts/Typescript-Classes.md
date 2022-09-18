@@ -8,7 +8,7 @@ description:
 photos:
 ---
 
-Ts完全支持Es2015中的`class`关键字.
+Ts完全支持Es2015中的{% label primary@class %}关键字.
 
 {% note info%}
 
@@ -47,7 +47,7 @@ point.j = "xxx" // [3] Error: Property 'j' does not exist on type 'Point'.
 
 通过示例中的四个错误, 学习 Ts 类
 
-1. Ts中对于未声明类型的成员, 会隐式的得到一个`any`类型
+1. Ts中对于未声明类型的成员, 会隐式的得到一个{% label primary@any %}类型
 2. 成员变量必须初始化(配置strictPropertyInitialization)
 3. 不能对未声明的变量进行初始化
 4. 与普通的变量声明一样, 具有[类型推断](https://kinsiy.github.io/Typescript-TypeGuards/)
@@ -169,9 +169,9 @@ class A {
 
 #### 注意
 
-上述修饰符仅在类型检查期间起作用,在编译成 Js 运行时你还是能够在对应实例上找到被`protected`/`private`的成员.被`readonly`修饰的成员也能在运行时进行写操作.
+上述修饰符仅在类型检查期间起作用,在编译成 Js 运行时你还是能够在对应实例上找到被{% label primary@protected %}/{% label primary@private %}的成员.被{% label primary@readonly %}修饰的成员也能在运行时进行写操作.
 
-并且在Ts类型检查阶段, 对于`protected`/`private`修饰的成员,可以通过中括号(obj[key])的方式逃过类型检查(`readonly`不行)
+并且在Ts类型检查阶段, 对于{% label primary@protected %}/{% label primary@private %}修饰的成员,可以通过中括号(obj[key])的方式逃过类型检查({% label primary@readonly %}不行)
 
 ```typescript
 class MySafe {
@@ -346,7 +346,7 @@ Property 'check' in type 'NameChecker' is not assignable to the same property in
 */
 ```
 
-注意看[1\][2]两个报错, [1\]报的是‘s’是any类型而不是[2\]的类型不符,也就是说_check()是符合接口约束的,但是参数’s’的类型并不会被接口改写为要求的`string`  
+注意看[1\][2]两个报错, [1\]报的是‘s’是any类型而不是[2\]的类型不符,也就是说_check()是符合接口约束的,但是参数’s’的类型并不会被接口改写为要求的{% label primary@string %}  
 
 ### extends
 
@@ -371,7 +371,7 @@ class Derived extends Base {
 
 #### declare
 
-当编译目标大于等于ES2022或--useDefineForClassFields时, 派生类声明的任何成员都会覆盖基类声明的值,当我们仅想在派生类中更具体化成员类型时.会直接覆盖基类初始值.这时可以使用`declare`表面派生类声明不会产生任何运行时影响
+当编译目标大于等于ES2022或--useDefineForClassFields时, 派生类声明的任何成员都会覆盖基类声明的值,当我们仅想在派生类中更具体化成员类型时.会直接覆盖基类初始值.这时可以使用{% label primary@declare %}表面派生类声明不会产生任何运行时影响
 
 ```typescript
 interface Animal {
@@ -424,7 +424,7 @@ const d = new Derived();
 
 ## 静态成员
 
-使用`static`修饰符可声明静态成员.其性质与JS原生实现别无二致. 并且可以与`public`,`protected`,`private`同时使用
+使用{% label primary@static %}修饰符可声明静态成员.其性质与JS原生实现别无二致. 并且可以与{% label primary@public %},{% label primary@protected %},{% label primary@private %}同时使用
 
 ```typescript
 class MyClass {
@@ -452,7 +452,7 @@ mc._printX() // 0
 
 {% note info %}
 
-由于在JS中,类就是一个特殊的函数.所以在声明静态类成员时,需要注意,不允许覆盖`Function`原型链上的属性,比如`name`,`length`,`call`...等
+由于在JS中,类就是一个特殊的函数.所以在声明静态类成员时,需要注意,不允许覆盖{% label primary@Function %}原型链上的属性,比如{% label primary@name %},{% label primary@length %},{% label primary@call %}...等
 
 {% endnote %}
 
@@ -490,7 +490,7 @@ class Foo {
 
 ## 泛型类
 
-正如前面构造函数提到的,类的泛型在`class`关键字上声明.
+正如前面构造函数提到的,类的泛型在{% label primary@class %}关键字上声明.
 
 ```typescript
 class Box<Type> {
@@ -506,13 +506,13 @@ b.contents // (property) Box<string>.contents: string
 
 {% note info %}
 
-不要在静态成员上使用泛型, 谨记一点, 在编译后所有的类型注解都会去掉. 我们知道JS中的类是基于原型链实现继承的, 修改原型链上的任何属性都会影响到所有实例.在静态类上使用泛型`Box<string>`与`Box<number>`在编译后其实并无差别,更改他们中的任意一个的原型链都会影响到另一个.
+不要在静态成员上使用泛型, 谨记一点, 在编译后所有的类型注解都会去掉. 我们知道JS中的类是基于原型链实现继承的, 修改原型链上的任何属性都会影响到所有实例.在静态类上使用泛型`Box<string>{% label primary@$1 %}Box<number>`在编译后其实并无差别,更改他们中的任意一个的原型链都会影响到另一个.
 
 {% endnote %}
 
-## `this`参数
+## {% label primary@this %}参数
 
-我们知道,在JS中,`this`的值是动态绑定的.比如,下面的例子
+我们知道,在JS中,{% label primary@this %}的值是动态绑定的.比如,下面的例子
 
 ```typescript
 class MyClass {
@@ -533,7 +533,7 @@ console.log(obj.getName())
 
 这并不是一种错误的行为,当我们清楚我们的在做什么时,可以使用箭头函数,bind等绑定回 MyClass 实例.
 
-但这样还是有一点小小的隐患,可能会出现误用.有没有办法在类型检查阶段就限制该方法只能在该类实例中调用?这就用到了Ts中特有的`this`参数
+但这样还是有一点小小的隐患,可能会出现误用.有没有办法在类型检查阶段就限制该方法只能在该类实例中调用?这就用到了Ts中特有的{% label primary@this %}参数
 
 ```typescript
 class MyClass {
@@ -550,9 +550,9 @@ const g = c.getName;
 console.log(g()); // Error: The 'this' context of type 'void' is not assignable to method's 'this' of type 'MyClass'.
 ```
 
-可以当直接调用getName()时,Ts检查到`this`类型不同会给出错误.
+可以当直接调用getName()时,Ts检查到{% label primary@this %}类型不同会给出错误.
 
-`this`参数在编译成Js时会被去掉
+{% label primary@this %}参数在编译成Js时会被去掉
 
 ```typescript
 // TypeScript input with 'this' parameter
@@ -568,7 +568,7 @@ function fn(x) {
 
 ## 抽象类
 
-在JS中我们无法直接声明抽象类,但是很容易可以通过 new.target 来达到目的.Ts中则是直接支持使用`abstract`关键字声明抽象类
+在JS中我们无法直接声明抽象类,但是很容易可以通过 new.target 来达到目的.Ts中则是直接支持使用{% label primary@abstract %}关键字声明抽象类
 
 ```typescript
 abstract class Base {

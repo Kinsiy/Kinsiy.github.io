@@ -13,9 +13,9 @@ photos:
 >
 > CSP 被设计成完全向后兼容（除CSP2 在向后兼容有明确提及的不一致; 更多细节查看[这里](https://www.w3.org/TR/CSP2)）。不支持CSP的浏览器也能与实现了CSP的服务器正常合作，反之亦然：不支持 CSP 的浏览器只会忽略它，如常运行，默认为网页内容使用标准的同源策略。如果网站不提供 CSP 头部，浏览器也使用标准的[同源策略](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)。
 >
-> **为使CSP可用, 你需要配置你的网络服务器返回  [`Content-Security-Policy`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) HTTP头部 **
+> **为使CSP可用, 你需要配置你的网络服务器返回  [{% label primary@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) HTTP头部 **
 >
-> ( 有时你会看到一些关于`X-Content-Security-Policy`头部的提法, 那是旧版本，你无须再如此指定它)。
+> ( 有时你会看到一些关于{% label primary@X-Content-Security-Policy %}头部的提法, 那是旧版本，你无须再如此指定它)。
 >
 > 除此之外, **[`<meta>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta) 元素也可以被用来配置该策略** 
 >
@@ -66,7 +66,7 @@ HTML文件中，需要为所有<script\>标签添加相同值 `{RANDOM1}` 字符
 ```html
 <script nonce="{RANDOM1}" src="https://example.com/script1.js"></script>
 <script nonce="{RANDOM1}">
-  // Inline scripts can be used with the `nonce` attribute.
+  // Inline scripts can be used with the {% label primary@nonce %} attribute.
 </script>
 ```
 
@@ -130,7 +130,7 @@ Public-Key-Pins: pin-sha256="<pin-value>";
 
 ## HTTP Strict Transport Security(HSTS)
 
-> `HTTP Strict Transport Security`（通常简称为 [HSTS](https://developer.mozilla.org/zh-CN/docs/Glossary/HSTS)）是一个安全功能，它告诉浏览器只能通过HTTPS访问当前资源，而不是 [HTTP](https://developer.mozilla.org/en/HTTP)。
+> {% label primary@HTTP Strict Transport Security %}（通常简称为 [HSTS](https://developer.mozilla.org/zh-CN/docs/Glossary/HSTS)）是一个安全功能，它告诉浏览器只能通过HTTPS访问当前资源，而不是 [HTTP](https://developer.mozilla.org/en/HTTP)。
 >
 > ——MDN. HTTP Strict Transport Security.
 
@@ -148,11 +148,11 @@ Strict-Transport-Security: max-age=<expire-time>; preload
 
   设置在浏览器收到这个请求后的<expire-time>秒的时间内凡是访问这个域名下的请求都使用HTTPS请求。
 
-- `includeSubDomains` 可选
+- {% label primary@includeSubDomains %} 可选
 
   如果这个可选的参数被指定，那么说明此规则也适用于该网站的所有子域名。
 
-- `preload` 可选
+- {% label primary@preload %} 可选
 
   查看 [预加载 HSTS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Strict-Transport-Security#预加载_hsts) 获得详情。不是标准的一部分。
 
@@ -165,7 +165,7 @@ Strict-Transport-Security: max-age=<expire-time>; preload
 
 ## Referrer-Policy
 
-> **`Referrer-Policy`** 首部用来监管哪些访问来源信息——会在 [`Referer`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Referer) 中发送——应该被包含在生成的请求当中
+> **{% label primary@Referrer-Policy %}** 首部用来监管哪些访问来源信息——会在 [{% label primary@Referer %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Referer) 中发送——应该被包含在生成的请求当中
 >
 > ——MDN. Referrer-Policy.
 
@@ -201,13 +201,13 @@ Referrer-Policy: unsafe-url
 <meta name="referrer" content="origin">
 ```
 
-或者用<a\>、<area\>、<img\>、<iframe\>、<script\>或者<link\>元素上的 `referrerpolicy` 属性为其设置独立的请求策略。
+或者用<a\>、<area\>、<img\>、<iframe\>、<script\>或者<link\>元素上的 {% label primary@referrerpolicy %} 属性为其设置独立的请求策略。
 
 ```
 <a href="http://example.com" referrerpolicy="origin">
 ```
 
-另外也可以在<a\>、<area\>、<link\>元素上将 `rel` 属性设置为 `noreferrer`。
+另外也可以在<a\>、<area\>、<link\>元素上将 {% label primary@rel %} 属性设置为 {% label primary@noreferrer %}。
 
 ```
 <a href="http://example.com" rel="noreferrer">
@@ -227,12 +227,12 @@ X-Content-Type-Options: nosniff
 
 ### 指令
 
-`nosniff`
+{% label primary@nosniff %}
 
 下面两种情况的请求将被阻止：
 
-- 请求类型是`style` 但是 MIME 类型不是 `text/css`
-- 请求类型是`script` 但是 MIME 类型不是 [JavaScript MIME 类型](https://html.spec.whatwg.org/multipage/scripting.html#javascript-mime-type)。
+- 请求类型是{% label primary@style %} 但是 MIME 类型不是 {% label primary@text/css %}
+- 请求类型是{% label primary@script %} 但是 MIME 类型不是 [JavaScript MIME 类型](https://html.spec.whatwg.org/multipage/scripting.html#javascript-mime-type)。
 
 ## X-Frame-Options
 
@@ -240,7 +240,7 @@ X-Content-Type-Options: nosniff
 >
 > The added security is only provided if the user accessing the document is using a browser supporting X-Frame-Options. 
 >
-> `Content-Security-Policy `HTTP 头中的 frame-ancestors 指令会替代这个非标准的 header。CSP 的 frame-ancestors 会在 Gecko 4.0 中支持，但是并不会被所有浏览器支持。然而 X-Frame-Options 是个已广泛支持的非官方标准，可以和 CSP 结合使用
+> {% label primary@Content-Security-Policy  %}HTTP 头中的 frame-ancestors 指令会替代这个非标准的 header。CSP 的 frame-ancestors 会在 Gecko 4.0 中支持，但是并不会被所有浏览器支持。然而 X-Frame-Options 是个已广泛支持的非官方标准，可以和 CSP 结合使用
 >
 > ——MDN. X-Frame-Options.
 
@@ -268,7 +268,7 @@ X-Frame-Options: allow-from https://example.com/
 
 ## X-XSS-Protection
 
-> HTTP **`X-XSS-Protection`** 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 ([XSS (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting))时，浏览器将停止加载页面。若网站设置了良好的 [`Content-Security-Policy`](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) 来禁用内联 JavaScript (`'unsafe-inline'`)，现代浏览器不太需要这些保护， 但其仍然可以为尚不支持 [CSP](https://developer.mozilla.org/zh-CN/docs/Glossary/CSP) 的旧版浏览器的用户提供保护
+> HTTP **{% label primary@X-XSS-Protection %}** 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 ([XSS (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting))时，浏览器将停止加载页面。若网站设置了良好的 [{% label primary@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) 来禁用内联 JavaScript ({% label primary@'unsafe-inline' %})，现代浏览器不太需要这些保护， 但其仍然可以为尚不支持 [CSP](https://developer.mozilla.org/zh-CN/docs/Glossary/CSP) 的旧版浏览器的用户提供保护
 >
 > ——MDN. X-XSS-Protection.
 

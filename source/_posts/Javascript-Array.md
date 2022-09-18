@@ -162,7 +162,7 @@ for (const [i, e] of arr_1.entries()) {
 
 ### Array.prototype.fill()
 
-`fill()` 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。返回修改后的数组
+{% label primary@fill() %} 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。返回修改后的数组
 
 {% note info %}
 
@@ -189,7 +189,7 @@ console.log(zeroes); // [0, 0, 0, 0, 0, 0]
 
 ### Array.prototype.copyWithin()
 
-`copyWithin()`会按照指定范围浅复制数组中的部分内容，然后将他们插入到指定索引开始的位置，并返回修改后的数组。
+{% label primary@copyWithin() %}会按照指定范围浅复制数组中的部分内容，然后将他们插入到指定索引开始的位置，并返回修改后的数组。
 
 {% note info %}
 
@@ -199,7 +199,7 @@ arr.copyWithin(target, [start=0], [end=array.length]])
 
 **target(number):** 复制序列到该位置，如果是负数，将从末尾开始计算。
 
-如果 `target` 大于等于 `arr.length`，将会不发生拷贝。如果 `target` 在 `start` 之后，复制的序列将被修改以符合 `arr.length`
+如果 {% label primary@target %} 大于等于 {% label primary@arr.length %}，将会不发生拷贝。如果 {% label primary@target %} 在 {% label primary@start %} 之后，复制的序列将被修改以符合 {% label primary@arr.length %}
 
 **[start=0\](number):** 复制起始索引，如果是负数，将从末尾开始计算
 
@@ -226,7 +226,7 @@ reset();
 
 ### Array.prototype.join()
 
-`join()` 方法将一个数组（或一个[类数组对象](https://developer.mozilla.org/zh-CN_docs/Web/JavaScript/Guide/Indexed_collections#working_with_array-like_objects)）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符
+{% label primary@join() %} 方法将一个数组（或一个[类数组对象](https://developer.mozilla.org/zh-CN_docs/Web/JavaScript/Guide/Indexed_collections#working_with_array-like_objects)）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符
 
 {% note info %}
 
@@ -241,7 +241,7 @@ console.log(colors.join("^")); // red^blue^pink^yellow
 
 ### Array.prototype.push()
 
-`push()`方法接收任意数量的参数，并将它们添加到数组末尾，返回数组的最新长度。
+{% label primary@push() %}方法接收任意数量的参数，并将它们添加到数组末尾，返回数组的最新长度。
 
 {% note info %}
 
@@ -257,7 +257,7 @@ console.log(`colors: ${colors}      count: ${count}`); // colors: pink,yellow   
 
 ### Array.prototype.pop()
 
-`pop()`方法用于删除数组的最后一项，同时减少数组的 length 值，返回被删除的项。
+{% label primary@pop() %}方法用于删除数组的最后一项，同时减少数组的 length 值，返回被删除的项。
 
 {% note info %}
 
@@ -272,7 +272,7 @@ console.log(`colors: ${colors}      count: ${count}`); // colors: pink      coun
 
 ### Array.prototype.shift()
 
-`shift()`方法删除数组的第一项并返回它，然后数组长度减一
+{% label primary@shift() %}方法删除数组的第一项并返回它，然后数组长度减一
 
 {% note info %}
 
@@ -291,7 +291,7 @@ console.log(`colors: ${colors}      count: ${count}`); // colors: black,bule    
 
 ### Array.prototype.unshift()
 
-`unshift()`在数组开头添加任意多个值，然后返回新的数组长度, 使用unshift()和pop()可以在相反方向上模拟队列
+{% label primary@unshift() %}在数组开头添加任意多个值，然后返回新的数组长度, 使用unshift()和pop()可以在相反方向上模拟队列
 
 {% note info %}
 
@@ -309,7 +309,7 @@ console.log(`colors: ${colors}      count: ${count}`); // colors: yellow,green,b
 
 ### Array.prototype.reverse()
 
-`reverse()` 方法将数组中元素的位置颠倒，并返回调用它的数组的引用
+{% label primary@reverse() %} 方法将数组中元素的位置颠倒，并返回调用它的数组的引用
 
 {% note info %}
 
@@ -330,7 +330,7 @@ arr.sort([compareFunction])
 
 {% endnote %}
 
-`sort()` 方法用[原地算法](https://en.wikipedia.org/wiki/In-place_algorithm)对数组的元素进行排序，并返回调用它的数组的引用。sort()会把数组转换为字符串再进行比较，在比较数值时不合适为此sort()可以接收一个比较方法比较函数接收两个参数，如果value_1 < value_2，返回负值，value_1 = value_2，返回0，value_1 > value_2, 返回正值。若需降序，交换正负值即可
+{% label primary@sort() %} 方法用[原地算法](https://en.wikipedia.org/wiki/In-place_algorithm)对数组的元素进行排序，并返回调用它的数组的引用。sort()会把数组转换为字符串再进行比较，在比较数值时不合适为此sort()可以接收一个比较方法比较函数接收两个参数，如果value_1 < value_2，返回负值，value_1 = value_2，返回0，value_1 > value_2, 返回正值。若需降序，交换正负值即可
 
 ```javascript
 let arr_1 = [7, 5, 6, 1, 4, 12];
@@ -352,7 +352,7 @@ console.log(arr_1.sort(compare)); // [1, 4, 5, 6, 7, 12]
 
 ### Array.prototype.concat()
 
-`concat()` 方法可以在现有数组全部元素基础上创建一个新数组。
+{% label primary@concat() %} 方法可以在现有数组全部元素基础上创建一个新数组。
 
 {% note info %}
 
@@ -376,7 +376,7 @@ console.log(colors_3); // ["red", "pink", "blue", "purple", ["green","black"]]
 
 ### Array.prototype.slice()
 
-`slice()`用于数组切片，接收一个或两个参数：切片的开始索引与结束索引。支持负索引，不包含结束索引元素
+{% label primary@slice() %}用于数组切片，接收一个或两个参数：切片的开始索引与结束索引。支持负索引，不包含结束索引元素
 
 {% note info %}
 
@@ -396,7 +396,7 @@ console.log(colors_2); // ["pink", "black", "yellow"]
 
 ### Array.prototype.splice()
 
-`splice()`的主要目的是在数组中间插入元素，但有 3 种不同的方式使用这个方法。
+{% label primary@splice() %}的主要目的是在数组中间插入元素，但有 3 种不同的方式使用这个方法。
 
 -   <b>删除。</b> 需要给 splice() 传 2 个参数：要删除的第一个元素的位置和要删除的元素数量。可以从数组中删除任意多个元素，比如 splice(0,2)会删除前两个元素。
 -   <b>插入。</b> 需要给 splice() 传 3 个参数： 开始位置，0(要删除的元素数量)和要插入的元素，可以在数组中删除指定的位置插入元素。第三个元素之后还可以传第四个、第五个参数，乃至任意多个要插入的元素。比如，splice(2,0,"pink","purple")会从数组位置 2 开始插入字符串"pink"和"purple"
@@ -408,11 +408,11 @@ array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
 
 {% endnote %}
 
-**start[Number]:** 指定修改的开始位置（从0计数）。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位（从-1计数，这意味着-n是倒数第n个元素并且等价于`array.length-n`）；如果负数的绝对值大于数组的长度，则表示开始位置为第0位。
+**start[Number]:** 指定修改的开始位置（从0计数）。如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位开始的第几位（从-1计数，这意味着-n是倒数第n个元素并且等价于{% label primary@array.length-n %}）；如果负数的绝对值大于数组的长度，则表示开始位置为第0位。
 
 **deleteCount[Number]:** 整数，表示要移除的数组元素的个数。
 
-**item1, item2, ...:** 要添加进数组的元素,从`start` 位置开始。如果不指定，则 `splice()` 将只删除数组元素
+**item1, item2, ...:** 要添加进数组的元素,从{% label primary@start %} 位置开始。如果不指定，则 {% label primary@splice() %} 将只删除数组元素
 
 返回由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组
 
@@ -436,7 +436,7 @@ console.log(`colors: ${colors}     result: ${result}`);
 
 ### Array.prototype.indexOf()
 
-`indexOf()`方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+{% label primary@indexOf() %}方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
 
 {% note info %}
 
@@ -464,7 +464,7 @@ console.log(otherPeople.indexOf(person)); // 0
 
 ### Array.prototype.lastIndexOf()
 
-`lastIndexOf()` 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 `fromIndex` 处开始。
+{% label primary@lastIndexOf() %} 方法返回指定元素（也即有效的 JavaScript 值或变量）在数组中的最后一个的索引，如果不存在则返回 -1。从数组的后面向前查找，从 {% label primary@fromIndex %} 处开始。
 
 {% note info %}
 
@@ -484,7 +484,7 @@ console.log(num.lastIndexOf(4)); // 5
 
 ### Array.prototype.includes()
 
-`includes()`返回布尔值，表示是否至少找到一个与指定元素匹配的项。在比较第一个参数跟数组每一项时，会使用全等(===)比较，也就是说两者必须严格相等。
+{% label primary@includes() %}返回布尔值，表示是否至少找到一个与指定元素匹配的项。在比较第一个参数跟数组每一项时，会使用全等(===)比较，也就是说两者必须严格相等。
 
 {% note info %}
 
@@ -600,7 +600,7 @@ console.log(sum); // 27
 {% endnote %}
 ### Object.prototype.valueof()
 
-`valueof()`返回数组本身。
+{% label primary@valueof() %}返回数组本身。
 
 {% note info %}
 
@@ -615,7 +615,7 @@ console.log(colors.valueOf()); // ["red","blue","pink","yellow"]
 
 ### Object.prototype.toString()
 
-`toString()`返回由数组中每个值得等效字符串拼接而成的一个逗号分隔的字符串。
+{% label primary@toString() %}返回由数组中每个值得等效字符串拼接而成的一个逗号分隔的字符串。
 
 {% note info %}
 

@@ -14,7 +14,7 @@ photos:
 
 前面附加元素时基本上都明确指定了栅格元素在栅格中的位置,对与未明确指定的栅格元素,其位置将按照栅格流自动放入栅格中.
 
-栅格流主要分为两种模式,即行优先和列优先,不过二者都可以通过密集流增强.栅格流通过`grid-auto-flow`设置
+栅格流主要分为两种模式,即行优先和列优先,不过二者都可以通过密集流增强.栅格流通过{% label primary@grid-auto-flow %}设置
 
 <!--more-->
 
@@ -78,11 +78,11 @@ photos:
 
 ![image-20220717212225412](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220717212225412.png)
 
-注意上图, 05 右边存在空白, 这是因为我们设定的栅格流设定的是`row`. 行流在每一行从左向右排,如果有足够的空间放下一个栅格元素,那就把该栅格元素方在哪儿,如果放不下或栅格单元被其他栅格元素占据了,就挑个那个栅格单元. 
+注意上图, 05 右边存在空白, 这是因为我们设定的栅格流设定的是{% label primary@row %}. 行流在每一行从左向右排,如果有足够的空间放下一个栅格元素,那就把该栅格元素方在哪儿,如果放不下或栅格单元被其他栅格元素占据了,就挑个那个栅格单元. 
 
 05 右边的栅格单元明显放不下06, 所以跳过了 06 导致了空白.
 
- 如果想让栅格元素尽量靠紧,而不管顺序会受到什么影响. 在`grid-auto-flow`的值里加上关键字`dense`即可
+ 如果想让栅格元素尽量靠紧,而不管顺序会受到什么影响. 在{% label primary@grid-auto-flow %}的值里加上关键字{% label primary@dense %}即可
 
 ```css
 .grid {
@@ -96,7 +96,7 @@ photos:
 
 当栅格元素超出了栅格边界时,默认情况下会根据布局要求增加所需的行或列.因此,如果在行主导的栅格末尾有一个跨三行的栅格元素,将在显式栅格后增加三行.
 
-默认情况下,自动增加的行是所需的最小尺寸.可以使用`grid-auto-rows`和`grid-auto-columns`控制自动增加的轨道尺寸
+默认情况下,自动增加的行是所需的最小尺寸.可以使用{% label primary@grid-auto-rows %}和{% label primary@grid-auto-columns %}控制自动增加的轨道尺寸
 
 ```css
 .grid {
@@ -141,7 +141,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 }
 ```
 
-在使用grid声明时,`grid-template-rows`的值被拆开了,分配与每行栅格区域声明后.
+在使用grid声明时,{% label primary@grid-template-rows %}的值被拆开了,分配与每行栅格区域声明后.
 
 当不声明栅格区域时,可以简写为
 
@@ -165,13 +165,13 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 {% note warning %}
 
-`grid`属性会将所有未设置的值设定为默认值, 所以一定要把`grid`属性设定在其他与栅格有关的其他属性之前
+{% label primary@grid %}属性会将所有未设置的值设定为默认值, 所以一定要把{% label primary@grid %}属性设定在其他与栅格有关的其他属性之前
 
 {% endnote %}
 
 ### 子栅格
 
-`grid`属性还可以取一个值: `subgrid`
+{% label primary@grid %}属性还可以取一个值: {% label primary@subgrid %}
 
 此时,每个栅格元素的子元素将根据父栅格对齐. **略**
 
@@ -179,7 +179,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 ### 栏距
 
-栏距是两个栅格轨道之间的间隔.使用`row-gap`, `column-gap`设定
+栏距是两个栅格轨道之间的间隔.使用{% label primary@row-gap %}, {% label primary@column-gap %}设定
 
 ```css
 .grid {
@@ -199,13 +199,13 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 ### margin
 
-在栅格区域中,盒模型中的外边距属性`margin`与普通布局稍有不同,设置`margin`时**元素在外边距的边界处附加到栅格中**
+在栅格区域中,盒模型中的外边距属性{% label primary@margin %}与普通布局稍有不同,设置{% label primary@margin %}时**元素在外边距的边界处附加到栅格中**
 
 这意味着, 正外边距使元素向栅格内部收缩, 负外边距, 元素向栅格外部扩张, 也不会出现外边距坍缩的现象
 
 {% note primary %}
 
-计算栅格轨道的尺寸时将忽略栅格元素的外边距.这意味着,不管栅格元素的外边距有多大,都不会改变`min-content`列的尺寸,增加栅格元素的外边距也不会改变使用`fr`单位设定尺寸的栅格轨道的尺寸
+计算栅格轨道的尺寸时将忽略栅格元素的外边距.这意味着,不管栅格元素的外边距有多大,都不会改变{% label primary@min-content %}列的尺寸,增加栅格元素的外边距也不会改变使用{% label primary@fr %}单位设定尺寸的栅格轨道的尺寸
 
 {% endnote %}
 
@@ -213,7 +213,7 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 对于绝对定位, 书<sup>[1]</sup>中指出开始栅格线和结束栅格线围成的栅格区域用作容纳块和定位上下文,栅格元素就在这个上下文中定位.
 
-但截至`2022/07/19`,在`Chrome v103.0.5060.114`没有测试成功
+但截至{% label primary@2022/07/19 %},在{% label primary@Chrome v103.0.5060.114 %}没有测试成功
 
 {% endnote %}
 
@@ -230,19 +230,19 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 ### 对齐单个栅格元素
 
-`justify-self`各个值的取值情况, `align-self`除方向不一致外,这8个取值效果完全一样
+{% label primary@justify-self %}各个值的取值情况, {% label primary@align-self %}除方向不一致外,这8个取值效果完全一样
 
 ![image-20220719220231406](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220719220231406.png)
 
-另外纵向对齐还可以使用`baseline`,`last-baseline`.这两个值把栅格元素中的第一条或最后一条基线与栅格轨道中最高或最低的基线对齐. 
+另外纵向对齐还可以使用{% label primary@baseline %},{% label primary@last-baseline %}.这两个值把栅格元素中的第一条或最后一条基线与栅格轨道中最高或最低的基线对齐. 
 
-`flex-start`与`flex-end`之应该在弹性盒布局中使用,在其他布局中等同与`start`与`end`
+{% label primary@flex-start %}与{% label primary@flex-end %}之应该在弹性盒布局中使用,在其他布局中等同与{% label primary@start %}与{% label primary@end %}
 
 ### 对齐全部栅格元素
 
-`justify-items`与`align-items`取值与`justify-self`/`align-self`完全一致,只不过应用与栅格容器中,对所有栅格元素起作用.
+{% label primary@justify-items %}与{% label primary@align-items %}取值与{% label primary@justify-self %}/{% label primary@align-self %}完全一致,只不过应用与栅格容器中,对所有栅格元素起作用.
 
-`justify-content`/`align-content`的作用与`flex`布局中的作用类似, 用于分配剩余空间.
+{% label primary@justify-content %}/{% label primary@align-content %}的作用与{% label primary@flex %}布局中的作用类似, 用于分配剩余空间.
 
 ![image-20220719222614834](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220719222614834.png)
 
@@ -250,19 +250,19 @@ grid属性的作用是以简洁的句法定义栅格模板.**未定义的值都�
 
 {% note warning %}
 
-`stretch`把余下的空间均匀的分配给各个栅格轨道,而不分配给栏距. 
+{% label primary@stretch %}把余下的空间均匀的分配给各个栅格轨道,而不分配给栏距. 
 
-截至`2022/07/19`,在`Chrome v103.0.5060.114`没有测试成功
+截至{% label primary@2022/07/19 %},在{% label primary@Chrome v103.0.5060.114 %}没有测试成功
 
 {% endnote %}
 
 ## 分层和排序
 
-对于重叠的栅格元素,默认按照在文档源码中的顺序叠放.可以使用`z-index`或者`order`进行调整, `z-index`无需多说, 与其他布局的行为一样. 
+对于重叠的栅格元素,默认按照在文档源码中的顺序叠放.可以使用{% label primary@z-index %}或者{% label primary@order %}进行调整, {% label primary@z-index %}无需多说, 与其他布局的行为一样. 
 
-也可以调整`order`的值改变栅格元素的顺序,以改变叠放顺序,但是**不推荐**使用.
+也可以调整{% label primary@order %}的值改变栅格元素的顺序,以改变叠放顺序,但是**不推荐**使用.
 
-仅当与视觉顺序无需与阅读和导航顺序一致时才可以使用`order`属性; 否则应该调整元素在文档源码中的顺序
+仅当与视觉顺序无需与阅读和导航顺序一致时才可以使用{% label primary@order %}属性; 否则应该调整元素在文档源码中的顺序
 
 
 

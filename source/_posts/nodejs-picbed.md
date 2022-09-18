@@ -14,25 +14,25 @@ photos:
 
  在Github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.[Github. My-Easy-Pic-Bed](https://github.com/fslongjin/My-Easy-Pic-Bed)
 
-我寻思着这也没必要上Flask,只要能起web服务的就行,而且我并不需要网页上传入口,通过`curl`命令行上传图片就行,这下`html`页面也省了
+我寻思着这也没必要上Flask,只要能起web服务的就行,而且我并不需要网页上传入口,通过{% label primary@curl %}命令行上传图片就行,这下{% label primary@html %}页面也省了
 
 <!--more-->
 
 ## 代码实现
 
-利用`http.createServer()`创建web服务,我们只需要处理图片的上传(`post`)和下载(`get`)就行.
+利用{% label primary@http.createServer() %}创建web服务,我们只需要处理图片的上传({% label primary@post %})和下载({% label primary@get %})就行.
 
 {% note info %}
 
 环境: node -v12.21.0
 
-代码已上传至GitHub，clone下来`npm run start`即可食用[Github. Kinsiy.Simple-pic-bed](https://github.com/Kinsiy/simple-pic-bed/tree/main)
+代码已上传至GitHub，clone下来{% label primary@npm run start %}即可食用[Github. Kinsiy.Simple-pic-bed](https://github.com/Kinsiy/simple-pic-bed/tree/main)
 
 {% endnote %}
 
 ### Post
 
-文件上传核心就一件事,将文件以唯一文件名保存到指定文件夹.代码也很简单,使用`formidable`库获取请求体中的文件,使用`uuid`库生成唯一文件名,保存文件,并返回路径即可.
+文件上传核心就一件事,将文件以唯一文件名保存到指定文件夹.代码也很简单,使用{% label primary@formidable %}库获取请求体中的文件,使用{% label primary@uuid %}库生成唯一文件名,保存文件,并返回路径即可.
 
 ```javascript
 if (req.url === "/upload" && req.method.toLowerCase() === "post") {
@@ -107,7 +107,7 @@ if (/\/upload\/[^\/]+/.test(req.url) && req.method.toLowerCase() === "get") {
 
 ### 示例
 
-通过`curl`上传.`curl`用法自行查阅
+通过{% label primary@curl %}上传.{% label primary@curl %}用法自行查阅
 
 ![image-20220417011951482](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417011951482.png)
 
@@ -115,7 +115,7 @@ if (/\/upload\/[^\/]+/.test(req.url) && req.method.toLowerCase() === "get") {
 
 {% note  info %}
 
-贴几个`curl`的参考文档
+贴几个{% label primary@curl %}的参考文档
 
 - [阮一峰的网络日志. curl的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
 - [catonamat.net. Curl CookBook](https://catonmat.net/cookbooks/curl)
@@ -131,7 +131,7 @@ if (/\/upload\/[^\/]+/.test(req.url) && req.method.toLowerCase() === "get") {
 
 ### upload-image.sh
 
-`"C:/Program Files/Git/bin/bash.exe" "D:\Blog\picBed\upload-image.sh"`
+{% label primary@"C:/Program Files/Git/bin/bash.exe" "D:\Blog\picBed\upload-image.sh" %}
 
 ```sh
 result=()
@@ -154,7 +154,7 @@ done
 
 ### upload-image.ps1
 
-`"C:\Program Files\PowerShell\7\pwsh.exe" "D:\Blog\picBed\upload-image.ps1"`
+{% label primary@"C:\Program Files\PowerShell\7\pwsh.exe" "D:\Blog\picBed\upload-image.ps1" %}
 
 ```powershell
 $ipv4 = (Get-NetIPAddress | Where-Object { $_.AddressState -eq "Preferred" -and $_.ValidLifetime -lt "24:00:00" }).IPAddress

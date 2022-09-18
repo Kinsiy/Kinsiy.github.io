@@ -37,17 +37,17 @@ photos:
 
 本质区别在于，可以使用<from\>或<script\>经行"简单请求"，而无需任何其他特殊方法。
 
-实际区别在于，简单请求会使用 `Origin` header 并立即发送，而对于其他请求，浏览器会发出初步的“预检”请求，以请求许可
+实际区别在于，简单请求会使用 {% label primary@Origin %} header 并立即发送，而对于其他请求，浏览器会发出初步的“预检”请求，以请求许可
 
 ### 用于简单请求的 CORS
 
 如果一个请求是跨源的，浏览器会始终向其添加 Origin header; Origin 包含了确切的源（domain/protocol/port），没有路径。
 
-Origin: `http://www.nczonline.net`
+Origin: {% label primary@http://www.nczonline.net %}
 
 如果服务器决定响应请求，那么应该发送 Access-Control-Allow-Origin 头部，包含相同的源；或者如果资源是公开的，那么就包含"\*"。比如：
 
-Access-Control-Allow-Origin: `http://www.nczonline.net`
+Access-Control-Allow-Origin: {% label primary@http://www.nczonline.net %}
 
 如果没有这个头部，或者有但源不匹配，则表明不会响应浏览器请求。否则，服务器就会处理这个请求。注意，无论请求还是响应都不会包含 cookie 信息。
 
@@ -71,7 +71,7 @@ Access-Control-Allow-Origin: `http://www.nczonline.net`
 
 访问任何其他 response header 都将导致 error
 
-要授予 Javascript 对任何其他 response header 的访问权限，服务器必须发送`Access-Control-Expose-Headers ` header。它包含一个以逗号分隔的应该被设置为可访问的非简单 header 名称列表
+要授予 Javascript 对任何其他 response header 的访问权限，服务器必须发送{% label primary@Access-Control-Expose-Headers  %} header。它包含一个以逗号分隔的应该被设置为可访问的非简单 header 名称列表
 
 ```javascript
 200 OK
@@ -84,13 +84,13 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 
 ### "非简单"请求
 
-我们可以使用任何 HTTP 方法：不仅仅是 `GET/POST`，也可以是 `PATCH`，`DELETE` 及其他
+我们可以使用任何 HTTP 方法：不仅仅是 {% label primary@GET/POST %}，也可以是 {% label primary@PATCH %}，{% label primary@DELETE %} 及其他
 
 之前，没有人能够设想网页能发出这样的请求。因此，可能仍然存在有些 Web 服务将非标准方法视为一个信号：“这不是浏览器”。它们可以在检查访问权限时将其考虑在内。
 
 因此，为了避免误解，任何“非标准”请求 —— 浏览器不会立即发出在过去无法完成的这类请求。即在它发送这类请求前，会先发送“预检（preflight）”请求来请求许可。
 
-预检请求使用 `OPTIONS` 方法，它没有 body，但是有两个 header：
+预检请求使用 {% label primary@OPTIONS %} 方法，它没有 body，但是有两个 header：
 
 -   Access-Control-Request-Method： header 带有简单请求的方法
 -   Access-Control-Request-Headers:：header 提供一个以逗号分隔的非简单 HTTP header 列表
@@ -100,7 +100,7 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 -   Access-Control-Allow-Origin: 必须为经行请求的源或 " \* "。才能允许此请求
 -   Access-Control-Allow-Methods: 必须具有允许的方法
 -   Access-Control-Allow-Headers: 必须具有一个允许的 header 列表
--   另外，header `Access-Control-Max-Age` 可以指定缓存此权限的秒数。因此，浏览器不是必须为满足给定权限的后续请求发送预检
+-   另外，header {% label primary@Access-Control-Max-Age %} 可以指定缓存此权限的秒数。因此，浏览器不是必须为满足给定权限的后续请求发送预检
 
 ![](https://zh.javascript.info/article/fetch-crossorigin/xhr-preflight.svg)
 
@@ -143,11 +143,11 @@ img.src = "Http://www.example.com/test?name=Nicholas";
 
 ### JSONP
 
-使用 <script\> 标签。<script\> 可以具有任何域的 src，例如 <script src="`http://another.com/`…"\>。也可以执行来自任何网站的 <script\>。
+使用 <script\> 标签。<script\> 可以具有任何域的 src，例如 <script src="{% label primary@http://another.com/ %}…"\>。也可以执行来自任何网站的 <script\>。
 
 如果一个网站，例如 another.com 试图公开这种访问方式的数据，则会使用所谓的 “JSONP (JSON with padding)” 协议。
 
-假设在我们的网站，需要以这种方式从 `http://another.com` 网站获取数据，例如天气：
+假设在我们的网站，需要以这种方式从 {% label primary@http://another.com %} 网站获取数据，例如天气：
 
 1. 首先，我们先声明一个全局函数来接收数据，例如 gotWeather
     ```JavaScript
@@ -156,7 +156,7 @@ img.src = "Http://www.example.com/test?name=Nicholas";
          alert(`temperature: ${temperature}, humidity: ${humidity}`);
        }
     ```
-2. 然后我们创建一个特性（attribute）为 src="`http://another.com/weather.json?callback=gotWeather`" 的 <script\> 标签，使用我们的函数名作为它的 callback URL-参数。
+2. 然后我们创建一个特性（attribute）为 src="{% label primary@http://another.com/weather.json?callback=gotWeather %}" 的 <script\> 标签，使用我们的函数名作为它的 callback URL-参数。
 
     ```JavaScript
        let script = document.createElement('script');

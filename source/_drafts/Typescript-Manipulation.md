@@ -22,7 +22,7 @@ Typescript 的类型系统非常强大,它允许用一种类型来表达另一�
 
 ### 泛型约束
 
-泛型约束除在泛型函数中直接对参数类型属性进行约束外,还可以依据泛型`Type`创建出另一种类型,实现响应键值/属性的约束.
+泛型约束除在泛型函数中直接对参数类型属性进行约束外,还可以依据泛型{% label primary@Type %}创建出另一种类型,实现响应键值/属性的约束.
 
 ```typescript
 function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
@@ -35,10 +35,10 @@ getProperty(x, "a");
 getProperty(x, "m"); // Argument of type '"m"' is not assignable to parameter of type '"a" | "b" | "c" | "d"'.
 ```
 
- 这里的`Key`类型是根据泛型`Type`创造出来的
+ 这里的{% label primary@Key %}类型是根据泛型{% label primary@Type %}创造出来的
 
 ### keyof 操作符
 
-正如上面泛型约束的示例所示,`keyof` 操作符根据给出的`object`生成一个由其键值联合的字符串或数字类型.上方`key`类型就是`x`的键值的联合类型.
+正如上面泛型约束的示例所示,{% label primary@keyof %} 操作符根据给出的{% label primary@object %}生成一个由其键值联合的字符串或数字类型.上方{% label primary@key %}类型就是{% label primary@x %}的键值的联合类型.
 
 ### typeof 操作符

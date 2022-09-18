@@ -17,11 +17,11 @@ photos:
 
 ### 缓存类型
 
--  **首次请求[`Client 1`]：**浏览器首次请求资源时，由于浏览器缓存中没有对应的缓存，此时需要去服务器请求，待返回数据后将其存储在缓存数据库中。当浏览器存在对应缓存数据后，下次请求可以根据需要决定是否向服务器发起请求
+-  **首次请求[{% label primary@Client 1 %}]：**浏览器首次请求资源时，由于浏览器缓存中没有对应的缓存，此时需要去服务器请求，待返回数据后将其存储在缓存数据库中。当浏览器存在对应缓存数据后，下次请求可以根据需要决定是否向服务器发起请求
 
-- **强缓存[`Client 2`]：**用户请求数据，如果命中强缓存，则不向服务器请求，而直接从本地资源获取，返回200状态码，并提示from disk cache或from memory cache（比从disk快）
+- **强缓存[{% label primary@Client 2 %}]：**用户请求数据，如果命中强缓存，则不向服务器请求，而直接从本地资源获取，返回200状态码，并提示from disk cache或from memory cache（比从disk快）
 
-- **协商缓存[`Client 3`]：**在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效
+- **协商缓存[{% label primary@Client 3 %}]：**在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效
 
 ![](https://mdn.mozillademos.org/files/13771/HTTPStaleness.png)
 
@@ -42,7 +42,7 @@ photos:
   - **public：** 客户端和代理服务器都可以缓存
   - **max-age = xxx：** 缓存内容将在xxx秒后失效 
 -  **Expires：**Expires的值为服务端返回的到期时间，即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据。
-- **Pragma：**一个HTTP1.0中规定的通用首部，如果`Cache-Control`不存在的话，它的行为与`Cache-Control: no-cache`一致
+- **Pragma：**一个HTTP1.0中规定的通用首部，如果{% label primary@Cache-Control %}不存在的话，它的行为与{% label primary@Cache-Control: no-cache %}一致
 
 在HTTP1.0的环境下，Cache-Control不起作用，Expires起作用； 在HTTP1.1的环境之下， Expires不起作用，而Cache-Control起作用。当前一般都是http1.1的情况，所以Expires是作为一种向下兼容的形式而存在的。
 
