@@ -13,11 +13,11 @@ photos:
 >
 > CSP 被设计成完全向后兼容（除CSP2 在向后兼容有明确提及的不一致; 更多细节查看[这里](https://www.w3.org/TR/CSP2)）。不支持CSP的浏览器也能与实现了CSP的服务器正常合作，反之亦然：不支持 CSP 的浏览器只会忽略它，如常运行，默认为网页内容使用标准的同源策略。如果网站不提供 CSP 头部，浏览器也使用标准的[同源策略](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)。
 >
-> **为使CSP可用, 你需要配置你的网络服务器返回  [{% label primary@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) HTTP头部 **
+> **为使CSP可用, 你需要配置你的网络服务器返回  [{% label primary@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) HTTP头部**
 >
 > ( 有时你会看到一些关于{% label primary@X-Content-Security-Policy %}头部的提法, 那是旧版本，你无须再如此指定它)。
 >
-> 除此之外, **[`<meta>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta) 元素也可以被用来配置该策略** 
+> **除此之外, [{% label primary@&lt;meta&gt; %}](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta)元素也可以被用来配置该策略**
 >
 > ——MDN. 内容安全策略( CSP ). 
 
@@ -33,16 +33,16 @@ photos:
 - default-src 是 CSP 指令，多个指令之间使用英文分号分割。
 - self 是指令值，多个指令值用英文空格分割
 
-具体语法及指令及其意义可以参考这里 [MDN. Content-Security-Policy. ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy)
+具体语法及指令及其意义可以参考这里 [{% label info@MDN. Content-Security-Policy.%} ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy)
 
-更多详细配置方案可以参考这里 [web.dev Security headers quick reference](https://web.dev/security-headers/)
+更多详细配置方案可以参考这里 [{% label info@web.dev Security headers quick reference%}](https://web.dev/security-headers/)
 
 ### strict CSP
 
 可以使用以下两种方式启用严格CSP
 
-- 如果HTML在服务端渲染，选用 ** nonce-based strict CSP**
-- 如果HTML必须静态提供或缓存，例如单页面富应用，选用 ** hash-based strict CSP**
+- 如果HTML在服务端渲染，选用 {% label primary@nonce-based strict CSP%}
+- 如果HTML必须静态提供或缓存，例如单页面富应用，选用 {% label primary@hash-based strict CSP%}
 
 #### nonce-based
 
@@ -61,7 +61,7 @@ Content-Security-Policy:
   base-uri 'none';
 ```
 
-HTML文件中，需要为所有<script\>标签添加相同值 `{RANDOM1}` 字符串的nonce属性
+HTML文件中，需要为所有<script\>标签添加相同值 {% label primary@{RANDOM1} %} 字符串的nonce属性
 
 ```html
 <script nonce="{RANDOM1}" src="https://example.com/script1.js"></script>
@@ -108,9 +108,13 @@ scripts.forEach(function(scriptUrl) {
 
 ## HTTP Public Key Pinning (HPKP)
 
-> **Public-Key-Pins** 是一个响应首部，其包含该Web 服务器用来进行加密的 public [key (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Key) （公钥）信息 ，以此来降低使用伪造证书进行 [MITM](https://developer.mozilla.org/zh-CN/docs/Glossary/MitM) （中间人攻击）的风险。如果锚定的加密串与服务器返回的公钥不匹配，那么浏览器将会认定响应不合法，并且不会将结果展示给用户 
+> HTTP 公钥锁定（HPKP）是一种安全功能，它告诉 Web 客户端将特定加密公钥与某个 Web 服务器相关联，以降低使用伪造证书进行 MITM 攻击的风险。
 >
-> ——MDN. Public-Key-Pins.
+> 为确保 TLS 会话中使用的服务器公钥的真实性，此公钥将包装到 X.509 证书中，该证书通常由证书颁发机构（CA）签名。诸如浏览器之类的 Web 客户端信任许多这些 CA，它们都可以为任意域名创建证书。如果攻击者能够攻击单个 CA，则他们可以对各种 TLS 连接执行 MITM 攻击。 HPKP 可以通过告知客户端哪个公钥属于某个 Web 服务器来规避 HTTPS 协议的这种威胁。
+>
+> HPKP 是首次使用信任（TOFU）技术。 Web 服务器第一次通过特殊的 HTTP 标头告诉客户端哪些公钥属于它，客户端会在给定的时间段内存储此信息。当客户端再次访问服务器时，它希望证书链中至少有一个证书包含一个公钥，其指纹已通过 HPKP 已知。如果服务器提供未知的公钥，则客户端应向用户发出警告。
+>
+> ——HTTP Public Key Pinning (HPKP)
 
 ### 语法
 
@@ -130,7 +134,7 @@ Public-Key-Pins: pin-sha256="<pin-value>";
 
 ## HTTP Strict Transport Security(HSTS)
 
-> {% label primary@HTTP Strict Transport Security %}（通常简称为 [HSTS](https://developer.mozilla.org/zh-CN/docs/Glossary/HSTS)）是一个安全功能，它告诉浏览器只能通过HTTPS访问当前资源，而不是 [HTTP](https://developer.mozilla.org/en/HTTP)。
+>  HTTP Strict Transport Security (通常简称为 [{% label info@HSTS %}](https://developer.mozilla.org/zh-CN/docs/Glossary/HSTS) )是一个安全功能，它告诉浏览器只能通过HTTPS访问当前资源，而不是 HTTP。
 >
 > ——MDN. HTTP Strict Transport Security.
 
@@ -146,13 +150,13 @@ Strict-Transport-Security: max-age=<expire-time>; preload
 
 - max-age=<expire-time\>
 
-  设置在浏览器收到这个请求后的<expire-time>秒的时间内凡是访问这个域名下的请求都使用HTTPS请求。
+  设置在浏览器收到这个请求后的<expire-time\>秒的时间内凡是访问这个域名下的请求都使用HTTPS请求。
 
-- {% label primary@includeSubDomains %} 可选
+- includeSubDomains 可选
 
   如果这个可选的参数被指定，那么说明此规则也适用于该网站的所有子域名。
 
-- {% label primary@preload %} 可选
+- preload  可选
 
   查看 [预加载 HSTS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Strict-Transport-Security#预加载_hsts) 获得详情。不是标准的一部分。
 
@@ -195,7 +199,7 @@ Referrer-Policy: unsafe-url
 
 ### 集成至HTML
 
-你也可以在 HTML 内设置 referrer 策略。例如，你可以用一个 name 为 referrer 的 [`<meta>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta) 元素为整个文档设置 referrer 策略。
+你也可以在 HTML 内设置 referrer 策略。例如，你可以用一个 name 为 referrer 的 [{% label info@&lt;meta&gt; %}](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta)  元素为整个文档设置 referrer 策略。
 
 ```html
 <meta name="referrer" content="origin">
@@ -231,8 +235,8 @@ X-Content-Type-Options: nosniff
 
 下面两种情况的请求将被阻止：
 
-- 请求类型是{% label primary@style %} 但是 MIME 类型不是 {% label primary@text/css %}
-- 请求类型是{% label primary@script %} 但是 MIME 类型不是 [JavaScript MIME 类型](https://html.spec.whatwg.org/multipage/scripting.html#javascript-mime-type)。
+- 请求类型是{% label info@style %} 但是 MIME 类型不是 {% label info@text/css %}
+- 请求类型是{% label info@script %} 但是 MIME 类型不是 [{% label info@JavaScript MIME 类型 %}](https://html.spec.whatwg.org/multipage/scripting.html#javascript-mime-type)。
 
 ## X-Frame-Options
 
@@ -240,7 +244,7 @@ X-Content-Type-Options: nosniff
 >
 > The added security is only provided if the user accessing the document is using a browser supporting X-Frame-Options. 
 >
-> {% label primary@Content-Security-Policy  %}HTTP 头中的 frame-ancestors 指令会替代这个非标准的 header。CSP 的 frame-ancestors 会在 Gecko 4.0 中支持，但是并不会被所有浏览器支持。然而 X-Frame-Options 是个已广泛支持的非官方标准，可以和 CSP 结合使用
+> {% label info@Content-Security-Policy  %}HTTP 头中的 frame-ancestors 指令会替代这个非标准的 header。CSP 的 frame-ancestors 会在 Gecko 4.0 中支持，但是并不会被所有浏览器支持。然而 X-Frame-Options 是个已广泛支持的非官方标准，可以和 CSP 结合使用
 >
 > ——MDN. X-Frame-Options.
 
@@ -254,21 +258,19 @@ X-Frame-Options: allow-from https://example.com/
 
 ### 指令
 
-- **deny：** 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许。
-- **sameorigin：**表示该页面可以在相同域名页面的 frame 中展示。
-- **allow-from *uri* ：**表示该页面可以在指定来源的 frame 中展示。
+- deny: 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许。
+- sameorigin: 表示该页面可以在相同域名页面的 frame 中展示。
+- allow-from uri: 表示该页面可以在指定来源的 frame 中展示。
 
-<% note warning %>
+{% note warning %}
 
-设置 meta 标签是无效的！例如 `<meta http-equiv="X-Frame-Options" content="deny">` 没有任何效果。
+设置 meta 标签是无效的！例如 {% label danger@\<meta http-equiv="X-Frame-Options" content="deny"\> %} 没有任何效果。配置方法 [{% label info@MDN. X-Frame-Options. %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/X-Frame-Options)
 
-[配置方法 MDN. X-Frame-Options. ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/X-Frame-Options)
-
-<% endnote %>
+{% endnote %}
 
 ## X-XSS-Protection
 
-> HTTP **{% label primary@X-XSS-Protection %}** 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 ([XSS (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting))时，浏览器将停止加载页面。若网站设置了良好的 [{% label primary@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) 来禁用内联 JavaScript ({% label primary@'unsafe-inline' %})，现代浏览器不太需要这些保护， 但其仍然可以为尚不支持 [CSP](https://developer.mozilla.org/zh-CN/docs/Glossary/CSP) 的旧版浏览器的用户提供保护
+> HTTP **{% label info@X-XSS-Protection %}** 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 ([XSS (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting))时，浏览器将停止加载页面。若网站设置了良好的 [{% label info@Content-Security-Policy %}](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy) 来禁用内联 JavaScript ({% label info@'unsafe-inline' %})，现代浏览器不太需要这些保护， 但其仍然可以为尚不支持 [CSP](https://developer.mozilla.org/zh-CN/docs/Glossary/CSP) 的旧版浏览器的用户提供保护
 >
 > ——MDN. X-XSS-Protection.
 
@@ -285,7 +287,7 @@ X-XSS-Protection: 1; report=<reporting-uri>
 
 - 0： 禁止XSS过滤
 - 1： 启用XSS过滤（通常浏览器是默认的）。 如果检测到跨站脚本攻击，浏览器将清除页面（删除不安全的部分）。
-- 1;mode=block：启用XSS过滤。 如果检测到攻击，浏览器将不会清除页面，而是阻止页面加载
+- 1; mode=block：启用XSS过滤。 如果检测到攻击，浏览器将不会清除页面，而是阻止页面加载
 - 1; report=<reporting-URI\> (Chromium only)：启用XSS过滤。 如果检测到跨站脚本攻击，浏览器将清除页面并使用CSP [report-uri (en-US)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri)指令的功能发送违规报告
 
 ## 参考

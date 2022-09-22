@@ -9,7 +9,13 @@ photos:
 
 ## HTTP 缓存
 
-> 缓存是一种保存资源副本并在下次请求时直接使用该副本的技术。当 web 缓存发现请求的资源已经被存储，它会拦截请求，返回该资源的拷贝，而不会去源服务器重新下载。这样带来的好处有：缓解服务器端压力，提升性能(获取资源的耗时更短了)。对于网站来说，缓存是达到高性能的重要组成部分。缓存需要合理配置，因为并不是所有资源都是永久不变的：重要的是对一个资源的缓存应截止到其下一次发生改变（即不能缓存过期的资源）
+> HTTP 缓存存储与请求关联的响应，并将存储的响应复用于后续请求。
+>
+> 可复用性有几个优点。首先，由于不需要将请求传递到源服务器，因此客户端和缓存越近，响应速度就越快。最典型的例子是浏览器本身为浏览器请求存储缓存。
+>
+> 此外，当响应可复用时，源服务器不需要处理请求——因为它不需要解析和路由请求、根据 cookie 恢复会话、查询数据库以获取结果或渲染模板引擎。这减少了服务器上的负载。
+>
+> 缓存的正确操作对系统的稳定运行至关重要。
 >
 > ——MDN - HTTP缓存
 
@@ -17,13 +23,13 @@ photos:
 
 ### 缓存类型
 
--  **首次请求[{% label primary@Client 1 %}]：**浏览器首次请求资源时，由于浏览器缓存中没有对应的缓存，此时需要去服务器请求，待返回数据后将其存储在缓存数据库中。当浏览器存在对应缓存数据后，下次请求可以根据需要决定是否向服务器发起请求
+-  首次请求[{% label success@Client 1 %}]：浏览器首次请求资源时，由于浏览器缓存中没有对应的缓存，此时需要去服务器请求，待返回数据后将其存储在缓存数据库中。当浏览器存在对应缓存数据后，下次请求可以根据需要决定是否向服务器发起请求
 
-- **强缓存[{% label primary@Client 2 %}]：**用户请求数据，如果命中强缓存，则不向服务器请求，而直接从本地资源获取，返回200状态码，并提示from disk cache或from memory cache（比从disk快）
+- 强缓存[{% label success@Client 2 %}]：用户请求数据，如果命中强缓存，则不向服务器请求，而直接从本地资源获取，返回200状态码，并提示from disk cache或from memory cache（比从disk快）
 
-- **协商缓存[{% label primary@Client 3 %}]：**在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效
+- 协商缓存[{% label success@Client 3 %}]：在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效
 
-![](https://mdn.mozillademos.org/files/13771/HTTPStaleness.png)
+![缓存示意图](https://segmentfault.com/img/bV4mb8?w=822&h=910)
 
 强制缓存和协商缓存命中缓存资源后，都是从本地读取资源。如果强制缓存生效，则不需要再向服务器发出请求；而协商缓存，不管是否使用缓存，必须向服务器发送一个请求来协商。
 
@@ -35,14 +41,14 @@ photos:
 
 强制缓存的response header中会有两个字段来表明失效规则（Expires/Cache-Control）
 
-- **Cache-Control：**Cache-Control 是最重要的规则。常见的取值有private、public、no-cache、max-age [更多指令](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control)
-  - **no-store：**所有内容都不会缓存，强缓存，协商缓存都不会触发
-  - **no-cache：** 需要使用协商缓存来验证缓存数据
-  - **private：** 客户端可以缓存
-  - **public：** 客户端和代理服务器都可以缓存
-  - **max-age = xxx：** 缓存内容将在xxx秒后失效 
--  **Expires：**Expires的值为服务端返回的到期时间，即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据。
-- **Pragma：**一个HTTP1.0中规定的通用首部，如果{% label primary@Cache-Control %}不存在的话，它的行为与{% label primary@Cache-Control: no-cache %}一致
+- Cache-Control：Cache-Control 是最重要的规则。常见的取值有private、public、no-cache、max-age [更多指令](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control)
+  - no-store：所有内容都不会缓存，强缓存，协商缓存都不会触发
+  - no-cache： 需要使用协商缓存来验证缓存数据
+  - private：客户端可以缓存
+  - public：客户端和代理服务器都可以缓存
+  - max-age = xxx： 缓存内容将在xxx秒后失效 
+-  Expires：Expires的值为服务端返回的到期时间，即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据。
+- Pragma：一个HTTP1.0中规定的通用首部，如果{% label primary@Cache-Control %}不存在的话，它的行为与{% label primary@Cache-Control: no-cache %}一致
 
 在HTTP1.0的环境下，Cache-Control不起作用，Expires起作用； 在HTTP1.1的环境之下， Expires不起作用，而Cache-Control起作用。当前一般都是http1.1的情况，所以Expires是作为一种向下兼容的形式而存在的。
 
@@ -50,7 +56,7 @@ photos:
 
 Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。
 
-Expires 到期时间是由服务端生成的，但是客户端时间可能跟服务端时间有误差，这就会导致缓存命中的误差。 
+Expires 到期时间是由服务端生成的，但是客户端时间可能跟服务端时间有误差，这会导致缓存命中的误差。 
 
 Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control 高
 
@@ -60,17 +66,17 @@ Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control
 
 ##### Last-Modified / If-Modified-Since
 
-- **Last-Modified：**服务器响应请求时，告诉浏览器资源最后的修改时间。
+- Last-Modified：服务器响应请求时，告诉浏览器资源最后的修改时间。
 
-- **If-Modified-Since：**浏览器再次请求资源时，浏览器通知服务器，上次请求时，返回的资源最后修改时间。
+- If-Modified-Since：浏览器再次请求资源时，浏览器通知服务器，上次请求时，返回的资源最后修改时间。
 
 若最后修改时间小于等于If-Modified-Since，则response header返回304，告知浏览器继续使用所保存的cache。若大于If-Modified-Since，则说明资源被改动过，返回状态码200；
 
 #####  **If-none-match / Etag**
 
-- **Etag：**服务器响应请求时，告诉浏览器当前资源在浏览器的唯一标识（生成规则由服务器确定）
+- Etag：服务器响应请求时，告诉浏览器当前资源在浏览器的唯一标识（生成规则由服务器确定）
 
-- **If-None-Match：**再次请求服务器时，通过此字段通知服务器客户端缓存数据的唯一标识。
+- If-None-Match：再次请求服务器时，通过此字段通知服务器客户端缓存数据的唯一标识。
 
   服务器收到请求后发现有If-None-Match 则与被请求资源的唯一标识进行比对：
   - 不同，说明资源又被改动过，则响应整片资源内容，返回状态码200；
@@ -94,7 +100,14 @@ Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control
 
 ### 用户行为对缓存的影响
 
-![](https://camo.githubusercontent.com/8f2d92c11ba6d11a95651ba11be7d87641be6476b4ab6d3b7883529aac20d71c/68747470733a2f2f6e6f74652e796f7564616f2e636f6d2f7977732f7075626c69632f7265736f757263652f62313163633264383230616332646331393931663863323339653362333734622f786d6c6e6f74652f5745425245534f5552434535663236633831633032623039333163313438336362396365356337346463612f383933)
+| 用户操作        | Expires/Cache-Control | Last-Modied/Etag |
+| --------------- | --------------------- | ---------------- |
+| 地址栏回车      | √                     | √                |
+| 页面链接跳转    | √                     | √                |
+| 新开窗口        | √                     | √                |
+| 前进回退        | √                     | √                |
+| F5刷新          | ×                     | √                |
+| Ctrl+F5强制刷新 | ×                     | ×                |
 
 ### 缓存更新
 
