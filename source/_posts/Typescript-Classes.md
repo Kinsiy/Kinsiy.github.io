@@ -506,11 +506,11 @@ b.contents // (property) Box<string>.contents: string
 
 {% note info %}
 
-不要在静态成员上使用泛型, 谨记一点, 在编译后所有的类型注解都会去掉. 我们知道JS中的类是基于原型链实现继承的, 修改原型链上的任何属性都会影响到所有实例.在静态类上使用泛型`Box<string>{% label primary@$1 %}Box<number>`在编译后其实并无差别,更改他们中的任意一个的原型链都会影响到另一个.
+不要在静态成员上使用泛型, 谨记一点, 在编译后所有的类型注解都会去掉. 我们知道JS中的类是基于原型链实现继承的, 修改原型链上的任何属性都会影响到所有实例.在静态类上使用泛型{% label danger@Box&lt;string&gt;%}与{% label danger@Box&lt;number&gt;%}在编译后其实并无差别,更改他们中的任意一个的原型链都会影响到另一个.
 
 {% endnote %}
 
-## {% label primary@this %}参数
+## this 参数
 
 我们知道,在JS中,{% label primary@this %}的值是动态绑定的.比如,下面的例子
 
@@ -594,7 +594,7 @@ d.printName()	// ok
 
 {% note info %}
 
-注意: 在类型检查中,不要直接检查类型是否与抽象类一致,而是检查构造函数返回的类型是否属于改抽象类,举例来说
+注意: 在类型检查中,不要直接检查类型是否与抽象类一致,而是检查构造函数返回的类型是否属于该抽象类,举例来说
 
 ```typescript
 function greet(ctor: new () => Base) {	// 不要写成  Base 或 typeof Base

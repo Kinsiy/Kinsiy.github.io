@@ -543,3 +543,7 @@ outerText 是一个非标准的属性，而且也没有被标准化的前景。�
 // 如果不可见，则将元素可见
 document.images[0].scrollIntoViewIfNeeded(); 
 ```
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

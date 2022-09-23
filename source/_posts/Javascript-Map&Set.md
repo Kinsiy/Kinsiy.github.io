@@ -316,3 +316,6 @@ let arr_5 = [...arr_4];
 arr_4[0].name = "Kinsiy";
 console.log(arr_5[0]); // {name: "Kinsiy"}
 ```
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

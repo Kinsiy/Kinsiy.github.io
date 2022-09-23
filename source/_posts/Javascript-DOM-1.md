@@ -14,12 +14,12 @@ photos:
 
 ```html
 <html>
-    <head>
-        <title>Sample Page</title>
-    <head>
-    <body>
-        <p>Hello word!</p>
-    </body>
+  <head>
+    <title>Sample Page</title>
+  <head>
+  <body>
+    <p>Hello word!</p>
+  </body>
 </html>
 ```
 
@@ -81,14 +81,14 @@ DOM 规范规定 Document 节点的子节点可以是 DocumentType、Element、P
 
 ```html
 <html>
-    <body>
-        <script>
-            let html = document.documentElement
-            let body = document.body
-            console.log(html.nodeName); // HTML
-            console.log(body.nodeName);  // BODY
-        <script>
-    </body>
+  <body>
+    <script>
+      let html = document.documentElement
+      let body = document.body
+      console.log(html.nodeName); // HTML
+      console.log(body.nodeName);  // BODY
+    </script>
+  </body>
 </html>
 ```
 
@@ -185,3 +185,7 @@ Element 类型是唯一使用 attributes 属性的 DOM 节点类型。attribute 
 Text 类型 && Comment 类型 && CDATASection 类型
 DocumentType 类型 && DocumentFragment 类型 && Attr 类型
 略 🤣
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

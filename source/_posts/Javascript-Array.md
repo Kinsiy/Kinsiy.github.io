@@ -653,3 +653,6 @@ alert(people); // Kinsiy Type57
 console.log(people.toString()); // Kinsiy Type57
 console.log(people.toLocaleString()); // Kinsiy Restituo
 ```
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

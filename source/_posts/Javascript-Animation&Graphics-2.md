@@ -359,3 +359,7 @@ globalCompositionOperation 属性表示新绘制的形状如何与上下文中�
 -   lighter：新图形与原有图形重叠部分的像素值相加，使该部分变亮。
 -   copy：新图形将擦除并完全取代原有图形。
 -   xor：新图形与原有图形重叠部分的像素执行“异或”计
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

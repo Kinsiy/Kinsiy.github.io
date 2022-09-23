@@ -111,13 +111,13 @@ xhr.abort();
 ```javascript
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                alert(xhr.responseText);
-        } else {
-                alert("Request was unsuccessful: " + xhr.status);
-        }
+  if (xhr.readyState == 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+      alert(xhr.responseText);
+    } else {
+      alert("Request was unsuccessful: " + xhr.status);
     }
+  }
 };
 xhr.open("get", "example.php", true);
 xhr.setRequestHeader("MyHeader", "MyValue");
@@ -165,20 +165,20 @@ xhr.open("post", "example.php", true);
 
 ```JavaScript
 function submitData() {
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                    alert(xhr.responseText);
-            } else {
-                    alert("Request was unsuccessful: " + xhr.status);
-            }
-        }
-    };
-    xhr.open("post", "postexample.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let form = document.getElementById("user-info");
-    xhr.send(serialize(form));
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        alert(xhr.responseText);
+      } else {
+        alert("Request was unsuccessful: " + xhr.status);
+      }
+    }
+  };
+  xhr.open("post", "postexample.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  let form = document.getElementById("user-info");
+  xhr.send(serialize(form));
 }
 ```
 
@@ -222,17 +222,17 @@ IE8 给 XHR 对象增加了一个 timeout 属性，用于表示发送请求后�
 ```JavaScript
 let xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) { // ontimeout readyState 仍然会变成 4
-        try {
-            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                alert(xhr.responseText);
-            } else {
-                alert("Request was unsuccessful: " + xhr.status);
-            }
-        } catch (ex) {
-        // 假设由 ontimeout 处理
-        }
+  if (xhr.readyState == 4) { // ontimeout readyState 仍然会变成 4
+    try {
+      if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        alert(xhr.responseText);
+      } else {
+        alert("Request was unsuccessful: " + xhr.status);
+      }
+    } catch (ex) {
+    // 假设由 ontimeout 处理
     }
+  }
 };
 xhr.open("get", "timeout.php", true);
 xhr.timeout = 1000; // 设置 1 秒超时
@@ -313,3 +313,7 @@ xhr.send(null);
 ```
 
 为了保证正确执行，必须在调用 open()之前添加 onprogress 事件处理程序。
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

@@ -185,12 +185,12 @@ setInterval()与 setTimeout()的使用方法类似，只不过指定的任务会
 let num = 0, intervalId = null
 let max = 10
  let incrementNumber = function(){
-     num++
-     // 如果达到最大值，则取消所有未执行的任务
-     if(num == max){
-         clearInterval(intervalId)
-         console.log("Done")
-     }
+   num++
+   // 如果达到最大值，则取消所有未执行的任务
+   if(num == max){
+     clearInterval(intervalId)
+     console.log("Done")
+   }
  }
 
  intervalId = setInterval(incrementNumber,500)
@@ -198,13 +198,13 @@ let max = 10
 let num_1 = 0
 let max_1 = 10
 let incrementNumber_1 = function(){
-    num_1++
-    // 如果还没有达到最大值，再设置一个超时任务
-    if(num_1 < max_1>){
-        setTimeout(incrementNumber_1,500)
-    }else{
-        console.log("Done")
-    }
+  num_1++
+  // 如果还没有达到最大值，再设置一个超时任务
+  if(num_1 < max_1>){
+    setTimeout(incrementNumber_1,500)
+  }else{
+    console.log("Done")
+  }
 }
 setTimeout(incrementNumber_1,500)
 ```
@@ -235,5 +235,8 @@ if (result != null) {
 }
 ```
 
-Javascript 还可以显示另外两种对话框：find()和 print()。这两种对话框都是异步显示。用户在浏览器菜单上选择"查找"和"打印"时显示的就是这两种对话框。通过在 window 对象上调用 find()和 print()可以显示它们。
-（chrome find()调不出来）
+Javascript 还可以显示另外两种对话框：find()和 print()。这两种对话框都是异步显示。用户在浏览器菜单上选择"查找"和"打印"时显示的就是这两种对话框。通过在 window 对象上调用 find()和 print()可以显示它们。（chrome find()调不出来）
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

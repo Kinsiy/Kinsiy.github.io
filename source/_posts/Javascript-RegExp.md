@@ -168,3 +168,7 @@ console.log(RegExp["$2"]); // t
 -   x(忽略空格)匹配模式
 -   条件式匹配
 -   正则表达式注释
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

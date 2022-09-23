@@ -44,11 +44,11 @@ function greeter(fn: GreetFunction) {
 
 <!--more-->
 
-`(a: string) => void`的意思是, 一个拥有一个string类型的参数a,不返回任何值的函数.
+{% label info@(a: string) => void%}的意思是, 一个拥有一个string类型的参数a,不返回任何值的函数.
 
 ### 调用签名
 
-我们知道在Js中函数是一个对象, 可以像下面这样往函数中添加属性. (当然我们很少这么做,只是使用Function原有的属性{% label primary@name %},{% label primary@length %}等)
+我们知道在Js中函数是一个对象, 可以像下面这样往函数中添加属性. (当然我们很少这么做,只是使用Function原有的属性{% label info@name %},{% label info@length %}等)
 
 ```javascript
 function foo(){
@@ -60,7 +60,7 @@ foo.kinsiy = "qinglai"
 foo()
 ```
 
-这意味着我们需要声明的是一个可以调用的对象.这时候函数表达式的类型声明方法无法满足我们的要求,需要用到**调用签名**这一声明方法,这种方式声明也很简单,只需把函数类型表达式中的箭头 (=>) 换成冒号 (:) 即可
+这意味着我们需要声明的是一个可以调用的对象.这时候函数表达式的类型声明方法无法满足我们的要求,需要用到**调用签名**这一声明方法,这种方式声明也很简单,只需把函数类型表达式中的箭头 {% label danger@=> %}换成冒号 {% label danger@: %} 即可
 
 ```typescript
 type DescribableFunction = {
@@ -75,7 +75,7 @@ function doSomething(fn: DescribableFunction) {
 
 ### 构造签名
 
-在Js中,还可以使用{% label primary@new %}操作符调用函数.这时候我们可以在调用签名前添加一个{% label primary@new %},便可以声明构造函数的目的.对于调用时{% label primary@new %}操作符是可选的函数(对象),比如 {% label primary@Date %}, 需要同时声明调用签名,与构造签名
+在Js中,还可以使用{% label info@new %}操作符调用函数.这时候我们可以在调用签名前添加一个{% label info@new %},便可以声明构造函数的目的.对于调用时{% label info@new %}操作符是可选的函数(对象),比如 {% label info@Date %}, 需要同时声明调用签名,与构造签名
 
 ```typescript
 type SomeConstructor = {
@@ -103,7 +103,7 @@ function firstElement(arr: any[]) {
 }
 ```
 
-函数很简单,我们希望函数能够根据我们输入的类型自动得出返回值的类型,当我输入`string[]`类型时,返回值就是{% label primary@string %}类型的,其他类型同理.但实际上由于是任意数组,无法事先知道参数的类型,目前为止只能使用`any[]`类型,这时候返回类型自然也就是{% label primary@any %}类型.不满足我们的要求! 这就轮到**泛型函数**登场了
+函数很简单,我们希望函数能够根据我们输入的类型自动得出返回值的类型,当我输入{% label info@string[]%}类型时,返回值就是{% label info@string %}类型的,其他类型同理.但实际上由于是任意数组,无法事先知道参数的类型,目前为止只能使用{% label info@any[]%}类型,这时候返回类型自然也就是{% label info@any %}类型.不满足我们的要求! 这就轮到**泛型函数**登场了
 
 ```typescript
 function firstElement<Type>(arr: Type[]): Type {
@@ -115,11 +115,11 @@ const n = firstElement([1, 2, 3]) // const n: number
 const u = firstElement([]) // const u: never
 ```
 
-可以看到,我们在函数名后方声明了类型{% label primary@Type %},并在参数中使用`Type[]`对arr进行注解,函数返回类型也是{% label primary@Type %}类型.这样我们就得到了一个通用的类型函数(**泛型函数**).函数的返回类型会根据参数类型自动推断出来.
+可以看到,我们在函数名后方声明了类型{% label info@Type %},并在参数中使用{% label info@Type[]%}对arr进行注解,函数返回类型也是{% label info@Type %}类型.这样我们就得到了一个通用的类型函数(**泛型函数**).函数的返回类型会根据参数类型自动推断出来.
 
 {% note  info %}
 
-注意: 不需要主动去指定{% label primary@Type %}.Ts会自动推断出正确的类型
+注意: 不需要主动去指定{% label info@Type %}.Ts会自动推断出正确的类型
 
 ```typescript
 function map<Input, Output>(arr: Input[], func: (arg: Input) => Output): Output[] {
@@ -135,7 +135,7 @@ const parsed = map(["1", "2", "3"], (n) => parseInt(n))
 
 ### 泛型约束
 
-当函数需要处理不同类型的对象时,在函数中我们可能只需要读/写特定的属性.只要某对象存在这些属性,就应该可以成为函数的合法参数.举例来说, 比较两个参数的{% label primary@length: number %}属性, 只要参数存在{% label primary@length: number %}属性即可比较,无其他约束.
+当函数需要处理不同类型的对象时,在函数中我们可能只需要读/写特定的属性.只要某对象存在这些属性,就应该可以成为函数的合法参数.举例来说, 比较两个参数的{% label info@length: number %}属性, 只要参数存在{% label info@length: number %}属性即可比较,无其他约束.
 
 ```typescript
 function longest<Type extends { length: number }>(a: Type, b: Type) {
@@ -151,7 +151,7 @@ const longerString = longest("alice", "bob") // const longerString: "alice" | "b
 const notOK = longest(10, 100) // Argument of type 'number' is not assignable to parameter of type '{ length: number; }'.
 ```
 
-另外对于返回泛型{% label primary@Type %}的函数, 返回值满足约束条件并不一定能满足类型{% label primary@Type %},{% label primary@Type %}是由入参决定的,{% label primary@Type %}是“约束”的超集.
+另外对于返回泛型{% label info@Type %}的函数, 返回值满足约束条件并不一定能满足类型{% label info@Type %}, {% label info@Type %}是由入参决定的,{% label info@Type %}是“约束”的超集.
 
 ```typescript
 function minimumLength<Type extends { length: number }>(
@@ -161,7 +161,7 @@ function minimumLength<Type extends { length: number }>(
   if (obj.length >= minimum) {
     return obj;
   } else {
-    return { length: minimum }; // Error "约束"不能满足其超集{% label primary@Type %}
+    return { length: minimum }; // Error "约束"不能满足其超集 Type
   }
 }
 
@@ -173,7 +173,7 @@ Type '{ length: number; }' is not assignable to type 'Type'.
 
 ### 指定类型
 
-对于泛型函数,若指定多个入参均为泛型{% label primary@Type %},这些入参的类型应完全一样.对于不一样的类型,可以在调用函数时指定通用泛型
+对于泛型函数,若指定多个入参均为泛型{% label info@Type %},这些入参的类型应完全一样.对于不一样的类型,可以在调用函数时指定通用泛型
 
 ```typescript
 function combine<Type>(arr1: Type[], arr2: Type[]): Type[] {
@@ -224,9 +224,9 @@ const _arr = combine<string | number>([1, 2, 3], ["hello"]) // const arr: (strin
    }
    ```
 
-   对比{% label primary@filter1 %}与{% label primary@filter2 %},不难发现两种写法,在不指定类型其实是没差别的,但当指定类型时,{% label primary@filter2 %}却需要多指定一个泛型.多此一举
+   对比{% label info@filter1 %}与{% label info@filter2 %},不难发现两种写法,在不指定类型其实是没差别的,但当指定类型时,{% label info@filter2 %}却需要多指定一个泛型.多此一举
 
-3. 泛型{% label primary@Type %}至少应该出现两次
+3. 泛型{% label info@Type %}至少应该出现两次
 
    >  If a type parameter only appears in one location, strongly reconsider if you actually need it
 
@@ -247,7 +247,7 @@ const _arr = combine<string | number>([1, 2, 3], ["hello"]) // const arr: (strin
 
 ## 可选参数
 
-在参数前使用{% label primary@? %}修饰,可以使参数变为可选参数.对于未指定默认值的可选参数,其类型永远都是声明类型本身与{% label primary@undefined %}的联合类型.因为在Js中未赋值的参数的值就是{% label primary@undefined %}.
+在参数前使用{% label info@? %}修饰,可以使参数变为可选参数.对于未指定默认值的可选参数,其类型永远都是声明类型本身与{% label info@undefined %}的联合类型.因为在Js中未赋值的参数的值就是{% label info@undefined %}.
 
 ```typescript
 function f(x?: number){
@@ -262,7 +262,7 @@ function g(x = 10){
 }
 ```
 
-与ES6一样,可以对参数设定默认值,设定默认值后,改参数变为可选参数,但不传该值或传入的值为undefined时,参数获得改默认值,并且值的类型为其本身类型,不会存在{% label primary@undefined %}
+与ES6一样,可以对参数设定默认值,设定默认值后,改参数变为可选参数,但不传该值或传入的值为undefined时,参数获得改默认值,并且值的类型为其本身类型,不会存在{% label info@undefined %}
 
 ### 回调函数
 
@@ -383,7 +383,7 @@ const f1: voidFunc = () => true // ok
 const v1 = f1() // const v1: void
 ```
 
-这对于定义回调很有用,使得我们可以在形如`Array.prototype.forEach{% label primary@$1 %}Array.prototype.push`这样返回函数的值
+这对于定义回调很有用,使得我们可以在形如 {% label info@Array.prototype.forEach, Array.prototype.push%}这样返回函数的值
 
 ```typescript
 const src = [1, 2, 3];

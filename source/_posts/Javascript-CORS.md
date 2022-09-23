@@ -104,11 +104,15 @@ Access-Control-Expose-Headers: Content-Length,API-Key
 
 ![](https://zh.javascript.info/article/fetch-crossorigin/xhr-preflight.svg)
 
-> **注意：**
->
-> **预检请求发生在“幕后”，它对 JavaScript 不可见。**
->
-> **JavaScript 仅获取对主请求的响应，如果没有服务器许可，则获得一个 error。**
+
+
+{% note warning %}
+
+#### 注意
+
+预检请求发生在{% label danger@“幕后” %}，它对 JavaScript 不可见。JavaScript 仅获取对主请求的响应，如果没有服务器许可，则获得一个 error。
+
+{% endnote %}
 
 ## 代替性跨源技术
 
@@ -151,17 +155,17 @@ img.src = "Http://www.example.com/test?name=Nicholas";
 
 1. 首先，我们先声明一个全局函数来接收数据，例如 gotWeather
     ```JavaScript
-       // 1. 声明处理天气数据的函数
-       function gotWeather({ temperature, humidity }) {
-         alert(`temperature: ${temperature}, humidity: ${humidity}`);
-       }
+     // 1. 声明处理天气数据的函数
+     function gotWeather({ temperature, humidity }) {
+       alert(`temperature: ${temperature}, humidity: ${humidity}`);
+     }
     ```
 2. 然后我们创建一个特性（attribute）为 src="{% label primary@http://another.com/weather.json?callback=gotWeather %}" 的 <script\> 标签，使用我们的函数名作为它的 callback URL-参数。
 
     ```JavaScript
-       let script = document.createElement('script');
-       script.src = `http://another.com/weather.json?callback=gotWeather`;
-       document.body.append(script);
+     let script = document.createElement('script');
+     script.src = `http://another.com/weather.json?callback=gotWeather`;
+     document.body.append(script);
     ```
 
 3. 远程服务器 another.com 动态生成一个脚本，该脚本调用 gotWeather(...)，发送它想让我们接收的数据。
@@ -169,13 +173,13 @@ img.src = "Http://www.example.com/test?name=Nicholas";
     ```JavaScript
     // 我们期望来自服务器的回答看起来像这样：
     gotWeather({
-    temperature: 25,
-    humidity: 78
+      temperature: 25,
+      humidity: 78
     });
 
     ```
 
-4. 当远程脚本加载并执行时，gotWeather`函数将运行，并且因为它是我们的函数，我们就有了需要的数据
+4. 当远程脚本加载并执行时，{% label info@gotWeather%}函数将运行，并且因为它是我们的函数，我们就有了需要的数据
 
 JSONP 由于其简单易用，在开发者中非常流行。相比于图片探测，使用 JSONP 可以直接访问响应， 实现浏览器与服务器的双向通信。不过 JSONP 也有一些缺点
 

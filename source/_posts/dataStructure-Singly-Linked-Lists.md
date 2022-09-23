@@ -52,144 +52,144 @@ photos:
 ```javascript
 // Singly Linked Lists
 class Node {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-    }
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
 }
 
 class LinkedList {
-    constructor() {
-        this.root = null; // first/head/root 结点
-        this.size = 0; // 结点总数
-    }
-    // 在单向链表末端新增结点, 返回新的链表长度
-    push(...args) {
-        for (const value of args) {
-            const node = new Node(value);
-            if (this.root) {
-                let currentNode = this.root;
-                while (currentNode && currentNode.next) {
-                    currentNode = currentNode.next;
-                }
-                currentNode.next = node;
-            } else {
-                this.root = node;
-            }
-            this.size++;
-        }
-        return this.size;
-    }
-
-    // 在单向链表末端删除结点, 返回结点值
-    pop() {
-        let prevNode = null;
+  constructor() {
+    this.root = null; // first/head/root 结点
+    this.size = 0; // 结点总数
+  }
+  // 在单向链表末端新增结点, 返回新的链表长度
+  push(...args) {
+    for (const value of args) {
+      const node = new Node(value);
+      if (this.root) {
         let currentNode = this.root;
-
-        if (currentNode && currentNode.next) {
-            // 判断是不是只有一个结点
-            while (currentNode && currentNode.next) {
-                // 到达最后一个结点
-                prevNode = currentNode;
-                currentNode = currentNode.next;
-            }
-            prevNode.next = null;
-        } else {
-            this.root = null;
+        while (currentNode && currentNode.next) {
+          currentNode = currentNode.next;
         }
+        currentNode.next = node;
+      } else {
+        this.root = node;
+      }
+      this.size++;
+    }
+    return this.size;
+  }
 
-        if (currentNode) {
-            this.size--;
-            return currentNode.value;
-        }
+  // 在单向链表末端删除结点, 返回结点值
+  pop() {
+    let prevNode = null;
+    let currentNode = this.root;
+
+    if (currentNode && currentNode.next) {
+      // 判断是不是只有一个结点
+      while (currentNode && currentNode.next) {
+        // 到达最后一个结点
+        prevNode = currentNode;
+        currentNode = currentNode.next;
+      }
+      prevNode.next = null;
+    } else {
+      this.root = null;
     }
 
-    // 在单向链表开端新增结点, 返回新链表长
-    unshift(...args) {
-        for (let index = args.length - 1; index >= 0; index--) {
-            const node = new Node(args[index]);
-            node.next = this.root;
-            this.size++;
-            this.root = node;
+    if (currentNode) {
+      this.size--;
+      return currentNode.value;
+    }
+  }
+
+  // 在单向链表开端新增结点, 返回新链表长
+  unshift(...args) {
+    for (let index = args.length - 1; index >= 0; index--) {
+      const node = new Node(args[index]);
+      node.next = this.root;
+      this.size++;
+      this.root = node;
+    }
+    return this.size;
+  }
+
+  // 在单向链表开端删除结点, 返回结点值
+  shift() {
+    const first = this.root;
+    if (first) {
+      this.root = first.next;
+      this.size--;
+      return first.value;
+    }
+  }
+
+  // 按值搜索结点，返回其索引值,未找到则返回-1
+  indexOf(value) {
+    for (let currentNode = this.root, i = 0; currentNode; i++, currentNode = currentNode.next){
+      if (currentNode.value === value) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  // 按索引值删除单向链表的值, 返回结点值, 不存在返回undefined
+  removeByIndex(index = 0) {
+    if (index === 0) return this.shift();
+    let prevNode = this.root;
+    for (let currentNode = this.root.next, i = 1; currentNode; i++, currentNode = currentNode.next) {
+      if (i === index) {
+        prevNode.next = currentNode.next;
+        this.size--;
+        return currentNode.value;
+      }
+      prevNode = currentNode;
+    }
+  }
+
+  // 获取第i个元素的值, 不存在则返回undefined
+  getItemByIndex(index) {
+    for (let currentNode = this.root, i = 0; currentNode; i++, currentNode = currentNode.next) {
+      if (i === index) {
+        return currentNode.value;
+      }
+    }
+    return undefined;
+  }
+
+  // 在第i个位置之前插入新结点, 返回新链表长, 位置比链表长大则在链表末端新增, 位置小于0，则重置为0
+  insertBefore(position = 0, ...args) {
+    position < 0 && (position = 0); // 重置负值
+
+    if (position === 0) return this.unshift(...args);
+
+    let prevNode = this.root;
+    let currentNode = this.root.next;
+    let i = 1;
+
+    for (; currentNode; i++, currentNode = currentNode.next) {
+      if (i === position) {
+        for (const value of args) {
+          const insertNode = new Node(value);
+          prevNode.next = insertNode;
+          insertNode.next = currentNode;
+          prevNode = insertNode;
+          this.size++;
         }
         return this.size;
+      }
+      prevNode = currentNode;
     }
+    return this.push(...args);
+  }
 
-    // 在单向链表开端删除结点, 返回结点值
-    shift() {
-        const first = this.root;
-        if (first) {
-            this.root = first.next;
-            this.size--;
-            return first.value;
-        }
-    }
-
-    // 按值搜索结点，返回其索引值,未找到则返回-1
-    indexOf(value) {
-        for (let currentNode = this.root, i = 0; currentNode; i++, currentNode = currentNode.next) {
-            if (currentNode.value === value) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    // 按索引值删除单向链表的值, 返回结点值, 不存在返回undefined
-    removeByIndex(index = 0) {
-        if (index === 0) return this.shift();
-        let prevNode = this.root;
-        for (let currentNode = this.root.next, i = 1; currentNode; i++, currentNode = currentNode.next) {
-            if (i === index) {
-                prevNode.next = currentNode.next;
-                this.size--;
-                return currentNode.value;
-            }
-            prevNode = currentNode;
-        }
-    }
-
-    // 获取第i个元素的值, 不存在则返回undefined
-    getItemByIndex(index) {
-        for (let currentNode = this.root, i = 0; currentNode; i++, currentNode = currentNode.next) {
-            if (i === index) {
-                return currentNode.value;
-            }
-        }
-        return undefined;
-    }
-
-    // 在第i个位置之前插入新结点, 返回新链表长, 位置比链表长大则在链表末端新增, 位置小于0，则重置为0
-    insertBefore(position = 0, ...args) {
-        position < 0 && (position = 0); // 重置负值
-
-        if (position === 0) return this.unshift(...args);
-
-        let prevNode = this.root;
-        let currentNode = this.root.next;
-        let i = 1;
-
-        for (; currentNode; i++, currentNode = currentNode.next) {
-            if (i === position) {
-                for (const value of args) {
-                    const insertNode = new Node(value);
-                    prevNode.next = insertNode;
-                    insertNode.next = currentNode;
-                    prevNode = insertNode;
-                    this.size++;
-                }
-                return this.size;
-            }
-            prevNode = currentNode;
-        }
-        return this.push(...args);
-    }
-
-    // 整表删除, 不用担心循环引用垃圾回收的问题
-    clear() {
-        this.root = null;
-        this.size = 0;
-    }
+  // 整表删除, 不用担心循环引用垃圾回收的问题
+  clear() {
+    this.root = null;
+    this.size = 0;
+  }
 }
 
 const kinsiyLinkedList = new LinkedList();

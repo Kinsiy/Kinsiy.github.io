@@ -55,19 +55,15 @@ class BithrNode{
   }
 }
 
-
 class BithrTree{
   constructor(tree){        // tree 是以二叉链表存储的二叉树，tree指向根节点
     this.head = new BithrNode
 
-
     this.head.RTag = 1
     this.head.lchild = tree
 
-
     this.inThreading(tree)
   }
-
 
   inThreading(root){
     let preNode = this.head
@@ -77,7 +73,6 @@ class BithrTree{
     this.head.rchild = preNode
     preNode.RTag = 1
     preNode.rchild = this.head
-
 
     function fn(root) {
       if(root === null) return
@@ -111,28 +106,22 @@ class BithrTree{
 function inorderTraverseThr(head) {
   const result = []
 
-
   let root = head.lchild
   while(root !== head){
-
 
     while(root.LTag === 0){   // 中序序列第一个节点
       root = root.lchild
     }
 
-
     result.push(root.val)
-
 
     while(root.RTag === 1 && root.rchild !== head){
       root = root.rchild
       result.push(root.val)
     }
 
-
     root = root.rchild
   }
-
 
   return result
 }

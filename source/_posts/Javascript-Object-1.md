@@ -411,3 +411,6 @@ getPersonInfo("1st", person, "2st");
 // ["1st", {name: "Kinsiy", age: 23}, "2st"]
 // Kinsiy 23
 ```
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

@@ -287,3 +287,7 @@ me.sayName(); // Kinsiy
 ```
 
 这里只调用了一次 SuperType 构造函数，避免了 SubType.prototype 上不必要也用不到的属性，因此可以说是这个例子的效率更高。而且，原型键仍然保持不变，因此 instanceof 操作符合 isPrototypeOf()方法正常有效。寄生式组合继承可以算是引用类型继承的最佳模式。
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

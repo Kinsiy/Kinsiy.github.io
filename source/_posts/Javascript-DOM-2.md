@@ -135,3 +135,7 @@ document.body.className = "bar"; // 不会有日志输出
 ### 后续
 
 略 🤣
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

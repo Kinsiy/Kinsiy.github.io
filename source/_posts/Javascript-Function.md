@@ -30,7 +30,7 @@ let sum_4 = new Function(val_1, val_2, "return val_1 + val_2");
 
 <!-- more -->
 
-# 箭头函数
+## 箭头函数
 
 很大程度上，箭头函数实例化的函数对象与正式的函数表达式创建的函数对象行为是相同的。任何可以使用函数表达式的地方，都可以使用箭头函数。
 
@@ -48,7 +48,7 @@ let sum = (a,b,c) => a+b+c
 
 箭头函数不能使用 arguments、super 和 new.target，也不能用作构造函数。此外箭头函数也没有 prototype 属性。
 
-# 函数名
+## 函数名
 
 函数名就是指向函数的指针，它们跟其他包含对象指针的变量具有相同的行为。这意味着一个函数可以有多个变体
 
@@ -91,7 +91,7 @@ console.log(propertyDescriptor.get.name); // get year
 console.log(propertyDescriptor.set.name); // set year
 ```
 
-# 理解参数
+## 理解参数
 
 ECMAScript 函数的参数跟大多数其他语言不同。ECMAScript 函数既不关系传入的参数个数，也不关心这些参数的数据类型。定义函数时要接收两个参数，并不意味着调用时就传两个参数。你可以传一个、三个，甚至一个也不传，解释器也不会报错。
 ECMAScript 函数的参数在内部表现为一个数组。在使用 function 关键字定义(非箭头)函数时，可以在函数内部访问 arguments 对象，从中取得传递进来的每个参数值。arguments 对象是一个类数组对象(不是 Array 实例)
@@ -121,11 +121,11 @@ sum(4, 5); // 88 100
 
 如果函数是使用箭头函数定义的，那么传给函数的参数将不能使用 arguments 关键字访问，而只能通过定义的命名参数访问。
 
-# 没有重载
+## 没有重载
 
 ECMAScript 函数不能像传统编程那样重载。在其他语言比如 Java 中，一个函数可以有两个定义，只要签名(接收函数的类型和数量)不同就行。ECMAScript 中函数没有签名，因为参数是由包含零个或多个值得数组表示。没有函数签名，自然也就没有重载。如果在 ECMAScript 中定义了两个同名函数，则后定义的会覆盖先定义的。
 
-# 默认函数值
+## 默认函数值
 
 在 ECMAScript5.1 及以前，实现默认参数的一种常用方式就是检测某个参数是否等于 undefined。如果是则意味着没有传这个参数，那就给它赋一个值。ES6 之后就不用这么麻烦了，因为它支持显式定义默认参数了
 
@@ -145,7 +145,7 @@ function makeQueen(name = "QingLai") {
 // 跟ES5 严格模式一样，修改命名参数也不会影响arguments对象，它始终以调用函数时传入的值为准
 ```
 
-## 默认函数作用域与暂时性死区
+### 默认函数作用域与暂时性死区
 
 给多个参数定义默认值实际上跟使用 let 关键字顺序声明变量一样。参数初始化顺序遵循"暂时性死区"规则，即前面定义的参数不能引用后面定义的。
 
@@ -164,11 +164,11 @@ function makeMarry(name = "Kinsiy", age = num) {
 }
 ```
 
-# 参数扩展与收集
+## 参数扩展与收集
 
 ECMAScript 6 新增了扩展操作符，使用它可以非常简洁地操作和组合集合数据。扩展操作符最有用的场景就是函数定义中的参数列表。
 
-## 扩展参数
+### 扩展参数
 
 ```javascript
 let values = [1, 2, 3, 4];
@@ -180,7 +180,7 @@ function countArguments() {
 countArguments(-1, ...values); // 5
 ```
 
-## 收集参数
+### 收集参数
 
 在构思函数定义时，可以使用扩展操作符把不同长度的独立参数组合为一个数组。这有点像 arguments 对象的构造机制，只不过收集参数的结果会得到一个 Array 实例。因为收集参数的结果可变，所以只能把它作为最后一个参数：
 
@@ -192,7 +192,7 @@ function getSum(...values) {
 console.log(getSum(1, 2, 3, 4, 5, 6)); // 21
 ```
 
-# 函数声明与函数表达式
+## 函数声明与函数表达式
 
 函数声明会在任何代码执行之前先被读取并添加到执行上下文。这个过程叫作函数声明提升。而函数表达式必须等到代码执行到它那一行，才会在执行上下文中生成函数定义。
 
@@ -212,7 +212,7 @@ let sum_1 = function (num_1, num_2) {
 
 除了函数什么时候真正有定义这个区别之外，这两种语法是等价的。
 
-# 函数作为值
+## 函数作为值
 
 如果是访问函数而不是调用函数，那就必须不带括号
 
@@ -242,11 +242,11 @@ data.sort(createComparisonFunction("age"));
 console.log(data[0].name); // QingLai
 ```
 
-# 函数内部
+## 函数内部
 
 ES 5 中，函数内部存在两个特殊的对象：arguments 和 this。ES 6 新增了 new.target 属性
 
-## arguments
+### arguments
 
 arguments 前面已经说过很多次了，这里主要讲一下 arguments 对象的 callee 属性，是一个指向 arguments 对象所在函数的指针。
 
@@ -262,7 +262,7 @@ function factorial(num) {
 console.log(factorial(5)); // 120
 ```
 
-## this
+### this
 
 this 在标准函数和箭头函数中有不同的行为。
 
@@ -292,7 +292,7 @@ o.sayColor_1 = sayColor_1;
 o.sayColor_1(); // purple
 ```
 
-## caller
+### caller
 
 这个属性引用的是调用当前函数的函数，或者如果是在全局作用域中调用的则为 null
 
@@ -308,7 +308,7 @@ function inner() {
 outer(); // ƒ outer()
 ```
 
-## new.target
+### new.target
 
 检测函数是否使用 new 关键字调用。如果函数是正常调用的，new.target 的值是 undefined；如果是使用 new 关键字调用的，则 new.target 将引用被调用的构造函数。
 
@@ -324,7 +324,7 @@ new King(); // new King
 King(); // Error: King 必须new
 ```
 
-# 函数属性与方法
+## 函数属性与方法
 
 每个函数都有两个属性：length 和 prototype。其中 length 属性保存函数定义的命名参数的个数。prototype 是保存引用类型所有实例方法的地方，这意味着 toString()、valueOf()等方法实际上都保存在 prototype 上，进而由所有实例共享。
 
@@ -383,11 +383,11 @@ let ObjectSayColor = sayColor.bind(o);
 ObjectSayColor(); // purple
 ```
 
-# 函数表达式
+## 函数表达式
 
 记住。函数声明会被提升，而函数表达式不会被提升。任何时候，只要函数被当作值来使用，它就是一个函数表达式。
 
-# 递归
+## 递归
 
 在编写递归函数时，arguments.callee 是引用当前函数的首选。在严格模式下可以使用命名函数表达式达到目的。
 
@@ -403,12 +403,12 @@ const factorial = function f(num) {
 console.log(factorial(5)); // 120
 ```
 
-# 尾调用优化
+## 尾调用优化
 
 ES 6 规范新增了一项内存管理优化机制，让 javascript 引擎在满足条件时重用栈帧。具体来说，这项优化非常适合"尾调用"，即外部函数的返回值是一个内部函数的返回值。
 示例及适用条件略(:
 
-# 闭包
+## 闭包
 
 闭包指的是那些引用了另一个函数作用域中变量的函数，通常是在嵌套函数中实现的。
 
@@ -434,7 +434,7 @@ let result = compare({ name: "Kinsiy" }, { name: "Restituo" });
 
 compare 函数就是一个闭包，他的作用域链包含本身函数的的作用域与 createComparisonFunction()的作用域以及全局作用域。createComparisonFunction()活动对象并不能在它执行完毕后销毁，因为匿名函数的作用域链中仍然有对它的引用。
 
-## this 对象
+### this 对象
 
 ```javascript
 window.identity = "the window";
@@ -450,11 +450,11 @@ let object = {
 console.log(object.getIdentity()()); // the window
 ```
 
-## 内存泄露
+### 内存泄露
 
 因为 IE 在 IE9 之前对 JScript 和 COM 对象使用了不同的垃圾回收机制，所以 IE 在旧版本 IE 中可能回导致内存泄露。
 
-# 立即调用表达式
+## 立即调用表达式
 
 立即调用的匿名函数又被称作立即调用的函数表达式。它类似与函数声明，但由于被包含在括号中，所以会被解释为函数表达式。紧跟在第一组括号后面的第二组括号会立即调用前面的函数表达式。
 
@@ -471,6 +471,12 @@ console.log(object.getIdentity()()); // the window
 )(); // 0,1,2
 ```
 
-# 私有变量
+## 私有变量
 
 略
+
+
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

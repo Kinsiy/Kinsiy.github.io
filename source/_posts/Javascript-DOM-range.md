@@ -45,17 +45,17 @@ DOM2 在 Document 类型上定义了一个 createRange()方法，暴露在 docum
 ```html
 <!DOCTYPE html> 
 <html> 
-    <body> 
-        <p id="p1"><b>Hello</b> world!</p> 
-    </body> 
+  <body> 
+    <p id="p1"><b>Hello</b> world!</p> 
+  </body> 
 </html> 
 ```
 
 
 ```javascript
-let range1 = document.createRange(), 
- range2 = document.createRange(), 
- p1 = document.getElementById("p1"); 
+let range1 = document.createRange()
+let range2 = document.createRange()
+let p1 = document.getElementById("p1")
 range1.selectNode(p1); 
 range2.selectNodeContents(p1); 
 ```
@@ -93,45 +93,40 @@ Container 属性就是传入的节点，在这个例子中是<p\>元素。startO
 
 
 ```javascript
-let range1 = document.createRange(), 
-    range2 = document.createRange(), 
-    p1 = document.getElementById("p1"), 
-    p1Index = -1, 
-    i, 
-    len; 
+let range1 = document.createRange()
+let range2 = document.createRange()
+let p1 = document.getElementById("p1")
+let p1Index = -1
+let i
+let len
+
 for (i = 0, len = p1.parentNode.childNodes.length; i < len; i++) { 
  if (p1.parentNode.childNodes[i] === p1) { 
- p1Index = i; 
- break; 
+   p1Index = i; 
+   break; 
  } 
 }
 
-
- range1.setStart(p1.parentNode, p1Index); 
- range1.setEnd(p1.parentNode, p1Index + 1); 
- range2.setStart(p1, 0); 
- range2.setEnd(p1, p1.childNodes.length); 
+range1.setStart(p1.parentNode, p1Index); 
+range1.setEnd(p1.parentNode, p1Index + 1); 
+range2.setStart(p1, 0); 
+range2.setEnd(p1, p1.childNodes.length); 
 ```
 
 
 注意，要选择节点（使用 range1），必须先确定给定节点（p1）在其父节点 childNodes 集合中的索引。而要选择节点的内容（使用 range2），则不需要这样计算，因为可以直接给 setStart()和setEnd()传默认值。虽然可以模拟 selectNode()和 selectNodeContents()，但 setStart()和setEnd()真正的威力还是选择节点中的某个部分。
 
-
 假设我们想通过范围从前面示例中选择从"Hello"中的"llo"到" world!"中的"o"的部分。很简单，第一步是取得所有相关节点的引用
+
+```html
+<p id="p1"><b>Hello</b> world!</p>
+```
 
 
 ```javascript
-/**
-...
-    <p id="p1"><b>Hello</b> world!</p>
-...
-*/
-
-
-let p1 = document.getElementById("p1"), 
- helloNode = p1.firstChild.firstChild, 
- worldNode = p1.lastChild
-
+let p1 = document.getElementById("p1")
+let helloNode = p1.firstChild.firstChild
+let worldNode = p1.lastChild
 
 let range = document.createRange(); 
 range.setStart(helloNode, 2); 
@@ -197,72 +192,60 @@ range.deleteContents();
 
 
 ```javascript
-let p1 = document.getElementById("p1"), 
- helloNode = p1.firstChild.firstChild, 
- worldNode = p1.lastChild, 
- range = document.createRange(); 
-
+let p1 = document.getElementById("p1")
+let helloNode = p1.firstChild.firstChild
+let worldNode = p1.lastChild
+let range = document.createRange()
 
 range.setStart(helloNode, 2); 
 range.setEnd(worldNode, 3); 
 let fragment_1 = range.extractContents(); 
 p1.parentNode.appendChild(fragment_1);
 
-
 /** result:
-        <p><b>He</b>rld!</p> 
-        <b>llo</b> wo 
+  <p><b>He</b>rld!</p> 
+  <b>llo</b> wo 
 */
 
-
 // 如果不想把范围从文档中移除，也可以使用 cloneContents()创建一个副本，然后把这个副本插入到文档其他地方
-
 
 let fragment_2 = range.cloneContents(); 
 p1.parentNode.appendChild(fragment_2);
 
-
 /** result:
-        <p><b>Hello</b> world!</p> 
-        <b>llo</b> wo 
+  <p><b>Hello</b> world!</p> 
+  <b>llo</b> wo 
 */
 ```
 
 
 ### 范围插入
 
-
 使用insertNode()方法可以在范围选区的开始位置插入一个节点
+
+```html
+<p id="p1"><b>Hello</b> world!</p>
+```
 
 
 ```javascript
-/**
-...
-    <p id="p1"><b>Hello</b> world!</p>
-...
-*/
-
-
 // 插入: <span style="color: red">Inserted text</span>
 
-
-let p1 = document.getElementById("p1"), 
- helloNode = p1.firstChild.firstChild, 
- worldNode = p1.lastChild, 
- range = document.createRange(); 
+let p1 = document.getElementById("p1")
+let helloNode = p1.firstChild.firstChild 
+let worldNode = p1.lastChild
+let range = document.createRange(); 
 range.setStart(helloNode, 2); 
 range.setEnd(worldNode, 3); 
 let span = document.createElement("span"); 
 span.style.color = "red"; 
 span.appendChild(document.createTextNode("Inserted text")); 
 range.insertNode(span); 
-
-
-/** result:
-        <p id="p1"><b>He<span style="color: red">Inserted text</span>llo</b> world</p>
-*/
 ```
 
+```html
+<p id="p1"><b>He<span style="color: red">Inserted text</span>llo</b> world</p>
+```
 
 注意，<span\>正好插入到"Hello"中的"llo"之前，也就是范围选区的前面。同时，也要注意原始的 HTML 并没有添加或删除<b\>元素，因为这里并没有使用之前提到的方法。使用这个技术可以插入有用的信息，比如在外部链接旁边插入一个小图标。
 
@@ -279,27 +262,22 @@ range.insertNode(span);
 
 
 ```JavaScript
-let p1 = document.getElementById("p1"), 
-    helloNode = p1.firstChild.firstChild, 
-    worldNode = p1.lastChild, 
-    range = document.createRange(); 
-
+let p1 = document.getElementById("p1")
+let helloNode = p1.firstChild.firstChild
+let worldNode = p1.lastChild
+let range = document.createRange()
 
 range.selectNode(helloNode); 
-
 
 let span = document.createElement("span"); 
 span.style.backgroundColor = "yellow"; 
 
-
 range.surroundContents(span); 
-
-
-/** result:
-        <p><b><span style="background-color:yellow">Hello</span></b> world!</p>
-*/
 ```
 
+```html
+<p><b><span style="background-color:yellow">Hello</span></b> world!</p>
+```
 
 ### 范围折叠
 
@@ -317,17 +295,14 @@ range.surroundContents(span);
 range.collapse(true); // 折叠到起点
 console.log(range.collapsed); // 输出 true
 
-
 /**
 <p id="p1">Paragraph 1</p>
 <p id="p2">Paragraph 2</p> 
 */
 
-
-let p1 = document.getElementById("p1"), 
-    p2 = document.getElementById("p2"), 
-    range = document.createRange(); 
-
+let p1 = document.getElementById("p1")
+let p2 = document.getElementById("p2")
+let range = document.createRange(); 
 
 range.setStartAfter(p1); 
 range.setStartBefore(p2); 
@@ -346,27 +321,21 @@ console.log(range.collapsed); // true
 - Range.END_TO_END(2)，比较两个范围的终点
 - Range.END_TO_START(3)，比较第一个范围的终点和第二个范围的起点
 
-
 compareBoundaryPoints()方法在第一个范围的边界点位于第二个范围的边界点之前时返回-1， 在两个范围的边界点相等时返回 0，在第一个范围的边界点位于第二个范围的边界点之后时返回 1
+
+```html
+<p id="p1"><b>Hello</b> world!</p>
+```
 
 
 ```JavaScript
-/**
-...
-    <p id="p1"><b>Hello</b> world!</p>
-...
-*/
-
-
 let range1 = document.createRange(); 
 let range2 = document.createRange(); 
 let p1 = document.getElementById("p1"); 
 
-
 range1.selectNodeContents(p1); 
 range2.selectNodeContents(p1); 
 range2.setEndBefore(p1.lastChild); 
-
 
 console.log(range1.compareBoundaryPoints(Range.START_TO_START, range2)); // 0 
 console.log(range1.compareBoundaryPoints(Range.END_TO_END, range2)); // 1 
@@ -385,12 +354,12 @@ console.log(range1.compareBoundaryPoints(Range.END_TO_END, range2)); // 1
 ```JavaScript
 let newRange = range.cloneRange(); 
 
-
 range.detach(); // 从文档中剥离范围
 range = null; // 解除引用
 ```
 
-
-
-
 这两步是最合理的结束使用范围的方式。剥离之后的范围就不能再使用了
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

@@ -454,3 +454,7 @@ person_1.friends.push("Type57");
 console.log(person_1.friends); // ["Kinsiy", "Restituo", "Type57"]
 console.log(person_2.friends); // ["Kinsiy", "Restituo", "Type57"]
 ```
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

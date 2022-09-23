@@ -185,3 +185,7 @@ while (i < 5) {
 | Math.sin(x)         | sin(x)                                                 |
 | Math.cos(x)         | cos(x)                                                 |
 | Math.tan(x)         | tan(x)                                                 |
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

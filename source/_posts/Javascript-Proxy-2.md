@@ -419,3 +419,7 @@ new proxy(); // construct()
     - newTarget: 最初被调用的构造函数
 4. 捕获器不变式
     - target 必须可以用作构造函数
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

@@ -90,3 +90,7 @@ animate 函数接受 3 个描述动画的基本参数：
 -   draw(progress)：获取动画完成状态并绘制的函数。值 progress = 0 表示开始动画状态，progress = 1 表示结束状态。这是实际绘制动画的函数
 
 更多信息参考这里 [javascript 动画](https://zh.javascript.info/js-animation#jie-gou-hua-dong-hua)
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

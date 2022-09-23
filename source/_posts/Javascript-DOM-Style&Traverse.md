@@ -362,12 +362,9 @@ let iterator = document.createNodeIterator(root, NodeFilter.SHOW_ELEMENT, filter
 let iterator = document.createNodeIterator(document, NodeFilter.SHOW_ALL, null, false);
 ```
 
-
 NodeIterator 的两个主要方法是 nextNode()和 previousNode()。nextNode()方法在 DOM子树中以深度优先方式进前一步，而 previousNode()则是在遍历中后退一步。创建 NodeIterator对象的时候，会有一个内部指针指向根节点，因此第一次调用 nextNode()返回的是根节点。当遍历到达 DOM 树最后一个节点时，nextNode()返回 null。previousNode()方法也是类似的。当遍历到达DOM 树最后一个节点时，调用 previousNode()返回遍历的根节点后，再次调用也会返回 null。
 
-
-```javascript
-/**
+```html
 <div id="div1"> 
     <p><b>Hello</b> world!</p> 
     <ul> 
@@ -376,9 +373,12 @@ NodeIterator 的两个主要方法是 nextNode()和 previousNode()。nextNode()�
          <li>List item 3</li> 
     </ul> 
 </div> 
-*/
+```
 
 
+
+
+```javascript
 // 遍历<div>元素内部的所有元素
 
 
@@ -428,3 +428,7 @@ while (node !== null) {
  node = walker.nextSibling(); 
 } 
 ```
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

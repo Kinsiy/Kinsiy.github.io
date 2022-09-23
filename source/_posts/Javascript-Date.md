@@ -40,18 +40,18 @@ console.log(result); // 0
 
 ### toLocaleString()-toString()-valueof()-...
 
-```javascript
-/* Date类型的
-toLocaleString()方法 返回与浏览器运行的本地环境一致的时间和日期。这通常意味着格式中包含针对时间的AM或PM，但不包含时区信息(具体格式  可能因浏览器而不同)
-toString()方法 返回带时区信息的日期和时间，而时间也是24小时制表示的
-valueOf()方法 不返回字符串，这个方法被重写后返回的是日期的毫秒表示
-toDateString() 显示日期中的周几、月、日、年(格式特定于实现)
-toTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
-toLocaleDateString() 显示日期中的周几、月、日、年(格式特定于实现和地区)
-toLocaleTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
-toUTCString() 显示完整UTC日期(格式特定于实现)
-*/
+{% label info@Date 类型的%}
 
+- toLocaleString()方法 返回与浏览器运行的本地环境一致的时间和日期。这通常意味着格式中包含针对时间的AM或PM，但不包含时区信息(具体格式  可能因浏览器而不同)
+- toString()方法 返回带时区信息的日期和时间，而时间也是24小时制表示的
+- valueOf()方法 不返回字符串，这个方法被重写后返回的是日期的毫秒表示
+- toDateString() 显示日期中的周几、月、日、年(格式特定于实现)
+- toTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
+- toLocaleDateString() 显示日期中的周几、月、日、年(格式特定于实现和地区)
+- toLocaleTimeString() 显示日期中的时、分、秒和时区(格式特定与实现)
+- toUTCString() 显示完整UTC日期(格式特定于实现)
+
+```javascript
 let now = new Date();
 console.log(now.toLocaleString()); // 2021/1/13 上午1:25:05
 console.log(now.toString()); // Wed Jan 13 2021 01:29:11 GMT+0800 (中国标准时间)
@@ -107,3 +107,7 @@ console.log(now.getTime()); // 1610474569539
 console.log(now.setTime(now.getTime() / 2)); // Sun Jul 09 1995 05:01:24 GMT+0800 (中国标准时间)
 console.log(now.getTimezoneOffset()); // -480
 ```
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

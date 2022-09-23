@@ -411,3 +411,7 @@ console.log(stringValue.localeCompare("zoo")); // -1
 ##### html 方法
 
 略
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

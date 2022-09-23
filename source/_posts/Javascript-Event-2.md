@@ -227,3 +227,6 @@ if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
 // 触发事件
 textbox.dispatchEvent(event);
 ```
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

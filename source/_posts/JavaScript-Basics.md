@@ -10,13 +10,13 @@ tags: [JS红宝书]
 
 <!-- more -->
 
-# 语法
+## 语法
 
-## 区分大小写
+### 区分大小写
 
 ECMAScript 中一切都区分大小写。无论是变量、函数名、还是操作符，都区分大小写。
 
-## 标识符
+### 标识符
 
 -   第一个字符必须是字母、下划线(\_)或美元符号($)
 -   剩下的其他字符可以是字母、下划线、美元符号或数字
@@ -24,7 +24,7 @@ ECMAScript 中一切都区分大小写。无论是变量、函数名、还是操
 字母可以是扩展 ASCII 中的字母，也可以是 Unicode 的字母字符。
 按照惯例，ECMAScript 标识符使用驼峰大小写形式，即第一个单词的首字母小写，后面每个单词的首字母大写。
 
-## 注释
+### 注释
 
 ```javascript
 // 驼峰大小写(单行注释)
@@ -35,7 +35,7 @@ ECMAScript 中一切都区分大小写。无论是变量、函数名、还是操
 */
 ```
 
-## 严格模式
+### 严格模式
 
 严格模式(ECMAScript 5 增加)是一种不同的 Javascript 解析和执行模式，ECMAScript 3 的一些不规范写法在这种模式下会被处理，对于不安全的活动会抛出错误。
 
@@ -47,7 +47,7 @@ function doSomething() {
 }
 ```
 
-## 语句
+### 语句
 
 ECMAScript 中的语句以分号结尾。多条语句可以合并到一个 C 语言风格的代码块中。代码块由一个左花括号( { )标识开始，一个右花括号( } )标识结束。
 
@@ -62,7 +62,7 @@ if (test) {
 /* if 之类的控制语句只在执行多条语句时要求必须有代码块。不过，最佳实践是始终在控制语句中使用代码块，即使要执行的只有一条语句 */
 ```
 
-## 关键字与保留字
+### 关键字与保留字
 
 ECMA-262 第六版规定的所有关键字如下：
 
@@ -74,7 +74,7 @@ ECMA-262 第六版规定的所有关键字如下：
 | debugger | function | this  | default |    if    |  throw  |   delete   | import |
 |   try    |    -     |   -   |    -    |    -     |    -    |     -      |   -    |
 
-### 未来的保留字
+#### 未来的保留字
 
 ECMA-262 第 6 版为将来保留的所有词汇：<br>
 始终保留：<b>enum</b>
@@ -86,11 +86,11 @@ ECMA-262 第 6 版为将来保留的所有词汇：<br>
 
 代码块中保留：<b>await</b>
 
-## 变量
+### 变量
 
 有三个关键字可以声明变量：var、const 和 let。const 和 let 只能在 ECMAScript 6 及更晚的版本中使用。
 
-### var
+#### var
 
 ```javascript
 var message = "hello worid!";
@@ -111,7 +111,7 @@ console.log(firstName); //ReferenceError
 console.log(secondName); //Kinsiy
 ```
 
-### let
+#### let
 
 let 和 var 的作用差不多,但有着非常重要的区别。最明显的区别是，let 声明的范围是块作用域，而 var 声明的范围是函数作用域。
 
@@ -158,7 +158,7 @@ sex;
 /* 总之一句话不能使用let进行条件式声明 */
 ```
 
-### const
+#### const
 
 const 的行为与 let 基本相同，唯一一个重要的区别是用它声明变量时必须同时初始化变量尝试修改 const 声明的变量会导致运行时错误。
 
@@ -187,9 +187,9 @@ person.name = "Kinsiy"; //没有问题
 */
 ```
 
-## 数据类型
+### 数据类型
 
-### Undefined
+#### Undefined
 
 Undefined 类型只有一个值，就是特殊值 undefined(假值)。当使用 var 或 let 声明了变量但没有初始化值时，就相当于给变量赋予了 undefined 值：
 
@@ -205,7 +205,7 @@ console.log(typeof message); //"undefined"
 console.log(typeof age); //"undefined"
 ```
 
-### Null
+#### Null
 
 Null 类型同样只有一个值，即特殊值 null(假值)。逻辑上讲，null 值表示一个空对象指针。
 
@@ -219,7 +219,7 @@ console.log(null == undefined); //true
 /* 任何时候，只要变量要保存对象，而当时又没有那个对象可保存,就要用null来填充该变量。这样可以保持null是空对象指针的语义，并进一步与undefined区分开来 */
 ```
 
-### Boolean 类型
+#### Boolean 类型
 
 Boolean 有两个字面值：true 和 false。这两个布尔值不同于数值，因此 true 不等于 1，false 不等于 0。<br>
 Boolean()转型函数可以在任意类型的数据上调用，而且始终返回一个布尔值。转换规则如下：
@@ -232,9 +232,9 @@ Boolean()转型函数可以在任意类型的数据上调用，而且始终返�
 |  Object   |       任意对象       |       null        |
 | Undefined |     N/A(不存在)      |     undefined     |
 
-### Number 类型
+#### Number 类型
 
-#### 浮点值
+##### 浮点值
 
 要定义浮点值，数值中必须包含小数点，且小数点后面必须至少有一个数字。
 
@@ -290,7 +290,7 @@ Number()函数基于如下规则执行转换：
     -   如果字符串包含除上述情况之外的其他字符，则返回 NaN
 -   对象，调用 valueof()方法，并按照上述规则转换返回的值。如果转换结果是 NaN，则调用 toString()方法,在按照字符串的规则转换。
 
-### String 类型
+#### String 类型
 
 String (字符串)数据类型表示零或多个 16 位 Unicode 字符序列。字符串可以使用双引号(")、单引号(')或反引号(`)标识。
 
@@ -348,12 +348,12 @@ String()函数遵循如下规则：
 -   如果值是 null，返回"null"
 -   如果值是 undefined，返回"undefined"
 
-### Symbol 类型
+#### Symbol 类型
 
 Symbol(符号)是 EMCAScript 6 新增的数据类型。符号是原始值，且符号是唯一、不可变的。符号的用途是确保对象属性使用唯一标识符，不会发生属性冲突的危险。
 <br>看不明白，暂时略过。
 
-### Object 类型
+#### Object 类型
 
 ECMAScript 中的对象其实就是一组数据和功能的集合。
 <br>每个 Object 实例都有如下属性和方法：
@@ -365,14 +365,14 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   toString(): 返回对象的字符串表示
 -   valueof(): 返会对象对应的字符串、数值、布尔值表示。通常与 toString()的返回值相同。
 
-## 操作符
+### 操作符
 
-### 一元操作符
+#### 一元操作符
 
 | "+" | "++" | "-" | "--" |
 | :-: | :--: | :-: | :--: |
 
-### 位操作符
+#### 位操作符
 
 |    名称    |  符号  |                  规则(效果)                   |
 | :--------: | :----: | :-------------------------------------------: |
@@ -384,9 +384,9 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 | 有符号右移 |   >>   |   将数值的所有 32 位都向右移，同时保留符号    |
 | 无符号右移 |  >>>   |          将数值的所有 32 位都向右移           |
 
-### 布尔操作符
+#### 布尔操作符
 
-#### 逻辑非(!)
+##### 逻辑非(!)
 
 逻辑非会遵循如下规则：
 
@@ -399,7 +399,7 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   如果操作数是 NaN，返回 true
 -   如果操作数数 undefined，返回 true
 
-#### 逻辑与(&&)
+##### 逻辑与(&&)
 
 逻辑与操作符可用于任何类型的操作数，不限与布尔值。如果有操作数不是布尔值，则逻辑与并不一定会返回布尔值，而是遵循如下规则。
 
@@ -410,7 +410,7 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   如果有一个操作数是 NaN，则返回 NaN
 -   如果有一个操作数是 undefined，则返回 undefined
 
-#### 逻辑或(||)
+##### 逻辑或(||)
 
 与逻辑与类似，如果有一个操作数不是布尔值，那么逻辑或操作符也不一定返回布尔值
 
@@ -421,9 +421,9 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   如果两个操作数都是 NaN，则返回 NaN
 -   如果两个操作数都是 undefined，则返回 undefined
 
-### 乘性操作符
+#### 乘性操作符
 
-#### 乘法(\*)
+##### 乘法(\*)
 
 -   有任一操作数是 NaN，返回 NaN
 -   Infinity \* 0 ，返回 NaN
@@ -431,7 +431,7 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   Infinity \* Infinity，返回 Infinity
 -   如果不是数值的操作数，则现在后台用 Number()将其转换为数值，再应用上述规则
 
-#### 除法(/)
+##### 除法(/)
 
 -   有任一操作数是 NaN，返回 NaN
 -   Infinity / Infinity ，返回 NaN
@@ -440,7 +440,7 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   Infinity / x，依据 x 的正负返回 Infinity 或-Infinity
 -   如果不是数值的操作数，则现在后台用 Number()将其转换为数值，再应用上述规则
 
-#### 取模(%)
+##### 取模(%)
 
 与其他乘性操作符一样，取模操作符对特殊值也有一些特殊的行为
 
@@ -451,16 +451,16 @@ ECMAScript 中的对象其实就是一组数据和功能的集合。
 -   被除数是有限值，除数是无限值，返回被除数
 -   如果不是数值的操作数，则现在后台用 Number()将其转换为数值，再应用上述规则
 
-### 指数操作符
+#### 指数操作符
 
 ```javascript
 console.log(3 ** 2); //9
 console.log(16 ** 0.5); //4
 ```
 
-### 加性操作符
+#### 加性操作符
 
-#### 加法操作符
+##### 加法操作符
 
 -   如果有任一操作数是 NaN，返回 NaN
 -   Infinity + Infinity,返回 Infinity
@@ -473,7 +473,7 @@ console.log(16 ** 0.5); //4
     -   两个操作数均为字符串，将第二个字符串拼接到第一个字符串后面
     -   如果只有一个操作数是字符串，则将另一个操作数转换为字符串，再将两个字符串拼接到一起
 
-#### 减法操作符
+##### 减法操作符
 
 -   如果有任一操作数是 NaN，返回 NaN
 -   Infinity - Infinity,返回 NaN
@@ -485,7 +485,7 @@ console.log(16 ** 0.5); //4
 -   若有一个操作数是字符串、布尔值、null 或 undefined，则先在后台使用 Number()将其转换为数值，然后在根据前面的规则执行数学运算。
 -   如果有任一操作数是对象，则调用其 valueof()方法取得表示他的数值。如果对象没有 valueof()方法，则调用其 toString()方法，然后再将得到的字符串转换为数值。
 
-### 关系操作符
+#### 关系操作符
 
 -   如果操作符都是数值，则执行数值比较
 -   如果操作数是字符串，则逐个比较字符串中对应字符的编码
@@ -494,9 +494,9 @@ console.log(16 ** 0.5); //4
 -   如果有任一操作数是布尔值，则将其转换为数值在执行比较
 -   只要任一操作数为 NaN，均返会 false
 
-### 相等操作符
+#### 相等操作符
 
-#### 等于(==)与不等于(!=)
+##### 等于(==)与不等于(!=)
 
 -   null 与 undefined 不能转换为其他类型的值再进行比较
 
@@ -514,25 +514,25 @@ console.log(16 ** 0.5); //4
 | null == 0         | false |
 | "5" == 5          | true  |
 
-#### 全等(===)和不全等(!==)
+##### 全等(===)和不全等(!==)
 
 ```javascript
 let result_1 = "55" == 55; //true, 转换后相等
 let result_2 = "55" === 55; //false, 因为数据类型不同
 ```
 
-### 条件操作符
+#### 条件操作符
 
 ```javascript
 // variable = boolean_expression ? true_value : false_value;
 let max = num1 > num2 ? num1 : num2;
 ```
 
-### 赋值操作符
+#### 赋值操作符
 
 <b>"="</b>
 
-### 逗号操作符
+#### 逗号操作符
 
 ```javascript
 let num1 = 1,
@@ -541,15 +541,15 @@ let num1 = 1,
 let num = (5, 1, 4, 8, 0); //num = 0
 ```
 
-## 语句
+### 语句
 
-### if
+#### if
 
 > if (condition) statement1 else statement2
 
 这里的条件(condition)可以是任何表达式，并且求值结果不一定是布尔值。ECMAScript 会自动调用 Boolean()函数将这个表达式转换为布尔值。
 
-### do-while
+#### do-while
 
 > do { statement } while (expression)
 
@@ -560,7 +560,7 @@ do{
 }while(i<10>);
 ```
 
-### while
+#### while
 
 > while (expression) statement
 
@@ -571,7 +571,7 @@ while(i<10>){
 };
 ```
 
-### for
+#### for
 
 > for (initialization; expression; post-loop-expression) statement
 
@@ -582,7 +582,7 @@ for (let i = 0; i < count; i++>){
 }
 ```
 
-### for-in
+#### for-in
 
 for-in 语句是一种严格的迭代语句，<b>用于枚举对象中的非符号键属性</b>
 
@@ -596,7 +596,7 @@ for (const proName in window) {
 
 ECMAScript 中对象的属性是无序的，因此 for-in 语句不能保证返回对象属性的顺序
 
-### for-of
+#### for-of
 
 for-of 语句是一种严格的迭代语句，<b>用于遍历可迭代对象的元素</b>
 
@@ -610,7 +610,7 @@ for (const el of [1, 5, 4, 6]) {
 
 for-of 会按照可迭代对象的 next()方法产生值得顺序迭代元素。
 
-### 标签 & break & continue
+#### 标签 & break & continue
 
 ```javascript
 let num = 0;
@@ -626,7 +626,7 @@ outermost: for (let i = 0; i < 10; i++) {
 console.log(num); //95
 ```
 
-### with
+#### with
 
 不推荐使用<br>
 使用场景是针对一个对象反复操作
@@ -643,7 +643,7 @@ with (location) {
 }
 ```
 
-### switch
+#### switch
 
 ```javascript
 /*
@@ -686,6 +686,10 @@ switch (true) {
 }
 ```
 
-## 函数
+### 函数
 
 见 [Javascript-Function](../../../../2021/03/14/Javascript-Function/)
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

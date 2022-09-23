@@ -38,14 +38,14 @@ class BitNode{
 
 ```javascript
 function* preorderTraversal(root) {
-	if (root === null) return;
-	yield root.value;
-	yield* preorderTraversal(root.left);
-	yield* preorderTraversal(root.right);
+  if (root === null) return;
+  yield root.value;
+  yield* preorderTraversal(root.left);
+  yield* preorderTraversal(root.right);
 }
 
 for (const node of preorderTraversal(root)) {
-	console.log(node);
+  console.log(node);
 }
 ```
 
@@ -79,15 +79,15 @@ var preorderTraversal = function(root) {
 
 ```javascript
 function* inorderTraversal(root) {
-	if (root === null) return;
+  if (root === null) return;
 
-	yield* inorderTraversal(root.left);
-	yield root.value;
-	yield* inorderTraversal(root.right);
+  yield* inorderTraversal(root.left);
+  yield root.value;
+  yield* inorderTraversal(root.right);
 }
 
 for (const node of inorderTraversal(root)) {
-	console.log(node);
+  console.log(node);
 }
 ```
 
@@ -95,22 +95,22 @@ for (const node of inorderTraversal(root)) {
 
 ```javascript
 var inorderTraversal = function (root) {
-	const result = [];
-	const stack = [];
-	let curNode = root;
+  const result = [];
+  const stack = [];
+  let curNode = root;
 
-	while (curNode !== null || stack.length !== 0) {
-		if (curNode !== null) {
-			stack.push(curNode);
-			curNode = curNode.left;
-		} else {
-			curNode = stack.pop();
-			result.push(curNode.val);
-			curNode = curNode.right;
-		}
-	}
+  while (curNode !== null || stack.length !== 0) {
+    if (curNode !== null) {
+      stack.push(curNode);
+      curNode = curNode.left;
+    } else {
+      curNode = stack.pop();
+      result.push(curNode.val);
+      curNode = curNode.right;
+    }
+  }
 
-	return result;
+  return result;
 };
 ```
 
@@ -139,19 +139,19 @@ for (const node of postorderTraversal(root)) {
 
 ```javascript
 var postorderTraversal = function (root) {
-	const result = [];
-	if (root === null) return result;
-	const stack = [];
-	let node;
-	stack.push(root);
+  const result = [];
+  if (root === null) return result;
+  const stack = [];
+  let node;
+  stack.push(root);
 
-	while (stack.length !== 0) {
-		node = stack.pop();
-		result.push(node.val);
-		if (node.left) stack.push(node.left); // 注意与前序遍历的不同
-		if (node.right) stack.push(node.right);
-	}
-	return result.reverse(); // 注意与前序遍历的不同
+  while (stack.length !== 0) {
+    node = stack.pop();
+    result.push(node.val);
+    if (node.left) stack.push(node.left); // 注意与前序遍历的不同
+    if (node.right) stack.push(node.right);
+  }
+  return result.reverse(); // 注意与前序遍历的不同
 };
 ```
 

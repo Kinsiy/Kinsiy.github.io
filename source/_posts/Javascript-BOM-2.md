@@ -98,7 +98,7 @@ location.reload(true); // 重新加载，从服务器加载
 
 ## navigator 对象
 
-xxxxxxxxxx class Vehicle{}​let FooMixin = (SuperClass) => class extends SuperClass{  foo(){    console.log("foo")  }}​let BarMixin = (SuperClass) => class extends SuperClass{  bar(){    console.log("bar")  }}​let BzaMixin = (SuperClass) => class extends SuperClass{  baz(){    console.log("baz")  }}​function mix(Baseclass,...Mixins){  return Mixins.reduce((accumulator, current) => current(accumulator),Baseclass)}​class Bus extends mix(Vehicle,FooMixin,BarMixin,BzaMixin){}​let b = new Busb.foo();  // foob.bar();  // barb.baz();  // bazJavascript
+navigator 对象的属性通常用于确定浏览器的类型
 
 | 属性/方法                     | 说明                                                             |
 | :---------------------------- | :--------------------------------------------------------------- |
@@ -227,3 +227,7 @@ if (history.length == 1) {
 ### 历史状态管理
 
 略
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

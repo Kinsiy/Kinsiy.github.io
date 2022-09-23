@@ -29,7 +29,7 @@ photos:
 
 - 协商缓存[{% label success@Client 3 %}]：在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效
 
-![缓存示意图](https://segmentfault.com/img/bV4mb8?w=822&h=910)
+![HTTPStaleness](https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/HTTPStaleness.png)
 
 强制缓存和协商缓存命中缓存资源后，都是从本地读取资源。如果强制缓存生效，则不需要再向服务器发出请求；而协商缓存，不管是否使用缓存，必须向服务器发送一个请求来协商。
 

@@ -215,3 +215,7 @@ btn.attachEvent("onclick", function (event) {
 | type         | 字符串 | 只读  | 触发的事件类型                                                                     |
 
 由于事件处理程序的作用域取决于指定它的方式，因此 this 值并不总是等于事件目标。为此，更好的方式是使用事件对象的 srcElement 属性代替 this。
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

@@ -20,7 +20,7 @@ $_ // 指向当前遍历到的值，可以理解为js中 Array.each((e,i,a)=> e 
 
 {% note primary  %}
 
-`ls -filter *.EXTENSION | ...`搭配 System.String 提供的方法可以满足所有需求。对字符串使用 Get-Member 可以获取所有方法
+{% label success@ls -filter *.EXTENSION | ...%}搭配 System.String 提供的方法可以满足所有需求。对字符串使用 Get-Member 可以获取所有方法
 
 {% code %}"Hello world" | Get-Member{% endcode %}
 

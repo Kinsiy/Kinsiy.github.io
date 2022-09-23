@@ -50,8 +50,8 @@ ECMAscript 中所有函数的参数都是按值传递的。在按值传递参数
 
 ```javascript
 function addTen(num){
-    num += 10;
-    return num;
+  num += 10;
+  return num;
 }
 
 let count  = 20;
@@ -60,9 +60,9 @@ console.log(count); // 20
 console.log(result); // 30
 
 function setName(obj){
-    obj.name = "Kinsiy";
-    obj = New Object();
-    obj.name = "Restituo";
+  obj.name = "Kinsiy";
+  obj = New Object();
+  obj.name = "Restituo";
 }
 
 let person = new Object();
@@ -106,17 +106,17 @@ console.log(patter instanceof RegExp); //true
 ```javascript
 var color = "bule";
 function changeColor(){
-    let anotherColor = "red";
+  let anotherColor = "red";
 
-    function swapColor(){
-        ler tempColor = anotherColor;
-        anotherColor = color;
-        color = tempColor;
+  function swapColor(){
+    ler tempColor = anotherColor;
+    anotherColor = color;
+    color = tempColor;
 
-        // 可以访问color、anotherColor、tempColor
-    }
-    // 可以访问color、anotherColor, 无法访问tempColor
-    swapColor();
+    // 可以访问color、anotherColor、tempColor
+  }
+  // 可以访问color、anotherColor, 无法访问tempColor
+  swapColor();
 }
 
 // 只能访问color
@@ -231,9 +231,9 @@ Javascript 最常用的垃圾回收策略是标记清理。<br>
 
 ```javascript
 function createPerson(name){
-    let locatPerson = new Object();
-    locatPerson.name = name;
-    return localPerson;
+  let locatPerson = new Object();
+  locatPerson.name = name;
+  return localPerson;
 }
 
 let grobalPerson = createPerson("Kinsiy");
@@ -252,8 +252,8 @@ grobalPerson = null;        //解除grobalPerson 对值得引用
 */
 
 function Article(opt_authour){
-    this.title = "V8 Javascript";
-    this.authour = opt_authour;     //避免“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性
+  this.title = "V8 Javascript";
+  this.authour = opt_authour;     //避免“先创建再补充”式的动态属性赋值，并在构造函数中一次性声明所有属性
 }
 
 let a1 = new Article("someone");
@@ -264,22 +264,26 @@ a1.author = null;
 
 /* 内存泄露 */
 function setName(){
-    name = "Kinsiy";                //最常见，解释器会把变量name当做window属性来创建。
+  name = "Kinsiy";                //最常见，解释器会把变量name当做window属性来创建。
 }
 
 let name = "Kinsiy";
 setInterval(() => {
-    console.log(name);
+  console.log(name);
 }, 100;)                            //定时器导致内存泄露
 
 let outer = function(){
-    let name = "Kinsiy";
-    return function(){
-        return name;
-    };
+  let name = "Kinsiy";
+  return function(){
+    return name;
+  };
 };                                  //闭包导致内存泄露
 
 /* 静态分配与对象池 */
 
 //略
 ```
+
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

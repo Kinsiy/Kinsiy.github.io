@@ -197,3 +197,6 @@ new proxy("Queen");
 // User {name: "Queen"}
 console.log(userList); // [User, User, User]
 ```
+## 参考
+
+[1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)
