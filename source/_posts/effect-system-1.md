@@ -1,9 +1,10 @@
 ---
-title: 《Vue.js设计与实现》- 响应系统 - Ⅰ 
+title: 响应系统 - 实现
 mathjax: false
 date: 2022-09-18 11:26:48
-tags:
+tags: 响应式
 categories:
+ - ['Vue', 'Vue.js设计与实现']
 description:
 photos:
 ---
@@ -14,9 +15,9 @@ photos:
 
 {% endnote %}
 
-<!-- more -->
-
 ## 一个完善的响应式系统
+
+<!-- more -->
 
 ```js
 // 存储副作用函数的桶
