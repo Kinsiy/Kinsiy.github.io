@@ -2,8 +2,9 @@
 title: 响应系统 - 非原始值 - 数组
 mathjax: false
 date: 2022-09-27 00:30:30
-tags:
+tags: 响应式
 categories:
+ - ['Vue', 'Vue.js设计与实现']
 description:
 photos:
 ---
