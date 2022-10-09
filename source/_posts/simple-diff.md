@@ -1,5 +1,5 @@
 ---
-title: 简单Diff算法
+title: 简单 Diff 算法
 mathjax: false
 date: 2022-09-28 23:14:25
 tags: 'diff'
