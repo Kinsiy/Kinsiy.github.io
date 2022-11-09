@@ -131,7 +131,7 @@ function SuperType(v) {
 }
 
 function SubType(v) {
-  SuperType.call(this, this.v);
+  SuperType.call(this, v);
   this.sex = "girl";
 }
 
@@ -147,11 +147,14 @@ console.log(`value: ${instance_2.value}     sex: ${instance_2.sex}`);
 
 ### 盗用构造函数的问题
 
-盗用构造函数的主要缺点，也是使用构造函数模式自定义类型的问题：必须在构造函数中定义方法，因此函数不能重用。此外，子类也不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式。
+- 必须在构造函数中定义方法, 函数不能重用
+
+- 子类不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式。
 
 ## 组合继承
 
 组合继承(有时候也叫伪经典继承)综合了原型链和盗用构造函数，将两者的优点集中了起来。其基本思想是使用原型链继承原型上的属性和方法，而通过盗用构造函数来继承实例属性。
+
 组合继承拟补了原型链和盗用构造函数的不足，是 Javascript 中使用最多的继承模式。而且组合继承也保留了 instanceof 操作符和 isPrototypeOf()方法识别合成对象的能力。
 
 ```javascript
@@ -199,7 +202,9 @@ function object(o) {
 ```
 
 这个 object()函数会创建一个临时构造函数，将传入的对象赋值给这个构造函数的原型，然后返回这个临时类型的一个实例。本质上，object()是对传入的对象执行了一次浅复制。
+
 原型式继承是适用于这种情况：你有一个对象，想在它的基础上再创建一个新对象。你需要把这个对象先传给 object()，然后再对返回的对象进行适当修改。
+
 EMCAScript5 通过增加 Object.create()方法将原型式继承的概念规范化了。这个方法接收两个参数：作为新对象原型的对象，以及给新对象定义额外属性的对象(第二个可选)。在只有一个参数时，Object.create()与这里的 object()方法效果相同。
 
 ```javascript
@@ -286,7 +291,7 @@ console.log(me instanceof SuperType); // true
 me.sayName(); // Kinsiy
 ```
 
-这里只调用了一次 SuperType 构造函数，避免了 SubType.prototype 上不必要也用不到的属性，因此可以说是这个例子的效率更高。而且，原型键仍然保持不变，因此 instanceof 操作符合 isPrototypeOf()方法正常有效。寄生式组合继承可以算是引用类型继承的最佳模式。
+这里只调用了一次 SuperType 构造函数，避免了 SubType.prototype 上不必要也用不到的属性，因此可以说是这个例子的效率更高。而且，原型链仍然保持不变，因此 instanceof 操作符合 isPrototypeOf()方法正常有效。寄生式组合继承可以算是引用类型继承的最佳模式。
 
 ## 参考
 

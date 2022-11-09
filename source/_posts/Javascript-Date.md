@@ -38,7 +38,7 @@ console.log(result); // 0
 
 <!-- more -->
 
-### toLocaleString()-toString()-valueof()-...
+### 字符串方法
 
 {% label info@Date 类型的%}
 
