@@ -243,7 +243,7 @@ Boolean()转型函数可以在任意类型的数据上调用，而且始终返�
 // 格式要求是一个数值(整数或浮点数)后跟一个大写或小写的e，再加上一个要乘的10的多少次幂
 let floatNum = 3.14e7; //等于31400000
 
-// 值得范围
+// 值的范围
 /*如果某个计算得到的数值结果超过了Javascript可以表示的范围，那么这个数值会被自动转换为一个特殊的Infinity(无穷值)。任何无法表示的负数以-Infinity表示，任何无法表示的正数以Infinity表示。*/
 
 let result = Number.MAX_VALUE + Number.MAX_VALUE;
