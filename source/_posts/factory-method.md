@@ -1,5 +1,5 @@
 ---
-title: 工厂方法
+title: 工厂方法模式
 mathjax: false
 date: 2023-04-06 23:03:45
 tags: factory-method
@@ -71,12 +71,13 @@ Transport <|-- Ship
 
 ```typescript
 // 产品接口, 工厂方法创建的产品需要实现该接口
+// 声明所有具体产品都必须实现的操作
 interface Product {
   getName(): string;
   getPrice(): number;
 }
 
-// 产品
+// 具体产品需提供产品接口的各种实现
 class BasicProduct implements Product {
   private name: string;
   private price: number;
@@ -117,11 +118,12 @@ class DiscountedProduct implements Product {
 }
 
 // 工厂基类(接口), 这里只有工厂方法, 也可以使用基类的方式. 额外定义产品的消费等
+// 创建者类声明的工厂方法必须返回一个产品类的对象. 创建者的子类通常会提供该方法的实现
 interface ProductFactory {
   createProduct(name: string): Product; // 注意返回值, 为产品实现的接口
 }
 
-// 产品工厂
+// 具体创建者将重写工厂方法以改变其所返回的产品类型
 class BasicProductFactory implements ProductFactory {
   createProduct(name: string): Product {
     return new BasicProduct(name, 10);
@@ -140,6 +142,9 @@ enum ProductType {
   BASIC,
   DISCOUNTED
 }
+
+// 当前客户端代码会与具体创建者的示例进行交互, 但是必须通过其基本接口进行
+// 只要客户端通过基本接口与创建者进行交互, 你就可以将任何创建者子类传递给客户端
 
 class ProductStore {
   private productFactories: Map<ProductType, ProductFactory>;
