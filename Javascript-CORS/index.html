@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="跨域资源共享(CORS) 跨源请求 —— 那些发送到其他域（即使是子域）、协议或端口的请求 —— 需要来自远程端的特殊 header 跨域资源共享(CORS，Cross-Origin Resource Sharing)定义了浏览器与服务器如果实现跨域通信。CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败 有两种类型的跨域请求：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-CORS">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-CORS/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="跨域资源共享(CORS) 跨源请求 —— 那些发送到其他域（即使是子域）、协议或端口的请求 —— 需要来自远程端的特殊 header 跨域资源共享(CORS，Cross-Origin Resource Sharing)定义了浏览器与服务器如果实现跨域通信。CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败 有两种类型的跨域请求：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zh.javascript.info/article/fetch-crossorigin/xhr-another-domain.svg">
+<meta property="og:image" content="https://zh.javascript.info/article/fetch-crossorigin/xhr-preflight.svg">
+<meta property="article:published_time" content="2021-10-29T11:08:39.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.451Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="CORS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zh.javascript.info/article/fetch-crossorigin/xhr-another-domain.svg">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-CORS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-CORS/","path":"Javascript-CORS/","title":"Javascript-CORS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-CORS | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB-CORS"><span class="nav-text">跨域资源共享(CORS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AF%B7%E6%B1%82"><span class="nav-text">简单的请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E7%9A%84-CORS"><span class="nav-text">用于简单请求的 CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Response-header"><span class="nav-text">Response header</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%AE%80%E5%8D%95-%E8%AF%B7%E6%B1%82"><span class="nav-text">&quot;非简单&quot;请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E6%9B%BF%E6%80%A7%E8%B7%A8%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-text">代替性跨源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E6%8E%A2%E6%B5%8B-%E4%BD%BF%E7%94%A8%E8%A1%A8%E5%8D%95"><span class="nav-text">图片探测&#x2F;使用表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONP"><span class="nav-text">JSONP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-CORS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-CORS | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-CORS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-29 19:08:39" itemprop="dateCreated datePublished" datetime="2021-10-29T19:08:39+08:00">2021-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="跨域资源共享-CORS">跨域资源共享(CORS)</h2>
+<p>跨源请求 —— 那些发送到其他域（即使是子域）、协议或端口的请求 —— 需要来自远程端的特殊 header</p>
+<p>跨域资源共享(CORS，Cross-Origin Resource Sharing)定义了浏览器与服务器如果实现跨域通信。CORS 背后的基本思路就是使用自定义的 HTTP 头部允许浏览器和服务器相互了解，以确实请求或响应应该成功还是失败</p>
+<p>有两种类型的跨域请求：</p>
+<ul>
+<li>简单的请求</li>
+<li>所有其他请求</li>
+</ul>
+<span id="more"></span>
+<h3 id="简单的请求">简单的请求</h3>
+<p>一个简单的请求是指满足以下两个条件的请求：</p>
+<ul>
+<li>简单的方法：GET，POST 或 HEAD</li>
+<li>简单的 header——仅允许自定义下列 header
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type 的值为 application/x-www-from-urlencoded, multipart/from-data 或 text/plain</li>
+</ul>
+</li>
+</ul>
+<p>任何其他请求都被认为是&quot;非简单请求&quot;</p>
+<p>本质区别在于，可以使用&lt;from&gt;或&lt;script&gt;经行&quot;简单请求&quot;，而无需任何其他特殊方法。</p>
+<p>实际区别在于，简单请求会使用 <mark class="label primary">Origin</mark> header 并立即发送，而对于其他请求，浏览器会发出初步的“预检”请求，以请求许可</p>
+<h3 id="用于简单请求的-CORS">用于简单请求的 CORS</h3>
+<p>如果一个请求是跨源的，浏览器会始终向其添加 Origin header; Origin 包含了确切的源（domain/protocol/port），没有路径。</p>
+<p>Origin: <mark class="label primary">http://www.nczonline.net</mark></p>
+<p>如果服务器决定响应请求，那么应该发送 Access-Control-Allow-Origin 头部，包含相同的源；或者如果资源是公开的，那么就包含&quot;*&quot;。比如：</p>
+<p>Access-Control-Allow-Origin: <mark class="label primary">http://www.nczonline.net</mark></p>
+<p>如果没有这个头部，或者有但源不匹配，则表明不会响应浏览器请求。否则，服务器就会处理这个请求。注意，无论请求还是响应都不会包含 cookie 信息。</p>
+<p>浏览器在这里扮演被信任的中间人的角色：</p>
+<ul>
+<li>它确保发送的跨源请求带有正确的 Origin</li>
+<li>它检查响应中的许可 Access-Control-Allow-Origin， 如果存在，则允许 Javascript 访问响应，否则将失败并报错</li>
+</ul>
+<p><img data-src="https://zh.javascript.info/article/fetch-crossorigin/xhr-another-domain.svg" alt=""></p>
+<h4 id="Response-header">Response header</h4>
+<p>对于跨域请求，默认情况下，Javascript 只能访问&quot;简单&quot;response header：</p>
+<ul>
+<li>Cache-control</li>
+<li>Content-language</li>
+<li>Content-Type</li>
+<li>Expires</li>
+<li>Last-Modified</li>
+<li>Pargma</li>
+</ul>
+<p>访问任何其他 response header 都将导致 error</p>
+<p>要授予 Javascript 对任何其他 response header 的访问权限，服务器必须发送<mark class="label primary">Access-Control-Expose-Headers</mark> header。它包含一个以逗号分隔的应该被设置为可访问的非简单 header 名称列表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">200</span> <span class="variable constant_">OK</span></span><br><span class="line"><span class="title class_">Content</span>-<span class="title class_">Type</span>:text/html; charset=<span class="variable constant_">UTF</span>-<span class="number">8</span></span><br><span class="line"><span class="title class_">Content</span>-<span class="title class_">Length</span>: <span class="number">12345</span></span><br><span class="line"><span class="variable constant_">API</span>-<span class="title class_">Key</span>: 2c9de507f2c54aa1</span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Allow</span>-<span class="title class_">Origin</span>: <span class="attr">https</span>:<span class="comment">//javascript.info</span></span><br><span class="line"><span class="title class_">Access</span>-<span class="title class_">Control</span>-<span class="title class_">Expose</span>-<span class="title class_">Headers</span>: <span class="title class_">Content</span>-<span class="title class_">Length</span>,<span class="variable constant_">API</span>-<span class="title class_">Key</span></span><br></pre></td></tr></table></figure>
+<h3 id="非简单-请求">&quot;非简单&quot;请求</h3>
+<p>我们可以使用任何 HTTP 方法：不仅仅是 <mark class="label primary">GET/POST</mark>，也可以是 <mark class="label primary">PATCH</mark>，<mark class="label primary">DELETE</mark> 及其他</p>
+<p>之前，没有人能够设想网页能发出这样的请求。因此，可能仍然存在有些 Web 服务将非标准方法视为一个信号：“这不是浏览器”。它们可以在检查访问权限时将其考虑在内。</p>
+<p>因此，为了避免误解，任何“非标准”请求 —— 浏览器不会立即发出在过去无法完成的这类请求。即在它发送这类请求前，会先发送“预检（preflight）”请求来请求许可。</p>
+<p>预检请求使用 <mark class="label primary">OPTIONS</mark> 方法，它没有 body，但是有两个 header：</p>
+<ul>
+<li>Access-Control-Request-Method： header 带有简单请求的方法</li>
+<li>Access-Control-Request-Headers:：header 提供一个以逗号分隔的非简单 HTTP header 列表</li>
+</ul>
+<p>如果服务器同意处理请求，那么他会进行响应，此响应的状态码应该为 200，没有 body，具有 header：</p>
+<ul>
+<li>Access-Control-Allow-Origin: 必须为经行请求的源或 &quot; * &quot;。才能允许此请求</li>
+<li>Access-Control-Allow-Methods: 必须具有允许的方法</li>
+<li>Access-Control-Allow-Headers: 必须具有一个允许的 header 列表</li>
+<li>另外，header <mark class="label primary">Access-Control-Max-Age</mark> 可以指定缓存此权限的秒数。因此，浏览器不是必须为满足给定权限的后续请求发送预检</li>
+</ul>
+<p><img data-src="https://zh.javascript.info/article/fetch-crossorigin/xhr-preflight.svg" alt=""></p>
+<div class="note warning"><h4 id="注意">注意</h4>
+<p>预检请求发生在<mark class="label danger">“幕后”</mark>，它对 JavaScript 不可见。JavaScript 仅获取对主请求的响应，如果没有服务器许可，则获得一个 error。</p>
+</div>
+<h2 id="代替性跨源技术">代替性跨源技术</h2>
+<h3 id="图片探测-使用表单">图片探测/使用表单</h3>
+<p>使用表单，提交一个&lt;from&gt;到&lt;iframe&gt;以停留在当前页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 表单目标 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">name</span>=<span class="string">&quot;iframe&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 表单可以由 JavaScript 动态生成并提交 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">target</span>=<span class="string">&quot;iframe&quot;</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">action</span>=<span class="string">&quot;http://another.com/…&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>图片探测是与服务器之间简单、跨域、单向的通信</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> img = <span class="keyword">new</span> <span class="title class_">Image</span>();</span><br><span class="line">img.<span class="property">onload</span> = img.<span class="property">onerror</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line">img.<span class="property">src</span> = <span class="string">&quot;Http://www.example.com/test?name=Nicholas&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>这两种方式都无法读取响应</p>
+<h3 id="JSONP">JSONP</h3>
+<p>使用 &lt;script&gt; 标签。&lt;script&gt; 可以具有任何域的 src，例如 &lt;script src=“<mark class="label primary">http://another.com/</mark>…”&gt;。也可以执行来自任何网站的 &lt;script&gt;。</p>
+<p>如果一个网站，例如 <a target="_blank" rel="noopener" href="http://another.com">another.com</a> 试图公开这种访问方式的数据，则会使用所谓的 “JSONP (JSON with padding)” 协议。</p>
+<p>假设在我们的网站，需要以这种方式从 <mark class="label primary">http://another.com</mark> 网站获取数据，例如天气：</p>
+<ol>
+<li>
+<p>首先，我们先声明一个全局函数来接收数据，例如 gotWeather</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 声明处理天气数据的函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">gotWeather</span>(<span class="params">&#123; temperature, humidity &#125;</span>) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">`temperature: <span class="subst">$&#123;temperature&#125;</span>, humidity: <span class="subst">$&#123;humidity&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>然后我们创建一个特性（attribute）为 src=“<mark class="label primary">http://another.com/weather.json?callback=gotWeather</mark>” 的 &lt;script&gt; 标签，使用我们的函数名作为它的 callback URL-参数。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> script = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">script.<span class="property">src</span> = <span class="string">`http://another.com/weather.json?callback=gotWeather`</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">append</span>(script);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>远程服务器 <a target="_blank" rel="noopener" href="http://another.com">another.com</a> 动态生成一个脚本，该脚本调用 gotWeather(…)，发送它想让我们接收的数据。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们期望来自服务器的回答看起来像这样：</span></span><br><span class="line"><span class="title function_">gotWeather</span>(&#123;</span><br><span class="line">  <span class="attr">temperature</span>: <span class="number">25</span>,</span><br><span class="line">  <span class="attr">humidity</span>: <span class="number">78</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>当远程脚本加载并执行时，<mark class="label info">gotWeather</mark>函数将运行，并且因为它是我们的函数，我们就有了需要的数据</p>
+</li>
+</ol>
+<p>JSONP 由于其简单易用，在开发者中非常流行。相比于图片探测，使用 JSONP 可以直接访问响应， 实现浏览器与服务器的双向通信。不过 JSONP 也有一些缺点</p>
+<p>首先 JSONP 是从不同的域拉取可执行代码。如果这个域并不可信，则可能在响应中加入恶意内容。此时除了完全删除 JSONP 没有其他办法。在使用不受控的 Web 服务时，一定要保证是可以信任的。</p>
+<p>第二个缺点是不好确定 JSONP 请求是否失败。虽然 HTML5 规定了&lt;script&gt;元素的 onerror 事件处理程序，但还没有被任何浏览器实现。为此，开发者经常使用计时器来决定是否放弃等待响应。这种方式并不准确，毕竟不同用户的网络连接速度和带宽是不一样的</p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://zh.javascript.info/fetch-crossorigin">Javascript.info. Fetch: 跨源请求.</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/CORS/" rel="tag"><i class="fa fa-tag"></i> CORS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/HTTP-cache/" rel="prev" title="HTTP-Cache">
+                  <i class="fa fa-chevron-left"></i> HTTP-Cache
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-XHR/" rel="next" title="Javascript-XHR">
+                  Javascript-XHR <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

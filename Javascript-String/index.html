@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本引用类型(原始包装类型) 为了方便操作原始值，EMCAScript 提供了 3 种特殊的引用类型：Boolean、Number 和 String。这些类型具有与其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应包装类型的对象，从而暴露出操作原始值得各种方法。 在以读模式访问字符串值得时候，后台都会执行一下三步：  创建一个 St">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-String">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-String/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="基本引用类型(原始包装类型) 为了方便操作原始值，EMCAScript 提供了 3 种特殊的引用类型：Boolean、Number 和 String。这些类型具有与其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应包装类型的对象，从而暴露出操作原始值得各种方法。 在以读模式访问字符串值得时候，后台都会执行一下三步：  创建一个 St">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-18T13:33:05.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.458Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="String">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-String/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-String/","path":"Javascript-String/","title":"Javascript-String"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-String | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%8E%9F%E5%A7%8B%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本引用类型(原始包装类型)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean"><span class="nav-text">Boolean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number"><span class="nav-text">Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Javascript-%E5%AD%97%E7%AC%A6"><span class="nav-text">Javascript 字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#normalize"><span class="nav-text">normalize()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C%E6%96%B9%E6%B3%95"><span class="nav-text">字符串操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%BC%E6%8E%A5-concat"><span class="nav-text">拼接-concat()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%87%E7%89%87-slice-substr-substring"><span class="nav-text">切片-slice(), substr(), substring()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D-indexOf-lastIndexOf"><span class="nav-text">定位-indexOf(), lastIndexOf()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%85%E5%90%AB-starstWith-endsWith-includes"><span class="nav-text">包含-starstWith(), endsWith(), includes()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E5%89%AA-trim-trimLeft-trimRight"><span class="nav-text">修剪-trim(), trimLeft(), trimRight()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D-repeat"><span class="nav-text">重复-repeat()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A1%AB%E5%85%85-padStart-padEnd"><span class="nav-text">填充-padStart(), padEnd()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E4%B8%8E%E8%A7%A3%E6%9E%84-iterator"><span class="nav-text">迭代与解构-@@iterator()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99-toLowerCase-toUpperCase"><span class="nav-text">大小写-toLowerCase(), toUpperCase()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E5%88%99"><span class="nav-text">正则</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#match"><span class="nav-text">match()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#search"><span class="nav-text">search()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#replace"><span class="nav-text">replace()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#split"><span class="nav-text">split()</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E2%80%94localeCompare"><span class="nav-text">比较—localeCompare()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#html-%E6%96%B9%E6%B3%95"><span class="nav-text">html 方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-String | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-String
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-18 21:33:05" itemprop="dateCreated datePublished" datetime="2021-01-18T21:33:05+08:00">2021-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="基本引用类型-原始包装类型">基本引用类型(原始包装类型)</h2>
+<p>为了方便操作原始值，EMCAScript 提供了 3 种特殊的引用类型：Boolean、Number 和 String。这些类型具有与其他引用类型一样的特点，但也具有与各自原始类型对应的特殊行为。每当用到某个原始值的方法或属性时，后台都会创建一个相应包装类型的对象，从而暴露出操作原始值得各种方法。<br>
+在以读模式访问字符串值得时候，后台都会执行一下三步：</p>
+<ul>
+<li>创建一个 String 类型的实例</li>
+<li>调用实例上的特定方法</li>
+<li>销毁实例</li>
+</ul>
+<span id="more"></span>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> s2 = s1.<span class="title function_">substring</span>(<span class="number">2</span>);</span><br><span class="line"><span class="comment">/* 可以想象成 */</span></span><br><span class="line"><span class="keyword">let</span> s1_ = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> s2_ = <span class="keyword">new</span> <span class="title class_">String</span>(s1_).<span class="title function_">substring</span>(<span class="number">2</span>);</span><br><span class="line">s_ = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>这种行为可以让原始值拥有对象的行为。对布尔值和数值而言，以上三步也会在后台发生，只不过使用的是 Boolean 和 Number 包装类型而已。<br>
+引用类型与原始值包装类型的主要区别在于对象的生命周期。在通过 new 实例化引用类型后，得到的实例会在离开作用域是被销毁，而自动创建的原始值包装对象则只存在于访问它执行期间。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s1 = <span class="string">&quot;some text&quot;</span>;</span><br><span class="line">s1.<span class="property">color</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s1.<span class="property">color</span>); <span class="comment">//undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Object作为一个工厂方法，能够根据传入值得类型返回相应原始值包装类型的实例 */</span></span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="title class_">Object</span>(<span class="string">&quot;some text&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj <span class="keyword">instanceof</span> <span class="title class_">String</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用new调用原始值包装类型的构造函数，与调用同名的转型函数并不一样 */</span></span><br><span class="line"><span class="keyword">let</span> value = <span class="string">&quot;25&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> number = <span class="title class_">Number</span>(value);</span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="title class_">Number</span>(value);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> number); <span class="comment">// number</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> obj); <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+<h3 id="Boolean">Boolean</h3>
+<p>建议永远不要使用 Boolean 对象<br>
+Boolean 的实例会重写 valueof()方法，返回一个原始值 true 或 false。toString()方法在被调用时也会被覆盖，返回字符串&quot;true&quot;或&quot;false&quot;。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> falseObject = <span class="keyword">new</span> <span class="title class_">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">let</span> result = falseObject &amp;&amp; <span class="literal">true</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> falseValue = <span class="literal">false</span>;</span><br><span class="line">result = falseValue &amp;&amp; <span class="literal">true</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> falseObject); <span class="comment">// object</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> falseValue); <span class="comment">// Boolean</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(falseObject <span class="keyword">instanceof</span> <span class="title class_">Boolean</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(falseValue <span class="keyword">instanceof</span> <span class="title class_">Boolean</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="Number">Number</h3>
+<p>与 Boolean 类型一样，Number 类型重写了 valueof()、toLocaleString()和 toString()方法。valueof()方法返回对象表示的原始数值，另外两个方法返回数值字符串。toString()方法可选地接收一个表示基数的参数，并返回相应技术形式的数值字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toString</span>()); <span class="comment">// 10</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toString</span>(<span class="number">2</span>)); <span class="comment">// 1010</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toString</span>(<span class="number">16</span>)); <span class="comment">// a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* toFixed()方法返回包含指定小数点位数的数值字符串 */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toFixed</span>(<span class="number">2</span>)); <span class="comment">// 10.00</span></span><br><span class="line">num = <span class="number">10.008</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toFixed</span>(<span class="number">2</span>)); <span class="comment">// 10.01        四舍五入</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* toExponential(),返回以科学计数法表示的数值字符串 */</span></span><br><span class="line">num = <span class="number">88888</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toExponential</span>(<span class="number">1</span>)); <span class="comment">// 8.9e+4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* toPrecision(),根据情况返回最合理的输出结果 */</span></span><br><span class="line">num = <span class="number">88</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toPrecision</span>(<span class="number">1</span>)); <span class="comment">// 9e+1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toPrecision</span>(<span class="number">2</span>)); <span class="comment">// 88</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num.<span class="title function_">toPrecision</span>(<span class="number">3</span>)); <span class="comment">// 88.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 本质上toPrecision()会根据数值和精度来决定调用toFixed()还是toExponential()。为了以正确的小数位精确表示数值，这三个方法都会向上或向下舍入。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* isInteger(), 用于辨别一个数值是否保存为整数 */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">1</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">1.0</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Number</span>.<span class="title function_">isInteger</span>(<span class="number">1.01</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="String">String</h3>
+<p>String 对象的方法可以在所有字符串原始值上调用。上个继承的方法 valueof()、toLocaleString()和 toString()都返回对象的原始字符串值。<br>
+每个 String 对象都有一个 length 属性，表示字符串中字符的数量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> stringValue = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringValue.<span class="property">length</span>);        <span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 即使字符串中包含双字节字符(而不是单字节的ASCII字符)，也仍然会按单字符来计数</span></span><br><span class="line"><span class="keyword">let</span> str_1 = <span class="string">&quot;这串文字的长度是⑨&quot;</span>；</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(str_1.<span class="property">length</span>);              <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<h4 id="Javascript-字符">Javascript 字符</h4>
+<p>Javascript 字符串有 16 位码元(code unit)组成。对多数字符来说，每 16 位码元对应一个字符。换句话说，字符串的 length 属性表示字符串包含多少 16 位码元。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* charAt()用于返回给定索引位置的字符 */</span></span><br><span class="line"><span class="keyword">let</span> message = <span class="string">&quot;abcde&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charAt</span>(<span class="number">2</span>)); <span class="comment">// c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* charCodeAt()方法可以查看指定码元的字符编码 */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charCodeAt</span>(<span class="number">2</span>)); <span class="comment">//  99</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* fromCharCode(), 用于根据给定的UTF-16码元创建字符串中的字符。 */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">0x61</span>, <span class="number">0x62</span>, <span class="number">0x63</span>, <span class="number">0x64</span>, <span class="number">0x65</span>)); <span class="comment">// abcde</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">97</span>, <span class="number">98</span>, <span class="number">99</span>, <span class="number">100</span>, <span class="number">101</span>)); <span class="comment">// abcde</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 当字符编码扩展到Unicode增补平面时 */</span></span><br><span class="line"><span class="comment">/* codePointAt(), 接收16位码元的索引并返回改索引位置上的码点 */</span></span><br><span class="line">message = <span class="string">&quot;ab🤣de&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="property">length</span>); <span class="comment">// 6</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charAt</span>(<span class="number">1</span>)); <span class="comment">// b</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charAt</span>(<span class="number">2</span>)); <span class="comment">// &lt;?\&gt;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charAt</span>(<span class="number">3</span>)); <span class="comment">// &lt;?\&gt;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charAt</span>(<span class="number">4</span>)); <span class="comment">// d</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charCodeAt</span>(<span class="number">1</span>)); <span class="comment">// 98</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charCodeAt</span>(<span class="number">2</span>)); <span class="comment">// 55358</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charCodeAt</span>(<span class="number">3</span>)); <span class="comment">// 56611</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">charCodeAt</span>(<span class="number">4</span>)); <span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">codePointAt</span>(<span class="number">1</span>)); <span class="comment">// 98</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">codePointAt</span>(<span class="number">2</span>)); <span class="comment">// 129315</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">codePointAt</span>(<span class="number">3</span>)); <span class="comment">// 56611</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">codePointAt</span>(<span class="number">4</span>)); <span class="comment">// 100</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* fromCodePoint(), 接受任意个码点，返回对应字符拼接起来的字符串 */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">97</span>, <span class="number">98</span>, <span class="number">55358</span>, <span class="number">56611</span>, <span class="number">100</span>, <span class="number">101</span>)); <span class="comment">// ab🤣de</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">String</span>.<span class="title function_">fromCodePoint</span>(<span class="number">97</span>, <span class="number">98</span>, <span class="number">129315</span>, <span class="number">100</span>, <span class="number">101</span>)); <span class="comment">// ab🤣de</span></span><br></pre></td></tr></table></figure>
+<h4 id="normalize">normalize()</h4>
+<p>某些 Unicode 字符可以有多种编码方式。有的字符即可以通过一个 BMP 字符表示，也可以通过一个代理对表示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">0x00c5</span>),</span><br><span class="line">  b = <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">0x212b</span>),</span><br><span class="line">  c = <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(<span class="number">0x0041</span>, <span class="number">0x030a</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`a: <span class="subst">$&#123;a&#125;</span> b: <span class="subst">$&#123;b&#125;</span> c: <span class="subst">$&#123;c&#125;</span>`</span>); <span class="comment">// a: Å b: Å c: Å</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a === b); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a === c); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b === c); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用normalize() 规范化，使用时需要传入表示那种形式的字符串：&quot;NFD&quot;,&quot;NFC&quot;,&quot;NFKD&quot;,&quot;NFKC&quot; */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="title function_">normalize</span>(<span class="string">&quot;NFC&quot;</span>) === b.<span class="title function_">normalize</span>(<span class="string">&quot;NFC&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="字符串操作方法">字符串操作方法</h4>
+<h5 id="拼接-concat">拼接-concat()</h5>
+<p>concat(), 用于将一个或多个字符串拼接成一个新字符串。常用(+)替代</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> result = strValue.<span class="title function_">concat</span>(<span class="string">&quot; &quot;</span>, <span class="string">&quot;World &quot;</span>, <span class="string">&quot;!&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// Hello World !</span></span><br></pre></td></tr></table></figure>
+<h5 id="切片-slice-substr-substring">切片-slice(), substr(), substring()</h5>
+<p>这三个方法都返回调用他们的字符串的一个字字符串，而且都接收一或两个参数。对 slice()和 substring()而言，第二个参数是提取结束的位置。对 substr()而言，第二个参数表示返回的字符串数量。任何情况下，省略第二个参数都意味着提取到字符串末尾。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">slice</span>(<span class="number">3</span>)); <span class="comment">// lo World!</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">slice</span>(-<span class="number">3</span>)); <span class="comment">// ld!</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">slice</span>(-<span class="number">3</span>, -<span class="number">1</span>)); <span class="comment">// ld</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">substring</span>(<span class="number">3</span>, -<span class="number">4</span>)); <span class="comment">// Hel      substring(), 把所有负参数转换为0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">substr</span>(-<span class="number">3</span>, <span class="number">2</span>)); <span class="comment">// ld</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">substr</span>(-<span class="number">3</span>, -<span class="number">2</span>)); <span class="comment">// &quot;&quot;(空字符串) substr()，第二个参数若为负数，转换为0</span></span><br></pre></td></tr></table></figure>
+<h5 id="定位-indexOf-lastIndexOf">定位-indexOf(), lastIndexOf()</h5>
+<p>这两个方法从字符串中搜索传入的字符串，并返回位置(如果没找到，则返回-1)。两者的区别在于，indexof()方法从字符串开头开始查找子字符串，而 lastIndexOf 从字符串末尾开始查找子字符串。这两个方法都可以接收第二个参数，表示开始搜索的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;slipped the surly bonds of earth to touch the face of God&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">indexOf</span>(<span class="string">&quot;f&quot;</span>)); <span class="comment">// 25</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">lastindexOf</span>(<span class="string">&quot;f&quot;</span>)); <span class="comment">// 52</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> position = [];</span><br><span class="line"><span class="keyword">let</span> pos = strValue.<span class="title function_">indexOf</span>(<span class="string">&quot;f&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (pos &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">  position.<span class="title function_">push</span>(pos);</span><br><span class="line">  pos = strValue.<span class="title function_">indexOf</span>(<span class="string">&quot;f&quot;</span>, ++pos);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(position); <span class="comment">// [25,46,52]</span></span><br></pre></td></tr></table></figure>
+<h5 id="包含-starstWith-endsWith-includes">包含-starstWith(), endsWith(), includes()</h5>
+<p>用于判断字符串中是否包含另一个字符串，这些方法都会从字符串中搜索传入的字符串，并返回表示是否包含的布尔值。区别在于，startsWith()检查目标字符串是否以传入字符串开头，endsWith()检查目标字符串是否以传入字符串结尾，includes()检查目标字符串是否包含传入字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> message = <span class="string">&quot;foobarbaz&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">startsWith</span>(<span class="string">&quot;foo&quot;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">endsWith</span>(<span class="string">&quot;bak&quot;</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">endsWith</span>(<span class="string">&quot;bar&quot;</span>, -<span class="number">3</span>)); <span class="comment">// false        可接受第二个参数结束索引</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(message.<span class="title function_">includes</span>(<span class="string">&quot;oba&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h5 id="修剪-trim-trimLeft-trimRight">修剪-trim(), trimLeft(), trimRight()</h5>
+<p>创建字符串的一个副本，删除前、后所有空格，再返回结果。原字符串不受影响</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;   Hello  &quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">trim</span>()); <span class="comment">// Hello</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">trimLeft</span>()); <span class="comment">// Hello__(两空格)</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">trimRight</span>()); <span class="comment">// ___Hello</span></span><br></pre></td></tr></table></figure>
+<h5 id="重复-repeat">重复-repeat()</h5>
+<p>ECMAScript 在所有字符串上都提供 repeat()方法。这个方法接收一个整数参数，表示要将字符串复制多少次，然后返回拼接所有副本的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;Kinsiy &quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">repeat</span>(<span class="number">5</span>) + <span class="string">&quot;🤣&quot;</span>); <span class="comment">// Kinsiy Kinsiy Kinsiy Kinsiy Kinsiy 🤣</span></span><br></pre></td></tr></table></figure>
+<h5 id="填充-padStart-padEnd">填充-padStart(), padEnd()</h5>
+<p>padStatr()和 padEnd()方法会复制字符串，如果小于指定长度，则在相应的一边填充字符直至满足长度条件。这个方法的第一个参数是长度，第二个参数是可选的填充字符串，默认为空格(U+0020)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;Kinsiy&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">padStart</span>(<span class="number">10</span>, <span class="string">&quot;🤣&quot;</span>)); <span class="comment">// 🤣🤣Kinsiy 别忘了前面说的Unicode代理对</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">padEnd</span>(<span class="number">10</span>, <span class="string">&quot;🤣&quot;</span>)); <span class="comment">// Kinsiy🤣🤣</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 可选的第二个参数不限于一个字符。如果提供了多个字符的字符串，则会将其拼接并截断以匹配指定长度。</span></span><br><span class="line"><span class="comment">    此外，如果长度小于或等于字符串长度，则会返回原始字符串</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">strValue = <span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">padStart</span>(<span class="number">10</span>, <span class="string">&quot;bar&quot;</span>)); <span class="comment">// barbarbfoo</span></span><br></pre></td></tr></table></figure>
+<h5 id="迭代与解构-iterator">迭代与解构-@@iterator()</h5>
+<p>字符串的原型上暴露了一个@@iterator()方法，表示可以迭代字符串的每个字符。可以向下面这样手动使用迭代器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;ab&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> stringIterator = strValue[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringIterator.<span class="title function_">next</span>()); <span class="comment">//&#123;value: &quot;a&quot;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringIterator.<span class="title function_">next</span>()); <span class="comment">//&#123;value: &quot;b&quot;, done: false&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringIterator.<span class="title function_">next</span>()); <span class="comment">//&#123;value: undefined, done: true&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 在for-of 循环中可以通过这个迭代器按序访问每个字符 */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> c <span class="keyword">of</span> <span class="string">&quot;abcde&quot;</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用解构操作符解构为数组 */</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&quot;Kinsiy&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>([...name]); <span class="comment">// [&quot;K&quot;, &quot;i&quot;, &quot;n&quot;, &quot;s&quot;, &quot;i&quot;, &quot;y&quot;]</span></span><br></pre></td></tr></table></figure>
+<h5 id="大小写-toLowerCase-toUpperCase">大小写-toLowerCase(), toUpperCase()</h5>
+<p>还有 toLocaleLowerCase(),toLocaleUpperCase(), 旨在基于特定地区实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strValue = <span class="string">&quot;Kinsiy &quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">toLowerCase</span>()); <span class="comment">// kinsiy</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(strValue.<span class="title function_">toUpperCase</span>()); <span class="comment">// KINSIY</span></span><br></pre></td></tr></table></figure>
+<h5 id="正则">正则</h5>
+<h6 id="match">match()</h6>
+<p>本质上跟 RegExp 对象的 exec()方法相同。match()方法接收一个参数，可以是一个正则表达式字面量，也可以是一个 RegExp 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="string">&quot;cat, bat, sat, fat&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> pattern = <span class="regexp">/.at/</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> matches = text.<span class="title function_">match</span>(pattern);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(matches.<span class="property">index</span>); <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(matches[<span class="number">0</span>]); <span class="comment">// cat</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(pattern.<span class="property">lastIndex</span>); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h6 id="search">search()</h6>
+<p>这个方法唯一的参数和 match()一样：正则表达式字面量或 RegExp 对象。这个方法返回模式第一个匹配位置的位置索引，如果没找到则返回-1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="string">&quot;cat, bat, sat, fat&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> pattern = <span class="regexp">/at/</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(text.<span class="title function_">search</span>(pattern)); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<h6 id="replace">replace()</h6>
+<p>这个方法接收两个参数，第一个参数可以是一个 RegExp 对象或一个字符串(这个字符串不会转换为正则表达式)，第二个参数可以是一个字符串或一个函数。如果第一个参数是字符串，那么只会替换第一个字字符串。想要替换所有子字符串，第一个参数必须为正则表达式并且带全局标记。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="string">&quot;cat, bat, sat, fat&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> result = text.<span class="title function_">replace</span>(<span class="string">&quot;at&quot;</span>, <span class="string">&quot;ond&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// cond, bat, sat, fat</span></span><br><span class="line"></span><br><span class="line">result = text.<span class="title function_">replace</span>(<span class="regexp">/at/g</span>, <span class="string">&quot;ond&quot;</span>); <span class="comment">// cond, bond, sond, fond</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br></pre></td></tr></table></figure>
+<p>在第二个参数是字符串的情况下，有几个特殊的字符序列，可以用来插入正则表达式操作的值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字符序列</th>
+<th style="text-align:left">替换文本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$$</td>
+<td style="text-align:left">$</td>
+</tr>
+<tr>
+<td style="text-align:center">$&amp;</td>
+<td style="text-align:left">匹配整个模式的子字符串。与 RegExp.lastMatch 相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;’</td>
+<td style="text-align:left">匹配的子字符串之前的字符串。与 RegExp.rightContext 相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;`</td>
+<td style="text-align:left">匹配的子字符串之后的字符串。与 RegExp.leftContext 相同</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;n</td>
+<td style="text-align:left">匹配第 n 个捕获组的字符串，其中 n 是 0~9</td>
+</tr>
+<tr>
+<td style="text-align:center">&amp;nn</td>
+<td style="text-align:left">匹配第 nn 个捕获组的字符串，其中 nn 是 01~99</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> text = <span class="string">&quot;cat, bat, sat, fat&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> result = text.<span class="title function_">replace</span>(<span class="regexp">/(.at)/g</span>, <span class="string">&quot;word ($1)&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// word (cat), word (bat), word (sat), word (fat)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* replace() 第二个参数可以是一个函数</span></span><br><span class="line"><span class="comment">    在只有一个匹配项时，这个函数会收到3个参数：与整个模式匹配的字符串，匹配项在字符串中的开始位置，以及整个字符串。在有多个捕获组的情况下，每个匹配捕获组的字符串也会作为参数传给这个函数。但最后两个参数还是与整个模式匹配的开始位置和原始字符串。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">htmlEscape</span>(<span class="params">text</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> text.<span class="title function_">replace</span>(<span class="regexp">/[&lt;&gt;&quot;&amp;]/g</span>, <span class="keyword">function</span> (<span class="params">match, pos, originalText</span>) &#123;</span><br><span class="line">    <span class="keyword">switch</span> (match) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;&lt;&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&amp;lt;&quot;</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;&gt;&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&amp;gt;&quot;</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&quot;&amp;&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&amp;amp;&quot;</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;&quot;&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&amp;quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">htmlEscape</span>(<span class="string">&#x27;&lt;p class=&quot;greeting&quot;&gt;Hello World!&lt;/p&gt;&#x27;</span>));</span><br><span class="line"><span class="comment">// &amp;lt;p class=&amp;quot;greeting&amp;quot;&amp;gt;Hello World!&amp;lt;/p&amp;gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="split">split()</h6>
+<p>这个方法会根据传入的分隔符将字符串拆分成数组。作为分隔符的参数可以是字符串，也可以是 RegExp 对象。还可以传入第二个参数，即数组大小，确保返回的数组不会超过指定大小。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> colorText = <span class="string">&quot;ref,bule,green,yellow&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> colors1 = colorText.<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors1); <span class="comment">//[&quot;ref&quot;, &quot;bule&quot;, &quot;green&quot;, &quot;yellow&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> colors2 = colorText.<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>, <span class="number">2</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors2); <span class="comment">//[&quot;ref&quot;, &quot;bule&quot;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> colors3 = colorText.<span class="title function_">split</span>(<span class="regexp">/[^,]+/</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(colors3); <span class="comment">//[&quot;&quot;, &quot;,&quot;, &quot;,&quot;, &quot;,&quot;, &quot;&quot;]</span></span><br></pre></td></tr></table></figure>
+<h5 id="比较—localeCompare">比较—localeCompare()</h5>
+<p>这个方法比价两个字符串，返回如下 3 个值中的一个</p>
+<ul>
+<li>如果按照字母表顺序，字符串应该排在字符串参数前头，则返回负值</li>
+<li>如果字符串与字符串参数相等，则返回 0</li>
+<li>如果按照字母表顺序，字符串应该排在字符串参数后头，则返回正值</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> stringValue = <span class="string">&quot;yellow&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringValue.<span class="title function_">localeCompare</span>(<span class="string">&quot;brick&quot;</span>)); <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringValue.<span class="title function_">localeCompare</span>(<span class="string">&quot;yellow&quot;</span>)); <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(stringValue.<span class="title function_">localeCompare</span>(<span class="string">&quot;zoo&quot;</span>)); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+<h5 id="html-方法">html 方法</h5>
+<p>略</p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-Math/" rel="prev" title="Javascript-(Global & Math)">
+                  <i class="fa fa-chevron-left"></i> Javascript-(Global & Math)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-RegExp/" rel="next" title="Javascript-RegExp">
+                  Javascript-RegExp <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Ts完全支持Es2015中的class关键字. 学习ES6中的类Javascript - Class、MDN. Classes 本文参考Typescript官网Docs - Handbook - Classes自翻译而来, 仅供个人参考学习使用.一切请以官网为准!  类成员 来看示例(–strictPropertyInitialization) 12345678910111213141516171">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript - Classes">
+<meta property="og:url" content="https://kinsiy.github.io/Typescript-Classes/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="Ts完全支持Es2015中的class关键字. 学习ES6中的类Javascript - Class、MDN. Classes 本文参考Typescript官网Docs - Handbook - Classes自翻译而来, 仅供个人参考学习使用.一切请以官网为准!  类成员 来看示例(–strictPropertyInitialization) 12345678910111213141516171">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-28T15:17:51.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.459Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="Classes">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Typescript-Classes/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Typescript-Classes/","path":"Typescript-Classes/","title":"Typescript - Classes"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Typescript - Classes | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E6%88%90%E5%91%98"><span class="nav-text">类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-text">访问修饰符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#readonly"><span class="nav-text">readonly</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#public"><span class="nav-text">public</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#protected"><span class="nav-text">protected</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#private"><span class="nav-text">private</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getters-Setters"><span class="nav-text">Getters&#x2F;Setters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E7%AD%BE%E5%90%8D"><span class="nav-text">索引签名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF-%E5%AE%9E%E7%8E%B0"><span class="nav-text">继承&#x2F;实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#implements"><span class="nav-text">implements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-text">extends</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#declare"><span class="nav-text">declare</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F"><span class="nav-text">初始化顺序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%88%90%E5%91%98"><span class="nav-text">静态成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%9D%97"><span class="nav-text">静态块*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB"><span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this-%E5%8F%82%E6%95%B0"><span class="nav-text">this 参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B"><span class="nav-text">鸭子类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Typescript-Classes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Typescript - Classes | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Typescript - Classes
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-28 23:17:51" itemprop="dateCreated datePublished" datetime="2022-03-28T23:17:51+08:00">2022-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Ts完全支持Es2015中的<mark class="label primary">class</mark>关键字.</p>
+<div class="note info"><p>学习ES6中的类<a href="https://kinsiy.github.io/Javascript-Class/?highlight=%E7%B1%BB">Javascript - Class</a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes">MDN. Classes</a></p>
+<p>本文参考Typescript官网<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/2/classes.html">Docs - Handbook - Classes</a>自翻译而来, 仅供个人参考学习使用.一切请以官网为准!</p>
+</div>
+<h2 id="类成员">类成员</h2>
+<p>来看示例(–strictPropertyInitialization)</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span></span><br><span class="line">  y						<span class="comment">// [1] Error: Member &#x27;y&#x27; implicitly has an &#x27;any&#x27; type.</span></span><br><span class="line">  <span class="attr">y</span>: <span class="built_in">number</span> 	<span class="comment">// [2] Property &#x27;y&#x27; has no initializer and is not definitely assigned in the constructor</span></span><br><span class="line">  z = <span class="number">0</span></span><br><span class="line">  <span class="attr">i</span>: <span class="built_in">string</span> = <span class="string">&quot;kinsiy&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = <span class="number">1</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">j</span> = <span class="number">2</span>	<span class="comment">// [3] Error: Property &#x27;j&#x27; does not exist on type &#x27;Point&#x27;.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> point = <span class="keyword">new</span> <span class="title class_">Point</span>()</span><br><span class="line"></span><br><span class="line">point.<span class="property">z</span> = <span class="string">&quot;3&quot;</span> <span class="comment">// [4] Error: Type &#x27;string&#x27; is not assignable to type &#x27;number&#x27;.</span></span><br><span class="line">point.<span class="property">j</span> = <span class="string">&quot;xxx&quot;</span> <span class="comment">// [3] Error: Property &#x27;j&#x27; does not exist on type &#x27;Point&#x27;.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>通过示例中的四个错误, 学习 Ts 类</p>
+<ol>
+<li>Ts中对于未声明类型的成员, 会隐式的得到一个<mark class="label primary">any</mark>类型</li>
+<li>成员变量必须初始化(配置strictPropertyInitialization)</li>
+<li>不能对未声明的变量进行初始化</li>
+<li>与普通的变量声明一样, 具有<a href="https://kinsiy.github.io/Typescript-TypeGuards/">类型推断</a></li>
+</ol>
+<p>对于第二个错误, 必须在定义成员时或<strong>构造方法中</strong>进行初始化,才不会报错,Ts不会检查构造方法调用的方法,因为这些方法可能会被派生类重新.从而导致未初始化. 如果你确定该变量一定会被初始化可以使用非空断言进行声明</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">OKGreeter</span> &#123;</span><br><span class="line">  name!: <span class="built_in">string</span> <span class="comment">// ok</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="访问修饰符">访问修饰符</h3>
+<h4 id="readonly">readonly</h4>
+<p>只读成员,通过readonly修饰符声明. 只读成员在任何地方可读</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Greeter</span> &#123;</span><br><span class="line">  <span class="keyword">readonly</span> <span class="attr">name</span>: <span class="built_in">string</span> = <span class="string">&quot;world&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">otherName?: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (otherName !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">name</span> = otherName;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">err</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&quot;not ok&quot;</span>;	<span class="comment">// Error: Cannot assign to &#x27;name&#x27; because it is a read-only property.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = <span class="keyword">new</span> <span class="title class_">Greeter</span>();</span><br><span class="line">g.<span class="property">name</span> = <span class="string">&quot;also not ok&quot;</span>;	<span class="comment">// Error: Cannot assign to &#x27;name&#x27; because it is a read-only property.</span></span><br></pre></td></tr></table></figure>
+<h4 id="public">public</h4>
+<p>公有成员,通过public修饰符声明.默认修饰符. 公有成员在任何地方都可以被读/写</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Greeter</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">greet</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hi!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = <span class="keyword">new</span> <span class="title class_">Greeter</span>();</span><br><span class="line">g.<span class="title function_">greet</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="protected">protected</h4>
+<p>保护成员,通过protected修饰符声明. 保护成员<strong>只能在自身及其派生类内部读/写</strong>(实例不可见)</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Greeter</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">greet</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello, &quot;</span> + <span class="variable language_">this</span>.<span class="title function_">getName</span>());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">protected</span> <span class="title function_">getName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hi&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">_getName</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="title function_">getName</span>())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SpecialGreeter</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Greeter</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">howdy</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// OK to access protected member here</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Howdy, &quot;</span> + <span class="variable language_">this</span>.<span class="title function_">getName</span>());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = <span class="keyword">new</span> <span class="title class_">SpecialGreeter</span>();</span><br><span class="line">g.<span class="title function_">greet</span>(); <span class="comment">// OK</span></span><br><span class="line">g.<span class="title function_">_getName</span>()</span><br><span class="line">g.<span class="title function_">getName</span>();	<span class="comment">// Error: Property &#x27;getName&#x27; is protected and only accessible within class &#x27;Greeter&#x27; and its subclasses.</span></span><br></pre></td></tr></table></figure>
+<h4 id="private">private</h4>
+<p>私有成员, 通过private修饰符声明. 私有成员<strong>只能在该类内部读/写</strong>(实例不可见)</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对实例不可见</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> x = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> <span class="title class_">Base</span>()</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b.<span class="property">x</span>)	<span class="comment">// Error: Property &#x27;x&#x27; is private and only accessible within class &#x27;Base&#x27;.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对派生类不可见</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Base</span> &#123;</span><br><span class="line">  <span class="title function_">showX</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">x</span>) <span class="comment">// Error:Property &#x27;x&#x27; is private and only accessible within class &#x27;Base&#x27;.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能被派生类改变可见性</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">_Derived</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Base</span> &#123;</span><br><span class="line">  x = <span class="number">1</span></span><br><span class="line">  <span class="comment">// Error: Class &#x27;_Derived&#x27; incorrectly extends base class &#x27;Base&#x27;.</span></span><br><span class="line">  <span class="comment">//				  Property &#x27;x&#x27; is private in type &#x27;Base&#x27; but not in type &#x27;_Derived&#x27;.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Ts与Java/C#/C++/Swift/PHP一样可以跨实例访问私有成员</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 能够跨实例访问</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> x = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">sameAs</span>(<span class="params">other: A</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> other.<span class="property">x</span> === <span class="variable language_">this</span>.<span class="property">x</span>;	<span class="comment">// ok</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="注意">注意</h4>
+<p>上述修饰符仅在类型检查期间起作用,在编译成 Js 运行时你还是能够在对应实例上找到被<mark class="label primary">protected</mark>/<mark class="label primary">private</mark>的成员.被<mark class="label primary">readonly</mark>修饰的成员也能在运行时进行写操作.</p>
+<p>并且在Ts类型检查阶段, 对于<mark class="label primary">protected</mark>/<mark class="label primary">private</mark>修饰的成员,可以通过中括号(obj[key])的方式逃过类型检查(<mark class="label primary">readonly</mark>不行)</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MySafe</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> secretKey = <span class="number">12345</span>;</span><br><span class="line">  <span class="keyword">protected</span> kinsiy = <span class="number">2212</span></span><br><span class="line">  <span class="keyword">readonly</span> qinglai = <span class="number">333</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> s = <span class="keyword">new</span> <span class="title class_">MySafe</span>()</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="property">secretKey</span>) <span class="comment">// Error: Property &#x27;secretKey&#x27; is private and only accessible within class &#x27;MySafe&#x27;.</span></span><br><span class="line"> </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s[<span class="string">&quot;secretKey&quot;</span>]) <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s[<span class="string">&quot;kinsiy&quot;</span>]) <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(s.<span class="property">kinsiy</span>)</span><br><span class="line"></span><br><span class="line">s[<span class="string">&quot;qinglai&quot;</span>] = <span class="number">3333</span> <span class="comment">// Error: Cannot assign to &#x27;qinglai&#x27; because it is a read-only property.</span></span><br></pre></td></tr></table></figure>
+<p>要想实现硬私有,可以直接使用JS中的私有成员修饰符**(#)**</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &#123;</span><br><span class="line">  #barkAmount = <span class="number">0</span>;</span><br><span class="line">  personality = <span class="string">&quot;happy&quot;</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="构造函数">构造函数</h3>
+<p>构造函数声明与一般函数声明几乎一样.只有两个小小的不同.</p>
+<ul>
+<li>不能使用泛型, 类的泛型在class关键字上声明,后面会介绍</li>
+<li>不能有返回类型注解, 构造函数永远返回类实例</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 重载</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">string</span></span>);</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x: <span class="built_in">number</span>, y: <span class="built_in">number</span></span>)</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">s: <span class="built_in">string</span></span>);</span><br><span class="line">  </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">x: <span class="built_in">any</span>, y?: <span class="built_in">any</span></span>)  &#123;</span><br><span class="line">    x = <span class="title class_">Number</span>(x)</span><br><span class="line">    y = <span class="title class_">Number</span>(y)</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以把成员声明放在构造函数中</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Params</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">public</span> <span class="keyword">readonly</span> x: <span class="built_in">number</span>,</span></span><br><span class="line"><span class="params">    <span class="keyword">protected</span> y: <span class="built_in">number</span>,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> z: <span class="built_in">number</span></span></span><br><span class="line"><span class="params">  </span>) &#123;</span><br><span class="line">    <span class="comment">// No body necessary</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = <span class="keyword">new</span> <span class="title class_">Params</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="property">x</span>) <span class="comment">// (property) Params.x: number</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a.<span class="property">z</span>) <span class="comment">// Property &#x27;z&#x27; is private and only accessible within class &#x27;Params&#x27;.</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>与Js一样,在类构造函数中,不能在调用super()之前引用this</p>
+</div>
+<h3 id="方法">方法</h3>
+<p>Ts中声明方法与Js中声明方法除类型注解外,其余部分完全一样.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span> &#123;</span><br><span class="line">  x = <span class="number">10</span>;</span><br><span class="line">  y = <span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="title function_">scale</span>(<span class="attr">n</span>: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> *= n;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> *= n;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Getters-Setters">Getters/Setters</h3>
+<p>设置类成员的Getters/Setters时,需要注意几点</p>
+<ul>
+<li>仅设置getters, 成员自动变为仅读成员</li>
+<li>如果未注解setters的参数类型,则其类型与getters返回类型一致</li>
+<li>Getters/Setters必须拥有一样的成员可见性</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Thing</span> &#123;</span><br><span class="line">  _size = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">size</span>(): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">_size</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">size</span>(<span class="params">value: <span class="built_in">string</span> | <span class="built_in">number</span> | <span class="built_in">boolean</span></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> num = <span class="title class_">Number</span>(value)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Don&#x27;t allow NaN, Infinity, etc</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="title class_">Number</span>.<span class="built_in">isFinite</span>(num)) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">_size</span> = <span class="number">0</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">_size</span> = num</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="索引签名">索引签名</h3>
+<p>与Interface等对象类型一样,类也支持索引签名</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">  [<span class="attr">s</span>: <span class="built_in">string</span>]: <span class="built_in">boolean</span> | (<span class="function">(<span class="params">s: <span class="built_in">string</span></span>) =&gt;</span> <span class="built_in">boolean</span>);</span><br><span class="line"> </span><br><span class="line">  <span class="title function_">check</span>(<span class="params">s: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>[s] <span class="keyword">as</span> <span class="built_in">boolean</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="继承-实现">继承/实现</h2>
+<h3 id="implements">implements</h3>
+<p>使用implements实现一个或多个接口.需要注意的是接口仅检查类是否可以被视为接口类型,不会更改类声明的类型.举例来说</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> _Checkable&#123;</span><br><span class="line">  <span class="title function_">_check</span>(<span class="attr">name</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Checkable</span> &#123;</span><br><span class="line">  <span class="title function_">check</span>(<span class="attr">name</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NameChecker</span> <span class="keyword">implements</span> <span class="title class_">Checkable</span>, _Checkable &#123;</span><br><span class="line">  <span class="title function_">_check</span>(<span class="params">s</span>) &#123;	<span class="comment">// [1] Error: Parameter &#x27;s&#x27; implicitly has an &#x27;any&#x27; type.</span></span><br><span class="line">    <span class="keyword">return</span> s.<span class="title function_">toLowerCase</span>() === <span class="string">&quot;ok&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="title function_">check</span>(<span class="params">n: <span class="built_in">number</span></span>) &#123;	<span class="comment">// [2] Error</span></span><br><span class="line">    <span class="keyword">let</span> s = <span class="title class_">String</span>(n)</span><br><span class="line">    <span class="keyword">return</span> s.<span class="title function_">toLowerCase</span>() === <span class="string">&quot;ok&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Property &#x27;check&#x27; in type &#x27;NameChecker&#x27; is not assignable to the same property in base type &#x27;Checkable&#x27;.</span></span><br><span class="line"><span class="comment">  Type &#x27;(n: number) =&gt; boolean&#x27; is not assignable to type &#x27;(name: string) =&gt; boolean&#x27;.</span></span><br><span class="line"><span class="comment">    Types of parameters &#x27;n&#x27; and &#x27;name&#x27; are incompatible.</span></span><br><span class="line"><span class="comment">      Type &#x27;string&#x27; is not assignable to type &#x27;number&#x27;.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>注意看[1][2]两个报错, [1]报的是‘s’是any类型而不是[2]的类型不符,也就是说_check()是符合接口约束的,但是参数’s’的类型并不会被接口改写为要求的<mark class="label primary">string</mark></p>
+<h3 id="extends">extends</h3>
+<p>与Js一样,Ts使用extends实现继承. 除类型注解外.差异不大</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  <span class="title function_">greet</span>(name?: <span class="built_in">string</span>):<span class="built_in">void</span></span><br><span class="line">  <span class="title function_">greet</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello, world!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Base</span> &#123;</span><br><span class="line">  <span class="title function_">greet</span>(<span class="params">name: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello, <span class="subst">$&#123;name.toUpperCase()&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>派生类重写方法需要注意方法签名要与基类一致</p>
+<h4 id="declare">declare</h4>
+<p>当编译目标大于等于ES2022或–useDefineForClassFields时, 派生类声明的任何成员都会覆盖基类声明的值,当我们仅想在派生类中更具体化成员类型时.会直接覆盖基类初始值.这时可以使用<mark class="label primary">declare</mark>表面派生类声明不会产生任何运行时影响</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">  <span class="attr">dateOfBirth</span>: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">  <span class="attr">breed</span>: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AnimalHouse</span> &#123;</span><br><span class="line">  <span class="attr">resident</span>: <span class="title class_">Animal</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">animal: Animal</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">resident</span> = animal;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DogHouse</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AnimalHouse</span> &#123;</span><br><span class="line">  <span class="comment">// Does not emit JavaScript code,</span></span><br><span class="line">  <span class="comment">// only ensures the types are correct</span></span><br><span class="line">  <span class="keyword">declare</span> <span class="attr">resident</span>: <span class="title class_">Dog</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">dog: Dog</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(dog);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="初始化顺序">初始化顺序</h4>
+<ol>
+<li>基类成员初始化</li>
+<li>执行基类构造函数</li>
+<li>派生类成员初始化</li>
+<li>执行派生类构造函数</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  name = <span class="string">&quot;base&quot;</span>;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;My name is &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Base</span> &#123;</span><br><span class="line">  name = <span class="string">&quot;derived&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Prints &quot;base&quot;, not &quot;derived&quot;</span></span><br><span class="line"><span class="keyword">const</span> d = <span class="keyword">new</span> <span class="title class_">Derived</span>();</span><br></pre></td></tr></table></figure>
+<h2 id="静态成员">静态成员</h2>
+<p>使用<mark class="label primary">static</mark>修饰符可声明静态成员.其性质与JS原生实现别无二致. 并且可以与<mark class="label primary">public</mark>,<mark class="label primary">protected</mark>,<mark class="label primary">private</mark>同时使用</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> x = <span class="number">0</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> y = <span class="number">1</span>	<span class="comment">// 与 private 同时使用</span></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">printX</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MyClass</span>.<span class="property">x</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MyClass</span>.<span class="property">x</span>);	<span class="comment">// 0</span></span><br><span class="line"><span class="title class_">MyClass</span>.<span class="title function_">printX</span>();	<span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MyClass</span>.<span class="property">y</span>) <span class="comment">// Error: Property &#x27;y&#x27; is private and only accessible within class &#x27;MyClass&#x27;.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可被继承</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">_MyClass</span> <span class="keyword">extends</span> <span class="title class_ inherited__">MyClass</span> &#123;</span><br><span class="line">  _printX = <span class="title class_">MyClass</span>.<span class="property">printX</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mc = <span class="keyword">new</span> <span class="title function_">_MyClass</span>()</span><br><span class="line"></span><br><span class="line">mc.<span class="title function_">_printX</span>() <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>由于在JS中,类就是一个特殊的函数.所以在声明静态类成员时,需要注意,不允许覆盖<mark class="label primary">Function</mark>原型链上的属性,比如<mark class="label primary">name</mark>,<mark class="label primary">length</mark>,<mark class="label primary">call</mark>…等</p>
+</div>
+<h2 id="静态块">静态块*</h2>
+<p>可以在类中声明静态块,可以访问所以的类内部成员</p>
+<div class="note info"><p>暂不理解,这么做的目的是什么? 但确实可以这么干</p>
+</div>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> #count = <span class="number">0</span> <span class="comment">// 注意这里是硬私有哦</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">count</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Foo</span>.#count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> lastInstances = <span class="title function_">loadLastInstances</span>()</span><br><span class="line">      <span class="title class_">Foo</span>.#count += lastInstances.<span class="property">length</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    <span class="title class_">Foo</span>.#count ++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="泛型类">泛型类</h2>
+<p>正如前面构造函数提到的,类的泛型在<mark class="label primary">class</mark>关键字上声明.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Box</span>&lt;<span class="title class_">Type</span>&gt; &#123;</span><br><span class="line">  <span class="attr">contents</span>: <span class="title class_">Type</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">value: Type</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">contents</span> = value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> <span class="title class_">Box</span>(<span class="string">&quot;hello!&quot;</span>) <span class="comment">// const b: Box&lt;string&gt;</span></span><br><span class="line">b.<span class="property">contents</span> <span class="comment">// (property) Box&lt;string&gt;.contents: string</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>不要在静态成员上使用泛型, 谨记一点, 在编译后所有的类型注解都会去掉. 我们知道JS中的类是基于原型链实现继承的, 修改原型链上的任何属性都会影响到所有实例.在静态类上使用泛型<mark class="label danger">Box&lt;string&gt;</mark>与<mark class="label danger">Box&lt;number&gt;</mark>在编译后其实并无差别,更改他们中的任意一个的原型链都会影响到另一个.</p>
+</div>
+<h2 id="this-参数">this 参数</h2>
+<p>我们知道,在JS中,<mark class="label primary">this</mark>的值是动态绑定的.比如,下面的例子</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">  name = <span class="string">&quot;MyClass&quot;</span></span><br><span class="line">  <span class="title function_">getName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">MyClass</span>()</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: c.<span class="property">getName</span>,</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Prints &quot;obj&quot;, not &quot;MyClass&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(obj.<span class="title function_">getName</span>())</span><br></pre></td></tr></table></figure>
+<p>这并不是一种错误的行为,当我们清楚我们的在做什么时,可以使用箭头函数,bind等绑定回 MyClass 实例.</p>
+<p>但这样还是有一点小小的隐患,可能会出现误用.有没有办法在类型检查阶段就限制该方法只能在该类实例中调用呢?</p>
+<p>答案是: 有!  使用Ts中特有的<mark class="label primary">this</mark>参数进行限制</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">  name = <span class="string">&quot;MyClass&quot;</span>;</span><br><span class="line">  <span class="title function_">getName</span>(<span class="params"><span class="variable language_">this</span>: MyClass</span>) &#123; <span class="comment">// 注意这里这个this参数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">name</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">MyClass</span>();</span><br><span class="line"></span><br><span class="line">c.<span class="title function_">getName</span>() <span class="comment">// OK</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> g = c.<span class="property">getName</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">g</span>()); <span class="comment">// Error: The &#x27;this&#x27; context of type &#x27;void&#x27; is not assignable to method&#x27;s &#x27;this&#x27; of type &#x27;MyClass&#x27;.</span></span><br></pre></td></tr></table></figure>
+<p>可以当直接调用getName()时,Ts检查到<mark class="label primary">this</mark>类型不同会给出错误.</p>
+<mark class="label primary">this</mark>参数在编译成Js时会被去掉
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeScript input with &#x27;this&#x27; parameter</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"><span class="variable language_">this</span>: SomeType, x: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JavaScript output</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="抽象类">抽象类</h2>
+<p>在JS中我们无法直接声明抽象类,但是很容易可以通过 new.target 来达到目的.Ts中则是直接支持使用<mark class="label primary">abstract</mark>关键字声明抽象类</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Base</span> &#123;</span><br><span class="line">  <span class="keyword">abstract</span> <span class="title function_">getName</span>(): <span class="built_in">string</span>;</span><br><span class="line"> </span><br><span class="line">  <span class="title function_">printName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello, &quot;</span> + <span class="variable language_">this</span>.<span class="title function_">getName</span>())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> b = <span class="keyword">new</span> <span class="title class_">Base</span>() <span class="comment">// Error: Cannot create an instance of an abstract class.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 新建派生类实现抽象类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Base</span> &#123;</span><br><span class="line">  <span class="title function_">getName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;world&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> d = <span class="keyword">new</span> <span class="title class_">Derived</span>() <span class="comment">// ok</span></span><br><span class="line">d.<span class="title function_">printName</span>()	<span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>注意: 在类型检查中,不要直接检查类型是否与抽象类一致,而是检查构造函数返回的类型是否属于该抽象类,举例来说</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params">ctor: <span class="keyword">new</span> () =&gt; Base</span>) &#123;	<span class="comment">// 不要写成  Base 或 typeof Base</span></span><br><span class="line">  <span class="keyword">const</span> instance = <span class="keyword">new</span> <span class="title function_">ctor</span>();</span><br><span class="line">  instance.<span class="title function_">printName</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">greet</span>(<span class="title class_">Derived</span>)</span><br><span class="line"><span class="title function_">greet</span>(<span class="title class_">Base</span>) <span class="comment">// Error</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Argument of type &#x27;typeof Base&#x27; is not assignable to parameter of type &#x27;new () =&gt; Base&#x27;.</span></span><br><span class="line"><span class="comment">  Cannot assign an abstract constructor type to a non-abstract constructor type.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</div>
+<h2 id="鸭子类型">鸭子类型</h2>
+<p>Ts的类型检查是一种鸭子类型的检查.只要两个类的结构相同,我们完全可以对这两种类型的变量进行相互赋值.</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Point1</span> &#123;</span><br><span class="line">  x = <span class="number">1</span></span><br><span class="line">  y = <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point2</span> &#123;</span><br><span class="line">  x = <span class="number">3</span></span><br><span class="line">  y = <span class="number">4</span></span><br><span class="line">  z = <span class="number">5</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// OK</span></span><br><span class="line"><span class="keyword">const</span> <span class="attr">p</span>: <span class="title class_">Point1</span> = <span class="keyword">new</span> <span class="title class_">Point2</span>()	<span class="comment">// 反过来不行</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/2/classes.html">Typescriptlang.org. Classes</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Classes/" rel="tag"><i class="fa fa-tag"></i> Classes</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Typescript-Function/" rel="prev" title="Typescript - Function">
+                  <i class="fa fa-chevron-left"></i> Typescript - Function
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Typescript-TypeGuards/" rel="next" title="TypeScript - 类型推断">
+                  TypeScript - 类型推断 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

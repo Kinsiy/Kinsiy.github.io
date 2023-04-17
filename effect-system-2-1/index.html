@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="文章依据《Vue.js设计与实现》第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文  Proxy &amp; Reflect Javascript - Proxy 代理基础 &#x2F;捕获器与反射&#x2F; 代理模式  代理指的是对一个对象基本语义的代理。它允许我们拦截并重新定义对一个对象的基本操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="响应系统 - 非原始值 - 常规对象">
+<meta property="og:url" content="https://kinsiy.github.io/effect-system-2-1/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="文章依据《Vue.js设计与实现》第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文  Proxy &amp; Reflect Javascript - Proxy 代理基础 &#x2F;捕获器与反射&#x2F; 代理模式  代理指的是对一个对象基本语义的代理。它允许我们拦截并重新定义对一个对象的基本操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-24T11:25:09.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.464Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="响应式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/effect-system-2-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/effect-system-2-1/","path":"effect-system-2-1/","title":"响应系统 - 非原始值 - 常规对象"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>响应系统 - 非原始值 - 常规对象 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxy-Reflect"><span class="nav-text">Proxy &amp; Reflect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript%E5%AF%B9%E8%B1%A1%E5%8F%8AProxy%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">Javascript对象及Proxy的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BB%A3%E7%90%86Object"><span class="nav-text">如何代理Object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#in"><span class="nav-text">in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-%E2%80%A6-in"><span class="nav-text">for … in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete"><span class="nav-text">delete</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E7%90%86%E5%9C%B0%E8%A7%A6%E5%8F%91%E5%93%8D%E5%BA%94"><span class="nav-text">合理地触发响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%85%E5%93%8D%E5%BA%94%E4%B8%8E%E6%B7%B1%E5%93%8D%E5%BA%94"><span class="nav-text">浅响应与深响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AA%E8%AF%BB%E4%B8%8E%E6%B5%85%E5%8F%AA%E8%AF%BB"><span class="nav-text">只读与浅只读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/effect-system-2-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="响应系统 - 非原始值 - 常规对象 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          响应系统 - 非原始值 - 常规对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-24 19:25:09" itemprop="dateCreated datePublished" datetime="2022-09-24T19:25:09+08:00">2022-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文</p>
+</div>
+<h2 id="Proxy-Reflect">Proxy &amp; Reflect</h2>
+<div class="note info"><p><strong>Javascript - Proxy</strong></p>
+<p><a href="/Javascript-Proxy-1/">代理基础</a> /<a href="/Javascript-Proxy-2/">捕获器与反射</a>/ <a href="/Javascript-Proxy-3/">代理模式</a></p>
+</div>
+<p>代理指的是对一个对象<mark class="label primary">基本语义</mark>的代理。它允许我们<mark class="label primary">拦截</mark>并<mark class="label primary">重新定义</mark>对一个对象的基本操作</p>
+<span id="more"></span>
+<p><strong>基本操作:</strong>  读取、设置属性值、调用函数</p>
+<p><strong>复合操作:</strong> 非基本操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">bar</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">foo</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">    <span class="title function_">track</span>(target, key)</span><br><span class="line">    <span class="comment">// 使用Reflect.get 返回读取到属性值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//  ...</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">effect</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="property">bar</span>))</span><br><span class="line"></span><br><span class="line">p.<span class="property">foo</span>++</span><br></pre></td></tr></table></figure>
+<p>注意上面使用<mark class="label primary">Reflect</mark> 以达到收集 <mark class="label danger">obj.foo</mark>依赖. 直接使用<mark class="label info">target[key]</mark>无法收集</p>
+<h2 id="Javascript对象及Proxy的工作原理">Javascript对象及Proxy的工作原理</h2>
+<p><strong><mark class="label primary">常规对象</mark></strong>:</p>
+<ul>
+<li>对于 <em><mark class="label info">ECMA-262. 6.1.7.3 Invariants of the Essential Internal Methods</mark></em> 列出的除 [[Call]]、[[Construct]]外的内部方法,必须使用ECMA规范 10.1.x 节给出的定义实现</li>
+<li>对于内部方法[[Call]], 必须使用ECMA规范 10.2.1 节给出的定义实现</li>
+<li>对于内部方法[[Construct]], 必须使用ECMA规范 10.2.2 节给出的定义实现</li>
+</ul>
+<p><strong><mark class="label primary">异质对象</mark></strong>: 非常规对象</p>
+<div class="note info"><p><strong>ECMA - 262</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.ecma-international.org/wp-content/uploads/ECMA-262_12th_edition_june_2021.pdf">12th edition, June 2021</a></p>
+</div>
+<p>创建代理对象时指定的拦截函数,实际上是用来自定义代理对象本身的内部方法和行为的,而不是用来指定被代理对象的内部方法和行为的</p>
+<p>Proxy对象部署的所有内部方法以及用来自定义内部方法和行为的拦截函数名字 <em><mark class="label info">ECMA-262. 10.5 Proxy Object Internal Methods and Internal Slots</mark></em></p>
+<table>
+<thead>
+<tr>
+<th>Internal Method</th>
+<th>Handler Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[[GetPrototypeOf]]</td>
+<td><strong>getPrototypeOf</strong></td>
+</tr>
+<tr>
+<td>[[SetPrototypeOf]]</td>
+<td><strong>setPrototypeOf</strong></td>
+</tr>
+<tr>
+<td>[[IsExtensible]]</td>
+<td><strong>isExtensible</strong></td>
+</tr>
+<tr>
+<td>[[PreventExtensions]]</td>
+<td><strong>preventExtensions</strong></td>
+</tr>
+<tr>
+<td>[[GetOwnProperty]]</td>
+<td><strong>getOwnPropertyDescriptor</strong></td>
+</tr>
+<tr>
+<td>[[DefineOwnProperty]]</td>
+<td><strong>defineProperty</strong></td>
+</tr>
+<tr>
+<td>[[HasProperty]]</td>
+<td><strong>has</strong></td>
+</tr>
+<tr>
+<td>[[Get]]</td>
+<td><strong>get</strong></td>
+</tr>
+<tr>
+<td>[[Set]]</td>
+<td><strong>set</strong></td>
+</tr>
+<tr>
+<td>[[Delete]]</td>
+<td><strong>deleteProperty</strong></td>
+</tr>
+<tr>
+<td>[[OwnPropertyKeys]]</td>
+<td><strong>ownKeys</strong></td>
+</tr>
+<tr>
+<td>[[Call]]</td>
+<td><strong>apply</strong></td>
+</tr>
+<tr>
+<td>[[Construct]]</td>
+<td><strong>construct</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="如何代理Object">如何代理Object</h2>
+<p>这里直接贴出代理代码, 至于原因请阅读原文或者ECMA-262</p>
+<h3 id="in">in</h3>
+<mark class="label primary">[[HasProperty]]</mark>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">foo</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="title function_">has</span>(<span class="params">target, key</span>)&#123;</span><br><span class="line">    <span class="title function_">tarck</span>(target, key)</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">has</span>(target, key)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="for-…-in">for … in</h3>
+<mark class="label primary">ownKeys</mark>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">foo</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITERATE_KEY</span> = <span class="title class_">Symbol</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="title function_">ownKeys</span>(<span class="params">target</span>)&#123;</span><br><span class="line">    <span class="comment">// 将副作用函数与 ITERATE_KEY 关联</span></span><br><span class="line">    <span class="title function_">tarck</span>(target, <span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(target)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>当为对象添加新属性时,会对<mark class="label primary">for...in</mark>循环产生影响,所以需要触发与<mark class="label primary">ITERATE_KEY</mark>相关联的副作用函数重新执行.</p>
+<p>由于添加新属性与修改已有的属性值的基于语义都是<mark class="label info">[[Set]]</mark>, 为避免修改已有属性值时触发副作用.需要区分这两种操作</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITERATE_KEY</span> = <span class="title class_">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 拦截设置操作</span></span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target, key, newVal, receiver</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> type = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(target, key) ? <span class="string">&#x27;SET&#x27;</span> : <span class="string">&#x27;ADD&#x27;</span> <span class="comment">// 如果属性不存在，则说明是在添加新的属性，否则是设置已存在的属性</span></span><br><span class="line">    <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, newVal, receiver) <span class="comment">// 设置属性值</span></span><br><span class="line">    <span class="title function_">trigger</span>(target, key, type) <span class="comment">// 将 type 作为第三个参数传递给 trigger 函数</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key, type</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> depsMap = bucket.<span class="title function_">get</span>(target)</span><br><span class="line">  <span class="keyword">if</span> (!depsMap) <span class="keyword">return</span></span><br><span class="line">  <span class="keyword">const</span> effects = depsMap.<span class="title function_">get</span>(key)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> iterateEffects = depsMap.<span class="title function_">get</span>(<span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (type === <span class="string">&#x27;ADD&#x27;</span>) &#123;</span><br><span class="line">    iterateEffects &amp;&amp; iterateEffects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effectFn</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (effectFn !== activeEffect) &#123;</span><br><span class="line">        effectsToRun.<span class="title function_">add</span>(effectFn)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="delete">delete</h3>
+<mark class="label primary">deleteProperty</mark>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="title function_">deleteProperty</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> hadKey = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(target, key)</span><br><span class="line">    <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(target, key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (res &amp;&amp; hadKey) &#123;</span><br><span class="line">      <span class="title function_">trigger</span>(target, key, <span class="string">&#x27;DELETE&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<mark class="label primary">delete</mark>同样影响<mark class="label info">for...in</mark>循环
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key, type</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (type === <span class="string">&#x27;ADD&#x27;</span> || type === <span class="string">&#x27;DELETE&#x27;</span>) &#123;</span><br><span class="line">    iterateEffects &amp;&amp; iterateEffects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effectFn</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (effectFn !== activeEffect) &#123;</span><br><span class="line">        effectsToRun.<span class="title function_">add</span>(effectFn)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">	</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="合理地触发响应">合理地触发响应</h2>
+<p>考虑</p>
+<ul>
+<li>多次设置相同的值</li>
+<li>原型链上响应式对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">foo</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123; <span class="comment">/** ... */</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">effect</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="property">foo</span>))</span><br><span class="line">p.<span class="property">foo</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建响应式数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123; <span class="comment">/** ... */</span> &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> _obj = &#123;&#125;</span><br><span class="line"><span class="keyword">const</span> proto = &#123; <span class="attr">bar</span>: <span class="number">1</span> &#125;</span><br><span class="line"><span class="keyword">const</span> child = <span class="title function_">reactive</span>(_obj)</span><br><span class="line"><span class="keyword">const</span> parent = <span class="title function_">reactive</span>(proto)</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(child, parent)</span><br><span class="line"></span><br><span class="line"><span class="title function_">effect</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(child.<span class="property">bar</span>))</span><br><span class="line"></span><br><span class="line">child.<span class="property">bar</span> = <span class="number">2</span> <span class="comment">// 会导致副作用函数执行两次</span></span><br></pre></td></tr></table></figure>
+<p>对于设置相同值,只需要判断新值与旧值即可.  原型链上的响应式值则需要判断 <mark class="label info">receiver</mark>是不是<mark class="label info">target</mark>的代理对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === <span class="string">&#x27;raw&#x27;</span>) &#123;	</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="title function_">track</span>(target, key)</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, newVal, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> oldVal = target[key]	<span class="comment">// 对比新旧值</span></span><br><span class="line">      <span class="keyword">const</span> type = <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(target, key) ? <span class="string">&#x27;SET&#x27;</span> : <span class="string">&#x27;ADD&#x27;</span></span><br><span class="line">      <span class="comment">// 设置属性值</span></span><br><span class="line">      <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">set</span>(target, key, newVal, receiver)</span><br><span class="line">      <span class="keyword">if</span> (target === receiver.<span class="property">raw</span>) &#123;	<span class="comment">// 处理原型链上的响应式数据</span></span><br><span class="line">        <span class="keyword">if</span> (oldVal !== newVal &amp;&amp; (oldVal === oldVal || newVal === newVal)) &#123; <span class="comment">// 处理NaN</span></span><br><span class="line">          <span class="title function_">trigger</span>(target, key, type)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浅响应与深响应">浅响应与深响应</h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactive</span>(obj)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shallowReactive</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactive</span>(obj, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createReactive</span>(<span class="params">obj, isShallow = <span class="literal">false</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// 拦截读取操作</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === <span class="string">&#x27;raw&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 将副作用函数 activeEffect 添加到存储副作用函数的桶中</span></span><br><span class="line">      <span class="title function_">track</span>(target, key)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (isShallow) &#123; 	<span class="comment">// 浅响应</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> &amp;&amp; res !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title function_">reactive</span>(res)	<span class="comment">// 深响应</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="只读与浅只读">只读与浅只读</h2>
+<p>如果一个数据是只读的,那就意味着任何方式都无法修改它.因此,没有必要为只读数据建立响应联系</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">readonly</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactive</span>(obj, <span class="literal">false</span>, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shallowReadonly</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactive</span>(obj, <span class="literal">true</span>, <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createReactive</span>(<span class="params">obj, isShallow = <span class="literal">false</span>, isReadonly = <span class="literal">false</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="comment">// 拦截读取操作</span></span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === <span class="string">&#x27;raw&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> target</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 非只读的时候才需要建立响应联系</span></span><br><span class="line">      <span class="keyword">if</span> (!isReadonly) &#123;</span><br><span class="line">        <span class="title function_">track</span>(target, key)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> res = <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, receiver)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (isShallow) &#123;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> &amp;&amp; res !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 深只读/响应</span></span><br><span class="line">        <span class="keyword">return</span> isReadonly ? <span class="title function_">readonly</span>(res) : <span class="title function_">reactive</span>(res)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> res</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 拦截设置操作</span></span><br><span class="line">    <span class="title function_">set</span>(<span class="params">target, key, newVal, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isReadonly) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">`属性 <span class="subst">$&#123;key&#125;</span> 是只读的`</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="title function_">deleteProperty</span>(<span class="params">target, key</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isReadonly) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">`属性 <span class="subst">$&#123;key&#125;</span> 是只读的`</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">霍春阳. Vue.js设计与实现</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 响应式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/effect-system-2-2/" rel="prev" title="响应系统 - 非原始值 - 数组">
+                  <i class="fa fa-chevron-left"></i> 响应系统 - 非原始值 - 数组
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/effect-system-1/" rel="next" title="响应系统 - 实现">
+                  响应系统 - 实现 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

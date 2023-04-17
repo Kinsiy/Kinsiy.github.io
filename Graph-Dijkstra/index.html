@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最短路径,是指两顶点之间经过的边上权值之和最少的路径  戴克斯特拉的原始版本仅适用于找到两个顶点之间的最短路径，后来更常见的变体固定了一个顶点作为源结点然后找到该顶点到图中所有其它结点的最短路径，产生一个最短路径树 该算法解决了图  G&#x3D;(V,E)G &#x3D; (V,E)G&#x3D;(V,E)上带权的单源最短路径问题。 具体来说，戴克斯特拉算法设置了一顶点集合SSS，在集合SSS中所有的顶点与源点sss之间的最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论 - 最短路径(Dijkstra)">
+<meta property="og:url" content="https://kinsiy.github.io/Graph-Dijkstra/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="最短路径,是指两顶点之间经过的边上权值之和最少的路径  戴克斯特拉的原始版本仅适用于找到两个顶点之间的最短路径，后来更常见的变体固定了一个顶点作为源结点然后找到该顶点到图中所有其它结点的最短路径，产生一个最短路径树 该算法解决了图  G&#x3D;(V,E)G &#x3D; (V,E)G&#x3D;(V,E)上带权的单源最短路径问题。 具体来说，戴克斯特拉算法设置了一顶点集合SSS，在集合SSS中所有的顶点与源点sss之间的最">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Dijkstra_Animation.gif">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20221127114233075.png">
+<meta property="article:published_time" content="2022-11-27T01:52:47.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.445Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="Dijkstra算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Dijkstra_Animation.gif">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Graph-Dijkstra/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Graph-Dijkstra/","path":"Graph-Dijkstra/","title":"图论 - 最短路径(Dijkstra)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>图论 - 最短路径(Dijkstra) | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Graph-Dijkstra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="图论 - 最短路径(Dijkstra) | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图论 - 最短路径(Dijkstra)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-27 09:52:47" itemprop="dateCreated datePublished" datetime="2022-11-27T09:52:47+08:00">2022-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最短路径,是指两顶点之间经过的边上权值之和最少的路径</p>
+<blockquote>
+<p>戴克斯特拉的原始版本仅适用于找到两个顶点之间的最短路径，后来更常见的变体固定了一个顶点作为源结点然后找到该顶点到图中所有其它结点的最短路径，产生一个<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E6%A0%91">最短路径树</a></p>
+<p>该算法解决了图  <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><mi>V</mi><mo separator="true">,</mo><mi>E</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G = (V,E)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mclose">)</span></span></span></span>上带权的单源最短路径问题。</p>
+<p>具体来说，戴克斯特拉算法设置了一顶点集合<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>，在集合<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>中所有的顶点与源点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">s</span></span></span></span>之间的最终最短路径权值均已确定。算法反复选择最短路径估计最小的点<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>∈</mo><mi>V</mi><mo>−</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">u \in V - S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>并将<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span>加入<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span></span></span></span>中。</p>
+<p>——Wikipedia. 戴克斯特拉算法</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="代码实现">代码实现</h2>
+<p>Dijkstra算法要求使用 <a href="/Graph-store-1">图论 - 存储结构 - Ⅰ </a> 中介绍的邻接矩阵存储图数据。</p>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Dijkstra_Animation.gif" alt=""></p>
+<div style="font-style: italic;text-align: center;">由Ibmua - Work by uploader.，公有领域</div>
+<div class="note warning"><p>基于 <a href="/Graph-store-1">图论 - 存储结构 - Ⅰ </a> 的简单实现, 仅用于学习算法思想.</p>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: Dijkstra 算法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Graph</span>&#125; graph 邻接矩阵存储的图</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Node</span>&#125; start 起始顶点</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;Node, Node&gt;</span>&#125; path 最短路径链</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Map&lt;Node, number&gt;</span>&#125; minWeight 最短路径对应的权</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">void</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">dijkstra</span>(<span class="params">graph, start, path, minWeight</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; nodes, matrix &#125; = graph;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> final = <span class="keyword">new</span> <span class="title class_">Map</span>();	<span class="comment">// 表示是否找到最短路径 Map&lt;Node, 0 | 1&gt;</span></span><br><span class="line">  <span class="keyword">let</span> k = nodes.<span class="title function_">indexOf</span>(start);</span><br><span class="line">  <span class="keyword">if</span> (k === -<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nodes.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> weight = matrix[k][i] === <span class="title class_">Graph</span>.<span class="property">UNBOUND</span> ? <span class="title class_">Infinity</span> : matrix[k][i];</span><br><span class="line">    final.<span class="title function_">set</span>(nodes[i], <span class="number">0</span>);</span><br><span class="line">    minWeight.<span class="title function_">set</span>(nodes[i], weight);</span><br><span class="line">    path.<span class="title function_">set</span>(nodes[i], start);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  minWeight.<span class="title function_">set</span>(start, <span class="number">0</span>);</span><br><span class="line">  final.<span class="title function_">set</span>(start, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; nodes.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> min = <span class="title class_">Infinity</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nodes.<span class="property">length</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (final.<span class="title function_">get</span>(nodes[j]) || minWeight.<span class="title function_">get</span>(nodes[j]) &gt;= min) <span class="keyword">continue</span>;</span><br><span class="line">      k = j;</span><br><span class="line">      min = minWeight.<span class="title function_">get</span>(nodes[j]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    final.<span class="title function_">set</span>(nodes[k], <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; nodes.<span class="property">length</span>; j++) &#123;</span><br><span class="line">      <span class="keyword">const</span> weight = matrix[k][j] === <span class="title class_">Graph</span>.<span class="property">UNBOUND</span> ? <span class="title class_">Infinity</span> : matrix[k][j];</span><br><span class="line">      <span class="keyword">if</span> (final.<span class="title function_">get</span>(nodes[j]) || min + weight &gt;= minWeight.<span class="title function_">get</span>(nodes[j])) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">      minWeight.<span class="title function_">set</span>(nodes[j], min + matrix[k][j]);</span><br><span class="line">      path.<span class="title function_">set</span>(nodes[j], nodes[k]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="验证">验证</h3>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20221127114233075.png" alt="image-20221127114233075"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> graph = <span class="keyword">new</span> <span class="title class_">Graph</span>(<span class="title class_">Graph</span>.<span class="property">UNDIRECTED</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> start = graph.<span class="title function_">addVertex</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">2</span>, <span class="number">5</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">7</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">4</span>, <span class="number">1</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">3</span>, <span class="number">6</span>, <span class="number">3</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">4</span>, <span class="number">7</span>, <span class="number">9</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">5</span>, <span class="number">7</span>, <span class="number">5</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">6</span>, <span class="number">8</span>, <span class="number">7</span>);</span><br><span class="line">graph.<span class="title function_">addEdge</span>(<span class="number">7</span>, <span class="number">8</span>, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line"><span class="keyword">const</span> minWeight = <span class="keyword">new</span> <span class="title class_">Map</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">dijkstra</span>(graph, start, path, minWeight);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> end = graph.<span class="title function_">addVertex</span>(<span class="number">8</span>);</span><br><span class="line"><span class="comment">// v0 - v8</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;minWeight: &quot;</span>, minWeight.<span class="title function_">get</span>(end));	<span class="comment">// minWeight:  16</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> shortestPath = <span class="string">&quot;shortestPath: &quot;</span>;</span><br><span class="line"><span class="keyword">let</span> prev = end;</span><br><span class="line"><span class="keyword">while</span> (prev !== start) &#123;</span><br><span class="line">  shortestPath += prev.<span class="property">value</span> + <span class="string">&quot; -&gt; &quot;</span>;</span><br><span class="line">  prev = path.<span class="title function_">get</span>(prev);</span><br><span class="line">&#125;</span><br><span class="line">shortestPath += start.<span class="property">value</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(shortestPath);	<span class="comment">// shortestPath: 8 -&gt; 7 -&gt; 6 -&gt; 3 -&gt; 4 -&gt; 2 -&gt; 1 -&gt; 0</span></span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/6424904/">程杰. 大话数据结构. </a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%88%B4%E5%85%8B%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95">Wikipedia. 戴克斯特拉算法.</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Dijkstra%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> Dijkstra算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/design-pattern-factory/" rel="prev" title="工厂方法模式">
+                  <i class="fa fa-chevron-left"></i> 工厂方法模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/quick-diff/" rel="next" title="快速 Diff 算法">
+                  快速 Diff 算法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="节点层级 任何 HTML 或 XML 文档都可以用 DOM 表示为一个由节点构成的层级结构。节点分很多类型，每种类型对应着文档中不同的信息和(或)标记，也有自己不同的特性、数据和方法，而且与其他类型有某种关系。这些关系构成了层级，让标记可以表示为一个以特定节点为根的树形结构。 12345678&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Sample Pag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-DOM-1">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-DOM-1/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="节点层级 任何 HTML 或 XML 文档都可以用 DOM 表示为一个由节点构成的层级结构。节点分很多类型，每种类型对应着文档中不同的信息和(或)标记，也有自己不同的特性、数据和方法，而且与其他类型有某种关系。这些关系构成了层级，让标记可以表示为一个以特定节点为根的树形结构。 12345678&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Sample Pag">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Node.jpg">
+<meta property="article:published_time" content="2021-03-30T12:39:31.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.451Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="DOM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Node.jpg">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-DOM-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-DOM-1/","path":"Javascript-DOM-1/","title":"Javascript-DOM-1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-DOM-1 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%B1%82%E7%BA%A7"><span class="nav-text">节点层级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-%E7%B1%BB%E5%9E%8B"><span class="nav-text">Node 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nodeName-%E4%B8%8E-nodeValue"><span class="nav-text">nodeName 与 nodeValue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8A%82%E7%82%B9%E5%85%B3%E7%B3%BB"><span class="nav-text">节点关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E7%BA%B5%E8%8A%82%E7%82%B9"><span class="nav-text">操纵节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Document-%E7%B1%BB%E5%9E%8B"><span class="nav-text">Document 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%AD%90%E8%8A%82%E7%82%B9"><span class="nav-text">文档子节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E4%BF%A1%E6%81%AF"><span class="nav-text">文档信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E5%85%83%E7%B4%A0"><span class="nav-text">定位元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E9%9B%86%E5%90%88"><span class="nav-text">特殊集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Element-%E7%B1%BB%E5%9E%8B"><span class="nav-text">Element 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML-%E5%85%83%E7%B4%A0"><span class="nav-text">HTML 元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E5%B1%9E%E6%80%A7"><span class="nav-text">取得属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attributes-%E5%B1%9E%E6%80%A7"><span class="nav-text">attributes 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%85%83%E7%B4%A0"><span class="nav-text">创建元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E5%90%8E%E4%BB%A3"><span class="nav-text">元素后代</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%B1%BB%E5%9E%8B"><span class="nav-text">其他类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-DOM-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-DOM-1 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-DOM-1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-30 20:39:31" itemprop="dateCreated datePublished" datetime="2021-03-30T20:39:31+08:00">2021-03-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="节点层级">节点层级</h2>
+<p>任何 HTML 或 XML 文档都可以用 DOM 表示为一个由节点构成的层级结构。节点分很多类型，每种类型对应着文档中不同的信息和(或)标记，也有自己不同的特性、数据和方法，而且与其他类型有某种关系。这些关系构成了层级，让标记可以表示为一个以特定节点为根的树形结构。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Sample Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello word!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>document 节点表示每个文档的根节点。在这里，根节点的唯一子节点是&lt;html&gt;元素,我们称之为文档元素(documentElement)。文档元素是最外层的元素，所有其他元素都存在于这个元素之内。每个文档只能有一个文档元素。在 Html 页面中，文档元素始终是&lt;html&gt;元素。</p>
+<h3 id="Node-类型">Node 类型</h3>
+<p>DOMLevel 1 描述了名为 Node 的接口，这个接口是所有 DOM 节点类型都必须实现的。</p>
+<h4 id="nodeName-与-nodeValue">nodeName 与 nodeValue</h4>
+<p>nodeName 与 nodeValue 保存着有关节点的信息。这两个属性的值完全取决于节点类型。对元素而言，nodeName 始终等于元素的标签名，而 nodeValue 则始终为 null。</p>
+<h4 id="节点关系">节点关系</h4>
+<p>文档中的所有节点都与其他节点有关系。这些关系可以形容为家族关系，相当于把文档树比作家谱。<br>
+每个节点都有一个 childNodes 属性，其中包含一个 NodeList 的实例。NodeList 是一个类数组对象，用于存储可以按位置存取的有序节点。注意，NodeList 并不是 Array 的实例，但可以使用中括号访问它的值，而且它也有 length 属性。NodeList 是实时的活动对象，而不是第一次访问时所获得内容的快照。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> firstChild = someNode.<span class="property">childNodes</span>[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> secondChild = soNode.<span class="property">childNodes</span>.<span class="title function_">item</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> count = someNode.<span class="property">childNodes</span>.<span class="property">length</span>;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/Node.jpg" alt=""><br>
+利用这些关系指针，几乎可以访问到文档树中的任何节点。还可以使用 hasChildNodes()方法检测节点是否存在子节点，如果这个方法返回 true 说明节点有一个或多个子节点。</p>
+<h4 id="操纵节点">操纵节点</h4>
+<ol>
+<li><b>appendChild()</b><br>
+用于在 childNodes 列表末尾添加节点。添加新节点会更新相关的关系指针，包活父节点和之前的最后一个子节点。appendChild()方法返回新添加的节点。如果把文档中已经存在的节点传给 appendChild()，则这个节点会从之前的位置被转移到新位置。</li>
+<li><b>insertBefore()</b><br>
+如果想把节点放到 childNodes 中的特定位置而不是末尾，则可以使用 insertBefore()方法。这个方法接收两个参数：要插入的节点和参照节点。调用这个方法后，要插入的节点会变成参照节点的前一个同胞节点，并被返回。如果参照节点是 null，则 insertBefore()与 appendChild()效果相同。</li>
+<li><b>replaceChild()</b><br>
+replaceChild()方法接收两个参数：要插入的节点和要替换的节点。要替换的节点会被返回并从文档树中完全移除，要插入的节点会取而代之。</li>
+<li>其他方法<br>
+<b>cloneNode()</b>,会返回与调用它的节点一模一样的节点。cloneNode()还接收一个布尔值参数表示是否深复制。在传入 true 参数时，会进行深复制，即复制节点及其整个字 DOM 树。如果传入 false，则只会复制调用该方法的节点。复制返回的节点属于文档所有，但尚未指定父节点，可称为孤儿节点(orphan)<br>
+<b>normalize()</b>，处理文档子树中的文本节点。在节点上调用 normalize()方法会检测这个节点的所有后代，从中搜索不包含文本的文本节点已经互为同胞关系的文本节点，如果发现空文本节点，则将其删除；如果两个同胞节点是相邻的，则将其合并为一个文本节点。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设someNode有多个子节点</span></span><br><span class="line"><span class="keyword">let</span> returnedNode = someNode.<span class="title function_">appendChild</span>(someNode.<span class="property">firstChild</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(returnedNode === someNode.<span class="property">firstChild</span>); <span class="comment">// false</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(returnedNode === someNode.<span class="property">lastChild</span>); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> returnNode_1 = someNode.<span class="title function_">insertBefore</span>(newNode, someNode.<span class="property">firstChild</span>); <span class="comment">// 在第一个节点前插入一个新节点</span></span><br><span class="line"><span class="keyword">let</span> returnNode_1 = someNode.<span class="title function_">replaceChild</span>(newNode, someNode.<span class="property">childNodes</span>[someNode.<span class="property">childNodes</span>.<span class="property">length</span> - <span class="number">2</span>]); <span class="comment">// 替换倒数第二个节点</span></span><br></pre></td></tr></table></figure>
+<h3 id="Document-类型">Document 类型</h3>
+<p>Document 类型是 Javascript 中表示文档节点的类型。在浏览器中，文档对象是 HTMLDocument 的实例(HTMLDocument 继承 Document)，表示整个 HTML 页面。document 是 window 对象的属性，因此是一个全局对象</p>
+<h4 id="文档子节点">文档子节点</h4>
+<p>DOM 规范规定 Document 节点的子节点可以是 DocumentType、Element、ProcessingInstruction 或 Comment 类型，也提供了两个访问子节点的快捷方式。第一个是 documentElement 属性，始终指向 HTML 页面中的&lt;html&gt;元素。第二个是 body 属性，直接指向&lt;body&gt;元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">let</span> html = <span class="variable language_">document</span>.<span class="property">documentElement</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">let</span> body = <span class="variable language_">document</span>.<span class="property">body</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(html.<span class="property">nodeName</span>); <span class="comment">// HTML</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(body.<span class="property">nodeName</span>);  <span class="comment">// BODY</span></span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="文档信息">文档信息</h4>
+<p>title 属性，包含&lt;title&gt;元素中的文档，通常显示在浏览器窗口或标签页的标题栏。通过这个属性可以读写页面的标题，修改后的标题也会反映在浏览器标题栏上。不过，修改 title 属性并不会改变&lt;title&gt;元素<br>
+URL 属性包含当前页面的完整 URL，domain 包含页面的域名，而 referrer 包含链接到当前页面的那个页面的 URL。如果当前页面没有来源，则 referrer 属性包含空字符串。所有这些信息都可以在请求的 HTTP 头部信息中获取，只是在 Javascript 中通过这几个属性暴露出来而已。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="variable language_">document</span>.<span class="property">URL</span>;</span><br><span class="line"><span class="keyword">let</span> domain = <span class="variable language_">document</span>.<span class="property">domain</span>;</span><br><span class="line"><span class="keyword">let</span> referrer = <span class="variable language_">document</span>.<span class="property">referrer</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="定位元素">定位元素</h4>
+<p>使用 DOM 最常见的情形可能就是获取某个或某组元素的引用，然后对它们执行某些操作。</p>
+<ol>
+<li>getElementById()<br>
+方法接收一个参数，即要获取元素的 ID，如果找到了则返回这个元素，如果没找到则返回 null。参数 ID 必须跟在页面中的 id 属性值完全匹配，包括大小写。如果页面中存在多个具有多个相同的 ID 的元素，则 getElementById()返回在文档中出现的第一个元素。</li>
+<li>getElementByTagName()<br>
+方法接收一个参数，即要获取元素的标签名，返回包含零个或多个元素的 NodeList</li>
+<li>getElementByName()<br>
+顾名思义，这个方法会返回具有给定 name 属性的所有元素。</li>
+</ol>
+<h4 id="特殊集合">特殊集合</h4>
+<ul>
+<li>document.anchors 包含文档中所有带 name 属性的&lt;a&gt;元素</li>
+<li>document.froms 包含文档中所有&lt;from&gt;元素</li>
+<li>document.images 包含文档中所有&lt;img&gt;元素</li>
+<li>document.links 包含文档中所有带 href 属性的&lt;a&gt;元素</li>
+</ul>
+<h3 id="Element-类型">Element 类型</h3>
+<p>Elemenet 表示 XML 或 HTML 元素，对外暴露出访问元素标签名</p>
+<h4 id="HTML-元素">HTML 元素</h4>
+<p>所有 HTML 元素都通过 HTMLElement 类型表示，包括其直接实例和间接实例。另外，HTMLElement 直接继承 Element 并增加了一些属性。每个属性都对应下列属性之一，他们是所有 HTML 元素都有的标准属性</p>
+<ul>
+<li>id，元素在文档中的唯一标识符</li>
+<li>title，包含元素的额外信息，通常以提示条形式展示</li>
+<li>lang，元素内容的语言代码</li>
+<li>dir，语言的书写方向</li>
+<li>className，相当于 class 属性，用于指定元素的 CSS 类</li>
+</ul>
+<h4 id="取得属性">取得属性</h4>
+<p>每个元素都有零个或多个属性，通常用于为元素或其内容附加更多信息。</p>
+<ul>
+<li>getAttribute()</li>
+<li>setAttribute()</li>
+<li>removeAttribute()</li>
+</ul>
+<p>顾名思义，这几个方法不用多说。稍微需要注意的是，通过对象形式为元素添加自定义属性是不会让它变成元素的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">myColor</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(div.<span class="title function_">getAttribute</span>(<span class="string">&quot;myColor&quot;</span>)); <span class="comment">// null (IE除外)</span></span><br></pre></td></tr></table></figure>
+<h4 id="attributes-属性">attributes 属性</h4>
+<p>Element 类型是唯一使用 attributes 属性的 DOM 节点类型。attribute 属性包含一个 NamedNodeMap 实例，是一个类似 NodeList 的&quot;实时&quot;集合。元素的每个属性都表示为一个 Attr 节点，并保存在这个 NamedNodeMap 对象中。NamedNodeMap 对象包含下列方法：</p>
+<ul>
+<li>getNamedItem(name),返回 nodeName 属性等于 name 的节点</li>
+<li>removeNamedItem(name),删除 nodeName 属性等于 name 的节点</li>
+<li>setNamedItem(node),向列表中添加 node 节点，以其 nodeName 为索引</li>
+<li>item(pos),返回索引位置 pos 处的节点</li>
+</ul>
+<p>一般不怎么用，getAttribute()、setAttribute()、removeAttribute()这三个使用起来更简便，attributes 属性最有用的场景是需要迭代元素上所有属性的时候。</p>
+<h4 id="创建元素">创建元素</h4>
+<p>可以使用 document.createElement()方法创建新元素。这个方法接收一个参数，即要创建元素的标签名。在 HTML 文档中，标签名是不区分大小写的，而 XML 文档(包括 XHTML)是区分大小写的<br>
+创建的元素没有添加到文档树中，不会影响到浏览器显示，要把元素添加到文档树中，可以使用 appendChild()、insertBefore()或 replaceChild()。</p>
+<h4 id="元素后代">元素后代</h4>
+<p>元素可以拥有任意多个子元素和后代元素，因为元素本身也可以是其他元素的子元素。childNodes 属性包含所有的子节点，这些子节点可能是其他元素、文本节点、注释或处理指令。不同浏览器在识别这些节点时的表现明显不同。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在解析以上代码是，&lt;ul&gt;元素会包含 7 个子元素，其中 3 个事&lt;li&gt;元素，还有 4 个 Text 节点(表示&lt;li&gt;元素周围的空格)。如果把元素之间的空格删掉，则所有浏览器都会返回相同数量的子节点</p>
+<h3 id="其他类型">其他类型</h3>
+<p>Text 类型 &amp;&amp; Comment 类型 &amp;&amp; CDATASection 类型<br>
+DocumentType 类型 &amp;&amp; DocumentFragment 类型 &amp;&amp; Attr 类型<br>
+略 🤣</p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/DOM/" rel="tag"><i class="fa fa-tag"></i> DOM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-DOM-2/" rel="prev" title="Javascript-DOM-2">
+                  <i class="fa fa-chevron-left"></i> Javascript-DOM-2
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-async-await/" rel="next" title="Javascript-async/await">
+                  Javascript-async/await <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

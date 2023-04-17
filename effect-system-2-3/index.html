@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="文章依据《Vue.js设计与实现》第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文  代理 Set 和 Map Set 和 Map 的代理思路与代理数组是一样的, 需要注意的是其size是一个访问器属性, 访问器内部检查了[[SetData]]内部槽, Reflect.get中this的值要指向原始对象而非代理对象,其余方法也是一样">
+<meta property="og:type" content="article">
+<meta property="og:title" content="响应系统 - 非原始值 - Set&amp;Map">
+<meta property="og:url" content="https://kinsiy.github.io/effect-system-2-3/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="文章依据《Vue.js设计与实现》第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文  代理 Set 和 Map Set 和 Map 的代理思路与代理数组是一样的, 需要注意的是其size是一个访问器属性, 访问器内部检查了[[SetData]]内部槽, Reflect.get中this的值要指向原始对象而非代理对象,其余方法也是一样">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-26T16:30:43.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.464Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="响应式">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/effect-system-2-3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/effect-system-2-3/","path":"effect-system-2-3/","title":"响应系统 - 非原始值 - Set&Map"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>响应系统 - 非原始值 - Set&Map | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%90%86-Set-%E5%92%8C-Map"><span class="nav-text">代理 Set 和 Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E5%93%8D%E5%BA%94%E8%81%94%E7%B3%BB"><span class="nav-text">建立响应联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%B1%A1%E6%9F%93%E5%8E%9F%E5%A7%8B%E6%95%B0%E6%8D%AE"><span class="nav-text">避免污染原始数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86forEach"><span class="nav-text">处理forEach</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%96%B9%E6%B3%95"><span class="nav-text">迭代器方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values-%E4%B8%8E-keys-%E6%96%B9%E6%B3%95"><span class="nav-text">values 与 keys 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/effect-system-2-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="响应系统 - 非原始值 - Set&Map | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          响应系统 - 非原始值 - Set&Map
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-27 00:30:43" itemprop="dateCreated datePublished" datetime="2022-09-27T00:30:43+08:00">2022-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文</p>
+</div>
+<h2 id="代理-Set-和-Map">代理 Set 和 Map</h2>
+<p>Set 和 Map 的代理思路与代理数组是一样的, 需要注意的是其<mark class="label info">size</mark>是一个访问器属性, 访问器内部检查了<mark class="label danger">[[SetData]]</mark>内部槽, <mark class="label info">Reflect.get</mark>中<mark class="label info">this</mark>的值要指向原始对象而非代理对象,其余方法也是一样</p>
+<span id="more"></span>
+<h3 id="建立响应联系">建立响应联系</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutableInstrumentations = &#123;</span><br><span class="line">  <span class="title function_">add</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">    <span class="keyword">const</span> hadKey = target.<span class="title function_">has</span>(key)</span><br><span class="line">    <span class="keyword">const</span> res = target.<span class="title function_">add</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (!hadKey) &#123;</span><br><span class="line">      <span class="title function_">trigger</span>(target, key, <span class="string">&#x27;ADD&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">delete</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">    <span class="keyword">const</span> hadKey = target.<span class="title function_">has</span>(key)</span><br><span class="line">    <span class="keyword">const</span> res = target.<span class="title function_">delete</span>(key)</span><br><span class="line">    <span class="keyword">if</span> (hadKey) &#123;</span><br><span class="line">      <span class="title function_">trigger</span>(target, key, <span class="string">&#x27;DELETE&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">    <span class="keyword">const</span> had = target.<span class="title function_">has</span>(key)</span><br><span class="line"></span><br><span class="line">    <span class="title function_">track</span>(target, key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (had) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = target.<span class="title function_">get</span>(key)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">typeof</span> res === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">reactive</span>(res) : res</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">key, value</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">    <span class="keyword">const</span> had = target.<span class="title function_">has</span>(key)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> oldValue = target.<span class="title function_">get</span>(key)</span><br><span class="line">    <span class="keyword">const</span> rawValue = value.<span class="property">raw</span> || value</span><br><span class="line">    target.<span class="title function_">set</span>(key, rawValue)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!had) &#123;</span><br><span class="line">      <span class="title function_">trigger</span>(target, key, <span class="string">&#x27;ADD&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (oldValue !== value || (oldValue === oldValue &amp;&amp; value === value)) &#123;</span><br><span class="line">      <span class="title function_">trigger</span>(target, key, <span class="string">&#x27;SET&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createReactive</span>(<span class="params">obj, isShallow = <span class="literal">false</span>, isReadonly = <span class="literal">false</span></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Proxy</span>(obj, &#123;</span><br><span class="line">    <span class="title function_">get</span>(<span class="params">target, key, receiver</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === <span class="string">&#x27;raw&#x27;</span>) <span class="keyword">return</span> target</span><br><span class="line">      <span class="keyword">if</span> (key === <span class="string">&#x27;size&#x27;</span>) &#123;</span><br><span class="line">        <span class="title function_">track</span>(target, <span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(target, key, target)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> mutableInstrumentations[key]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="避免污染原始数据">避免污染原始数据</h3>
+<p><strong>响应式数据设置到原始数据上的行为称为数据污染</strong>, 形如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="keyword">new</span> <span class="title class_">Map</span></span><br><span class="line"><span class="keyword">const</span> p1 = <span class="title function_">reactive</span>(m)</span><br><span class="line"><span class="keyword">const</span> p2 = <span class="title function_">reactive</span>(<span class="keyword">new</span> <span class="title class_">Map</span>)</span><br><span class="line"></span><br><span class="line">p1.<span class="title function_">set</span>(<span class="string">&#x27;p2&#x27;</span>, p2)</span><br><span class="line"></span><br><span class="line"><span class="title function_">effect</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(m.<span class="title function_">get</span>(<span class="string">&#x27;p2&#x27;</span>).<span class="property">size</span>))</span><br><span class="line"></span><br><span class="line">m.<span class="title function_">get</span>(<span class="string">&#x27;p2&#x27;</span>).<span class="title function_">set</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="number">1</span>) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>注意 <a href="#%E5%BB%BA%E7%AB%8B%E5%93%8D%E5%BA%94%E8%81%94%E7%B3%BB">建立响应联系</a>中<mark class="label danger">mutableInstrumentations.set</mark>, 在  target.set 函数设置值之前对值进行检查: 只要发现即将要设置的值时响应式数据,那么就通过raw属性获取原始数据,再把原始数据设置到 target 上</p>
+<div class="note primary"><p>除了set方法需要避免污染原始数据外, Set 类型的 add 方法, 普通对象的写值操作, 还有为数组添加元素的方法等, 都需要做类似的处理</p>
+</div>
+<h3 id="处理forEach">处理forEach</h3>
+<p>由于上述 访问 <mark class="label danger">size</mark>属性时, 是通过原始数据进行操作的, 会导致在forEach 回调函数中参数不是响应式的问题, 需要手动处理, 并且对比 <mark class="label info">for...in</mark>操作, Map类型的forEach 需要在值更新时触发响应</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutableInstrumentations = &#123;</span><br><span class="line">  <span class="title function_">forEach</span>(<span class="params">callback, thisArg</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">wrap</span> = (<span class="params">val</span>) =&gt; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">reactive</span>(val) : val</span><br><span class="line">    <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">    <span class="title function_">track</span>(target, <span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line">    target.<span class="title function_">forEach</span>(<span class="function">(<span class="params">v, k</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 手动调用callback, 实现深响应</span></span><br><span class="line">      callback.<span class="title function_">call</span>(thisArg, <span class="title function_">wrap</span>(v), <span class="title function_">wrap</span>(k), <span class="variable language_">this</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key, type, newVal</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> effectsToRun = <span class="keyword">new</span> <span class="title class_">Set</span>()</span><br><span class="line">  effects &amp;&amp; effects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effectFn</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (effectFn !== activeEffect) &#123;</span><br><span class="line">      effectsToRun.<span class="title function_">add</span>(effectFn)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    type === <span class="string">&#x27;ADD&#x27;</span> ||</span><br><span class="line">    type === <span class="string">&#x27;DELETE&#x27;</span> ||</span><br><span class="line">    (</span><br><span class="line">      type === <span class="string">&#x27;SET&#x27;</span> &amp;&amp;</span><br><span class="line">      <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(target) === <span class="string">&#x27;[object Map]&#x27;</span></span><br><span class="line">    )</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">const</span> iterateEffects = depsMap.<span class="title function_">get</span>(<span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line">    iterateEffects &amp;&amp; iterateEffects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effectFn</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (effectFn !== activeEffect) &#123;</span><br><span class="line">        effectsToRun.<span class="title function_">add</span>(effectFn)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="迭代器方法">迭代器方法</h3>
+<p>Map 类型的迭代器方法, 包括<mark class="label info">[Symbol.iterator]/entries/keys/values</mark>, 与上述<mark class="label info">forEach</mark>一样, 迭代器方法需要将迭代产生的值包装成响应式数据.</p>
+<div class="note info"><p>可迭代协议指的是一个对象实现了<mark class="label info">Symbol.iterator</mark></p>
+<p>迭代器协议指的是一个对象实现了<mark class="label info">next</mark>方法</p>
+</div>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mutableInstrumentations = &#123;</span><br><span class="line">  [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]: iterationMethod,</span><br><span class="line">  <span class="attr">entries</span>: iterationMethod,</span><br><span class="line">  <span class="attr">keys</span>: keysIterationMethod,</span><br><span class="line">  <span class="attr">values</span>: valuesIterationMethod,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">iterationMethod</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 获取原始数据对象 target</span></span><br><span class="line">  <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">  <span class="comment">// 获取到原始迭代器方法</span></span><br><span class="line">  <span class="keyword">const</span> itr = target[<span class="title class_">Symbol</span>.<span class="property">iterator</span>]()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">wrap</span> = (<span class="params">val</span>) =&gt; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">reactive</span>(val) : val</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调用 track 函数建立响应联系</span></span><br><span class="line">  <span class="title function_">track</span>(target, <span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将其返回</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; value, done &#125; = itr.<span class="title function_">next</span>()</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">value</span>: value ? [<span class="title function_">wrap</span>(value[<span class="number">0</span>]), <span class="title function_">wrap</span>(value[<span class="number">1</span>])] : value,</span><br><span class="line">        done</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="values-与-keys-方法">values 与 keys 方法</h3>
+<p>values 方法的实现与entries 方法类似, 不同的是, 当使用 for…of 迭代values是, 得到的仅仅是Map数据的值, 而非键值对</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">valuesIterationMethod</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 获取原始数据对象 target</span></span><br><span class="line">  <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">  <span class="comment">// 获取到原始迭代器方法</span></span><br><span class="line">  <span class="keyword">const</span> itr = target.<span class="title function_">values</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">wrap</span> = (<span class="params">val</span>) =&gt; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">reactive</span>(val) : val</span><br><span class="line"></span><br><span class="line">  <span class="title function_">track</span>(target, <span class="variable constant_">ITERATE_KEY</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将其返回</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; value, done &#125; = itr.<span class="title function_">next</span>()</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="title function_">wrap</span>(value),	<span class="comment">// 只有值</span></span><br><span class="line">        done</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>keys 方法与values 方法非常类似, 不同点在于, 前者处理的是键而非值.</p>
+<p>另外对于 values 或 entries 来说 Map 类型的数据 即使操作类型为 SET, 也会触发那些与 ITERATE_KEY 相关联的副作用函数, 但这对keys 来说是没有必要的, keys 方法 只关心Map 类型数据的键的变化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAP_KEY_ITERATE_KEY</span> = <span class="title class_">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">keysIterationMethod</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 获取原始数据对象 target</span></span><br><span class="line">  <span class="keyword">const</span> target = <span class="variable language_">this</span>.<span class="property">raw</span></span><br><span class="line">  <span class="comment">// 获取到原始迭代器方法</span></span><br><span class="line">  <span class="keyword">const</span> itr = target.<span class="title function_">keys</span>()	<span class="comment">// 获取键值</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">wrap</span> = (<span class="params">val</span>) =&gt; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span> ? <span class="title function_">reactive</span>(val) : val</span><br><span class="line"></span><br><span class="line">  <span class="title function_">track</span>(target, <span class="variable constant_">MAP_KEY_ITERATE_KEY</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将其返回</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="title function_">next</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; value, done &#125; = itr.<span class="title function_">next</span>()</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">value</span>: <span class="title function_">wrap</span>(value),</span><br><span class="line">        done</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    [<span class="title class_">Symbol</span>.<span class="property">iterator</span>]() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="variable language_">this</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">trigger</span>(<span class="params">target, key, type, newVal</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">if</span> ((</span><br><span class="line">    type === <span class="string">&#x27;ADD&#x27;</span> || type === <span class="string">&#x27;DELETE&#x27;</span>) &amp;&amp;</span><br><span class="line">    <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(target) === <span class="string">&#x27;[object Map]&#x27;</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="comment">// 执行 Map 类型 keys 相关联的副作用函数</span></span><br><span class="line">    <span class="keyword">const</span> iterateEffects = depsMap.<span class="title function_">get</span>(<span class="variable constant_">MAP_KEY_ITERATE_KEY</span>)</span><br><span class="line">    iterateEffects &amp;&amp; iterateEffects.<span class="title function_">forEach</span>(<span class="function"><span class="params">effectFn</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (effectFn !== activeEffect) &#123;</span><br><span class="line">        effectsToRun.<span class="title function_">add</span>(effectFn)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">霍春阳. Vue.js设计与实现</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 响应式</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/effect-system-3/" rel="prev" title="响应系统 - 原始值">
+                  <i class="fa fa-chevron-left"></i> 响应系统 - 原始值
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/effect-system-2-2/" rel="next" title="响应系统 - 非原始值 - 数组">
+                  响应系统 - 非原始值 - 数组 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

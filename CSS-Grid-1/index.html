@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="很早之前就看过如何应用栅格布局,但平常都是flex布局用的多.导致grid布局都忘了.最近重新复习了一遍.这里记录下 基本术语  栅格容器:  是确立栅格格式化上下文的框体,即定义一个栅格区域,其中的元素根据栅格布局(而非块级布局)规则排布 栅格元素:  是在栅格格式化上下文中参与栅格布局的东西 栅格轨道: 指两条相邻的栅格线之间夹住的整个区域,从栅格容器的一边延伸到对边,即栅格列或栅格行 栅格单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS - 栅格布局 - Ⅰ">
+<meta property="og:url" content="https://kinsiy.github.io/CSS-Grid-1/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="很早之前就看过如何应用栅格布局,但平常都是flex布局用的多.导致grid布局都忘了.最近重新复习了一遍.这里记录下 基本术语  栅格容器:  是确立栅格格式化上下文的框体,即定义一个栅格区域,其中的元素根据栅格布局(而非块级布局)规则排布 栅格元素:  是在栅格格式化上下文中参与栅格布局的东西 栅格轨道: 指两条相邻的栅格线之间夹住的整个区域,从栅格容器的一边延伸到对边,即栅格列或栅格行 栅格单">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716173940540.png">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716180651012.png">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716182339313.png">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716182911866.png">
+<meta property="article:published_time" content="2022-07-16T03:08:29.000Z">
+<meta property="article:modified_time" content="2023-04-17T15:05:32.053Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="Grid">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716173940540.png">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/CSS-Grid-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/CSS-Grid-1/","path":"CSS-Grid-1/","title":"CSS - 栅格布局 - Ⅰ"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CSS - 栅格布局 - Ⅰ | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-text">基本术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BE%E7%BD%AE%E6%A0%85%E6%A0%BC%E7%BA%BF"><span class="nav-text">放置栅格线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%BD%E5%BA%A6%E5%9B%BA%E5%AE%9A%E7%9A%84%E6%A0%85%E6%A0%BC%E8%BD%A8%E9%81%93"><span class="nav-text">宽度固定的栅格轨道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E6%A0%85%E6%A0%BC%E8%BD%A8%E9%81%93"><span class="nav-text">弹性栅格轨道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%80%82%E9%85%8D"><span class="nav-text">自动适配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E6%A0%85%E6%A0%BC%E7%BA%BF"><span class="nav-text">重复栅格线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%85%E6%A0%BC%E5%8C%BA%E5%9F%9F"><span class="nav-text">栅格区域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="nav-text">附加元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%97%E7%BA%BF%E5%92%8C%E8%A1%8C%E7%BA%BF"><span class="nav-text">使用列线和行线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%92%8C%E5%88%97%E7%9A%84%E7%AE%80%E5%86%99%E5%B1%9E%E6%80%A7"><span class="nav-text">行和列的简写属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E6%A0%85%E6%A0%BC"><span class="nav-text">隐式栅格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9F%9F"><span class="nav-text">使用区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%8F%A0%E6%A0%85%E6%A0%BC%E5%85%83%E7%B4%A0"><span class="nav-text">重叠栅格元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/CSS-Grid-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CSS - 栅格布局 - Ⅰ | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS - 栅格布局 - Ⅰ
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-07-16 11:08:29" itemprop="dateCreated datePublished" datetime="2022-07-16T11:08:29+08:00">2022-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-17 23:05:32" itemprop="dateModified" datetime="2023-04-17T23:05:32+08:00">2023-04-17</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>很早之前就看过如何应用栅格布局,但平常都是flex布局用的多.导致grid布局都忘了.最近重新复习了一遍.这里记录下</p>
+<h2 id="基本术语">基本术语</h2>
+<ul>
+<li><strong>栅格容器</strong>:  是确立栅格格式化上下文的框体,即定义一个栅格区域,其中的元素根据栅格布局(而非块级布局)规则排布</li>
+<li><strong>栅格元素</strong>:  是在栅格格式化上下文中参与栅格布局的东西</li>
+<li><strong>栅格轨道</strong>: 指两条相邻的栅格线之间夹住的整个区域,从栅格容器的一边延伸到对边,即栅格列或栅格行</li>
+<li><strong>栅格单元</strong>: 指四条栅格线限定的区域,内部没有其他栅格线贯穿</li>
+<li><strong>栅格区域</strong>:  指任何四条栅格线限定的矩形区域,有一个或多个栅格单元构成</li>
+</ul>
+<span id="more"></span>
+<h2 id="放置栅格线">放置栅格线</h2>
+<p>使用<mark class="label primary">grid-template-rows</mark>, <mark class="label primary">grid-template-columns</mark>大致定义栅格模板中的栅格线</p>
+<h3 id="宽度固定的栅格轨道">宽度固定的栅格轨道</h3>
+<p>“<strong>宽度固定</strong>”的栅格线指栅格线之间的距离不随栅格轨道中的内容变化而变化</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">200px</span> <span class="number">50%</span> <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为栅格线命名</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: [start col-a] <span class="number">200px</span> [col-b] <span class="number">50%</span> [col-c] <span class="number">100px</span> [stop end last];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为轨道尺寸设定极值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: [start col-a] <span class="number">200px</span> [col-b] <span class="number">50%</span> [col-c] <span class="number">100px</span> [stop end last];</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: [start masthead] <span class="number">3em</span> [content] <span class="built_in">minmax</span>(<span class="number">3em</span>, <span class="number">100%</span>) [footer] <span class="number">2em</span> [stop end]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意: 如果minmax()中指定的最大值比最小值小,最大值将被忽略,最小值将用于设定宽度固定的轨道长度</p>
+<p>也可以使用<mark class="label primary">calc()</mark>计算</p>
+<h3 id="弹性栅格轨道">弹性栅格轨道</h3>
+<p>弹性栅格轨道的尺寸基于弹性容器中非弹性轨道意外的空间确定,或者基于整个轨道中的具体内容而定</p>
+<p>使用<mark class="label primary">fr</mark>单位把余下的空间分成一定份数, 以分配给各栏</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">15em</span> <span class="number">1</span>fr <span class="number">10%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意: <mark class="label primary">minmax()</mark>表达式的最小值部分不允许使用<mark class="label primary">fr</mark>单位</p>
+<p>使用<mark class="label primary">min-content</mark>, <mark class="label primary">max-context</mark>根据内容设定轨道尺寸</p>
+<ul>
+<li>max-content. 占据内容所需的最大空间. “宽度尽量大,以防换行”</li>
+<li>min-content. 占据内容所需的最小空间.  “尽量少占据空间,够显示内容即可”, 对文本来说,只保证最长的单词能够在一行里完整显示,会导致大量断行</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: max-content max-content max-content max-content;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: max-content max-content max-content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自动适配">自动适配</h3>
+<p>除<mark class="label primary">min-content</mark>和<mark class="label primary">max-content</mark>外,还可以使用<mark class="label primary">fix-content()</mark>函数以简练的方式表达特定类型的尺寸模型</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template</span>-colums: <span class="number">1</span>fr <span class="built_in">fit-content</span>(<span class="number">150px</span>) <span class="number">2</span>fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<mark class="label primary">fit-content</mark>的伪公式
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fit-<span class="title function_">content</span>(arg) =&gt; <span class="title function_">min</span>(max-content, <span class="title function_">max</span>(min-content, arg))</span><br></pre></td></tr></table></figure>
+<p>可以这么理解: <mark class="label primary">fit-content(arg)</mark> 等价于 <code>minmax(min-content, max-content)</code>, 除非参数指定的值设置了更大的上限</p>
+<h3 id="重复栅格线">重复栅格线</h3>
+<p>可以使用<mark class="label primary">repeat()</mark>重复声明同一尺寸的轨道</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template</span>-columus: <span class="built_in">repeat</span>(<span class="number">10</span>, <span class="number">5em</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述规则创建了10个列轨道,每个轨道的宽度为5em, 共计50em.</p>
+<p>在repeat中, 轨道的尺寸可以使用任何值,可以是<mark class="label primary">min-content</mark>和<mark class="label primary">max-content</mark>,也可以是<mark class="label primary">fr</mark>值和<mark class="label primary">auto</mark>等,而且不限于只提供一个值. 但是不能在重复中嵌套重复</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template</span>-columus: <span class="built_in">repeat</span>(<span class="number">4</span>, <span class="number">10px</span> [col-start] <span class="number">250px</span> <span class="number">1</span>fr [col-end] <span class="number">10px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还可以使用<mark class="label primary">auto-fill</mark>,对轨道尺寸进行简单重复,直到填满整个栅格容器为止.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template</span>-columus: <span class="built_in">repeat</span>(auto-fill, [top] <span class="number">5em</span> [bottom])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每隔5em放置一条行栅格线,直到没有空间为止.</p>
+<mark class="label primary">auto-fill</mark>的局限是只能有一个可选的栅格线名称,一个尺寸固定的轨道和另一个栅格线名称.上面`[top] 5em [bottom]`就是这种模式下值最多的情况. 且在一个轨道模板中只能有一个自动重复的模式. 
+<p>但是, 可以和固定数量的重复结合</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template</span>-columus: <span class="built_in">repeat</span>(<span class="number">3</span>, <span class="number">20em</span>) <span class="built_in">repeat</span>(auto-fill, <span class="number">100px</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>与<mark class="label primary">auto-fill</mark>的行为类似的声明还有一个<mark class="label primary">auto-fit</mark>, 其与<mark class="label primary">auto-fill</mark>的区别是, <strong>没有栅格元素的轨道将被剔除</strong></p>
+<h2 id="栅格区域">栅格区域</h2>
+<p>使用<mark class="label primary">grid-template-areas</mark>可以栅格画出来</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>: </span><br><span class="line">    <span class="string">&quot;h h h h&quot;</span></span><br><span class="line">    <span class="string">&quot;l c c r&quot;</span></span><br><span class="line">    <span class="string">&quot;l f f f&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<mark class="label primary">grid-template-areas</mark>中每个字符串(放在一对双引号中)定义栅格中的一行. 相同的字符串值用于定义栅格区域的形状.</p>
+<p>注意: 栅格区域必须是矩形, 如果区域形状太复杂,整个模板都将失效</p>
+<p>对不想命名的区域可以使用一个或多个<mark class="label primary">.</mark>字符占位</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>: </span><br><span class="line">    <span class="string">&quot;header header header header&quot;</span></span><br><span class="line">    <span class="string">&quot;left ... ... right&quot;</span></span><br><span class="line">    <span class="string">&quot;footer footer footer footer&quot;</span>;</span><br><span class="line">  <span class="attribute">grid-template</span>-colums: <span class="number">1</span>fr <span class="number">20em</span> <span class="number">20em</span> <span class="number">1</span>fr;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">40px</span> <span class="number">10em</span> <span class="number">3em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义好栅格区域之后, 接下来要使用前面介绍的 <mark class="label primary">grid-template-columns</mark> 和 <mark class="label primary">grid-template-rows</mark> 定义栅格轨道的尺寸.</p>
+<p>对于命名区域, 会自动为构成栅格区域的栅格线进行命名, 对矩形的左/上两条栅格线命名为 <mark class="label primary">$1</mark>, 右/下则为<mark class="label primary">$1</mark>. 对与上方的规则来说, 自动为第一条列栅格线命名<mark class="label primary">header-start</mark>, 最后一条列栅格线命名<mark class="label primary">header-end</mark>, 行栅格线同理.</p>
+<p>除显式声明栅格区域, 也可以通过为栅格线命名<mark class="label primary">$1</mark>, <mark class="label primary">$1</mark>的形式隐式声明栅格区域 <strong>(不建议)</strong></p>
+<h2 id="附加元素">附加元素</h2>
+<h3 id="使用列线和行线">使用列线和行线</h3>
+<p>可以通过使用<mark class="label primary">grid-row-start</mark>, <mark class="label primary">grid-row-end</mark>, <mark class="label primary">grid-column-start</mark>, <mark class="label primary">grid-column-end</mark>.四个属性把栅格元素附加到栅格中.</p>
+<p>这几个属性的意思是, “我想把元素的边界附加到某条栅格线上”</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50em</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">5</span>, <span class="number">5em</span>);</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="number">10</span>, <span class="number">5em</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.one</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: <span class="number">4</span>;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.two</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: <span class="number">4</span>;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: <span class="number">6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果省略结束栅格线,那么结束栅格线使用序列中的下一条栅格线.</p>
+<p>还可以使用 <mark class="label primary">span n</mark> 相对于 开始/结束 栅格线横跨 <mark class="label primary">n</mark> 条栅格线, <mark class="label primary">n</mark> 为正整数, 默认值 1. 还可以在 <mark class="label primary">n</mark> 前/后指定命名栅格线, 以横跨<mark class="label primary">n</mark>条特定栅格线,  若未指定栅格线名字,则为任意栅格线</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50em</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">5</span>, [R] <span class="number">5em</span>);</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="number">5</span>, [col-A] <span class="number">5em</span> [col-B] <span class="number">5em</span>) <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.one</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: R <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: <span class="number">5</span>;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: col-B;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: span <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.two</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row-start</span>: R;</span><br><span class="line">  <span class="attribute">grid-row-end</span>: span R <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-column-start</span>: col-A <span class="number">3</span>;</span><br><span class="line">  <span class="attribute">grid-column-end</span>: span <span class="number">2</span> col-A</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="行和列的简写属性">行和列的简写属性</h3>
+<p>使用<mark class="label primary">grid-row</mark>, <mark class="label primary">grid-column</mark>简化把元素附加到栅格线上的过程.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  dispaly: grid;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="built_in">repeat</span>(<span class="number">10</span>, [R] <span class="number">1.5em</span>);</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">2em</span> <span class="built_in">repeat</span>(<span class="number">5</span>, [col-A] <span class="number">5em</span> [col-B] <span class="number">5em</span>) <span class="number">2em</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.one</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row</span>: R <span class="number">3</span> / <span class="number">7</span>;</span><br><span class="line">  <span class="attribute">grid-column</span>: col-B / span <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.two</span> &#123;</span><br><span class="line">  <span class="attribute">grid-row</span>: R / span R <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-column</span>: col-A <span class="number">3</span> / span <span class="number">2</span> col-A;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果值中间没有斜线,那么定义的是开始栅格线,结束栅格线取决于开始栅格线的值.如果开始栅格线是用名称引用的,那么结束栅格线也使用那个名称引用.</p>
+<h3 id="隐式栅格">隐式栅格</h3>
+<p>当栅格元素(或其一部分)超出了显式定义的栅格, 浏览器或隐式的创建栅格线以满足定义.</p>
+<p>注意: 跨度是从显式栅格开始计数的. (注意看box4/5)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: <span class="number">2em</span> <span class="number">2em</span>;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="built_in">repeat</span>(<span class="number">6</span>, <span class="number">4em</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box01</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box02</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">3</span> / span <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box03</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">3</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: span <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box04</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">4</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: span <span class="number">2</span> / <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box05</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">5</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: span <span class="number">4</span> / <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box06</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">6</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: -<span class="number">1</span> / span <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box07</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">7</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: span <span class="number">3</span> / -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716173940540.png" alt="image-20220716173940540"></p>
+<h3 id="错误处理">错误处理</h3>
+<ol>
+<li>开始线在结束线之后 =&gt; 对调两个值</li>
+<li>开始线与结束线都声明为跨度 =&gt; 丢弃结束线的值, 替换为 auto</li>
+<li>只使用具名跨度指明栅格元素的位置 =&gt; <mark class="label primary">span name</mark>将被替换为<mark class="label primary">span 1</mark></li>
+</ol>
+<h3 id="使用区域">使用区域</h3>
+<p>可以直接使用<mark class="label primary">grid-area</mark>一个属性引用栅格区域</p>
+<p>定义了具名栅格区域</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>:</span><br><span class="line">    <span class="string">&quot;header header header header&quot;</span></span><br><span class="line">    <span class="string">&quot;leftside content content rightside&quot;</span></span><br><span class="line">    <span class="string">&quot;leftside footer footer footer&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box01</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: header;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box02</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: leftside;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box03</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: content;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box04</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: rightside;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box05</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: footer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716180651012.png" alt="image-20220716180651012"></p>
+<p>未定义栅格区域, 可以分别指定围成栅格区域的四条栅格线引用该栅格区域. 其顺序为row-start, column-start, row-end, column-end.</p>
+<p>若存在省缺值, 且未省缺值为具名栅格线,那么省缺值与未省缺值一致.否则省缺值为auto</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: [r1-start] <span class="number">1</span>fr [r1-end r2-start] <span class="number">2</span>fr [r2-end];</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: [col-start] <span class="number">1</span>fr [col-end main-start] <span class="number">1</span>fr [main-end];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box01</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: r1 / main / r1 / main;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box02</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: r2-start / col-start / r2-end / main-end;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box03</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: <span class="number">1</span> / <span class="number">1</span> / <span class="number">2</span> / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716182339313.png" alt="image-20220716182339313"></p>
+<h3 id="重叠栅格元素">重叠栅格元素</h3>
+<p>附加栅格元素时,完全可以重叠每个元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: [r1-start] <span class="number">1</span>fr [r1-end r2-start] <span class="number">2</span>fr [r2-end];</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: [col-start] <span class="number">1</span>fr [col-end main-start] <span class="number">1</span>fr [main-end];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box01</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: r1 / col / r1 / main;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box02</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: r1-start / main-start / r2-end / main-end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220716182911866.png" alt="image-20220716182911866"></p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/33398314/">Eric A. Meyer / Estelle Weyl. CSS权威指南（第四版）</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+              <a href="/tags/Grid/" rel="tag"><i class="fa fa-tag"></i> Grid</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/CSS-Grid-2/" rel="prev" title="CSS - 栅格布局 - Ⅱ">
+                  <i class="fa fa-chevron-left"></i> CSS - 栅格布局 - Ⅱ
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/nodejs-picbed/" rel="next" title="一个基于Node.js的简易局域网图床">
+                  一个基于Node.js的简易局域网图床 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一个回路是一条非空的路径，其中第一个顶点和最后一个顶点相同。令图G&#x3D;(V,E,∅)G &#x3D; (V,E,\empty)G&#x3D;(V,E,∅)，一个回路是一条非空路径(e1,e2,...,en)(e_1,e_2,...,e_n)(e1​,e2​,...,en​)，其顶点序列为(v1,v2,...,vn,v1)(v_1,v_2,...,v_n,v_1)(v1​,v2​,...,vn​,v1​) 一个环路或简">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图论 - 环">
+<meta property="og:url" content="https://kinsiy.github.io/Graph-Cycles/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="一个回路是一条非空的路径，其中第一个顶点和最后一个顶点相同。令图G&#x3D;(V,E,∅)G &#x3D; (V,E,\empty)G&#x3D;(V,E,∅)，一个回路是一条非空路径(e1,e2,...,en)(e_1,e_2,...,e_n)(e1​,e2​,...,en​)，其顶点序列为(v1,v2,...,vn,v1)(v_1,v_2,...,v_n,v_1)(v1​,v2​,...,vn​,v1​) 一个环路或简">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-27T10:48:19.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.445Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="环">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Graph-Cycles/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Graph-Cycles/","path":"Graph-Cycles/","title":"图论 - 环"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>图论 - 环 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E6%8E%A2%E6%B5%8B"><span class="nav-text">环探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E7%AE%80%E5%8D%95%E7%8E%AF-%E6%9C%89%E5%90%91%E5%9B%BE"><span class="nav-text">寻找简单环(有向图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E5%BD%95"><span class="nav-text">附录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Graph-Cycles/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="图论 - 环 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          图论 - 环
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-27 18:48:19" itemprop="dateCreated datePublished" datetime="2021-12-27T18:48:19+08:00">2021-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>一个回路是一条非空的路径，其中第一个顶点和最后一个顶点相同。令图<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><mi>V</mi><mo separator="true">,</mo><mi>E</mi><mo separator="true">,</mo><mi mathvariant="normal">∅</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G = (V,E,\empty)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∅</span><span class="mclose">)</span></span></span></span>，一个回路是一条非空路径<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>e</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>e</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>e</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(e_1,e_2,...,e_n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>，其顶点序列为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>v</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>v</mi><mi>n</mi></msub><mo separator="true">,</mo><msub><mi>v</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(v_1,v_2,...,v_n,v_1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<p>一个环路或简单回路是只有第一个与最后一个顶点相同的回路</p>
+<p>回路和环的长度是它们经过的边的个数</p>
+<p>——Wikipedia. 环(图论)</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="环探测">环探测</h2>
+<p>使用深度优先遍历的方法，通过寻找一条连接当前顶点与之前顶点的边(它包含了一条后向边)，我们可以探测有向图和无向图上环的存在。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Graph</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="title function_">isCyclic</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> visited = <span class="keyword">new</span> <span class="title class_">Map</span>(); <span class="comment">// 是否遍历过</span></span><br><span class="line">    <span class="keyword">const</span> recStack = <span class="keyword">new</span> <span class="title class_">Map</span>(); <span class="comment">// 是否在递归栈中</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> <span class="variable language_">this</span>.<span class="property">nodes</span>.<span class="title function_">keys</span>()) &#123;</span><br><span class="line">      visited.<span class="title function_">set</span>(key, <span class="literal">false</span>);</span><br><span class="line">      recStack.<span class="title function_">set</span>(key, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> <span class="variable language_">this</span>.<span class="property">nodes</span>.<span class="title function_">keys</span>()) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isCyclicUtil</span>(key, visited, recStack)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="title function_">isCyclicUtil</span>(<span class="params">key, visited, recStack</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (recStack.<span class="title function_">get</span>(key)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (visited.<span class="title function_">get</span>(key)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    visited.<span class="title function_">set</span>(key, <span class="literal">true</span>);</span><br><span class="line">    recStack.<span class="title function_">set</span>(key, <span class="literal">true</span>); <span class="comment">// 入栈</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> adjcent <span class="keyword">of</span> <span class="variable language_">this</span>.<span class="property">nodes</span>.<span class="title function_">get</span>(key).<span class="title function_">getAdjacents</span>()) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isCyclicUtil</span>(adjcent.<span class="property">value</span>, visited, recStack)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    recStack.<span class="title function_">set</span>(key, <span class="literal">false</span>); <span class="comment">// 出栈</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title class_">Graph</span>.<span class="property">UNDIRECTED</span> = <span class="title class_">Symbol</span>(<span class="string">&quot;undirected graph&quot;</span>); <span class="comment">// 无向图</span></span><br><span class="line"><span class="title class_">Graph</span>.<span class="property">DIRECTED</span> = <span class="title class_">Symbol</span>(<span class="string">&quot;directed graph&quot;</span>); <span class="comment">// 有向图</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> g = <span class="keyword">new</span> <span class="title class_">Graph</span>(<span class="title class_">Graph</span>.<span class="property">DIRECTED</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">2</span>);</span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">g.<span class="title function_">addEdge</span>(<span class="number">3</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(g.<span class="title function_">isCyclic</span>()); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="寻找简单环-有向图">寻找简单环(有向图)</h2>
+<p>算法基于强连通图，能够找出图中所有的简单环，强连通图可以用<a href="https://kinsiy.github.io/Graph-Tarjan/">图论 - Tarjan算法</a>得到。</p>
+<div class="note primary"><p>英文论文(科学上网)<a target="_blank" rel="noopener" href="https://www.cs.tufts.edu/comp/150GA/homeworks/hw1/Johnson%2075.PDF">Finding all the elementary circuits of a directed graph.</a></p>
+</div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">simple_cycles</span>(<span class="params">G</span>) &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@description</span>: 解锁顶点</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">*</span>&#125; thisnode 要解锁的顶点</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">Set</span>&#125; blocked 已锁顶点集合</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> &#123;<span class="type">Map</span>&#125; blockedMap 连锁顶点对照</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">_unblock</span>(<span class="params">thisnode, blocked, B</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> stack = [thisnode];</span><br><span class="line">    <span class="keyword">while</span> (stack.<span class="property">length</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> node = stack.<span class="title function_">pop</span>();</span><br><span class="line">      <span class="keyword">if</span> (blocked.<span class="title function_">has</span>(node)) &#123;</span><br><span class="line">        blocked.<span class="title function_">delete</span>(node);</span><br><span class="line">        <span class="keyword">if</span> (B.<span class="title function_">has</span>(node)) &#123;</span><br><span class="line">          stack.<span class="title function_">push</span>(...B.<span class="title function_">get</span>(node));</span><br><span class="line">          B.<span class="title function_">delete</span>(node);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// G = _.cloneDeep(G) 为了不影响原图，可以复制一份</span></span><br><span class="line">  <span class="keyword">const</span> sccs = G.<span class="title function_">SCC</span>();</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (sccs.<span class="property">length</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> scc = sccs.<span class="title function_">pop</span>(); <span class="comment">// 强连通分量(数组 [顶点值, 顶点值...])</span></span><br><span class="line">    <span class="keyword">if</span> (scc.<span class="property">length</span> &lt; <span class="number">2</span>) <span class="keyword">continue</span>; <span class="comment">// 只有一个顶点的强连通分量无环</span></span><br><span class="line">    <span class="keyword">const</span> H = G.<span class="title function_">subGraph</span>(scc); <span class="comment">// 强连通分量(图)        Graph.subGraph 见附录</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> startNode = scc.<span class="title function_">pop</span>(); <span class="comment">// 遍历起点</span></span><br><span class="line">    <span class="keyword">const</span> path = [startNode]; <span class="comment">// 深度遍历路径</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> blocked = <span class="keyword">new</span> <span class="title class_">Set</span>(); <span class="comment">// 已封锁顶点</span></span><br><span class="line">    <span class="keyword">const</span> closed = <span class="keyword">new</span> <span class="title class_">Set</span>(); <span class="comment">// 环内顶点</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    blocked.<span class="title function_">add</span>(startNode);</span><br><span class="line">    <span class="keyword">const</span> B = <span class="keyword">new</span> <span class="title class_">Map</span>(); <span class="comment">// 连锁顶点对照</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title class_">SNAdj</span> = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> vertex <span class="keyword">of</span> H.<span class="property">nodes</span>.<span class="title function_">get</span>(startNode).<span class="title function_">getAdjacents</span>()) &#123;</span><br><span class="line">      <span class="title class_">SNAdj</span>.<span class="title function_">push</span>(vertex.<span class="property">value</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> stack = [[startNode, <span class="title class_">SNAdj</span>]];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (stack.<span class="property">length</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> [thisnode, nbrs] = stack[stack.<span class="property">length</span> - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (nbrs.<span class="property">length</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 邻接顶点(未遍历过的)不为空</span></span><br><span class="line">        <span class="keyword">const</span> nextNode = nbrs.<span class="title function_">pop</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (nextNode === startNode) &#123;</span><br><span class="line">          <span class="comment">// 找到环</span></span><br><span class="line">          result.<span class="title function_">push</span>([...path]);</span><br><span class="line">          path.<span class="title function_">forEach</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> closed.<span class="title function_">add</span>(e));</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!blocked.<span class="title function_">has</span>(nextNode)) &#123;</span><br><span class="line">          <span class="comment">// 邻接顶点未被封锁</span></span><br><span class="line">          path.<span class="title function_">push</span>(nextNode);</span><br><span class="line">          <span class="keyword">const</span> <span class="title class_">NNAdj</span> = [];</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">const</span> vertex <span class="keyword">of</span> H.<span class="property">nodes</span>.<span class="title function_">get</span>(nextNode).<span class="title function_">getAdjacents</span>()) &#123;</span><br><span class="line">            <span class="title class_">NNAdj</span>.<span class="title function_">push</span>(vertex.<span class="property">value</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          stack.<span class="title function_">push</span>([nextNode, <span class="title class_">NNAdj</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">          closed.<span class="title function_">delete</span>(nextNode);</span><br><span class="line">          blocked.<span class="title function_">add</span>(nextNode);</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 邻接顶点为空(顶点的所有邻接顶点均遍历过了)</span></span><br><span class="line">        <span class="keyword">if</span> (closed.<span class="title function_">has</span>(thisnode)) &#123;</span><br><span class="line">          <span class="title function_">_unblock</span>(thisnode, blocked, B); <span class="comment">// 解锁顶点</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">const</span> adjacent <span class="keyword">of</span> H.<span class="property">nodes</span>.<span class="title function_">get</span>(thisnode).<span class="title function_">getAdjacents</span>()) &#123;</span><br><span class="line">            <span class="keyword">const</span> blockedChain = B.<span class="title function_">get</span>(adjacent) ?? <span class="keyword">new</span> <span class="title class_">Set</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            B.<span class="title function_">set</span>(adjacent, blockedChain); <span class="comment">// 连锁</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        stack.<span class="title function_">pop</span>();</span><br><span class="line">        path.<span class="title function_">pop</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    G.<span class="title function_">removeVertex</span>(startNode);</span><br><span class="line">    H.<span class="title function_">removeVertex</span>(startNode);</span><br><span class="line">    sccs.<span class="title function_">push</span>(...H.<span class="title function_">SCC</span>());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> g4 = <span class="keyword">new</span> <span class="title class_">Graph</span>(<span class="title class_">Graph</span>.<span class="property">DIRECTED</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">1</span>, <span class="number">4</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">2</span>, <span class="number">6</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">3</span>, <span class="number">2</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">4</span>, <span class="number">5</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">4</span>, <span class="number">6</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">5</span>, <span class="number">7</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">5</span>, <span class="number">8</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">5</span>, <span class="number">9</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">6</span>, <span class="number">4</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">7</span>, <span class="number">9</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">8</span>, <span class="number">9</span>);</span><br><span class="line">g4.<span class="title function_">addEdge</span>(<span class="number">9</span>, <span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="title function_">simple_cycles</span>(g4); <span class="comment">//[[0, 3, 2], [0, 1, 2], [6, 4], [6, 4, 5], [9, 8]]</span></span><br></pre></td></tr></table></figure>
+<h2 id="附录">附录</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// 图 - 邻接表实现</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Graph</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="title function_">subGraph</span>(<span class="params">vertexKeyList</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> subG = <span class="keyword">new</span> <span class="title class_">Graph</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">of</span> vertexKeyList) &#123;</span><br><span class="line">      <span class="keyword">let</span> vertex = <span class="variable language_">this</span>.<span class="property">nodes</span>.<span class="title function_">get</span>(key);</span><br><span class="line">      subG.<span class="title function_">addVertex</span>(key);</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">const</span> adjacent <span class="keyword">of</span> vertex.<span class="title function_">getAdjacents</span>()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vertexKeyList.<span class="title function_">includes</span>(adjacent.<span class="property">value</span>)) &#123;</span><br><span class="line">          subG.<span class="title function_">addEdge</span>(key, adjacent.<span class="property">value</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> subG;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/detect-cycle-in-a-graph/?ref=gcse">GeeksforGeeks. Detect Cycle in a Directed Graph.</a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://networkx.org/documentation/networkx-1.10/_modules/networkx/algorithms/cycles.html#simple_cycles">NetworkX. Source code for networkx.algorithms.cycles</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%8E%AF/" rel="tag"><i class="fa fa-tag"></i> 环</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Typescript-Types/" rel="prev" title="Typescript - 类型">
+                  <i class="fa fa-chevron-left"></i> Typescript - 类型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Graph-Tarjan/" rel="next" title="图论 - Tarjan算法">
+                  图论 - Tarjan算法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

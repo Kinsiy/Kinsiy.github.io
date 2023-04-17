@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="事件类型 DOM3 Events 定义了如下事件类型  用户界面事件(UIEvent): 涉及与 BOM 交互德尔通用浏览器事件 焦点事件(FocusEvent): 在元素获得和失去焦点时触发 鼠标事件(MouseEvent): 使用鼠标在页面上执行某些操作是触发 滚轮事件(WheelEvent)：使用鼠标滚轮(或类似设备)时触发 输入事件(InputEvent): 在文档中输入文本时触发 键盘事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-Event-2">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-Event-2/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="事件类型 DOM3 Events 定义了如下事件类型  用户界面事件(UIEvent): 涉及与 BOM 交互德尔通用浏览器事件 焦点事件(FocusEvent): 在元素获得和失去焦点时触发 鼠标事件(MouseEvent): 使用鼠标在页面上执行某些操作是触发 滚轮事件(WheelEvent)：使用鼠标滚轮(或类似设备)时触发 输入事件(InputEvent): 在文档中输入文本时触发 键盘事">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-06T15:13:39.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.454Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="Event">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-Event-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-Event-2/","path":"Javascript-Event-2/","title":"Javascript-Event-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-Event-2 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="nav-text">事件类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E4%BA%8B%E4%BB%B6"><span class="nav-text">用户界面事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6"><span class="nav-text">焦点事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BC%A0%E6%A0%87%E5%92%8C%E6%BB%9A%E8%BD%AE%E4%BA%8B%E4%BB%B6"><span class="nav-text">鼠标和滚轮事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E5%92%8C%E8%BE%93%E5%85%A5%E4%BA%8B%E4%BB%B6"><span class="nav-text">键盘和输入事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6"><span class="nav-text">合成事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML5-%E4%BA%8B%E4%BB%B6"><span class="nav-text">HTML5 事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#contextmenu-%E4%BA%8B%E4%BB%B6"><span class="nav-text">contextmenu 事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#beforeunload-%E4%BA%8B%E4%BB%B6"><span class="nav-text">beforeunload 事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOMContentLoaded-%E4%BA%8B%E4%BB%B6"><span class="nav-text">DOMContentLoaded 事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#readystatechange-%E4%BA%8B%E4%BB%B6"><span class="nav-text">readystatechange 事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hashchange-%E4%BA%8B%E4%BB%B6"><span class="nav-text">hashchange 事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E4%BA%8B%E4%BB%B6"><span class="nav-text">设备事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BA%8B%E4%BB%B6"><span class="nav-text">模拟事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-%E4%BA%8B%E4%BB%B6%E6%A8%A1%E6%8B%9F"><span class="nav-text">DOM 事件模拟</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-Event-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-Event-2 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-Event-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-06 23:13:39" itemprop="dateCreated datePublished" datetime="2021-04-06T23:13:39+08:00">2021-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="事件类型">事件类型</h2>
+<p>DOM3 Events 定义了如下事件类型</p>
+<ul>
+<li>用户界面事件(UIEvent): 涉及与 BOM 交互德尔通用浏览器事件</li>
+<li>焦点事件(FocusEvent): 在元素获得和失去焦点时触发</li>
+<li>鼠标事件(MouseEvent): 使用鼠标在页面上执行某些操作是触发</li>
+<li>滚轮事件(WheelEvent)：使用鼠标滚轮(或类似设备)时触发</li>
+<li>输入事件(InputEvent): 在文档中输入文本时触发</li>
+<li>键盘事件(KeyboardEvent): 使用键盘在页面上执行某些操作时触发</li>
+<li>合成事件(CompositionEvent): 在使用某种 IME(Input Method Editor, 输入法编辑器)输入字符时触发</li>
+</ul>
+<span id="more"></span>
+<h3 id="用户界面事件">用户界面事件</h3>
+<ul>
+<li>load：在 window 上当页面加载完成后触发，在窗套(&lt;frameset&gt;)上所有窗格(&lt;frame&gt;)都加载完成后触发</li>
+<li>unload：在 window 上当页面完全卸载后触发，在窗套(&lt;frameset&gt;)上当所有窗格(&lt;frame&gt;)都卸载完成后触发，在&lt;object&gt;元素上当相应对象卸载完成后触发</li>
+<li>abort：在&lt;object&gt;元素上当相应对象加载完成前被用户提前终止下载时触发</li>
+<li>error：在 window 上当 Javascript 报错时触发，在&lt;img&gt;元素上当无法加载指定图片时触发，在&lt;object&gt;元素上当无法加载相应对象时触发，在窗套(&lt;frameset&gt;)上当一个或多个窗格(&lt;frame&gt;)无法加载时触发</li>
+<li>select：在文本框(&lt;input&gt;或 textarea)上当用户选择了一个或多个字符时触发</li>
+<li>resize：在 window 或窗格上当窗口或窗格被缩放是触发</li>
+<li>scroll：当用户滚动包含滚动条的元素时在元素上触发。&lt;body&gt;元素包含已加载页面的滚动条</li>
+<li>DOMActivate：元素被用户通过鼠标或键盘操作激活时触发(DOM3 Event 已废弃)</li>
+</ul>
+<h3 id="焦点事件">焦点事件</h3>
+<p>焦点事件在页面元素获得或失去焦点时触发。这些事件可以与 document.hasFocus()和 document.activeElement 一起为开发者提供用户在页面中的导航信息。</p>
+<ul>
+<li>blur：当元素失去焦点时触发。这个事件不冒泡，所有浏览器都支持</li>
+<li>focus：当元素获得焦点时触发。这个事件不冒泡，所有浏览器都支持</li>
+<li>focusout：当元素失去焦点时触发。这个事件是 blur 的通用版</li>
+<li>focusin：当元素获得焦点时触发。这个事件是 focus 的冒泡版</li>
+<li>DOMFocusOut：当元素失去焦点时触发。这个事件是 blur 的的通用版。Opera 是唯一支持这个事件的主流浏览器。DOM3 Events 废弃了 DOMFocusIn，推荐 focusout。</li>
+<li>DOMFocusIn：当元素获得焦点时触发。这个事件是 focus 的冒泡版。Opera 是唯一支持这个事件的主流浏览器。DOM3 Events 废弃了 DOMFocusIn，推荐 focusin。</li>
+</ul>
+<p>当焦点从页面中的一个元素移到另一个元素上时，会依次发生如下事件。</p>
+<ol>
+<li>focusout 在失去焦点的元素上触发</li>
+<li>focusin 在获得焦点的元素上触发</li>
+<li>blur 在失去焦点的元素上触发</li>
+<li>DOMFocusOut 在失去焦点的元素上触发</li>
+<li>focus 在获得焦点的元素上触发</li>
+<li>DOMFocusIn 在获得焦点的元素上触发</li>
+</ol>
+<p>blur、DOMFocusOut 和 focusout 的事件目标是失去焦点的元素，而 focus、DOMFocusIn 和 focusin 的事件目标是获得焦点的元素</p>
+<h3 id="鼠标和滚轮事件">鼠标和滚轮事件</h3>
+<ul>
+<li>click：在用户单击鼠标主键(通常是左键)或按键盘回车键时触发。这主要是基于无障碍的考虑，让键盘和鼠标都可以触发 onclick 事件处理程序</li>
+<li>dbclick：在用户双击鼠标主键(通常是左键)时触发</li>
+<li>mousedown：在用户按下任意鼠标键时触发。这个事件不能通过键盘触发</li>
+<li>mouseenter：在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不冒泡，也不会在光标经过后代元素时触发</li>
+<li>mouseleave：在用户把鼠标光标从元素内部移到元素外部时触发。这个事件不冒泡，也不会在光标经过后代元素时触发。</li>
+<li>mousemove：在鼠标光标在元素上移到时反复触发。这个事件不能通过键盘触发。</li>
+<li>mouseout：在用户把光标从一个元素移动到另一个元素上时触发。移到到的元素可以是原始元素的外部元素，也可以是原始元素的子元素。这个事件不能通过键盘触发</li>
+<li>mouseover：在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不能通过键盘触发</li>
+<li>mouseup：在用户释放鼠标键时触发。这个事件不能通过键盘触发。</li>
+</ul>
+<p>mousedown、mouseup、click、dbclick 四个事件永远会按照如下顺序触发</p>
+<ol>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>dbclick</li>
+</ol>
+<p>使用 event.shiftKey/ctrlKey/altKey/metaKey 可以检测出用户是否按下了某个修饰键。<br>
+对于 mouseover 和 mouseout 事件而言，还存在与事件相关的其他元素。对 mouseover 事件来说，事件的主要目标是获得光标的元素，相关元素是失去光标的元素。mouseout 则相反，DOM 通过 event 对象的 relatedTarget 属性提供了相关元素的信息。这个属性只有在 mouseover 和 mouseout 事件发生时才有包含值，其他所有事件的这个属性的值都是 null。</p>
+<h3 id="键盘和输入事件">键盘和输入事件</h3>
+<p>键盘事件是用户操作键盘时触发的</p>
+<ul>
+<li>keydown：用户按下键盘某个键时触发，而且持续按住会重复触发</li>
+<li>keypress，用户按下键盘上某个键并产生字符时触发，而且持续按住会重发触发。Esc 键也会触发这个事件。DOM3 Events 废弃了 keypress 事件，而推荐 textInput 事件。</li>
+<li>keyup，用户释放键盘上某个键时触发</li>
+</ul>
+<p>输入事件只有一个，即 textInput。这个事件是对 keypress 事件的扩展，用于在文本显示给用户之前更方便地截取文本输入。textInput 会在文本被插入到文本框之前触发。</p>
+<h3 id="合成事件">合成事件</h3>
+<p>合成事件是 DOM3 Events 中新增的，用于处理通常使用 IME 输入时的复杂输入序列。IME 可以让用户输入物理键盘上没有的字符。例如，使用拉丁字母键盘的用户还可以使用 IME 输入日文。IME 通常需要同时按下多个键才能输入一个字符。合成事件用于监测和控制这种输入。</p>
+<ul>
+<li>compositionstart: 在 IME 的文本合成系统打开时触发，表示输入即将开始</li>
+<li>compositionupdate： 在新字符插入输入字段时触发</li>
+<li>compositionend：在 IME 的文本合成系统关时触发，表示恢复正常键盘输入。</li>
+</ul>
+<p>合成事件在很多方面与输入事件很类似。在合成事件触发时，事件目标是接收文本的输入字段。唯一增加的事件属性是 data，其中包含的值视情况而异：</p>
+<ul>
+<li>compositionstart 事件中，包含正在编辑的文本(例如，已经选择了文本但还没替换)</li>
+<li>compositionupdate 事件中，包含要插入的新字符</li>
+<li>compositionend 事件中，包含本次合成过程中输入的全部内容</li>
+</ul>
+<h3 id="HTML5-事件">HTML5 事件</h3>
+<h4 id="contextmenu-事件">contextmenu 事件</h4>
+<p>contextmenu 事件专门用于表示何时该显示上下文菜单，从而允许开发者取消默认的上下文菜单并提供自定义菜单。contextmenu 事件冒泡，因此只要给 document 指定一个事件处理程序就可以处理页面上的所用同类事件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>事件冒泡示例<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span>&gt;</span>此处右键获取特有上下文菜单，别处右键获取默认上下文菜单<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;myMenu&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: absolute;visibility: hidden;background-color: silver;&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>菜单1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>菜单2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>菜单3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;load&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        div.<span class="title function_">addEventListener</span>(<span class="string">&quot;contextmenu&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">          event.<span class="title function_">preventDefault</span>();</span></span><br><span class="line"><span class="language-javascript">          <span class="keyword">let</span> menu = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myMenu&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">          menu.<span class="property">style</span>.<span class="property">left</span> = event.<span class="property">clientX</span> + <span class="string">&quot;px&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">          menu.<span class="property">style</span>.<span class="property">top</span> = event.<span class="property">clientY</span> + <span class="string">&quot;px&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">          menu.<span class="property">style</span>.<span class="property">visibility</span> = <span class="string">&quot;visible&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">          <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myMenu&quot;</span>).<span class="property">style</span>.<span class="property">visibility</span> = <span class="string">&quot;hidden&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">      &#125;);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="beforeunload-事件">beforeunload 事件</h4>
+<p>beforeunload 事件会在 window 上触发，用意是给开发者提供阻止页面被卸载的机会。这个事件会在页面即将从浏览器中卸载时触发，如果页面要继续使用，则可以不被卸载。这个事件不能取消，否则就意味着可以把用户永久阻拦在一个页面上。相反，这个事件会向用户显示一个确认框，其中的消息表明浏览器即将卸载页面，并请用户确认是希望关闭页面，还是继续留在页面上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;beforeunload&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> message = <span class="string">&quot;我会想你的！🔈🔉🔊&quot;</span>;</span><br><span class="line">  event.<span class="property">returnValue</span> = message;</span><br><span class="line">  <span class="keyword">return</span> message;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在chrome这样子写上并不能显示message的信息(应该是限制了)，但确实阻止了页面卸载(会弹出确认框)</span></span><br></pre></td></tr></table></figure>
+<h4 id="DOMContentLoaded-事件">DOMContentLoaded 事件</h4>
+<p>window 的 load 事件会在页面完全加载后触发，因为要等待很多外部资源加载完成，所以会花费较长时间。而 DOMContentLoaded 事件会在 DOM 树构建完成后立即触发，而不用等待图片、Javascript 文件、CSS 文件或者其他资源加载完成。相对于 load 事件，DOMContentLoaded 可以让开发者在外部资源下载的同时就能指定事件处理程序，从而让用户能够更快地与界面交互。</p>
+<h4 id="readystatechange-事件">readystatechange 事件</h4>
+<p>支持 readystatechange 事件的每个对象都有一个 readyState 属性，该属性具有一个以下列出的可能的字符串值</p>
+<ul>
+<li>uninitialized：对象存在并尚未初始化</li>
+<li>loading：对象正在加载数据</li>
+<li>loaded：对象已经加载完数据</li>
+<li>interactive：对象可以交互，但尚未加载完成</li>
+<li>complete：对象加载完成</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;readystatechange&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">readyState</span> == <span class="string">&quot;interactive&quot;</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Content loaded&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="hashchange-事件">hashchange 事件</h4>
+<p>HTML5 增加了 hashchange 事件，用于在 URL 散列值(URL 最后#后面的部分)发生变化时通知开发者。onhashchange 事件处理程序必须添加给 window，每次 URL 散列值发生变化时会调用它。</p>
+<h3 id="设备事件">设备事件</h3>
+<p>暂略</p>
+<h2 id="模拟事件">模拟事件</h2>
+<h3 id="DOM-事件模拟">DOM 事件模拟</h3>
+<p>任何时候，都可以使用 document.creatEvent()方法创建一个 event 事件。这个方法接收一个参数，此参数是一个表示要创建事件类型的字符串。<br>
+可用的字符串值是以下值之一</p>
+<ul>
+<li>“UIEvents”(DOM3 中是&quot;UIEvent&quot;): 通用用户界面事件(鼠标事件和键盘事件都继承自这个事件)</li>
+<li>“MouseEvents”(DOM3 中是&quot;MouseEvent&quot;): 通用鼠标事件</li>
+<li>“HTMLEvents”(DOM3 中没有): 通用 HTML 事件(HTML 事件已经分散到了其他事件大类中)</li>
+</ul>
+<p>创建 event 事件之后，需要使用事件相关的信息来初始化。每种类型的 event 对象都有特定的方法，可以使用相应数据来完成初始化。方法的名字并不相同，这取决于调用 createEvent()时传入的参数。<br>
+事件模拟的最后一步是触发事件。为此要使用 dispatchEvent()方法，这个方法存在于所有支持事件的 DOM 节点之上。dispatchEvent()方法接收一个参数，即表示要触发事件的 event 对象。调用 dispatchEvent()方法之后，事件就&quot;转正&quot;了,接着便冒泡并触发事件处理程序执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟鼠标事件</span></span><br><span class="line"><span class="keyword">let</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> event = <span class="variable language_">document</span>.<span class="title function_">createEvent</span>(<span class="string">&quot;MouseEvents&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化event对象(参数含义暂略，需要时再查)</span></span><br><span class="line">event.<span class="title function_">initMouseEvent</span>(<span class="string">&quot;click&quot;</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="variable language_">document</span>.<span class="property">defaulyView</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="number">0</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发事件</span></span><br><span class="line">btn.<span class="title function_">dispatchEvent</span>(event);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟键盘事件</span></span><br><span class="line"><span class="keyword">let</span> textbox = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myTextbox&quot;</span>),</span><br><span class="line">  event;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按照DOM3 的方式创建event对象</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">implementation</span>.<span class="title function_">hasFeature</span>(<span class="string">&quot;KeyboardEvents&quot;</span>, <span class="string">&quot;3.0&quot;</span>)) &#123;</span><br><span class="line">  event = <span class="variable language_">document</span>.<span class="title function_">createEvent</span>(<span class="string">&quot;KeyboardEvent&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 初始化event对象(参数含义暂略，需要时再查)</span></span><br><span class="line">  event.<span class="title function_">initKeyboardEvent</span>(<span class="string">&quot;keydown&quot;</span>, <span class="literal">true</span>, <span class="literal">true</span>, <span class="variable language_">document</span>.<span class="property">defaulyView</span>, <span class="string">&quot;a&quot;</span>, <span class="number">0</span>, <span class="string">&quot;Shift&quot;</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 触发事件</span></span><br><span class="line">textbox.<span class="title function_">dispatchEvent</span>(event);</span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/Event/" rel="tag"><i class="fa fa-tag"></i> Event</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-BOM-1/" rel="prev" title="Javascript-BOM-1">
+                  <i class="fa fa-chevron-left"></i> Javascript-BOM-1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-Event-1/" rel="next" title="Javascript-Event-1">
+                  Javascript-Event-1 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

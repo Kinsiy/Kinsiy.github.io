@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本类型 boolean、string、number 这三种数据类型与JavaScript中的同名类型一致，唯一不同的也是 TypeScript  与 JavaScript 的不同，Typescript 是静态类型语言，无法将某种数据类型的数据赋值给另一种数据类型的变量。如下，将 number 类型 17 赋值给 string 类型的kinsiyName，无法通过编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript - 类型">
+<meta property="og:url" content="https://kinsiy.github.io/Typescript-Types/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="基本类型 boolean、string、number 这三种数据类型与JavaScript中的同名类型一致，唯一不同的也是 TypeScript  与 JavaScript 的不同，Typescript 是静态类型语言，无法将某种数据类型的数据赋值给另一种数据类型的变量。如下，将 number 类型 17 赋值给 string 类型的kinsiyName，无法通过编译">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-22T15:46:36.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.460Z">
+<meta property="article:author" content="Kinsiy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Typescript-Types/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Typescript-Types/","path":"Typescript-Types/","title":"Typescript - 类型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Typescript - 类型 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-text">基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#boolean%E3%80%81string%E3%80%81number"><span class="nav-text">boolean、string、number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null%E3%80%81undefined"><span class="nav-text">null、undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#any%E3%80%81void"><span class="nav-text">any、void</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unknown%E3%80%81never"><span class="nav-text">unknown、never</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="nav-text">数组类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="nav-text">元组类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%9E%8B-Enum"><span class="nav-text">枚举类型(Enum)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80"><span class="nav-text">类型断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E5%8F%89%E7%B1%BB%E5%9E%8B"><span class="nav-text">交叉类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-text">联合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E5%88%AB%E5%90%8D"><span class="nav-text">类型别名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#type%E4%B8%8Einterface%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">type与interface的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Typescript-Types/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Typescript - 类型 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Typescript - 类型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-22 23:46:36" itemprop="dateCreated datePublished" datetime="2022-03-22T23:46:36+08:00">2022-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="基本类型">基本类型</h2>
+<h3 id="boolean、string、number">boolean、string、number</h3>
+<p>这三种数据类型与JavaScript中的同名类型一致，唯一不同的也是 TypeScript  与 JavaScript 的不同，Typescript 是静态类型语言，无法将某种数据类型的数据赋值给另一种数据类型的变量。如下，将 number 类型 17 赋值给 string 类型的kinsiyName，无法通过编译</p>
+<span id="more"></span>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">isDone</span>: <span class="built_in">boolean</span> = <span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">kinsiyName</span>: <span class="built_in">string</span> = <span class="string">&quot;Kinsiy&quot;</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">kinsiyAge</span>: <span class="built_in">number</span> = <span class="number">24</span></span><br><span class="line"></span><br><span class="line">kinsiyName = <span class="number">17</span></span><br><span class="line"><span class="comment">// Type &#x27;number&#x27; is not assignable to type &#x27;string&#x27;.</span></span><br></pre></td></tr></table></figure>
+<h3 id="null、undefined">null、undefined</h3>
+<p>在JavaScript中一般用null表示空对象指针，undefined 表示值未进行初始化，它两均只有一个值。在TypeScript中一样，特殊点在于null与undefined能够赋给任意类型的变量。<em>可以配置 strictNullChecks 强制检查</em></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">isDone</span>: <span class="built_in">boolean</span> = <span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> <span class="attr">age</span>: <span class="built_in">number</span> = <span class="number">24</span></span><br><span class="line"></span><br><span class="line">isDone = <span class="literal">undefined</span></span><br><span class="line">age = <span class="literal">null</span></span><br><span class="line"><span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+<h3 id="any、void">any、void</h3>
+<p>any 表示任意类型，用于为在编程阶段还不清楚类型的变量指定一个类型。void 则相反，它表示没有任意类型。当一个函数没有返回值时，你通常会见到其返回值类型是 void</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">notSure</span>: <span class="built_in">any</span> = <span class="string">&quot;kinsiy&quot;</span></span><br><span class="line">notSure = <span class="number">24</span>        </span><br><span class="line"><span class="comment">// ok</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>): <span class="built_in">void</span>&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;return void&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="unknown、never">unknown、never</h3>
+<p>unknown表示一种<strong>匿名</strong>类型，某个值存在某种类型，只是我不知道它是什么类型，所有类型都可以赋值给unknown类型，unknown类型只能赋值给 any 或 unknown 类型本身，对unknown类型变量进行任何操作都无法通过编译。never则表示从未观察到的值，比如走不到终点的函数返回值，联合类型中无剩余类型的条件分支</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">notKnown</span>: <span class="built_in">unknown</span> = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">a</span>: <span class="built_in">number</span> = notKnown + <span class="number">1</span></span><br><span class="line"><span class="comment">// Operator &#x27;+&#x27; cannot be applied to types &#x27;unknown&#x27; and &#x27;1&#x27;.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">notSure</span>: <span class="built_in">any</span> = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">notSure = notKnown</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fail</span>(<span class="params">msg: <span class="built_in">string</span></span>): <span class="built_in">never</span> &#123;        <span class="comment">// 走不到终点的函数</span></span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">x: <span class="built_in">string</span> | <span class="built_in">number</span></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> x === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> x === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// do something else</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    x; <span class="comment">// has type &#x27;never&#x27;!</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数组类型">数组类型</h3>
+<p>指定某一类型的数组有两种方式，注意不要和元组搞混了</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">array1</span>: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="attr">array2</span>: <span class="title class_">Array</span>&lt;<span class="built_in">string</span>&gt; = [<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="元组类型">元组类型</h3>
+<p>元组类型是另一种数组类型，它确切地知道它包含多少元素，以及在特定位置包含哪些类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">tuple</span>: [<span class="built_in">number</span>, <span class="built_in">string</span>] = [<span class="number">24</span>, <span class="string">&#x27;kinsiy&#x27;</span>]</span><br><span class="line">tuple[<span class="number">1</span>] = <span class="number">17</span></span><br><span class="line"><span class="comment">// 类型不匹配</span></span><br><span class="line"><span class="comment">// Type &#x27;number&#x27; is not assignable to type &#x27;string&#x27;.</span></span><br><span class="line"></span><br><span class="line">tuple[<span class="number">2</span>] = <span class="string">&#x27;lai&#x27;</span></span><br><span class="line"><span class="comment">// 越界类型为undefin</span></span><br><span class="line"><span class="comment">// Type &#x27;&quot;lai&quot;&#x27; is not assignable to type &#x27;undefined&#x27;.</span></span><br><span class="line"><span class="comment">// 越界</span></span><br><span class="line"><span class="comment">// Tuple type &#x27;[number, string]&#x27; of length &#x27;2&#x27; has no element at index &#x27;2&#x27;.</span></span><br></pre></td></tr></table></figure>
+<h3 id="枚举类型-Enum">枚举类型(Enum)</h3>
+<p>枚举类型是少部分不是JavaScript类型级拓展的特性之一。枚举允许我们定义一组命名常量 <a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/enums.html">enums</a></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数字枚举</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Direction</span> &#123;</span><br><span class="line">  <span class="title class_">Up</span> = <span class="number">1</span>,        <span class="comment">// 后续枚举值递增</span></span><br><span class="line">  <span class="title class_">Down</span>,</span><br><span class="line">  <span class="title class_">Left</span>,</span><br><span class="line">  <span class="title class_">Right</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串枚举</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">Direction</span> &#123;</span><br><span class="line">  <span class="title class_">Up</span> = <span class="string">&quot;UP&quot;</span>,</span><br><span class="line">  <span class="title class_">Down</span> = <span class="string">&quot;DOWN&quot;</span>,</span><br><span class="line">  <span class="title class_">Left</span> = <span class="string">&quot;LEFT&quot;</span>,</span><br><span class="line">  <span class="title class_">Right</span> = <span class="string">&quot;RIGHT&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异构枚举 避免使用</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">BooleanLikeHeterogeneousEnum</span> &#123;</span><br><span class="line">  <span class="title class_">No</span> = <span class="number">0</span>,</span><br><span class="line">  <span class="title class_">Yes</span> = <span class="string">&quot;YES&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类型断言">类型断言</h2>
+<p>有时候我们会比Typescript更清楚一个值的类型。可以使用类型断言去更改其类型。比如<mark class="label primary">let kinsiyEle = document.getElementById(kinsiy)</mark> Typescript只知道 <mark class="label primary">kinsiyEle</mark>  是一个<mark class="label primary">HTMLElement</mark>类型的变量，但我们可能清楚的知道他是一个<mark class="label primary">HTMLCanvasElement</mark>类型的元素。在使用<mark class="label primary">HTMLCanvasElement</mark>的属性或方法时我们就需要用到类型断言。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> kinsiyEle = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;kinsiy&quot;</span>)        </span><br><span class="line">kinsiyEle.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"><span class="comment">//Property &#x27;getContext&#x27; does not exist on type &#x27;HTMLElement&#x27;.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第一种方式使用 as</span></span><br><span class="line"><span class="keyword">let</span> kinsiyEle = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;kinsiy&quot;</span>) <span class="keyword">as</span> <span class="title class_">HTMLCanvasElement</span></span><br><span class="line">kinsiyEle.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"><span class="comment">// 使用时再声明也是可以的</span></span><br><span class="line">(kinsiyEle <span class="keyword">as</span> <span class="title class_">HTMLCanvasElement</span>).<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种方式使用尖括号</span></span><br><span class="line"><span class="keyword">let</span> kinsiyEle = &lt;<span class="title class_">HTMLCanvasElement</span>&gt;<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;kinsiy&quot;</span>);</span><br><span class="line">kinsiyEle.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line">(&lt;<span class="title class_">HTMLCanvasElement</span>&gt;kinsiyEle).<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在使用 querySelector 等带泛型的选择器使用泛型也是可以的</span></span><br><span class="line"><span class="keyword">let</span> kinsiyEle = <span class="variable language_">document</span>.<span class="property">querySelector</span>&lt;<span class="title class_">HTMLCanvasElement</span>&gt;(<span class="string">&quot;#kinsiy&quot;</span>);</span><br><span class="line">kinsiyEle.<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>类型断言只允许断言一个类型更具体或更不具体，可以理解为缩放两者(A, B)中必须存在<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⊂</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\subset B</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span></span></span></span> 或者 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>⊂</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">B \subset A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">A</span></span></span></span>(硬要改也是可以的)。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> kinsiy = <span class="string">&#x27;kinsiy&#x27;</span> <span class="keyword">as</span> <span class="built_in">number</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Conversion of type &#x27;string&#x27; to type &#x27;number&#x27; may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to &#x27;unknown&#x27; first.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span>&#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B</span> <span class="keyword">extends</span> <span class="title class_ inherited__">A</span>&#123;</span><br><span class="line">  <span class="attr">b</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">C</span>&#123;</span><br><span class="line">  <span class="attr">c</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> <span class="title function_">B</span>() <span class="keyword">as</span> A        <span class="comment">// ok 缩小</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="title function_">A</span>() <span class="keyword">as</span> B  <span class="comment">// ok 放大</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> _c = <span class="keyword">new</span> <span class="title function_">C</span>() <span class="keyword">as</span> B        <span class="comment">// error miss b</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = (<span class="keyword">new</span> C <span class="keyword">as</span> <span class="built_in">any</span>) <span class="keyword">as</span> B        <span class="comment">// 强制更改。any 与 unknown 是任何类型的超集</span></span><br></pre></td></tr></table></figure>
+<h2 id="交叉类型">交叉类型</h2>
+<p>交叉类型可以将多个类型合并为一个类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Colorful</span> &#123;</span><br><span class="line">  <span class="attr">color</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">  <span class="attr">radius</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">type</span> <span class="title class_">ColorfulCircle</span> = <span class="title class_">Colorful</span> &amp; <span class="title class_">Circle</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params">circle: ColorfulCircle</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Color was <span class="subst">$&#123;circle.color&#125;</span>`</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Radius was <span class="subst">$&#123;circle.radius&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// okay</span></span><br><span class="line"><span class="title function_">draw</span>(&#123; <span class="attr">color</span>: <span class="string">&quot;blue&quot;</span>, <span class="attr">radius</span>: <span class="number">42</span> &#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// oops</span></span><br><span class="line"><span class="title function_">draw</span>(&#123; <span class="attr">color</span>: <span class="string">&quot;red&quot;</span>, <span class="attr">raidus</span>: <span class="number">42</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Argument of type &#x27;&#123; color: string; raidus: number; &#125;&#x27; is not assignable to parameter of type &#x27;ColorfulCircle&#x27;.</span></span><br><span class="line"><span class="comment">  Object literal may only specify known properties, but &#x27;raidus&#x27; does not exist in type &#x27;ColorfulCircle&#x27;. Did you mean to write &#x27;radius&#x27;?</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="联合类型">联合类型</h2>
+<p>联合类型表示一个值可以是几种类型之一</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">numAndStr</span>: <span class="built_in">number</span> | <span class="built_in">string</span></span><br><span class="line"></span><br><span class="line">numAndStr = <span class="string">&quot;kinsiy&quot;</span>        <span class="comment">// ok</span></span><br><span class="line">numAndStr = <span class="number">24</span>        <span class="comment">// ok</span></span><br><span class="line">numAndStr = <span class="literal">true</span></span><br><span class="line"><span class="comment">//Type &#x27;boolean&#x27; is not assignable to type &#x27;string | number&#x27;.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Bird</span> &#123;</span><br><span class="line">  <span class="attr">fly</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">  <span class="attr">layEggs</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Fish</span> &#123;</span><br><span class="line">  <span class="attr">swim</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">  <span class="attr">layEggs</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getSmallPet</span>(<span class="params"></span>): <span class="title class_">Fish</span> | <span class="title class_">Bird</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> <span class="attr">result</span>: <span class="title class_">Fish</span> | <span class="title class_">Bird</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span>)&#123;</span><br><span class="line">    result =  &#123;</span><br><span class="line">      <span class="attr">fly</span>: <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Bird fly&quot;</span>),</span><br><span class="line">      <span class="attr">layEggs</span>: <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Bird layEggs&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    result =  &#123;</span><br><span class="line">      <span class="attr">swim</span>: <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Fish fly&quot;</span>),</span><br><span class="line">      <span class="attr">layEggs</span>: <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Fish layEggs&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> pet = <span class="title function_">getSmallPet</span>();</span><br><span class="line">pet.<span class="title function_">layEggs</span>(); <span class="comment">// okay        </span></span><br><span class="line">pet.<span class="title function_">swim</span>();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">Property &#x27;swim&#x27; does not exist on type &#x27;Bird | Fish&#x27;.</span></span><br><span class="line"><span class="comment">  Property &#x27;swim&#x27; does not exist on type &#x27;Bird&#x27;.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h2 id="类型别名">类型别名</h2>
+<p>可以使用<mark class="label primary">type</mark>关键字对类型设置别名</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="title class_">Point</span> = &#123;</span><br><span class="line">  <span class="attr">x</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="attr">y</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Exactly the same as the earlier example</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">printCoord</span>(<span class="params">pt: Point</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s x value is &quot;</span> + pt.<span class="property">x</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;The coordinate&#x27;s y value is &quot;</span> + pt.<span class="property">y</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_">printCoord</span>(&#123; <span class="attr">x</span>: <span class="number">100</span>, <span class="attr">y</span>: <span class="number">100</span> &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="variable constant_">ID</span> = <span class="built_in">number</span> | <span class="built_in">string</span>;</span><br></pre></td></tr></table></figure>
+<div class="note info no-icon"><h3 id="type与interface的区别">type与interface的区别</h3>
+<p>一般来说用interface描述<strong>数据结构</strong>，用type描述<strong>类型关系</strong></p>
+<ul>
+<li>type 可以声明基本类型别名，联合类型，元组等类型</li>
+<li>type 语句中还可以使用 typeof 获取实例的 类型进行赋值</li>
+<li>interface 能够声明合并</li>
+</ul>
+</div>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/">TypeScriptLang.org Docs</a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://www.tslang.cn/docs/home.html">Tslang.cn Docs</a></p>
+<p>[3]<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903749501059085">掘金. Typescript 中的 interface 和 type 到底有什么区别</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Typescript-TypeGuards/" rel="prev" title="TypeScript - 类型推断">
+                  <i class="fa fa-chevron-left"></i> TypeScript - 类型推断
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Graph-Cycles/" rel="next" title="图论 - 环">
+                  图论 - 环 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

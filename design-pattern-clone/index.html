@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="原型模式将克隆过程委派给被克隆的实际对象。模式为所有支持克隆的对象声明了一个通用接口，该接口让你能够克隆对象，同时又无需将代码和对象所属类耦合。 通常情况下，这样的接口中仅包含一个 克隆 方法 所有的类对 克隆 方法都非常相似。该方法会创建一个当前类的对象，然后将原始对象所有的成员变量值复制到新建的类中。 支持克隆的对象即为原型。当你的对象有几十个成员变量和几百种类型时，对其进行克隆甚至可以代替子">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型模式">
+<meta property="og:url" content="https://kinsiy.github.io/design-pattern-clone/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="原型模式将克隆过程委派给被克隆的实际对象。模式为所有支持克隆的对象声明了一个通用接口，该接口让你能够克隆对象，同时又无需将代码和对象所属类耦合。 通常情况下，这样的接口中仅包含一个 克隆 方法 所有的类对 克隆 方法都非常相似。该方法会创建一个当前类的对象，然后将原始对象所有的成员变量值复制到新建的类中。 支持克隆的对象即为原型。当你的对象有几十个成员变量和几百种类型时，对其进行克隆甚至可以代替子">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T13:01:51.000Z">
+<meta property="article:modified_time" content="2023-04-17T15:00:04.316Z">
+<meta property="article:author" content="Kinsiy">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/design-pattern-clone/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/design-pattern-clone/","path":"design-pattern-clone/","title":"原型模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>原型模式 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0"><span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B%E6%B3%A8%E5%86%8C%E8%A1%A8%E5%AE%9E%E7%8E%B0"><span class="nav-text">原型注册表实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-clone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="原型模式 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          原型模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-17 21:01:51 / 修改时间：23:00:04" itemprop="dateCreated datePublished" datetime="2023-04-17T21:01:51+08:00">2023-04-17</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>原型模式将克隆过程委派给被克隆的实际对象。模式为所有支持克隆的对象声明了一个通用接口，该接口让你能够克隆对象，同时又无需将代码和对象所属类耦合。</p>
+<p>通常情况下，这样的接口中仅包含一个 <mark class="label info">克隆</mark> 方法</p>
+<p>所有的类对 <mark class="label info">克隆</mark> 方法都非常相似。该方法会创建一个当前类的对象，然后将原始对象所有的成员变量值复制到新建的类中。</p>
+<p>支持克隆的对象即为原型。当你的对象有几十个成员变量和几百种类型时，对其进行克隆甚至可以代替子类的构造</p>
+<span id="more"></span>
+<h2 id="基本实现">基本实现</h2>
+<pre><code class="highlight mermaid">classDiagram
+class Prototype &#123;
+&lt;&lt;Interface&gt;&gt;
++ clone(): Prototype
+&#125;
+class ConcretePrototype &#123;
+- field1
++ ConcretePrototype(prototype)
++ clone(): Prototype
+&#125;
+class SubclassPrototype &#123;
+- field2
++ SubclassPrototype(prototype)
++ clone(): Prototype
+&#125;
+
+Prototype &lt;|.. ConcretePrototype
+ConcretePrototype &lt;|-- SubclassPrototype
+
+
+Client --&gt; Prototype</code></pre>
+<ul>
+<li><strong>原型（Prototype）</strong> 接口将对克隆方法进行声明</li>
+<li><strong>具体原型（Concrete Prototype）</strong> 类将实现克隆方法。除了将原始对象的数据复制到克隆体中之外，该方法有时还需处理克隆过程中的极端情况，例如克隆关联对象和梳理递归依赖等</li>
+<li><strong>客户端（Client）</strong> 可以复制实现了原型接口的任何对象</li>
+</ul>
+<h2 id="原型注册表实现">原型注册表实现</h2>
+<pre><code class="highlight mermaid">classDiagram
+Client --&gt; PrototypeRegistry
+class PrototypeRegistry &#123;
+- items: Prototye[]
++ addItem(id: string, p: Prototype)
++ getById(id: string): Prototype
++ getByColor(color: string): Prototype
+&#125;
+class Prototype &#123;
+&lt;&lt;interface&gt;&gt;
++ getColor(): string
++ clone(): Prototype
+&#125;
+class Button &#123;
+- x,y,color
++ Button(x,y,color)
++ Botton(prototype)
++ getColor(): string
++ clone(): Prototype
+&#125;
+PrototypeRegistry o-- Prototype
+Prototype &lt;|.. Button</code></pre>
+<ul>
+<li><strong>原型注册表（Prototype registry）</strong> 提供了一种访问常用原型的简单方法，其中存储了一系列可供随时复制的预生成对象。</li>
+</ul>
+<h2 id="代码示例">代码示例</h2>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础原型</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Shape</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">id</span>: <span class="built_in">number</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">type</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">protected</span> <span class="attr">color</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">protected</span> <span class="attr">size</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">id: <span class="built_in">number</span>, <span class="keyword">type</span>: <span class="built_in">string</span>, color: <span class="built_in">string</span>, size: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = <span class="keyword">type</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = size;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">abstract</span> <span class="title function_">draw</span>(): <span class="built_in">void</span>;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">clone</span>(<span class="attr">prototype</span>: <span class="title class_">Shape</span> = <span class="variable language_">this</span>): <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clone = <span class="title class_">Object</span>.<span class="title function_">create</span>(prototype)</span><br><span class="line">    clone.<span class="property">id</span> = crypto.<span class="title function_">randomUUID</span>()</span><br><span class="line">    clone.<span class="property">type</span> = prototype.<span class="title function_">getType</span>()</span><br><span class="line">    clone.<span class="title function_">setColor</span>(prototype.<span class="title function_">getColor</span>())</span><br><span class="line">    clone.<span class="title function_">setSize</span>(prototype.<span class="title function_">getSize</span>())</span><br><span class="line">    <span class="keyword">return</span> clone</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getId</span>(): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">id</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getType</span>(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">type</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getColor</span>(): <span class="built_in">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">color</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getSize</span>(): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">size</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setColor</span>(<span class="attr">color</span>: <span class="built_in">string</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">color</span> = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setSize</span>(<span class="attr">size</span>: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = size;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 具体原型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Shape</span> &#123;</span><br><span class="line">  <span class="attr">radius</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">id: <span class="built_in">number</span>, color: <span class="built_in">string</span>, radius: <span class="built_in">number</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(id, <span class="string">&quot;Circle&quot;</span>, color, <span class="number">2</span> * radius);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">radius</span> = radius</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 需要调用父类克隆函数来复制父类中定义的私有成员变量</span></span><br><span class="line"><span class="comment">   * 当然由于父类定义了`Get`函数，直接在子类 Circle 克隆也是可以的</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">clone</span>(<span class="attr">prototype</span>: <span class="title class_">Circle</span> = <span class="variable language_">this</span>): <span class="title class_">Circle</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clone = <span class="variable language_">super</span>.<span class="title function_">clone</span>(prototype) <span class="keyword">as</span> <span class="title class_">Circle</span></span><br><span class="line">    clone.<span class="property">radius</span> = prototype.<span class="property">radius</span></span><br><span class="line">    <span class="keyword">return</span> clone</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">getRadius</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">radius</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Drawing a <span class="subst">$&#123;<span class="variable language_">this</span>.getColor()&#125;</span> circle with size <span class="subst">$&#123;<span class="variable language_">this</span>.getSize()&#125;</span> and ID <span class="subst">$&#123;<span class="variable language_">this</span>.getId()&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Shape</span> &#123;</span><br><span class="line">  <span class="attr">rx</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="attr">ry</span>: <span class="built_in">number</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">id: <span class="built_in">number</span>, color: <span class="built_in">string</span>, size: <span class="built_in">number</span>, rx = <span class="number">0</span>, ry = <span class="number">0</span></span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(id, <span class="string">&quot;Rectangle&quot;</span>, color, size);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rx</span> = rx</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ry</span> = ry</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">clone</span>(prototype = <span class="variable language_">this</span>): <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> clone = <span class="variable language_">super</span>.<span class="title function_">clone</span>(prototype) <span class="keyword">as</span> <span class="title class_">Rectangle</span></span><br><span class="line">    clone.<span class="property">rx</span> = prototype.<span class="property">rx</span></span><br><span class="line">    clone.<span class="property">ry</span> = prototype.<span class="property">ry</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> clone</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">draw</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Drawing a <span class="subst">$&#123;<span class="variable language_">this</span>.getColor()&#125;</span> rectangle with size <span class="subst">$&#123;<span class="variable language_">this</span>.getSize()&#125;</span> and ID <span class="subst">$&#123;<span class="variable language_">this</span>.getId()&#125;</span>`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 原型注册表</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ShapeCache</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="attr">shapeMap</span>: &#123; [<span class="attr">id</span>: <span class="built_in">string</span>]: <span class="title class_">Shape</span> &#125; = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getShape</span>(<span class="attr">id</span>: <span class="built_in">string</span>): <span class="title class_">Shape</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> cachedShape = <span class="title class_">ShapeCache</span>.<span class="property">shapeMap</span>[id];</span><br><span class="line">    <span class="keyword">return</span> cachedShape.<span class="title function_">clone</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 预生成对象</span></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">loadCache</span>(): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> circle = <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">1</span>, <span class="string">&quot;Red&quot;</span>, <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> rectangle = <span class="keyword">new</span> <span class="title class_">Rectangle</span>(<span class="number">2</span>, <span class="string">&quot;Blue&quot;</span>, <span class="number">20</span>);</span><br><span class="line">    <span class="title class_">ShapeCache</span>.<span class="property">shapeMap</span>[<span class="title class_">String</span>(circle.<span class="title function_">getId</span>())] = circle;</span><br><span class="line">    <span class="title class_">ShapeCache</span>.<span class="property">shapeMap</span>[<span class="title class_">String</span>(rectangle.<span class="title function_">getId</span>())] = rectangle;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Example usage:</span></span><br><span class="line"><span class="title class_">ShapeCache</span>.<span class="title function_">loadCache</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle1 = <span class="title class_">ShapeCache</span>.<span class="title function_">getShape</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> rectangle1 = <span class="title class_">ShapeCache</span>.<span class="title function_">getShape</span>(<span class="string">&quot;2&quot;</span>);</span><br><span class="line"></span><br><span class="line">circle1.<span class="title function_">draw</span>(); <span class="comment">// Drawing a Red circle with size 10 and ID randomUUID1</span></span><br><span class="line">rectangle1.<span class="title function_">draw</span>(); <span class="comment">// Drawing a Blue rectangle with size 20 and ID randomUUID2</span></span><br><span class="line"></span><br><span class="line">circle1.<span class="title function_">setColor</span>(<span class="string">&quot;Green&quot;</span>);</span><br><span class="line">circle1.<span class="title function_">setSize</span>(<span class="number">15</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle2 = <span class="title class_">ShapeCache</span>.<span class="title function_">getShape</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">circle2.<span class="title function_">draw</span>(); <span class="comment">// Drawing a Red circle with size 10 and ID &lt;different random number&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="适用场景">适用场景</h2>
+<ul>
+<li>需要复制一些对象，同时又希望代码独立于这些对象所属的具体类，可以使用原型模式</li>
+<li>如果子类的区别仅在于其对象的初始化方式，那么可以使用该模式来减少子类的数量。别人创建这些子类的目的可能是为了创建特定类型的对象</li>
+</ul>
+<h2 id="优点">优点</h2>
+<ul>
+<li>可以克隆对象，而无需与它们所属的具体类相耦合</li>
+<li>可以克隆预生成原型，避免反复初始化代码</li>
+<li>可以更方便地生成复杂对象</li>
+<li>可以用继承以外的方式来处理复杂对象的不同配置</li>
+</ul>
+<h2 id="缺点">缺点</h2>
+<ul>
+<li>克隆包含循环引用的复杂对象可能会非常麻烦</li>
+</ul>
+<h2 id="参考">参考</h2>
+<p><a target="_blank" rel="noopener" href="https://refactoringguru.cn/design-patterns/prototype">Refactoringguru.cn 生成器模式</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/design-pattern-builder/" rel="next" title="生成器模式">
+                  生成器模式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

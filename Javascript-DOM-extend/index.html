@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript - DOM扩展">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-DOM-extend/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-21T13:33:28.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.452Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="DOM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-DOM-extend/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-DOM-extend/","path":"Javascript-DOM-extend/","title":"Javascript - DOM扩展"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript - DOM扩展 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selector-API"><span class="nav-text">Selector API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelector"><span class="nav-text">querySelector()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelectorAll"><span class="nav-text">querySelectorAll()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mathes"><span class="nav-text">mathes()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5-%E5%BD%B1%E5%93%8DDOM%E8%8A%82%E7%82%B9%E9%83%A8%E5%88%86"><span class="nav-text">HTML5(影响DOM节点部分)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS%E7%B1%BB%E6%89%A9%E5%B1%95"><span class="nav-text">CSS类扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#getElementsByClassName"><span class="nav-text">getElementsByClassName()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#classList-%E5%B1%9E%E6%80%A7"><span class="nav-text">classList 属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A6%E7%82%B9%E7%AE%A1%E7%90%86"><span class="nav-text">焦点管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTMLDoucument%E6%89%A9%E5%B1%95"><span class="nav-text">HTMLDoucument扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#readyState%E5%B1%9E%E6%80%A7"><span class="nav-text">readyState属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#compatMode-%E5%B1%9E%E6%80%A7"><span class="nav-text">compatMode 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head-%E5%B1%9E%E6%80%A7"><span class="nav-text">head 属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86%E5%B1%9E%E6%80%A7"><span class="nav-text">字符集属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E5%B1%9E%E6%80%A7"><span class="nav-text">自定义数据属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%A0%87%E8%AE%B0"><span class="nav-text">插入标记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#innerHTML"><span class="nav-text">innerHTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outerHTML"><span class="nav-text">outerHTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E4%B8%8E%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-text">内存与性能问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%A8%E7%AB%99%E7%82%B9%E8%84%9A%E6%9C%AC"><span class="nav-text">跨站点脚本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrollIntoView"><span class="nav-text">scrollIntoView()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%93%E6%9C%89%E6%89%A9%E5%B1%95"><span class="nav-text">专有扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#children"><span class="nav-text">children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contains"><span class="nav-text">contains()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%A0%87%E8%AE%B0-2"><span class="nav-text">插入标记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#innerText-%E5%B1%9E%E6%80%A7"><span class="nav-text">innerText 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outerText-%E5%B1%9E%E6%80%A7"><span class="nav-text">outerText 属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8"><span class="nav-text">滚动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-DOM-extend/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript - DOM扩展 | Kinsiy">
+      <meta itemprop="description" content="尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript - DOM扩展
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-21 21:33:28" itemprop="dateCreated datePublished" datetime="2021-10-21T21:33:28+08:00">2021-10-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能。</p>
+<h2 id="Selector-API">Selector API</h2>
+<p>JavaScript 库中最流行的一种能力就是根据 CSS 选择符的模式匹配 DOM 元素。比如，jQuery 就完全 以 CSS 选择符查询 DOM 获取元素引用，而不是使用 getElementById()和 getElementsByTagName()。</p>
+<p>Selectors API（参见 W3C 网站上的 Selectors API Level 1）是 W3C 推荐标准，规定了浏览器原生支 持的 CSS 查询 API。支持这一特性的所有 JavaScript 库都会实现一个基本的 CSS 解析器，然后使用已有 的 DOM 方法搜索文档并匹配目标节点。虽然库开发者在不断改进其性能，但 JavaScript 代码能做到的 毕竟有限。通过浏览器原生支持这个 API，解析和遍历 DOM 树可以通过底层编译语言实现，性能也有 了数量级的提升。</p>
+<p>Selectors API Level 1 的核心是两个方法：querySelector()和 querySelectorAll()。在兼容浏 览器中，Document 类型和 Element 类型的实例上都会暴露这两个方法。</p>
+<p>Selectors API Level 2 规范在 Element 类型上新增了更多方法，比如 matches()、find()和 findAll()。不过，目前还没有浏览器实现或宣称实现 find()和 findAll()。</p>
+<h3 id="querySelector">querySelector()</h3>
+<p>querySelector()方法接收 CSS 选择符参数，返回匹配该模式的第一个后代元素，如果没有匹配 项则返回 null。下面是一些例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得&lt;body&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> body = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;body&quot;</span>); </span><br><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的元素</span></span><br><span class="line"><span class="keyword">let</span> myDiv = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#myDiv&quot;</span>); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得类名为&quot;selected&quot;的第一个元素</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;.selected&quot;</span>); </span><br><span class="line"><span class="comment">// 取得类名为&quot;button&quot;的图片</span></span><br><span class="line"><span class="keyword">let</span> img = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;img.button&quot;</span>); </span><br></pre></td></tr></table></figure>
+<p>在 Document 上使用 querySelector()方法时，会从文档元素开始搜索；在 Element 上使用 querySelector()方法时，则只会从当前元素的后代中查询。</p>
+<p>用于查询模式的 CSS 选择符可繁可简，依需求而定。如果选择符有语法错误或碰到不支持的选择符， 则 querySelector()方法会抛出错误。</p>
+<h3 id="querySelectorAll">querySelectorAll()</h3>
+<p>querySelectorAll()方法跟 querySelector()一样，也接收一个用于查询的参数，但它会返回 所有匹配的节点，而不止一个。<strong>这个方法返回的是一个 NodeList 的静态实例</strong>。</p>
+<p>再强调一次，querySelectorAll()返回的 NodeList 实例一个属性和方法都不缺，但它是一 个静态的“快照”，而非“实时”的查询。这样的底层实现避免了使用 NodeList 对象可能造成的性能问题。</p>
+<p>以有效 CSS 选择符调用 querySelectorAll()都会返回 NodeList，无论匹配多少个元素都可以。 如果没有匹配项，则返回空的 NodeList 实例。 与 querySelector()一样，querySelectorAll()也可以在 Document、DocumentFragment 和 Element 类型上使用。下面是几个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的&lt;div&gt;元素中的所有&lt;em&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> ems = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>).<span class="title function_">querySelectorAll</span>(<span class="string">&quot;em&quot;</span>); </span><br><span class="line"><span class="comment">// 取得所有类名中包含&quot;selected&quot;的元素</span></span><br><span class="line"><span class="keyword">let</span> selecteds = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.selected&quot;</span>); </span><br><span class="line"><span class="comment">// 取得所有是&lt;p&gt;元素子元素的&lt;strong&gt;元素</span></span><br><span class="line"><span class="keyword">let</span> strongs = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;p strong&quot;</span>); </span><br></pre></td></tr></table></figure>
+<p>返回的 NodeList 对象可以通过 for-of 循环、item()方法或中括号语法取得个别元素。比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> strongElements = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;p strong&quot;</span>); </span><br><span class="line"><span class="comment">// 以下 3 个循环的效果一样</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> strong <span class="keyword">of</span> strongElements) &#123; </span><br><span class="line"> strong.<span class="property">className</span> = <span class="string">&quot;important&quot;</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; strongElements.<span class="property">length</span>; ++i) &#123; </span><br><span class="line"> strongElements.<span class="title function_">item</span>(i).<span class="property">className</span> = <span class="string">&quot;important&quot;</span>; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; strongElements.<span class="property">length</span>; ++i) &#123; </span><br><span class="line"> strongElements[i].<span class="property">className</span> = <span class="string">&quot;important&quot;</span>; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>querySelector()方法一样，如果选择符有语法错误或碰到不支持的选择符，则 querySelectorAll()方法会抛出错误。</p>
+<h3 id="mathes">mathes()</h3>
+<p>matches()方法（在规范草案中称为 matchesSelector()）接收一个 CSS 选择符参数，如果元素 匹配则该选择符返回 true，否则返回 false。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">matches</span>(<span class="string">&quot;body.page1&quot;</span>))&#123; </span><br><span class="line"> <span class="comment">// true </span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>使用这个方法可以方便地检测某个元素会不会被 querySelector()或 querySelectorAll()方 法返回。</p>
+<h2 id="HTML5-影响DOM节点部分">HTML5(影响DOM节点部分)</h2>
+<p>HTML5 代表着与以前的 HTML 截然不同的方向。在所有以前的 HTML 规范中，从未出现过描述 JavaScript 接口的情形，HTML 就是一个纯标记语言。JavaScript 绑定的事，一概交给 DOM 规范去定义。 然而，HTML5 规范却包含了与标记相关的大量 JavaScript API 定义。其中有的 API 与 DOM 重合， 定义了浏览器应该提供的 DOM 扩展。</p>
+<h3 id="CSS类扩展">CSS类扩展</h3>
+<h4 id="getElementsByClassName">getElementsByClassName()</h4>
+<p>getElementsByClassName()是 HTML5 新增的最受欢迎的一个方法，暴露在 document 对象和 所有 HTML 元素上。这个方法脱胎于基于原有 DOM 特性实现该功能的 JavaScript 库，提供了性能高好 的原生实现。</p>
+<p>getElementsByClassName()方法接收一个参数，即包含一个或多个类名的字符串，返回类名中 包含相应类的元素的 NodeList。如果提供了多个类名，则顺序无关紧要。下面是几个示例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得所有类名中包含&quot;username&quot;和&quot;current&quot;元素</span></span><br><span class="line"><span class="comment">// 这两个类名的顺序无关紧要</span></span><br><span class="line"><span class="keyword">let</span> allCurrentUsernames = <span class="variable language_">document</span>.<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;username current&quot;</span>); </span><br><span class="line"><span class="comment">// 取得 ID 为&quot;myDiv&quot;的元素子树中所有包含&quot;selected&quot;类的元素</span></span><br><span class="line"><span class="keyword">let</span> selected = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>).<span class="title function_">getElementsByClassName</span>(<span class="string">&quot;selected&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>如果要给包含特定类（而不是特定 ID 或标签）的元素添加事件处理程序，使用这个方法会很方便。 不过要记住，因为返回值是 NodeList，所以使用这个方法会遇到跟使用 getElementsByTagName()和其他返回 NodeList 对象的 DOM 方法同样的问题。</p>
+<h4 id="classList-属性">classList 属性</h4>
+<p>要操作类名，可以通过 className 属性实现添加、删除和替换。但 className 是一个字符串， 所以每次操作之后都需要重新设置这个值才能生效，即使只改动了部分字符串也一样。以下面的 HTML 代码为例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bd user disabled&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>这个&lt;div&gt;元素有 3 个类名。要想删除其中一个，就得先把 className 拆开，删除不想要的那个， 再把包含剩余类的字符串设置回去。比如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要删除&quot;user&quot;类</span></span><br><span class="line"><span class="keyword">let</span> targetClass = <span class="string">&quot;user&quot;</span>; </span><br><span class="line"><span class="comment">// 把类名拆成数组</span></span><br><span class="line"><span class="keyword">let</span> classNames = div.<span class="property">className</span>.<span class="title function_">split</span>(<span class="regexp">/\s+/</span>); </span><br><span class="line"><span class="comment">// 找到要删除类名的索引</span></span><br><span class="line"><span class="keyword">let</span> idx = classNames.<span class="title function_">indexOf</span>(targetClass); </span><br><span class="line"><span class="comment">// 如果有则删除</span></span><br><span class="line"><span class="keyword">if</span> (idx &gt; -<span class="number">1</span>) &#123; </span><br><span class="line"> classNames.<span class="title function_">splice</span>(i,<span class="number">1</span>); </span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// 重新设置类名</span></span><br><span class="line">div.<span class="property">className</span> = classNames.<span class="title function_">join</span>(<span class="string">&quot; &quot;</span>); </span><br></pre></td></tr></table></figure>
+<p>HTML5 通过给所有元素增加 classList 属性为这些操作提供了更简单也更安全的实现方式。 classList 是一个新的集合类型 DOMTokenList 的实例。与其他 DOM 集合类型一样，DOMTokenList 也有 length 属性表示自己包含多少项，也可以通过 item()或中括号取得个别的元素。此外， DOMTokenList 还增加了以下方法。</p>
+<ul>
+<li>add(value)，向类名列表中添加指定的字符串值value。如果这个值已经存在，则什么也不做。</li>
+<li>contains(value)，返回布尔值，表示给定的value是否存在</li>
+<li>remove(value)，从类名列表中删除指定的字符串值value。</li>
+<li>toggle(value)，如果类名列表中已经存在指定的value，则删除；如果不存在，则添加。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除&quot;disabled&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;disabled&quot;</span>); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加&quot;current&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&quot;current&quot;</span>); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 切换&quot;user&quot;类</span></span><br><span class="line">div.<span class="property">classList</span>.<span class="title function_">toggle</span>(<span class="string">&quot;user&quot;</span>); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测类名 </span></span><br><span class="line"><span class="keyword">if</span> (div.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;bd&quot;</span>) &amp;&amp; !div.<span class="property">classList</span>.<span class="title function_">contains</span>(<span class="string">&quot;disabled&quot;</span>))&#123; </span><br><span class="line"> <span class="comment">// 执行操作</span></span><br><span class="line">) </span><br><span class="line"><span class="comment">// 迭代类名</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> <span class="keyword">class</span> <span class="title class_">of</span> div.<span class="property">classList</span>)&#123; </span><br><span class="line"> <span class="title function_">doStuff</span>(<span class="keyword">class</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="焦点管理">焦点管理</h3>
+<p>HTML5 增加了辅助 DOM 焦点管理的功能。首先是 document.activeElement，始终包含当前拥 有焦点的 DOM 元素。页面加载时，可以通过用户输入（按 Tab 键或代码中使用 focus()方法）让某个 元素自动获得焦点。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myButton&quot;</span>); </span><br><span class="line">button.<span class="title function_">focus</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">activeElement</span> === button); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，document.activeElement 在页面刚加载完之后会设置为 document.body。而在 页面完全加载之前，document.activeElement 的值为 null。</p>
+<p>其次是 document.hasFocus()方法，该方法返回布尔值，表示文档是否拥有焦点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myButton&quot;</span>); </span><br><span class="line">button.<span class="title function_">focus</span>(); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="title function_">hasFocus</span>()); <span class="comment">// true </span></span><br></pre></td></tr></table></figure>
+<h3 id="HTMLDoucument扩展">HTMLDoucument扩展</h3>
+<h4 id="readyState属性">readyState属性</h4>
+<p>readyState 是 IE4 最早添加到 document 对象上的属性，后来其他浏览器也都依葫芦画瓢地支持 这个属性。最终，HTML5 将这个属性写进了标准。document.readyState 属性有两个可能的值：</p>
+<ul>
+<li>loading，表示文档正在加载</li>
+<li>complete，表示文档加载完成</li>
+</ul>
+<p>实际开发中，最好是把 document.readState 当成一个指示器，以判断文档是否加载完毕。在这 个属性得到广泛支持以前，通常要依赖 onload 事件处理程序设置一个标记，表示文档加载完了。这个 属性的基本用法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">readyState</span> == <span class="string">&quot;complete&quot;</span>)&#123;  <span class="comment">// 执行操作 &#125; </span></span><br></pre></td></tr></table></figure>
+<h4 id="compatMode-属性">compatMode 属性</h4>
+<p>自从 IE6 提供了以标准或混杂模式渲染页面的能力之后，检测页面渲染模式成为一个必要的需求。 IE 为 document 添加了 compatMode 属性，这个属性唯一的任务是指示浏览器当前处于什么渲染模式。 如下面的例子所示，标准模式下 document.compatMode 的值是&quot;CSS1Compat&quot;，而在混杂模式下， document.compatMode 的值是&quot;BackCompat&quot;：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">compatMode</span> == <span class="string">&quot;CSS1Compat&quot;</span>)&#123; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Standards mode&quot;</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Quirks mode&quot;</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<p>HTML5 最终也把 compatMode 属性的实现标准化了</p>
+<h4 id="head-属性">head 属性</h4>
+<p>作为对 document.body（指向文档的元素）的补充，HTML5 增加了 document.head 属 性，指向文档的元素。可以像下面这样直接取得元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> head = <span class="variable language_">document</span>.<span class="property">head</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符集属性">字符集属性</h3>
+<p>HTML5 增加了几个与文档字符集有关的新属性。其中，characterSet 属性表示文档实际使用的 字符集，也可以用来指定新字符集。这个属性的默认值是&quot;UTF-16&quot;，但可以通过元素或响应头， 以及新增的 characterSeet 属性来修改。下面是一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">characterSet</span>); <span class="comment">// &quot;UTF-16&quot; </span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">characterSet</span> = <span class="string">&quot;UTF-8&quot;</span>; </span><br></pre></td></tr></table></figure>
+<h3 id="自定义数据属性">自定义数据属性</h3>
+<p>HTML5 允许给元素指定非标准的属性，但要使用前缀 data-以便告诉浏览器，这些属性既不包含 与渲染有关的信息，也不包含元素的语义信息。除了前缀，自定义属性对命名是没有限制的，data-后 面跟什么都可以。</p>
+<p>义了自定义数据属性后，可以通过元素的 dataset 属性来访问。dataset 属性是一个 DOMStringMap 的实例，包含一组键/值对映射。元素的每个 data-name 属性在 dataset 中都可以通 过 data-后面的字符串作为键来访问（例如，属性 data-myname、data-myName 可以通过 myname 访 问，但要注意 data-my-name、data-My-Name 要通过 myName 来访问）。下面是一个使用自定义数据 属性的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本例中使用的方法仅用于示范</span></span><br><span class="line"><span class="keyword">let</span> div = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;myDiv&quot;</span>); </span><br><span class="line"><span class="comment">// 取得自定义数据属性的值</span></span><br><span class="line"><span class="keyword">let</span> appId = div.<span class="property">dataset</span>.<span class="property">appId</span>; </span><br><span class="line"><span class="keyword">let</span> myName = div.<span class="property">dataset</span>.<span class="property">myname</span>; </span><br><span class="line"><span class="comment">// 设置自定义数据属性的值</span></span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">appId</span> = <span class="number">23456</span>; </span><br><span class="line">div.<span class="property">dataset</span>.<span class="property">myname</span> = <span class="string">&quot;Michael&quot;</span>; </span><br><span class="line"><span class="comment">// 有&quot;myname&quot;吗？</span></span><br><span class="line"><span class="keyword">if</span> (div.<span class="property">dataset</span>.<span class="property">myname</span>)&#123; </span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello, <span class="subst">$&#123;div.dataset.myname&#125;</span>`</span>); </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+<h3 id="插入标记">插入标记</h3>
+<p>DOM 虽然已经为操纵节点提供了很多 API，但向文档中一次性插入大量 HTML 时还是比较麻烦。 相比先创建一堆节点，再把它们以正确的顺序连接起来，直接插入一个 HTML 字符串要简单（快速） 得多。HTML5 已经通过以下 DOM 扩展将这种能力标准化了.</p>
+<h4 id="innerHTML">innerHTML</h4>
+<p>在读取 innerHTML 属性时，会返回元素所有后代的 HTML 字符串，包括元素、注释和文本节点。 而在写入 innerHTML 时，则会根据提供的字符串值以新的 DOM 子树替代元素中原来包含的所有节点。 比如下面的 HTML 代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">ul</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;/<span class="name">ul</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 对于这里的&lt;div&gt;元素而言，其 innerHTML 属性会返回以下字符串：--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a <span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+<p>实际返回的文本内容会因浏览器而不同。IE 和 Opera 会把所有元素标签转换为大写，而 Safari、 Chrome 和 Firefox 则会按照文档源代码的格式返回，包含空格和缩进。因此不要指望不同浏览器的 innerHTML 会返回完全一样的值</p>
+<p>在写入模式下，赋给 innerHTML 属性的值会被解析为 DOM 子树，并替代元素之前的所有节点。 因为所赋的值默认为 HTML，所以其中的所有标签都会以浏览器处理 HTML 的方式转换为元素（同样， 转换结果也会因浏览器不同而不同）。如果赋值中不包含任何 HTML 标签，则直接生成一个文本节点</p>
+<p>在所有现代浏览器中，通过 innerHTML 插入的&lt;script&gt;标签是不会执行的。</p>
+<h4 id="outerHTML">outerHTML</h4>
+<p>读取 outerHTML 属性时，会返回调用它的元素（及所有后代元素）的 HTML 字符串。在写入 outerHTML 属性时，调用它的元素会被传入的 HTML 字符串经解释之后生成的 DOM 子树取代。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML:</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&lt;div id=&quot;container&quot;&gt;</span></span><br><span class="line"><span class="comment">    &lt;div id=&quot;d&quot;&gt;This is a div.&lt;/div&gt;</span></span><br><span class="line"><span class="comment">&lt;/div&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> container = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;container&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> d = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;d&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(container.<span class="property">firstChild</span>.<span class="property">nodeName</span>);</span><br><span class="line"><span class="comment">// logs &quot;div&quot;</span></span><br><span class="line"></span><br><span class="line">d.<span class="property">outerHTML</span> = <span class="string">&quot;&lt;p&gt;This paragraph replaced the original div.&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(container.<span class="property">firstChild</span>.<span class="property">nodeName</span>);</span><br><span class="line"><span class="comment">// logs &quot;P&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    #d div不再是文档树的一部分，新段替换了它。</span></span><br><span class="line"><span class="comment">    (不在页面中显示,但仍然在内存中) </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h4 id="内存与性能问题">内存与性能问题</h4>
+<p>使用本节介绍的方法替换子节点可能在浏览器（特别是 IE）中导致内存问题。比如，如果被移除的 子树元素中之前有关联的事件处理程序或其他 JavaScript 对象（作为元素的属性），那它们之间的绑定关 系会滞留在内存中。如果这种替换操作频繁发生，页面的内存占用就会持续攀升。在使用 innerHTML、 outerHTML 和 insertAdjacentHTML()之前，最好手动删除要被替换的元素上关联的事件处理程序和 JavaScript 对象。</p>
+<p>使用这些属性当然有其方便之处，特别是 innerHTML。一般来讲，插入大量的新 HTML 使用 innerHTML 比使用多次 DOM 操作创建节点再插入来得更便捷。这是因为 HTML 解析器会解析设置给 innerHTML（或 outerHTML）的值。解析器在浏览器中是底层代码（通常是 C++代码），比 JavaScript 快得多。不过，HTML 解析器的构建与解构也不是没有代价，因此最好限制使用 innerHTML 和 outerHTML 的次数</p>
+<h4 id="跨站点脚本">跨站点脚本</h4>
+<p>尽管 innerHTML 不会执行自己创建的&lt;script&gt;标签，但仍然向恶意用户暴露了很大的攻击面，因为通过它可以毫不费力地创建元素并执行 onclick 之类的属性。</p>
+<p>如果页面中要使用用户提供的信息，则不建议使用 innerHTML。与使用 innerHTML 获得的方便相比，防止 XSS 攻击更让人头疼。此时一定要隔离要插入的数据，在插入页面前必须毫不犹豫地使用相关的库对它们进行转义。</p>
+<h3 id="scrollIntoView">scrollIntoView()</h3>
+<p>DOM 规范中没有涉及的一个问题是如何滚动页面中的某个区域。为填充这方面的缺失，不同浏览器实现了不同的控制滚动的方式。在所有这些专有方法中，HTML5 选择了标准化 scrollIntoView()。</p>
+<p>scrollIntoView()方法存在于所有 HTML 元素上，可以滚动浏览器窗口或容器元素以便包含元 素进入视口。这个方法的参数如下：</p>
+<ul>
+<li>
+<p>alignToTop 是一个布尔值</p>
+<ul>
+<li>true: 窗口滚动后元素的顶部与视口顶部对齐</li>
+<li>false：窗口滚动后元素的底部与视口底部对齐</li>
+</ul>
+</li>
+<li>
+<p>scrollIntoViewOption 是一个选项对象</p>
+<ul>
+<li>behavior：定义过渡动画，可取的值为&quot;smooth&quot;和&quot;auto&quot;，默认为&quot;auto&quot;</li>
+<li>block: 定义垂直方向的对齐，可取的值为&quot;start&quot;、“center”、“end&quot;和&quot;nearest”，默认为&quot;start&quot;</li>
+<li>inline: 定义水平方向的对齐，可取的值为&quot;start&quot;、“center”、“end&quot;和&quot;nearest”，默认为&quot;nearest&quot;</li>
+</ul>
+</li>
+<li>
+<p>不传参数等同于alignToTop为True</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确保元素可见</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(); </span><br><span class="line"><span class="comment">// 同上</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(<span class="literal">true</span>); </span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(&#123;<span class="attr">block</span>: <span class="string">&#x27;start&#x27;</span>&#125;); </span><br><span class="line"><span class="comment">// 尝试将元素平滑地滚入视口</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>[<span class="number">0</span>].<span class="title function_">scrollIntoView</span>(&#123;<span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span>, <span class="attr">block</span>: <span class="string">&#x27;start&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>这个方法可以用来在页面上发生某个事件时引起用户关注。把焦点设置到一个元素上也会导致浏览 器将元素滚动到可见位置</p>
+<h2 id="专有扩展">专有扩展</h2>
+<h3 id="children">children</h3>
+<p>children 属性是一个 HTMLCollection，只包含元素的 Element 类型的子节点。如果元素的子节点类型全部是元素类型，那 children 和 childNodes 中包含的节点应该是一样的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> childCount = element.<span class="property">children</span>.<span class="property">length</span>; </span><br><span class="line"><span class="keyword">let</span> firstChild = element.<span class="property">children</span>[<span class="number">0</span>]; </span><br></pre></td></tr></table></figure>
+<h3 id="contains">contains()</h3>
+<p>DOM 编程中经常需要确定一个元素是不是另一个元素的后代。IE 首先引入了 contains()方法， 让开发者可以在不遍历 DOM 的情况下获取这个信息。contains()方法应该在要搜索的祖先元素上调 用，参数是待确定的目标节点</p>
+<p>如果目标节点是被搜索节点的后代，contains()返回 true，否则返回 false另外，使用 DOM Level 3 的 compareDocumentPosition()方法也可以确定节点间的关系。这个 方法会返回表示两个节点关系的位掩码</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">掩码</th>
+<th style="text-align:center">十进制</th>
+<th style="text-align:left">节点关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0x1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">断开(传入的节点不在文档中)</td>
+</tr>
+<tr>
+<td style="text-align:center">0x2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:left">领先(传入的节点在DOM树中位于参考节点之前)</td>
+</tr>
+<tr>
+<td style="text-align:center">0x4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:left">落后(传入的节点在DOM树中位于参考节点之后)</td>
+</tr>
+<tr>
+<td style="text-align:center">0x8</td>
+<td style="text-align:center">8</td>
+<td style="text-align:left">包含(传入的节点是参考节点的祖先)</td>
+</tr>
+<tr>
+<td style="text-align:center">0x10</td>
+<td style="text-align:center">16</td>
+<td style="text-align:left">被包含(传入的节点是参考节点的后代)</td>
+</tr>
+<tr>
+<td style="text-align:center">0x20</td>
+<td style="text-align:center">32</td>
+<td style="text-align:left">待定</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">contains</span>(<span class="variable language_">document</span>.<span class="property">body</span>)); <span class="comment">// true </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="title function_">compareDocumentPosition</span>(<span class="variable language_">document</span>.<span class="property">body</span>); </span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(!!(result &amp; <span class="number">0x10</span>)); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/** result 的值为 20（或 0x14，其中 0x4 表示“随后”，加上 0x10“被包含”）。</span></span><br><span class="line"><span class="comment"> * 对result 和 0x10 应用按位与会返回非零值，而两个叹号将这个值转换成对应的布尔值。 </span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<div class="note info"><p>这里是模仿contains才与 0x10 进行按位与运算. 判断其他关系使用相应位掩码按位与即可</p>
+</div>
+<h3 id="插入标记-2">插入标记</h3>
+<p>HTML5 将 IE 发明的 innerHTML 和 outerHTML 纳入了标准，但还有两个属性没有入选。这两个剩下的属性是 innerText 和 outerText。</p>
+<h4 id="innerText-属性">innerText 属性</h4>
+<p>innerText 属性对应元素中包含的所有文本内容，无论文本在子树中哪个层级。在用于读取值时， innerText 会按照深度优先的顺序将子树中所有文本节点的值拼接起来。在用于写入值时，innerText 会移除元素的所有后代并插入一个包含该值的文本节点。</p>
+<p>因为设置 innerText 只能在容器元素中生成一个文本节点，所以为了保证一定是文本节点，就必 须进行 HTML 编码。innerText 属性可以用于去除 HTML 标签。通过将 innerText 设置为等于 innerText，可以去除所有 HTML 标签而只剩文本，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.<span class="property">innerText</span> = div.<span class="property">innerText</span>; </span><br></pre></td></tr></table></figure>
+<p>执行以上代码后，容器元素的内容只会包含原先的文本内容。</p>
+<h4 id="outerText-属性">outerText 属性</h4>
+<p>outerText 与 innerText 是类似的，只不过作用范围包含调用它的节点。要读取文本值时， outerText 与 innerText 实际上会返回同样的内容。但在写入文本值时，outerText 就大不相同了。 写入文本值时，outerText 不止会移除所有后代节点，而是会替换整个元素。</p>
+<p>本质上，这相当于用新的文本节点替代 outerText 所在的元素。此时，原来的元素会与文档脱离 关系，因此也无法访问。</p>
+<p>outerText 是一个非标准的属性，而且也没有被标准化的前景。因此，不推荐依赖这个属性实现 重要的操作。除 Firefox 之外所有主流浏览器都支持 outerText</p>
+<h3 id="滚动">滚动</h3>
+<p>如前所述，滚动是 HTML5 之前 DOM 标准没有涉及的领域。虽然 HTML5 把 scrollIntoView() 标准化了，但不同浏览器中仍然有其他专有方法。比如，scrollIntoViewIfNeeded()作 为 HTMLElement 类型的扩展可以在所有元素上调用。scrollIntoViewIfNeeded(alingCenter)会在 元素不可见的情况下，将其滚动到窗口或包含窗口中，使其可见；如果已经在视口中可见，则这个方法 什么也不做。如果将可选的参数 alingCenter 设置为 true，则浏览器会尝试将其放在视口中央。Safari、 Chrome 和 Opera 实现了这个方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不可见，则将元素可见</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">images</span>[<span class="number">0</span>].<span class="title function_">scrollIntoViewIfNeeded</span>(); </span><br></pre></td></tr></table></figure>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/DOM/" rel="tag"><i class="fa fa-tag"></i> DOM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-DOM-Style&Traverse/" rel="prev" title="Javascript-DOM-Style/Traverse">
+                  <i class="fa fa-chevron-left"></i> Javascript-DOM-Style/Traverse
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Js-debounce-thorttle&deepCopy/" rel="next" title="防抖-节流-深拷贝">
+                  防抖-节流-深拷贝 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

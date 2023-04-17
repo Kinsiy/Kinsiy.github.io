@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Canvas API 提供了一个通过 JavaScript 和 HTML 的&lt;canvas&gt;元素来绘制图形的方式。它可以用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理等方面。 Canvas API 主要聚焦于 2D 图形。而同样使用&lt;canvas&gt;元素的 WebGL API 则用于绘制硬件加速的 2D 和 3D 图形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-动画与图形-下">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-Animation&Graphics-2/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="Canvas API 提供了一个通过 JavaScript 和 HTML 的&lt;canvas&gt;元素来绘制图形的方式。它可以用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理等方面。 Canvas API 主要聚焦于 2D 图形。而同样使用&lt;canvas&gt;元素的 WebGL API 则用于绘制硬件加速的 2D 和 3D 图形">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-28T14:36:59.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.450Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-Animation&Graphics-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-Animation&Graphics-2/","path":"Javascript-Animation&Graphics-2/","title":"Javascript-动画与图形-下"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-动画与图形-下 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E7%94%BB%E5%B8%83%E5%8A%9F%E8%83%BD"><span class="nav-text">基本的画布功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2D-%E7%BB%98%E5%9B%BE%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">2D 绘图上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A1%AB%E5%85%85%E4%B8%8E%E6%8F%8F%E8%BE%B9"><span class="nav-text">填充与描边</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2"><span class="nav-text">绘制矩形</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E8%B7%AF%E5%BE%84"><span class="nav-text">绘制路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC"><span class="nav-text">绘制文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E6%8D%A2"><span class="nav-text">变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%9B%BE%E5%83%8F"><span class="nav-text">绘制图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B4%E5%BD%B1"><span class="nav-text">阴影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%90%E5%8F%98"><span class="nav-text">渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E6%A1%88"><span class="nav-text">图案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E6%95%B0%E6%8D%AE"><span class="nav-text">图像数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E6%88%90"><span class="nav-text">合成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-Animation&Graphics-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-动画与图形-下 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-动画与图形-下
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-28 22:36:59" itemprop="dateCreated datePublished" datetime="2021-10-28T22:36:59+08:00">2021-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Canvas API 提供了一个通过 JavaScript 和 HTML 的&lt;canvas&gt;元素来绘制图形的方式。它可以用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理等方面。</p>
+<p>Canvas API 主要聚焦于 2D 图形。而同样使用&lt;canvas&gt;元素的 WebGL API 则用于绘制硬件加速的 2D 和 3D 图形</p>
+<span id="more"></span>
+<h2 id="基本的画布功能">基本的画布功能</h2>
+<p>创建&lt;canvas&gt;元素时至少要设置其 width 和 height 属性，这样才能告诉浏览器在多大面积上绘图。出现在开始和结束标签之间的内容是后备数据，会在浏览器不支持&lt;canvas&gt;元素时显示</p>
+<p>与其他元素一样，width 和 height 属性也可以在 DOM 节点上设置，因此可以随时修改。整个元 素还可以通过 CSS 添加样式，并且元素在添加样式或实际绘制内容前是不可见的</p>
+<p>可以使用 toDataURL()方法导出元素上的图像。这个方法接收一个参数：要生成图像 的 MIME 类型（与用来创建图形的上下文无关）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  &lt;canvas id=&quot;drawing&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;A drawing of something.&lt;/canvas&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> drawing = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确保浏览器支持&lt;canvas&gt;</span></span><br><span class="line"><span class="keyword">if</span> (drawing.<span class="property">getContext</span>) &#123;</span><br><span class="line">  <span class="comment">// 取得图像的数据 URI</span></span><br><span class="line">  <span class="keyword">let</span> imgURI = drawing.<span class="title function_">toDataURL</span>(<span class="string">&quot;image/png&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 显示图片</span></span><br><span class="line">  <span class="keyword">let</span> image = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">  image.<span class="property">src</span> = imgURI;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(image);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2D-绘图上下文">2D 绘图上下文</h2>
+<p>2D 绘图上下文提供了绘制 2D 图形的方法，包括矩形、弧形和路径。2D 上下文的坐标原点(0, 0)在&lt;canvas&gt;元素的左上角。所有坐标值都相对于该点计算，因此 x 坐标向右增长，y 坐标向下增长。默认情况下，width 和 height 表示两个方向上像素的最大值</p>
+<h3 id="填充与描边">填充与描边</h3>
+<p>2D 上下文有两个基本绘制操作：填充和描边。填充以指定样式（颜色、渐变或图像）自动填充形状，而描边只为图形边界着色。大多数 2D 上下文操作有填充和描边的变体，显示效果取决于两个属性：fillStyle 和 strokeStyle。</p>
+<p>这两个属性可以是字符串、渐变对象或图案对象，默认值都为&quot;#000000&quot;。字符串表示颜色值，可以是 CSS 支持的任意格式：名称、十六进制代码、rgb、rgba、hsl 或 hsla。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="comment">// 确保浏览器支持&lt;canvas&gt;</span></span><br><span class="line"><span class="keyword">if</span> (drawing.<span class="property">getContext</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> context = drawing.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">  context.<span class="property">strokeStyle</span> = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">  context.<span class="property">fillStyle</span> = <span class="string">&quot;#0000ff&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="绘制矩形">绘制矩形</h3>
+<p>矩形是唯一一个可以直接在 2D 绘图上下文中绘制的形状。与绘制矩形相关的方法有 3 个：fillRect()、strokeRect()和 clearRect()。这些方法都接收 4 个参数：矩形 x 坐标、矩形 y 坐标、矩形宽度和矩形高度。这几个参数的单位都是像素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="comment">// 确保浏览器支持&lt;canvas&gt;</span></span><br><span class="line"><span class="keyword">if</span> (drawing.<span class="property">getContext</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> context = drawing.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// fillRect()方法用于以指定颜色在画布上绘制并填充矩形。填充的颜色使用 fillStyle 属性指定</span></span><br><span class="line">  <span class="comment">// 绘制红色矩形</span></span><br><span class="line">  context.<span class="property">fillStyle</span> = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">  context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// strokeRect()方法使用通过 strokeStyle 属性指定的颜色绘制矩形轮廓</span></span><br><span class="line">  <span class="comment">// 绘制半透明蓝色轮廓的矩形</span></span><br><span class="line">  context.<span class="property">strokeStyle</span> = <span class="string">&quot;rgba(0,0,255,0.5)&quot;</span>;</span><br><span class="line">  context.<span class="title function_">strokeRect</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用 clearRect()方法可以擦除画布中某个区域。该方法用于把绘图上下文中的某个区域变透明。</span></span><br><span class="line">  <span class="comment">// 在前两个矩形重叠的区域擦除一个矩形区域</span></span><br><span class="line">  context.<span class="title function_">clearRect</span>(<span class="number">40</span>, <span class="number">40</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="绘制路径">绘制路径</h3>
+<p>2D 绘图上下文支持很多在画布上绘制路径的方法。通过路径可以创建复杂的形状和线条。要绘制路径，必须首先调用 beginPath()方法以表示要开始绘制新路径。然后，再调用下列方法来绘制路径</p>
+<ul>
+<li>arc(x, y, radius, startAngle, endAngle, counterclockwise): 以坐标(x ,y)为圆心，以 radius 为半径绘制一条弧线，起始角度为 startAngle，结束角度为 endAngle(都是弧度)。最后一个参数 counterclockwise 表示是否逆时针计算其实角度和结束角度(默认为顺时针)</li>
+<li>arcTo(x1, y1, x2, y2, radius): 以给定半径 radius，经由(x1, y1)绘制一条从上一点到(x2, y2)的弧线</li>
+<li>bezierCurveTo(c1x, c1y, c2x, c2y, x, y): 以(c1x, c1y)和(c2x, c2y)为控制点，绘制一条从上一点到(x, y)的弧线(三次贝塞尔曲线)</li>
+<li>lineTo(x, y): 绘制一条从上一点到(x, y)的直线</li>
+<li>moveTo(x, y): 不绘制线条，只把绘制光标移动到(x, y)</li>
+<li>quadraticCurveTo(cx, cy, x, y): 以(cx, cy)为控制点，绘制一条从上一点到(x, y)的弧线(二次贝塞尔曲线)</li>
+<li>rect(x, y, width, height): 以给定宽度和高度在坐标点(x, y)绘制一个矩形。这个方法与 strokeRect()和 fillRect()的区别在于，它创建的是一条路径，而不是独立的图形</li>
+</ul>
+<p>创建路径之后，可以使用 closePath()方法绘制一条返回起点的线。如果路径已经完成，则既可 以指定 fillStyle 属性并调用 fill()方法来填充路径，也可以指定 strokeStyle 属性并调用 stroke()方法来描画路径，还可以调用 clip()方法基于已有路径创建一个新剪切区域</p>
+<p>路径是 2D 上下文的主要绘制机制，为绘制结果提供了很多控制。因为路径经常被使用，所以也有 一个 isPointInPath()方法，接收 x 轴和 y 轴坐标作为参数。这个方法用于确定指定的点是否在路径 上，可以在关闭路径前随时调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="comment">// 确保浏览器支持&lt;canvas&gt;</span></span><br><span class="line"><span class="keyword">if</span> (drawing.<span class="property">getContext</span>) &#123;</span><br><span class="line"> <span class="keyword">let</span> context = drawing.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 创建路径</span></span><br><span class="line"> context.<span class="title function_">beginPath</span>();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 绘制外圆</span></span><br><span class="line"> context.<span class="title function_">arc</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">99</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 绘制内圆</span></span><br><span class="line"> context.<span class="title function_">moveTo</span>(<span class="number">194</span>, <span class="number">100</span>);</span><br><span class="line"> context.<span class="title function_">arc</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">94</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="title class_">Math</span>.<span class="property">PI</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 绘制分针</span></span><br><span class="line"> context.<span class="title function_">moveTo</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"> context.<span class="title function_">lineTo</span>(<span class="number">100</span>, <span class="number">15</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 绘制时针</span></span><br><span class="line"> context.<span class="title function_">moveTo</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line"> context.<span class="title function_">lineTo</span>(<span class="number">35</span>, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 描画路径</span></span><br><span class="line"> context.<span class="title function_">stroke</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 判断指点的点是否在路径上</span></span><br><span class="line"> <span class="keyword">if</span> (context.<span class="title function_">isPointInPath</span>(<span class="number">100</span>, <span class="number">100</span>)) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&quot;Point (100, 100) is in the path.&quot;</span>);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="绘制文本">绘制文本</h3>
+<p>文本和图像混合也是常见的绘制需求，因此 2D 绘图上下文还提供了绘制文本的方法，即 fillText() 和 strokeText()。这两个方法都接收 4 个参数：要绘制的字符串、x 坐标、y 坐标和可选的最大像素 宽度。而且，这两个方法最终绘制的结果都取决于以下 3 个属性</p>
+<ul>
+<li>font: 以 CSS 语法指定的字体样式、大小、字体族等，比如&quot;10px Arial&quot;</li>
+<li>textAlign: 指定文本的对齐方式，可能的值包括&quot;start&quot;、“end”、“left”、“right&quot;和&quot;center”。</li>
+<li>textBaseLine: 指定文本的基线，可能的值包括&quot;top&quot;、“hanging”、“middle”、“alphabetic”、“ideological&quot;和&quot;bottom”</li>
+</ul>
+<p>这些属性都有相应的默认值，因此没必要每次绘制文本时都设置它们。fillText()方法使用 fillStyle 属性绘制文本，而 strokeText()方法使用 strokeStyle 属性。通常，fillText()方法是使用最多的，因为它模拟了在网页中渲染文本</p>
+<p>2D 上下文提供了用于辅助确定文本大小的 measureText()方法。这个方法接收一个参数，即要绘制的文本，然后返回一个 TextMetrics 对象。这个返回的对象目前只有一个属性 width，不过将来应该会增加更多度量指标。</p>
+<p>measureText()方法使用 font、textAlign 和 textBaseline 属性当前的值计算绘制指定文本后的大小。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fontSize = <span class="number">100</span>;</span><br><span class="line">context.<span class="property">font</span> = fontSize + <span class="string">&quot;px Arial&quot;</span>;</span><br><span class="line"><span class="keyword">while</span> (context.<span class="title function_">measureText</span>(<span class="string">&quot;Hello world!&quot;</span>).<span class="property">width</span> &gt; <span class="number">140</span>) &#123;</span><br><span class="line">  fontSize--;</span><br><span class="line">  context.<span class="property">font</span> = fontSize + <span class="string">&quot;px Arial&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">context.<span class="title function_">fillText</span>(<span class="string">&quot;Hello world!&quot;</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">context.<span class="title function_">fillText</span>(<span class="string">&quot;Font size is &quot;</span> + fontSize + <span class="string">&quot;px&quot;</span>, <span class="number">10</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="变换">变换</h3>
+<p>上下文变换可以操作绘制在画布上的图像。2D 绘图上下文支持所有常见的绘制变换。在创建绘制上下文时，会以默认值初始化变换矩阵，从而让绘制操作如实应用到绘制结果上。对绘制上下文应用变换，可以导致以不同的变换矩阵应用绘制操作，从而产生不同的结果</p>
+<ul>
+<li>
+<p>rotate(angle)：围绕<strong>原点</strong>把图像旋转 angle 弧度。</p>
+</li>
+<li>
+<p>scale(scaleX, scaleY)：通过在 x 轴乘以 scaleX、在 y 轴乘以 scaleY 来缩放图像。scaleX 和 scaleY 的默认值都是 1.0。</p>
+</li>
+<li>
+<p>translate(x, y)：把原点移动到(x, y)。执行这个操作后，坐标(0, 0)就会变成(x, y)。</p>
+</li>
+<li>
+<p>transform(m1_1, m1_2, m2_1, m2_2, dx, dy)：像下面这样通过矩阵乘法直接修改矩阵。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.15999999999999992em" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><msub><mn>1</mn><mn>1</mn></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><msub><mn>1</mn><mn>2</mn></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mi>x</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><msub><mn>2</mn><mn>1</mn></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>m</mi><msub><mn>2</mn><mn>2</mn></msub></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>d</mi><mi>y</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>0</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mn>1</mn></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{matrix}
+   m1_1 &amp; m1_2 &amp; dx \\
+   m2_1 &amp; m2_2 &amp; dy \\
+   0 &amp; 0 &amp; 1
+\end{matrix}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.6000000000000005em;vertical-align:-1.5500000000000007em;"></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">m</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span><span style="top:-3.0099999999999993em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span><span style="top:-1.8099999999999994em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5500000000000007em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+</li>
+<li>
+<p>setTransform(m1_1, m1_2, m2_1, m2_2, dx, dy)：把矩阵重置为默认值，再以传入的参数调用 transform()</p>
+</li>
+</ul>
+<p>所有这些变换，包括 fillStyle 和 strokeStyle 属性，会一直保留在上下文中，直到再次修改它们。虽然没有办法明确地将所有值都重置为默认值，但有两个方法可以帮我们跟踪变化。如果想着什么时候再回到当前的属性和变换状态，可以调用 save()方法。调用这个方法后，所有这一时刻的设置会被放到一个暂存栈中。保存之后，可以继续修改上下文。而在需要恢复之前的上下文时，可以调用 restore()方法。这个方法会从暂存栈中取出并恢复之前保存的设置。多次调用 save()方法可以在暂存栈中存储多套设置，然后通过 restore()可以系统地恢复</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">context.<span class="title function_">save</span>();</span><br><span class="line"></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#00ff00&quot;</span>;</span><br><span class="line">context.<span class="title function_">translate</span>(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">context.<span class="title function_">save</span>();</span><br><span class="line"></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#0000ff&quot;</span>;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>); <span class="comment">// 在(100, 100)绘制蓝色矩形</span></span><br><span class="line"></span><br><span class="line">context.<span class="title function_">restore</span>();</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">200</span>); <span class="comment">// 在(100, 100)绘制绿色矩形</span></span><br><span class="line"></span><br><span class="line">context.<span class="title function_">restore</span>();</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">200</span>); <span class="comment">// 在(0, 0)绘制红色矩形</span></span><br></pre></td></tr></table></figure>
+<h3 id="绘制图像">绘制图像</h3>
+<p>2D 绘图上下文内置支持操作图像。如果想把现有图像绘制到画布上，可以使用 drawImage()方法。这个方法可以接收 3 组不同的参数，并产生不同的结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> image = <span class="variable language_">document</span>.<span class="property">images</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取了文本中的第一个图像，然后在画布上的坐标(10, 10)处将它绘制了出来</span></span><br><span class="line">context.<span class="title function_">drawImage</span>(image, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 图像会缩放到 20 像素宽、30 像素高</span></span><br><span class="line">context.<span class="title function_">drawImage</span>(image, <span class="number">50</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  要绘制的图像、源图像 x 坐标、源图像 y 坐标、源图像宽度、源图像高度、目标区域 x 坐标、目标区域 y 坐标、目标区域宽度和目标区域高度</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">context.<span class="title function_">drawImage</span>(image, <span class="number">0</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">40</span>, <span class="number">60</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  原始图像中只有一部分会绘制到画布上。</span></span><br><span class="line"><span class="comment">  这一部分从(0, 10)开始，50 像素宽、50 像素高。</span></span><br><span class="line"><span class="comment">  而绘制到画布上时，会从(0, 100)开始，变成 40 像素宽、60 像素高</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="阴影">阴影</h3>
+<p>2D 上下文可以根据以下属性的值自动为已有形状或路径生成阴影。</p>
+<ul>
+<li>shadowColor：CSS 颜色值，表示要绘制的阴影颜色，默认为黑色。</li>
+<li>shadowOffsetX：阴影相对于形状或路径的 x 坐标的偏移量，默认为 0。</li>
+<li>shadowOffsetY：阴影相对于形状或路径的 y 坐标的偏移量，默认为 0。</li>
+<li>shadowBlur：像素，表示阴影的模糊量。默认值为 0，表示不模糊</li>
+</ul>
+<h3 id="渐变">渐变</h3>
+<p>渐变通过 CanvasGradient 的实例表示，在 2D 上下文中创建和修改都非常简单。要创建一个新的 线性渐变，可以调用上下文的 createLinearGradient()方法。这个方法接收 4 个参数：起点 x 坐标、 起点 y 坐标、终点 x 坐标和终点 y 坐标。调用之后，该方法会以指定大小创建一个新的 CanvasGradient 对象并返回实例</p>
+<p>有了 gradient 对象后，接下来要使用 addColorStop()方法为渐变指定色标。这个方法接收两 个参数：色标位置和 CSS 颜色字符串。色标位置通过 0 ～ 1 范围内的值表示，0 是第一种颜色，1 是最后 一种颜色</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gradient = context.<span class="title function_">createLinearGradient</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">70</span>, <span class="number">70</span>);</span><br><span class="line">gradient.<span class="title function_">addColorStop</span>(<span class="number">0</span>, <span class="string">&quot;white&quot;</span>);</span><br><span class="line">gradient.<span class="title function_">addColorStop</span>(<span class="number">1</span>, <span class="string">&quot;black&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制红色矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"><span class="comment">// 绘制渐变矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = gradient;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p>径向渐变（或放射性渐变）要使用 createRadialGradient()方法来创建。这个方法接收 6 个参数，分别对应两个圆形圆心的坐标和半径。前 3 个参数指定起点圆形中心的 x、y 坐标和半径，后 3 个参数指定终点圆形中心的 x、y 坐标和半径。在创建径向渐变时，可以把两个圆形想象成一个圆柱体的两个圆形表面。把一个表面定义得小一点，另一个定义得大一点，就会得到一个圆锥体。然后，通过移动两个圆形的圆心，就可以旋转这个圆锥体</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> gradient = context.<span class="title function_">createRadialGradient</span>(<span class="number">55</span>, <span class="number">55</span>, <span class="number">10</span>, <span class="number">55</span>, <span class="number">55</span>, <span class="number">30</span>);</span><br><span class="line">gradient.<span class="title function_">addColorStop</span>(<span class="number">0</span>, <span class="string">&quot;white&quot;</span>);</span><br><span class="line">gradient.<span class="title function_">addColorStop</span>(<span class="number">1</span>, <span class="string">&quot;black&quot;</span>);</span><br><span class="line"><span class="comment">// 绘制红色矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"><span class="comment">// 绘制渐变矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = gradient;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="图案">图案</h3>
+<p>图案是用于填充和描画图形的重复图像。要创建新图案，可以调用 createPattern()方法并传入两个参数：一个 HTML &lt;img&gt;元素和一个表示该如何重复图像的字符串。第二个参数的值与 CSS 的 background-repeat 属性是一样的，包括&quot;repeat&quot;、“repeat-x”、“repeat-y&quot;和&quot;no-repeat”</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">et image = <span class="variable language_">document</span>.<span class="property">images</span>[<span class="number">0</span>],</span><br><span class="line"> pattern = context.<span class="title function_">createPattern</span>(image, <span class="string">&quot;repeat&quot;</span>);</span><br><span class="line"><span class="comment">// 绘制矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = pattern;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="图像数据">图像数据</h3>
+<p>2D 上下文中比较强大的一种能力是可以使用 getImageData()方法获取原始图像数据。这个方法 接收 4 个参数：要取得数据中第一个像素的左上角坐标和要取得的像素宽度及高度</p>
+<p>返回的对象是一个 ImageData 的实例。每个 ImageData 对象都包含 3 个属性：width、height 和 data，其中，data 属性是包含图像的原始像素信息的数组。每个像素在 data 数组中都由 4 个值表 示，分别代表红、绿、蓝和透明度值。换句话说，第一个像素的信息包含在第 0 到第 3 个值中</p>
+<p>过更改图像数据可以创建一个简单的灰阶过滤器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="comment">// 确保浏览器支持&lt;canvas&gt;</span></span><br><span class="line"><span class="keyword">if</span> (drawing.<span class="property">getContext</span>) &#123;</span><br><span class="line"> <span class="keyword">let</span> context = drawing.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>),</span><br><span class="line"> image = <span class="variable language_">document</span>.<span class="property">images</span>[<span class="number">0</span>],</span><br><span class="line"> imageData, data,</span><br><span class="line"> i, len, average,</span><br><span class="line"> red, green, blue, alpha;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 绘制图像</span></span><br><span class="line"> context.<span class="title function_">drawImage</span>(image, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 取得图像数据</span></span><br><span class="line"> imageData = context.<span class="title function_">getImageData</span>(<span class="number">0</span>, <span class="number">0</span>, image.<span class="property">width</span>, image.<span class="property">height</span>);</span><br><span class="line"> data = imageData.<span class="property">data</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span> (i=<span class="number">0</span>, len=data.<span class="property">length</span>; i &lt; len; i+=<span class="number">4</span>) &#123;</span><br><span class="line"> red = data[i];</span><br><span class="line"> green = data[i+<span class="number">1</span>];</span><br><span class="line"> blue = data[i+<span class="number">2</span>];</span><br><span class="line"> alpha = data[i+<span class="number">3</span>];</span><br><span class="line"> <span class="comment">// 取得 RGB 平均值</span></span><br><span class="line"> average = <span class="title class_">Math</span>.<span class="title function_">floor</span>((red + green + blue) / <span class="number">3</span>);</span><br><span class="line"> <span class="comment">// 设置颜色，不管透明度</span></span><br><span class="line"> data[i] = average;</span><br><span class="line"> data[i+<span class="number">1</span>] = average;</span><br><span class="line"> data[i+<span class="number">2</span>] = average;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 将修改后的数据写回 ImageData 并应用到画布上显示出来</span></span><br><span class="line"> imageData.<span class="property">data</span> = data;</span><br><span class="line"> context.<span class="title function_">putImageData</span>(imageData, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="合成">合成</h3>
+<p>2D 上下文中绘制的所有内容都会应用两个属性：globalAlpha 和 globalComposition Operation，其中，globalAlpha 属性是一个范围在 0~1 的值（包括 0 和 1），用于指定所有绘制内容的透明度，默认值为 0。如果所有后来的绘制都需要使用同样的透明度，那么可以将 globalAlpha 设置为适当的值，执行绘制，然后再把 globalAlpha 设置为 0</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制红色矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改全局透明度</span></span><br><span class="line">context.<span class="property">globalAlpha</span> = <span class="number">0.5</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 绘制蓝色矩形</span></span><br><span class="line">context.<span class="property">fillStyle</span> = <span class="string">&quot;rgba(0,0,255,1)&quot;</span>;</span><br><span class="line">context.<span class="title function_">fillRect</span>(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重置</span></span><br><span class="line">context.<span class="property">globalAlpha</span> = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>globalCompositionOperation 属性表示新绘制的形状如何与上下文中已有的形状融合。这个属性是一个字符串，可以取下列值</p>
+<ul>
+<li>source-over：默认值，新图形绘制在原有图形上面。</li>
+<li>source-in：新图形只绘制出与原有图形重叠的部分，画布上其余部分全部透明。</li>
+<li>source-out：新图形只绘制出不与原有图形重叠的部分，画布上其余部分全部透明。</li>
+<li>source-atop：新图形只绘制出与原有图形重叠的部分，原有图形不受影响。</li>
+<li>destination-over：新图形绘制在原有图形下面，重叠部分只有原图形透明像素下的部分可见。</li>
+<li>destination-in：新图形绘制在原有图形下面，画布上只剩下二者重叠的部分，其余部分完全透明。</li>
+<li>destination-out：新图形与原有图形重叠的部分完全透明，原图形其余部分不受影响。</li>
+<li>destination-atop：新图形绘制在原有图形下面，原有图形与新图形不重叠的部分完全透明。</li>
+<li>lighter：新图形与原有图形重叠部分的像素值相加，使该部分变亮。</li>
+<li>copy：新图形将擦除并完全取代原有图形。</li>
+<li>xor：新图形与原有图形重叠部分的像素执行“异或”计</li>
+</ul>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-XHR/" rel="prev" title="Javascript-XHR">
+                  <i class="fa fa-chevron-left"></i> Javascript-XHR
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-Animation&Graphics-1/" rel="next" title="Javascript-动画与图形-上">
+                  Javascript-动画与图形-上 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。 Global Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-(Global &amp; Math)">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-Math/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。 Global Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 G">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-23T14:57:33.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.455Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="Global">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-Math/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-Math/","path":"Javascript-Math/","title":"Javascript-(Global & Math)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-(Global & Math) | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">Global</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#URL-%E7%BC%96%E7%A0%81%E6%96%B9%E6%B3%95"><span class="nav-text">URL 编码方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-text">eval()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-%E5%B1%9E%E6%80%A7"><span class="nav-text">Global 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#window-%E5%AF%B9%E8%B1%A1"><span class="nav-text">window 对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">Math</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Math-%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-text">Math 对象属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#min-max"><span class="nav-text">min() &amp;&amp; max()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%88%8D%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-text">舍入方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#random"><span class="nav-text">random()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95"><span class="nav-text">其他方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-Math/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-(Global & Math) | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-(Global & Math)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-23 22:57:33" itemprop="dateCreated datePublished" datetime="2021-01-23T22:57:33+08:00">2021-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。</p>
+<h1>Global</h1>
+<p>Global 对象为一种兜底对象，它所针对的是不属于任何对象的属性和方法。在全局作用域中的变量和方法都会成为 Global 对象的属性。</p>
+<span id="more"></span>
+<h2 id="URL-编码方法">URL 编码方法</h2>
+<p>encodeURI()和 encodeURIComponent()方法用于编码统一资源标识符(URI)，以便传给浏览器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 编码</span></span><br><span class="line"><span class="comment">    encodeURI()</span></span><br><span class="line"><span class="comment">    encondeURIComponent()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">let</span> uri = <span class="string">&quot;https://kinsiy.github.io?name=哈哈哈&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> url_1 = <span class="built_in">encodeURI</span>(uri);</span><br><span class="line"><span class="keyword">let</span> url_2 = <span class="built_in">encodeURIComponent</span>(uri);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(url_1); <span class="comment">// https://kinsiy.github.io?name=%E5%93%88%E5%93%88%E5%93%88</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(url_2); <span class="comment">// https%3A%2F%2Fkinsiy.github.io%3Fname%3D%E5%93%88%E5%93%88%E5%93%88</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 解码</span></span><br><span class="line"><span class="comment">    decodeURI()</span></span><br><span class="line"><span class="comment">    decondeURIComponent()</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">decodeURI</span>(url_1)); <span class="comment">// https://kinsiy.github.io?name=哈哈哈</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">decodeURIComponent</span>(url_2)); <span class="comment">// https://kinsiy.github.io?name=哈哈哈</span></span><br></pre></td></tr></table></figure>
+<h2 id="eval">eval()</h2>
+<p>这个方法就是一个完整的 EMCAScript 解释器，它接收一个参数，即一个要执行的 EMCAScript(Javascript)字符串。<br>
+通过 eval()定义的任何变量和函数都不会提升。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> msg = <span class="string">&quot;hello world!&quot;</span>;</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;console.log(msg)&quot;</span>); <span class="comment">// hello world!</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;function sayHi() &#123; console.log(&#x27;Hi&#x27;); &#125;&quot;</span>);</span><br><span class="line"><span class="title function_">sayHi</span>(); <span class="comment">// Hi</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;var name = &#x27;Kinsiy&#x27;&quot;</span>); <span class="comment">// 此处使用let与const声明console.log()均为空，原因不明，作用域原因？</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name); <span class="comment">// Kinsiy</span></span><br></pre></td></tr></table></figure>
+<h2 id="Global-属性">Global 属性</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">undefined</td>
+<td style="text-align:left">特殊值 undefined</td>
+</tr>
+<tr>
+<td style="text-align:left">NaN</td>
+<td style="text-align:left">特殊值 NaN</td>
+</tr>
+<tr>
+<td style="text-align:left">Infinity</td>
+<td style="text-align:left">特殊值 Infinity</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Object 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">Array 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">Function 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">Boolean 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">String 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">Number 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Date</td>
+<td style="text-align:left">Date 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">RegExp</td>
+<td style="text-align:left">RegExp 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Symbol</td>
+<td style="text-align:left">Symbol 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">Error</td>
+<td style="text-align:left">Errot 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">EvalError</td>
+<td style="text-align:left">EvalError 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">RangeError</td>
+<td style="text-align:left">RangerError 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">ReferenceError</td>
+<td style="text-align:left">RefenceError 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">SyntaxError</td>
+<td style="text-align:left">SytaxError 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">TypeError</td>
+<td style="text-align:left">TypeError 的构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">URIError</td>
+<td style="text-align:left">URIError 的构造函数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="window-对象">window 对象</h2>
+<p>虽然 ECMA-262 没有规定直接访问 Global 对象的方式，但浏览器将 window 对象实现为 Global 对象的代理。因此，所有全局作用域声明的变量和函数都变成了 window 的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">window</span>.<span class="property">color</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">satColor</span>(); <span class="comment">// red</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 另一种获取Global对象的方式 */</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable language_">global</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h1>Math</h1>
+<h2 id="Math-对象属性">Math 对象属性</h2>
+<p>Math 有一些属性，主要用于保存数学中的一些特殊值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Math.E</td>
+<td style="text-align:left">自然对数的基数 e 的值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LN10</td>
+<td style="text-align:left">In10</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LN2</td>
+<td style="text-align:left">In2</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LOG2E</td>
+<td style="text-align:left">Log<sub>2</sub>e</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.LOG10E</td>
+<td style="text-align:left">Log<sub>10</sub>e</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.PI</td>
+<td style="text-align:left">π</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.SQRT1_2</td>
+<td style="text-align:left">√(1/2)</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.SQRT2</td>
+<td style="text-align:left">√2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="min-max">min() &amp;&amp; max()</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> max = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">5</span>, <span class="number">7</span>, <span class="number">48</span>, <span class="number">56.1</span>, <span class="number">54.6</span>, <span class="number">100</span>, <span class="number">1.2</span>, <span class="number">100.5</span>); <span class="comment">// 100.5</span></span><br><span class="line"><span class="keyword">let</span> min = <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">5</span>, <span class="number">7</span>, <span class="number">48</span>, <span class="number">56.1</span>, <span class="number">54.6</span>, <span class="number">100</span>, <span class="number">1.2</span>, <span class="number">100.5</span>); <span class="comment">// 1.2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(max);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(min);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用扩展操作符 */</span></span><br><span class="line"><span class="keyword">let</span> values = [<span class="number">5</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">25</span>, <span class="number">7</span>, <span class="number">45</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">max</span>(...values)); <span class="comment">// 45</span></span><br></pre></td></tr></table></figure>
+<h2 id="舍入方法">舍入方法</h2>
+<ul>
+<li>Math.ceil() 向上取整</li>
+<li>Math.floor() 向下取整</li>
+<li>Math.round() 四舍五入</li>
+<li>Math.fround() 返回数值最接近的单精度(32 位)浮点值表示</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">ceil</span>(<span class="number">25.5</span>)); <span class="comment">// 26</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="number">25.5</span>)); <span class="comment">// 25</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="number">26.6</span>)); <span class="comment">// 27</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Math</span>.<span class="title function_">fround</span>(<span class="number">26.8</span>)); <span class="comment">// 26.799999237060547</span></span><br></pre></td></tr></table></figure>
+<h2 id="random">random()</h2>
+<p>Math.random()返回一个 0~1 范围内的随机数，其中包含 0 不包含 1。[0,1)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 随机数公式</span></span><br><span class="line"><span class="comment">    number = Math.floor(Math.random() * total_number_of_choices + first_possible_value)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">selectFrom</span>(<span class="params">lowerValue, upperValue</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> choices = upperValue - lowerValue + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * choices + lowerValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">5</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">selectFrom</span>(<span class="number">5</span>, <span class="number">45</span>)); <span class="comment">// [5,45]</span></span><br><span class="line">  i++; <span class="comment">// 8 17 28 17 11 (5个随机数)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其他方法">其他方法</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Math.abs(x)</td>
+<td style="text-align:left">x 的绝对值</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.exp(x)</td>
+<td style="text-align:left">e<sup>x</sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Math.expm1(x)</td>
+<td style="text-align:left">e<sup>x</sup>-1</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.log(x)</td>
+<td style="text-align:left">Inx</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.log1p(x)</td>
+<td style="text-align:left">1+Inx</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.pow(x, power)</td>
+<td style="text-align:left">x<sup>power</sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Math.hypot(…nums)</td>
+<td style="text-align:left">√(a<sup>2</sup>+b<sup>2</sup>+…+n<sup>2</sup>)</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.clz32(x)</td>
+<td style="text-align:left">返回 32 位整数 x 的前置零的数量</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.sign(x)</td>
+<td style="text-align:left">返回表示 x 符号的 1、0、-0 或-1</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.trunc(x)</td>
+<td style="text-align:left">取整</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.sqrt(x)</td>
+<td style="text-align:left">√x</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.cbrt(x)</td>
+<td style="text-align:left"><sup>3</sup>√x</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.acos(x)</td>
+<td style="text-align:left">cos<sup>-1</sup>x</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.acosh(x)</td>
+<td style="text-align:left">反双曲余弦</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.asin(x)</td>
+<td style="text-align:left">sin<sup>-1</sup>x</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.asinh(x)</td>
+<td style="text-align:left">反双曲正弦</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.atan(x)</td>
+<td style="text-align:left">tan<sup>-1</sup>x</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.atanh(x)</td>
+<td style="text-align:left">反双曲正切</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.atan2(y, x)</td>
+<td style="text-align:left">tan<sup>-1</sup>(y/x)</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.sin(x)</td>
+<td style="text-align:left">sin(x)</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.cos(x)</td>
+<td style="text-align:left">cos(x)</td>
+</tr>
+<tr>
+<td style="text-align:left">Math.tan(x)</td>
+<td style="text-align:left">tan(x)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/Global/" rel="tag"><i class="fa fa-tag"></i> Global</a>
+              <a href="/tags/Math/" rel="tag"><i class="fa fa-tag"></i> Math</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Javascript-Object-1/" rel="prev" title="Javascript-Object.1[理解对象]">
+                  <i class="fa fa-chevron-left"></i> Javascript-Object.1[理解对象]
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-String/" rel="next" title="Javascript-String">
+                  Javascript-String <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

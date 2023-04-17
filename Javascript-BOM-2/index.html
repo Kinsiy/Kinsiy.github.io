@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="location 对象 location 对象是最有用的 BOM 对象之一，提供了当前窗口中加载文档的信息，以及通常的导航功能。这个对象独特的地方在于，它既是 window 的属性，也是 document 的属性。 假设当前加载的 URL 是 http:&#x2F;&#x2F;foouser:barpassword@www.wrox.com:80&#x2F;WileyCDA&#x2F;?q&#x3D;javascript#contents, lo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript-BOM-2">
+<meta property="og:url" content="https://kinsiy.github.io/Javascript-BOM-2/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="location 对象 location 对象是最有用的 BOM 对象之一，提供了当前窗口中加载文档的信息，以及通常的导航功能。这个对象独特的地方在于，它既是 window 的属性，也是 document 的属性。 假设当前加载的 URL 是 http:&#x2F;&#x2F;foouser:barpassword@www.wrox.com:80&#x2F;WileyCDA&#x2F;?q&#x3D;javascript#contents, lo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-20T02:11:29.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.451Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="JS红宝书">
+<meta property="article:tag" content="BOM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/Javascript-BOM-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/Javascript-BOM-2/","path":"Javascript-BOM-2/","title":"Javascript-BOM-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Javascript-BOM-2 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#location-%E5%AF%B9%E8%B1%A1"><span class="nav-text">location 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-text">查询字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URLSearchParams"><span class="nav-text">URLSearchParams</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%9C%B0%E5%9D%80"><span class="nav-text">操作地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#navigator-%E5%AF%B9%E8%B1%A1"><span class="nav-text">navigator 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E6%A3%80%E6%B5%8B"><span class="nav-text">插件检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F"><span class="nav-text">注册处理程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#screen-%E5%AF%B9%E8%B1%A1"><span class="nav-text">screen 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history-%E5%AF%B9%E8%B1%A1"><span class="nav-text">history 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E8%88%AA"><span class="nav-text">导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86"><span class="nav-text">历史状态管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/Javascript-BOM-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Javascript-BOM-2 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Javascript-BOM-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-20 10:11:29" itemprop="dateCreated datePublished" datetime="2021-04-20T10:11:29+08:00">2021-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="location-对象">location 对象</h2>
+<p>location 对象是最有用的 BOM 对象之一，提供了当前窗口中加载文档的信息，以及通常的导航功能。这个对象独特的地方在于，它既是 window 的属性，也是 document 的属性。<br>
+假设当前加载的 URL 是 <a target="_blank" rel="noopener" href="http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents">http://foouser:barpassword@www.wrox.com:80/WileyCDA/?q=javascript#contents</a>, location 对象的内容如下表所示。</p>
+<span id="more"></span>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">location.hash</td>
+<td style="text-align:left">#contents</td>
+<td style="text-align:left">URL 散列值(井号后跟零个或多个字符)，如果没有则为空字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">location.host</td>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="http://www.wrox.com:80">www.wrox.com:80</a></td>
+<td style="text-align:left">服务器名及端口号</td>
+</tr>
+<tr>
+<td style="text-align:left">location.hostname</td>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="http://www.wrox.com">www.wrox.com</a></td>
+<td style="text-align:left">服务器名</td>
+</tr>
+<tr>
+<td style="text-align:left">location.href</td>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="http://www.wrox.com:80/WileyCDA/?q=javascript#contents">http://www.wrox.com:80/WileyCDA/?q=javascript#contents</a></td>
+<td style="text-align:left">当前加载页面的完整 URL。location 的 toString()方法返回这个值</td>
+</tr>
+<tr>
+<td style="text-align:left">location.pathname</td>
+<td style="text-align:left">/WileyCDA/</td>
+<td style="text-align:left">URL 中的路径和(或)文件名</td>
+</tr>
+<tr>
+<td style="text-align:left">location.port</td>
+<td style="text-align:left">80</td>
+<td style="text-align:left">请求的端口。如果 URL 中没有端口，则返回空字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">location.protocol</td>
+<td style="text-align:left">http:</td>
+<td style="text-align:left">页面使用的协议。通常是&quot;http:“或&quot;https:”</td>
+</tr>
+<tr>
+<td style="text-align:left">location.search</td>
+<td style="text-align:left">?q=javascript</td>
+<td style="text-align:left">URL 的查询字符串。这个字符串通常以问号开头</td>
+</tr>
+<tr>
+<td style="text-align:left">location.username</td>
+<td style="text-align:left">foouser</td>
+<td style="text-align:left">域名前指定的用户名</td>
+</tr>
+<tr>
+<td style="text-align:left">location.password</td>
+<td style="text-align:left">barpassword</td>
+<td style="text-align:left">域名前指定的密码</td>
+</tr>
+<tr>
+<td style="text-align:left">location.origin</td>
+<td style="text-align:left"><a target="_blank" rel="noopener" href="http://www.wrox.com">http://www.wrox.com</a></td>
+<td style="text-align:left">URL 的源地址。只读</td>
+</tr>
+</tbody>
+</table>
+<h3 id="查询字符串">查询字符串</h3>
+<p>location 的多数信息都可以通过上面的属性获取。但是 URL 中的查询字符串并不容易使用。虽然 location.search 返回了从问号直到 URL 末尾的所有内容，但没有办法逐个访问每个查询参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getQueryStringArgs = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 取得没有开头问号的查询字符串</span></span><br><span class="line">  <span class="keyword">let</span> qs = location.<span class="property">search</span>.<span class="property">length</span> &gt; <span class="number">0</span> ? location.<span class="property">search</span>.<span class="title function_">substring</span>(<span class="number">1</span>) : <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="comment">// 保存数据的对象</span></span><br><span class="line">  args = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 把每个参数添加到args对象</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> qs.<span class="title function_">split</span>(<span class="string">&quot;&amp;&quot;</span>).<span class="title function_">map</span>(<span class="function">(<span class="params">kv</span>) =&gt;</span> kv.<span class="title function_">split</span>(<span class="string">&quot;=&quot;</span>))) &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="built_in">decodeURIComponent</span>(item[<span class="number">0</span>]),</span><br><span class="line">      value = <span class="built_in">decodeURIComponent</span>(item[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">if</span> (name.<span class="property">length</span>) &#123;</span><br><span class="line">      args[name] = value;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> args;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="URLSearchParams">URLSearchParams</h4>
+<p>URLSearchParams 提供一组标准 API 方法，通过它们可以检查和修改查询字符串。给 URLSearchParams 构造函数传入一个查询字符串，就可以创建一个实例。这个实例上暴露了 get()、set()和 delete()等方法，可以对查询字符串执行相应操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// qs = name=kinsiy&amp;age=24</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> qs = location.<span class="property">search</span>;</span><br><span class="line"><span class="keyword">let</span> searchParams = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(qs);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(searchParams.<span class="title function_">has</span>(<span class="string">&quot;name&quot;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(searchParams.<span class="title function_">get</span>(<span class="string">&quot;age&quot;</span>)); <span class="comment">// 24</span></span><br><span class="line"></span><br><span class="line">searchParams.<span class="title function_">set</span>(<span class="string">&quot;lover&quot;</span>, <span class="string">&quot;someone&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(searchParams.<span class="title function_">toString</span>()); <span class="comment">// name=kinsiy&amp;age=24&amp;lover=someone</span></span><br><span class="line"><span class="comment">// 能够迭代</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> param <span class="keyword">of</span> searchParams) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(param); <span class="comment">// [&quot;name&quot;, &quot;kinsiy&quot;] [&quot;age&quot;, &quot;24&quot;] [&quot;lover&quot;, &quot;someone&quot;]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="操作地址">操作地址</h3>
+<p>可以通过 location 对象修改浏览器的地址。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 效果相同</span></span><br><span class="line">location.<span class="title function_">assign</span>(<span class="string">&quot;https://www.baidu.com&quot;</span>);</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">location</span> = <span class="string">&quot;https://www.baidu.com&quot;</span>;</span><br><span class="line">location.<span class="property">href</span> = <span class="string">&quot;https://www.baidu.com&quot;</span>;</span><br></pre></td></tr></table></figure>
+<p>修改 location 对象的属性也会修改当前加载的页面。其中，hash、search、hostname、pathname 和 port 属性被设置为新值之后都会修改当前 URL。除了 hash 之外，只要修改 location 的一个属性，就会导致页面重新加载新 URL。</p>
+<p>如果不希望增加历史记录，可以使用 replace()方法。这个方法接收一个 URL 参数，但重新加载后不会增加历史记录。调用 replace()之后，用户不能回到前一页。</p>
+<p>最后一个修改地址的方法是 reload()，它能重新加载当前显示的页面。调用 reload()而不传参数，页面会以最有效的方式重新加载。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">location.<span class="title function_">reload</span>(); <span class="comment">// 重新加载，可能是从缓存加载</span></span><br><span class="line">location.<span class="title function_">reload</span>(<span class="literal">true</span>); <span class="comment">// 重新加载，从服务器加载</span></span><br></pre></td></tr></table></figure>
+<h2 id="navigator-对象">navigator 对象</h2>
+<p>navigator 对象的属性通常用于确定浏览器的类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性/方法</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">activeVrDisplays</td>
+<td style="text-align:left">返回数组，包含 ispresenting 属性为 true 的 VRDisplay 实例</td>
+</tr>
+<tr>
+<td style="text-align:left">appCodeName</td>
+<td style="text-align:left">即使在非 Mozilla 浏览器中也会返回&quot;Mozilla&quot;</td>
+</tr>
+<tr>
+<td style="text-align:left">appName</td>
+<td style="text-align:left">浏览器全名</td>
+</tr>
+<tr>
+<td style="text-align:left">appVersion</td>
+<td style="text-align:left">浏览器版本。通常与实际的浏览器版本不一致</td>
+</tr>
+<tr>
+<td style="text-align:left">battery</td>
+<td style="text-align:left">返回暴露 Batter Status API 的 BatteryManager 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">buildId</td>
+<td style="text-align:left">浏览器的构建编号</td>
+</tr>
+<tr>
+<td style="text-align:left">connection</td>
+<td style="text-align:left">返回暴露 Network Information API 的 NetworkInformation 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">cookieEnabled</td>
+<td style="text-align:left">返回布尔值，表示是否启用了 cookie</td>
+</tr>
+<tr>
+<td style="text-align:left">credentials</td>
+<td style="text-align:left">返回暴露 Credentials Management API 的 CredentialsContainer 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">deviceMemory</td>
+<td style="text-align:left">返回单位为 GB 的设备内存容量</td>
+</tr>
+<tr>
+<td style="text-align:left">doNotTrack</td>
+<td style="text-align:left">返回用户&quot;不跟踪&quot;(do-not-track)设置</td>
+</tr>
+<tr>
+<td style="text-align:left">geolocation</td>
+<td style="text-align:left">返回暴露 Geolocation API 的 Geolcation 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">getVRDisplays()</td>
+<td style="text-align:left">返回数组，包含可用的每个 VRDisplay 实例</td>
+</tr>
+<tr>
+<td style="text-align:left">getUserMedia()</td>
+<td style="text-align:left">返回与可用媒体设备硬件关联的流</td>
+</tr>
+<tr>
+<td style="text-align:left">hardwareConcurrency</td>
+<td style="text-align:left">返回设备的处理器核心数量</td>
+</tr>
+<tr>
+<td style="text-align:left">javaEnabled</td>
+<td style="text-align:left">返回布尔值，表示浏览器是否启用了 Java</td>
+</tr>
+<tr>
+<td style="text-align:left">language</td>
+<td style="text-align:left">返回浏览器的主语言</td>
+</tr>
+<tr>
+<td style="text-align:left">languages</td>
+<td style="text-align:left">返回浏览器偏好的语言数组</td>
+</tr>
+<tr>
+<td style="text-align:left">locks</td>
+<td style="text-align:left">返回暴露 Web Locks API 的 LockManager 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">mediaCapabilities</td>
+<td style="text-align:left">返回暴露 Media Capabilities API 的 MediaCapabilities 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">mediaDevices</td>
+<td style="text-align:left">返回可用的媒体设备</td>
+</tr>
+<tr>
+<td style="text-align:left">maxTouchPoints</td>
+<td style="text-align:left">返回设备触摸屏支持的最大触点数</td>
+</tr>
+<tr>
+<td style="text-align:left">mimeTypes</td>
+<td style="text-align:left">返回浏览器中注册的 MIME 类型数组</td>
+</tr>
+<tr>
+<td style="text-align:left">onLine</td>
+<td style="text-align:left">返回布尔值，表示浏览器是否联网</td>
+</tr>
+<tr>
+<td style="text-align:left">oscpu</td>
+<td style="text-align:left">返回浏览器运行设备的操作系统和(或)CPU</td>
+</tr>
+<tr>
+<td style="text-align:left">permissions</td>
+<td style="text-align:left">返回暴露 Permissions API 的 Permissions 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">platform</td>
+<td style="text-align:left">返回浏览器运行的操作平台、</td>
+</tr>
+<tr>
+<td style="text-align:left">plugins</td>
+<td style="text-align:left">返回浏览器安装的插件数组</td>
+</tr>
+<tr>
+<td style="text-align:left">product</td>
+<td style="text-align:left">返回产品名称(通常是&quot;Geoko&quot;)</td>
+</tr>
+<tr>
+<td style="text-align:left">productSub</td>
+<td style="text-align:left">返回产品的额外信息(通常是 Geoko 的版本)</td>
+</tr>
+<tr>
+<td style="text-align:left">registerProtocolHandler()</td>
+<td style="text-align:left">将一个网站注册为特定协议的处理程序</td>
+</tr>
+<tr>
+<td style="text-align:left">requestMediaKeySystemAccess()</td>
+<td style="text-align:left">返回一个期约，解决为 MediaKeySystemAccess 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">sendBeacon()</td>
+<td style="text-align:left">异步传输一些小数据</td>
+</tr>
+<tr>
+<td style="text-align:left">serviceWorker</td>
+<td style="text-align:left">返回用来与 ServiceWorker 实例交互的 ServiceWorkerContainer</td>
+</tr>
+<tr>
+<td style="text-align:left">share()</td>
+<td style="text-align:left">返回当前平台的原生共享机制</td>
+</tr>
+<tr>
+<td style="text-align:left">storage</td>
+<td style="text-align:left">返回暴露 Storage API 的 StorageManager 对象</td>
+</tr>
+<tr>
+<td style="text-align:left">userAgent</td>
+<td style="text-align:left">返回浏览器的用户代理字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">vendor</td>
+<td style="text-align:left">返回浏览器的厂商名称</td>
+</tr>
+<tr>
+<td style="text-align:left">vendorSub</td>
+<td style="text-align:left">返回浏览器厂商的更多信息</td>
+</tr>
+<tr>
+<td style="text-align:left">vibrate()</td>
+<td style="text-align:left">触发设备振动</td>
+</tr>
+<tr>
+<td style="text-align:left">webdriver()</td>
+<td style="text-align:left">返回浏览器当前是否被自动化程序控制</td>
+</tr>
+</tbody>
+</table>
+<h3 id="插件检测">插件检测</h3>
+<p>plugins 数组的每一项都包含如下属性</p>
+<ul>
+<li>name: 插件名称</li>
+<li>description：插件介绍</li>
+<li>filename: 插件的文件名</li>
+<li>length: 由当前插件处理的 MIME 类型数量</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hasPlugin = <span class="keyword">function</span> (<span class="params">name</span>) &#123;</span><br><span class="line">  name = name.<span class="title function_">toLowerCase</span>();</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> plugin <span class="keyword">of</span> <span class="variable language_">window</span>.<span class="property">navigator</span>.<span class="property">plugins</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (plugin.<span class="property">name</span>.<span class="title function_">toLowerCase</span>().<span class="title function_">indexOf</span>(name) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检测QuickTime</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">hasPlugin</span>(<span class="string">&quot;QuickTime&quot;</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="注册处理程序">注册处理程序</h3>
+<p>现代浏览器支持 navigator 上的(在 HTML5 中定义的)registerProtocolHandler()方法。可以借助这个方法将 web 应用程序注册为像桌面应用程序一样的默认应用程序。<br>
+要使用 registerProtocolHandler()方法，必须传入 3 个参数：要处理的协议(如&quot;mailto&quot;或&quot;ftp&quot;)、处理该协议的 URL，以及应用程序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.<span class="title function_">registerProtocolHandler</span>(<span class="string">&quot;mailto&quot;</span>, <span class="string">&quot;http://www.somedailclient.com?cmd=%s&quot;</span>, <span class="string">&quot;Some Mail Client&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="screen-对象">screen 对象</h2>
+<p>这个对象中保存的纯粹是客户端能力信息，也就是浏览器窗口外面的客户端显示器的信息，比如像素宽度和像素高度</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">availHeight</td>
+<td style="text-align:left">屏幕像素高度减去系统组件高度(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">availLeft</td>
+<td style="text-align:left">没有被系统组件占用的屏幕的最左侧像素(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">availTop</td>
+<td style="text-align:left">没有被系统组件占用的屏幕的最顶端像素(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">availWidth</td>
+<td style="text-align:left">屏幕像素宽度减去系统组件高度(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">colorDepth</td>
+<td style="text-align:left">表示屏幕颜色的位数；多数系统是 32(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">height</td>
+<td style="text-align:left">屏幕像素高度</td>
+</tr>
+<tr>
+<td style="text-align:left">left</td>
+<td style="text-align:left">当前屏幕左边的像素距离</td>
+</tr>
+<tr>
+<td style="text-align:left">pixelDepth</td>
+<td style="text-align:left">屏幕的位深(只读)</td>
+</tr>
+<tr>
+<td style="text-align:left">top</td>
+<td style="text-align:left">当前屏幕顶端的像素距离</td>
+</tr>
+<tr>
+<td style="text-align:left">width</td>
+<td style="text-align:left">屏幕像素宽度</td>
+</tr>
+<tr>
+<td style="text-align:left">orientation</td>
+<td style="text-align:left">返回 Screen Orientation API 中屏幕的朝向</td>
+</tr>
+</tbody>
+</table>
+<h2 id="history-对象">history 对象</h2>
+<p>history 对象表示当前窗口首次使用以来用户的导航历史记录。因为 history 是 window 的属性。所以每个 window 都有自己的 history 对象。出于安全考虑，这个对象不会暴露用户访问过的 URL，但可以通过它在不知道实际 URL 的情况下前进和后退</p>
+<h3 id="导航">导航</h3>
+<p>go()方法可以在用户历史记录中沿任何方向导航，可以前进也可以后退。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后退一页</span></span><br><span class="line">history.<span class="title function_">go</span>(-<span class="number">1</span>);</span><br><span class="line">history.<span class="title function_">back</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前进一页</span></span><br><span class="line">history.<span class="title function_">go</span>(<span class="number">1</span>);</span><br><span class="line">history.<span class="title function_">forward</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导航到最近的页面，可能后退也可能前进。若无匹配项，则什么也不做</span></span><br><span class="line">history.<span class="title function_">go</span>(<span class="string">&quot;wrox.com&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>history 对象还有一个 length 属性，表示历史记录中有多个条目。对于窗口或标签页加载的第一个页面，history.length 等于 1.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (history.<span class="property">length</span> == <span class="number">1</span>) &#123;</span><br><span class="line">  <span class="comment">// 这是用户窗口的第一个页面</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="历史状态管理">历史状态管理</h3>
+<p>略</p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35175321/">JavaScript高级程序设计(第4版).</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JS%E7%BA%A2%E5%AE%9D%E4%B9%A6/" rel="tag"><i class="fa fa-tag"></i> JS红宝书</a>
+              <a href="/tags/BOM/" rel="tag"><i class="fa fa-tag"></i> BOM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Js-debounce-thorttle&deepCopy/" rel="prev" title="防抖-节流-深拷贝">
+                  <i class="fa fa-chevron-left"></i> 防抖-节流-深拷贝
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-BOM-1/" rel="next" title="Javascript-BOM-1">
+                  Javascript-BOM-1 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

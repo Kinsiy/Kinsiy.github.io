@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近有需要向别人分享markdown文档的需求,然而文档上面插入了一些本地图片,这些图片又不好上传到外网图床上.导致在非本机环境中打开文档,均无法查看图片. 既然无法使用外网图床,在本机搭建一个局域网图床不就行了? 在Github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.Github. My-Easy-Pic-Bed 我寻思着这也没">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个基于Node.js的简易局域网图床">
+<meta property="og:url" content="https://kinsiy.github.io/nodejs-picbed/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="最近有需要向别人分享markdown文档的需求,然而文档上面插入了一些本地图片,这些图片又不好上传到外网图床上.导致在非本机环境中打开文档,均无法查看图片. 既然无法使用外网图床,在本机搭建一个局域网图床不就行了? 在Github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.Github. My-Easy-Pic-Bed 我寻思着这也没">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417011951482.png">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417124706484.png">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417124921514.png">
+<meta property="article:published_time" content="2022-04-16T13:47:48.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.465Z">
+<meta property="article:author" content="Kinsiy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417011951482.png">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/nodejs-picbed/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/nodejs-picbed/","path":"nodejs-picbed/","title":"一个基于Node.js的简易局域网图床"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一个基于Node.js的简易局域网图床 | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Post"><span class="nav-text">Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get"><span class="nav-text">Get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Typora%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0"><span class="nav-text">Typora自动上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#upload-image-sh"><span class="nav-text">upload-image.sh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload-image-ps1"><span class="nav-text">upload-image.ps1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/nodejs-picbed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一个基于Node.js的简易局域网图床 | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个基于Node.js的简易局域网图床
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-16 21:47:48" itemprop="dateCreated datePublished" datetime="2022-04-16T21:47:48+08:00">2022-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近有需要向别人分享markdown文档的需求,然而文档上面插入了一些本地图片,这些图片又不好上传到外网图床上.导致在非本机环境中打开文档,均无法查看图片.</p>
+<p>既然无法使用外网图床,在本机搭建一个局域网图床不就行了?</p>
+<p>在Github上面找了一圈只找到了一个Python+Flask的实现.看了一下它的代码,非常简单,核心就是一个web服务.<a target="_blank" rel="noopener" href="https://github.com/fslongjin/My-Easy-Pic-Bed">Github. My-Easy-Pic-Bed</a></p>
+<p>我寻思着这也没必要上Flask,只要能起web服务的就行,而且我并不需要网页上传入口,通过<mark class="label primary">curl</mark>命令行上传图片就行,这下<mark class="label primary">html</mark>页面也省了</p>
+<span id="more"></span>
+<h2 id="代码实现">代码实现</h2>
+<p>利用<mark class="label primary">http.createServer()</mark>创建web服务,我们只需要处理图片的上传(<mark class="label primary">post</mark>)和下载(<mark class="label primary">get</mark>)就行.</p>
+<div class="note info"><p>环境: node -v12.21.0</p>
+<p>代码已上传至GitHub，clone下来<mark class="label primary">npm run start</mark>即可食用<a target="_blank" rel="noopener" href="https://github.com/Kinsiy/simple-pic-bed/tree/main">Github. Kinsiy.Simple-pic-bed</a></p>
+</div>
+<h3 id="Post">Post</h3>
+<p>文件上传核心就一件事,将文件以唯一文件名保存到指定文件夹.代码也很简单,使用<mark class="label primary">formidable</mark>库获取请求体中的文件,使用<mark class="label primary">uuid</mark>库生成唯一文件名,保存文件,并返回路径即可.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (req.<span class="property">url</span> === <span class="string">&quot;/upload&quot;</span> &amp;&amp; req.<span class="property">method</span>.<span class="title function_">toLowerCase</span>() === <span class="string">&quot;post&quot;</span>) &#123;</span><br><span class="line">  <span class="comment">// parse a file upload</span></span><br><span class="line">  <span class="keyword">const</span> form = <span class="title function_">formidable</span>(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">  form.<span class="title function_">parse</span>(req, <span class="function">(<span class="params">err, fields, files</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      res.<span class="property">statusCode</span> = err.<span class="property">httpCode</span> || <span class="number">400</span>;</span><br><span class="line">      res.<span class="title function_">end</span>(<span class="title class_">String</span>(err));</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> file = files.<span class="property">file</span>[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// checks if the file is valid</span></span><br><span class="line">    <span class="keyword">const</span> isValid = <span class="title function_">isFileValid</span>(file);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// rename file be unique</span></span><br><span class="line">    <span class="keyword">const</span> fileName = file.<span class="property">originalFilename</span>.<span class="title function_">replace</span>(<span class="regexp">/^.*(?=\.)/</span>, <span class="title function_">uuidv4</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!isValid) &#123;</span><br><span class="line">      <span class="comment">// throes error if file isn&#x27;t valid</span></span><br><span class="line">      res.<span class="property">statusCode</span> = <span class="number">400</span>;</span><br><span class="line">      res.<span class="title function_">end</span>(<span class="string">&quot;The file type is not a valid type&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> httpCode, result;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// store file</span></span><br><span class="line">      fs.<span class="title function_">copyFile</span>(file.<span class="property">filepath</span>, path.<span class="title function_">join</span>(uploadFolder, fileName), <span class="keyword">function</span> (<span class="params">err</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (err) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(err);</span><br><span class="line">      &#125;);</span><br><span class="line">      httpCode = <span class="number">200</span>;</span><br><span class="line">      result = <span class="string">`http://<span class="subst">$&#123;hostname&#125;</span>:<span class="subst">$&#123;port&#125;</span>/upload/<span class="subst">$&#123;fileName&#125;</span>`</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      httpCode = <span class="number">500</span>;</span><br><span class="line">      result = <span class="string">&quot;Image save failed! &quot;</span> + error.<span class="property">message</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    res.<span class="property">statusCode</span> = httpCode;</span><br><span class="line">    res.<span class="title function_">end</span>(result);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Get">Get</h3>
+<p>获取图片,也很简单.根据文件名去上传路径找到改文件,正确返回即可</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="regexp">/\/upload\/[^\/]+/</span>.<span class="title function_">test</span>(req.<span class="property">url</span>) &amp;&amp; req.<span class="property">method</span>.<span class="title function_">toLowerCase</span>() === <span class="string">&quot;get&quot;</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> resFileName = req.<span class="property">url</span>.<span class="title function_">split</span>(<span class="string">&quot;/&quot;</span>).<span class="title function_">pop</span>();</span><br><span class="line">  <span class="keyword">let</span> imagePath = path.<span class="title function_">join</span>(uploadFolder, resFileName);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fs.<span class="title function_">existsSync</span>(imagePath)) &#123;</span><br><span class="line">    <span class="comment">// Content-type is very interesting part that guarantee that</span></span><br><span class="line">    <span class="comment">// Web browser will handle response in an appropriate manner.</span></span><br><span class="line">    res.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">      <span class="string">&quot;Content-Type&quot;</span>: mime.<span class="title function_">lookup</span>(imagePath),</span><br><span class="line">      <span class="string">&quot;Content-Disposition&quot;</span>: <span class="string">&quot;inline;&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    fs.<span class="title function_">createReadStream</span>(imagePath).<span class="title function_">pipe</span>(res);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.<span class="property">statusCode</span> = <span class="number">404</span>;</span><br><span class="line">  res.<span class="title function_">end</span>(<span class="string">&quot;ERROR File does not exist&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="示例">示例</h3>
+<p>通过<mark class="label primary">curl</mark>上传.<mark class="label primary">curl</mark>用法自行查阅</p>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417011951482.png" alt="image-20220417011951482"></p>
+<p>终端无法查看图片，在浏览器中打开/Markdown中插入即可</p>
+<div class="note info"><p>贴几个<mark class="label primary">curl</mark>的参考文档</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/09/curl-reference.html">阮一峰的网络日志. curl的用法指南</a></li>
+<li><a target="_blank" rel="noopener" href="https://catonmat.net/cookbooks/curl">catonamat.net. Curl CookBook</a></li>
+<li><a target="_blank" rel="noopener" href="https://curl.se/">curl.se</a></li>
+</ul>
+</div>
+<h2 id="Typora自动上传">Typora自动上传</h2>
+<p>图床搭建好了，比较大的缺点就是一次只能上传一张图片并且需要手动复制返回的连接。Typora提供了自动上传的功能，我们只需要编写一个小脚本来自动上传即可. 脚本没考虑出错的情况，局域网内一般也不会有啥错，需要错误处理的可以自己改下</p>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417124706484.png" alt="image-20220417124706484"></p>
+<h3 id="upload-image-sh"><a target="_blank" rel="noopener" href="http://upload-image.sh">upload-image.sh</a></h3>
+<mark class="label primary">"C:/Program Files/Git/bin/bash.exe" D:BlogpicBedupload-image.sh</mark>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">result=()</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">upload</span></span>() &#123;</span><br><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">    t=$(curl -X POST -s -F <span class="string">&quot;file=@<span class="variable">$1</span>&quot;</span>  http://192.168.123.54:7070/upload)</span><br><span class="line">    result=(<span class="variable">$&#123;result[@]&#125;</span> <span class="string">&quot;<span class="variable">$&#123;t&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> [ <span class="variable">$#</span> -gt 0 ]; <span class="keyword">do</span></span><br><span class="line">    upload <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="variable">$index</span></span><br><span class="line">    <span class="built_in">shift</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment"># 输出格式</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Upload Success:&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$&#123;result[*]&#125;</span>; <span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$i</span>;</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="upload-image-ps1">upload-image.ps1</h3>
+<mark class="label primary">"C:\Program Files\PowerShell\7\pwsh.exe" D:BlogpicBedupload-image.ps1</mark>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ipv4</span> = (<span class="built_in">Get-NetIPAddress</span> | <span class="built_in">Where-Object</span> &#123; <span class="variable">$_</span>.AddressState <span class="operator">-eq</span> <span class="string">&quot;Preferred&quot;</span> <span class="operator">-and</span> <span class="variable">$_</span>.ValidLifetime <span class="operator">-lt</span> <span class="string">&quot;24:00:00&quot;</span> &#125;).IPAddress</span><br><span class="line"><span class="variable">$Port</span> = <span class="string">&#x27;7070&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Publish-Image</span></span> &#123;</span><br><span class="line">  <span class="keyword">param</span> (</span><br><span class="line">    <span class="variable">$ImagePath</span></span><br><span class="line">  )</span><br><span class="line">  <span class="built_in">Write-Output</span> (curl.exe <span class="literal">-X</span> POST <span class="literal">-s</span> <span class="operator">-F</span> (<span class="string">&#x27;&quot;file=@&#x27;</span> + <span class="variable">$ImagePath</span> + <span class="string">&#x27;&quot;&#x27;</span>) (<span class="string">&#x27;http://&#x27;</span> + <span class="variable">$ipv4</span> + <span class="string">&#x27;:&#x27;</span> + <span class="variable">$Port</span> + <span class="string">&#x27;/upload&#x27;</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Write-Output</span> <span class="string">&#x27;Upload Success:&#x27;</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> <span class="operator">-lt</span> <span class="variable">$args</span>.Count; <span class="variable">$i</span>++) &#123;</span><br><span class="line">  <span class="built_in">Publish-Image</span> <span class="variable">$args</span>[<span class="variable">$i</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="验证">验证</h3>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/image-20220417124921514.png" alt="image-20220417124921514"></p>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://blog.csdn.net/bklydxz/article/details/116562345">CSDN.Net Typora 配置自定义图床 upload-image.sh</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/CSS-Grid-1/" rel="prev" title="CSS - 栅格布局 - Ⅰ">
+                  <i class="fa fa-chevron-left"></i> CSS - 栅格布局 - Ⅰ
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Typescript-Function/" rel="next" title="Typescript - Function">
+                  Typescript - Function <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

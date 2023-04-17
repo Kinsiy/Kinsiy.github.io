@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="HTTP 缓存  HTTP 缓存存储与请求关联的响应，并将存储的响应复用于后续请求。 可复用性有几个优点。首先，由于不需要将请求传递到源服务器，因此客户端和缓存越近，响应速度就越快。最典型的例子是浏览器本身为浏览器请求存储缓存。 此外，当响应可复用时，源服务器不需要处理请求——因为它不需要解析和路由请求、根据 cookie 恢复会话、查询数据库以获取结果或渲染模板引擎。这减少了服务器上的负载。 缓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP-Cache">
+<meta property="og:url" content="https://kinsiy.github.io/HTTP-cache/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="HTTP 缓存  HTTP 缓存存储与请求关联的响应，并将存储的响应复用于后续请求。 可复用性有几个优点。首先，由于不需要将请求传递到源服务器，因此客户端和缓存越近，响应速度就越快。最典型的例子是浏览器本身为浏览器请求存储缓存。 此外，当响应可复用时，源服务器不需要处理请求——因为它不需要解析和路由请求、根据 cookie 恢复会话、查询数据库以获取结果或渲染模板引擎。这减少了服务器上的负载。 缓">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/HTTPStaleness.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-b52f314c86e3e95459845589d4d35570_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/8a8676e933478d1a73777d84a5de55f5_720w.jpg?source=1940ef5c">
+<meta property="og:image" content="https://pic3.zhimg.com/80/5276595f41d6276e21e5bc1d25741680_720w.jpg?source=1940ef5c">
+<meta property="og:image" content="https://pic4.zhimg.com/80/9b3a9df114d14a14130a70abf5733837_720w.jpg?source=1940ef5c">
+<meta property="article:published_time" content="2021-11-03T14:26:31.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.448Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="HTTP-Header">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/HTTPStaleness.png">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/HTTP-cache/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/HTTP-cache/","path":"HTTP-cache/","title":"HTTP-Cache"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP-Cache | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-%E7%BC%93%E5%AD%98"><span class="nav-text">HTTP 缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B"><span class="nav-text">缓存类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E7%9B%B8%E5%85%B3Header"><span class="nav-text">缓存相关Header</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="nav-text">协商缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Last-Modified-If-Modified-Since"><span class="nav-text">Last-Modified &#x2F; If-Modified-Since</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#If-none-match-Etag"><span class="nav-text">If-none-match &#x2F; Etag</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">流程图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%A1%8C%E4%B8%BA%E5%AF%B9%E7%BC%93%E5%AD%98%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-text">用户行为对缓存的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0"><span class="nav-text">缓存更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%95%B0%E5%AD%97%E5%81%9A%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-text">用数字做版本号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%96%87%E4%BB%B6%E6%91%98%E8%A6%81%E5%81%9A%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="nav-text">用文件摘要做版本号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%A5%BD%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-text">更好的做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/HTTP-cache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP-Cache | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP-Cache
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-03 22:26:31" itemprop="dateCreated datePublished" datetime="2021-11-03T22:26:31+08:00">2021-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="HTTP-缓存">HTTP 缓存</h2>
+<blockquote>
+<p>HTTP 缓存存储与请求关联的响应，并将存储的响应复用于后续请求。</p>
+<p>可复用性有几个优点。首先，由于不需要将请求传递到源服务器，因此客户端和缓存越近，响应速度就越快。最典型的例子是浏览器本身为浏览器请求存储缓存。</p>
+<p>此外，当响应可复用时，源服务器不需要处理请求——因为它不需要解析和路由请求、根据 cookie 恢复会话、查询数据库以获取结果或渲染模板引擎。这减少了服务器上的负载。</p>
+<p>缓存的正确操作对系统的稳定运行至关重要。</p>
+<p>——MDN - HTTP缓存</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="缓存类型">缓存类型</h3>
+<ul>
+<li>
+<p>首次请求[<mark class="label success">Client 1</mark>]：浏览器首次请求资源时，由于浏览器缓存中没有对应的缓存，此时需要去服务器请求，待返回数据后将其存储在缓存数据库中。当浏览器存在对应缓存数据后，下次请求可以根据需要决定是否向服务器发起请求</p>
+</li>
+<li>
+<p>强缓存[<mark class="label success">Client 2</mark>]：用户请求数据，如果命中强缓存，则不向服务器请求，而直接从本地资源获取，返回200状态码，并提示from disk cache或from memory cache（比从disk快）</p>
+</li>
+<li>
+<p>协商缓存[<mark class="label success">Client 3</mark>]：在用户请求资源时，浏览器直接向服务器发送请求，协商对比服务端和本地的资源，验证本地资源是否失效</p>
+</li>
+</ul>
+<p><img data-src="https://kinsiy-blog-img.oss-ap-southeast-1.aliyuncs.com/img/HTTPStaleness.png" alt="HTTPStaleness"></p>
+<p>强制缓存和协商缓存命中缓存资源后，都是从本地读取资源。如果强制缓存生效，则不需要再向服务器发出请求；而协商缓存，不管是否使用缓存，必须向服务器发送一个请求来协商。</p>
+<p>两类缓存规则可以同时存在，强制缓存优先级高于协商缓存，也就是说，当执行强制缓存的规则时，如果缓存生效，直接使用缓存，不再执行协商缓存规则。如果强制缓存规则不生效，则需要进行协商缓存判断</p>
+<h3 id="缓存相关Header">缓存相关Header</h3>
+<h4 id="强缓存">强缓存</h4>
+<p>强制缓存的response header中会有两个字段来表明失效规则（Expires/Cache-Control）</p>
+<ul>
+<li>Cache-Control：Cache-Control 是最重要的规则。常见的取值有private、public、no-cache、max-age <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control">更多指令</a>
+<ul>
+<li>no-store：所有内容都不会缓存，强缓存，协商缓存都不会触发</li>
+<li>no-cache： 需要使用协商缓存来验证缓存数据</li>
+<li>private：客户端可以缓存</li>
+<li>public：客户端和代理服务器都可以缓存</li>
+<li>max-age = xxx： 缓存内容将在xxx秒后失效</li>
+</ul>
+</li>
+<li>Expires：Expires的值为服务端返回的到期时间，即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据。</li>
+<li>Pragma：一个HTTP1.0中规定的通用首部，如果<mark class="label primary">Cache-Control</mark>不存在的话，它的行为与<mark class="label primary">Cache-Control: no-cache</mark>一致</li>
+</ul>
+<p>在HTTP1.0的环境下，Cache-Control不起作用，Expires起作用； 在HTTP1.1的环境之下， Expires不起作用，而Cache-Control起作用。当前一般都是http1.1的情况，所以Expires是作为一种向下兼容的形式而存在的。</p>
+<div class="note warning"><p>Expires 是HTTP 1.0的东西，现在默认浏览器均默认使用HTTP 1.1，所以它的作用基本忽略。</p>
+<p>Expires 到期时间是由服务端生成的，但是客户端时间可能跟服务端时间有误差，这会导致缓存命中的误差。</p>
+<p>Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control 高</p>
+</div>
+<h4 id="协商缓存">协商缓存</h4>
+<h5 id="Last-Modified-If-Modified-Since">Last-Modified / If-Modified-Since</h5>
+<ul>
+<li>
+<p>Last-Modified：服务器响应请求时，告诉浏览器资源最后的修改时间。</p>
+</li>
+<li>
+<p>If-Modified-Since：浏览器再次请求资源时，浏览器通知服务器，上次请求时，返回的资源最后修改时间。</p>
+</li>
+</ul>
+<p>若最后修改时间小于等于If-Modified-Since，则response header返回304，告知浏览器继续使用所保存的cache。若大于If-Modified-Since，则说明资源被改动过，返回状态码200；</p>
+<h5 id="If-none-match-Etag"><strong>If-none-match / Etag</strong></h5>
+<ul>
+<li>
+<p>Etag：服务器响应请求时，告诉浏览器当前资源在浏览器的唯一标识（生成规则由服务器确定）</p>
+</li>
+<li>
+<p>If-None-Match：再次请求服务器时，通过此字段通知服务器客户端缓存数据的唯一标识。</p>
+<p>服务器收到请求后发现有If-None-Match 则与被请求资源的唯一标识进行比对：</p>
+<ul>
+<li>不同，说明资源又被改动过，则响应整片资源内容，返回状态码200；</li>
+<li>相同，说明资源无新修改，则响应HTTP 304，告知浏览器继续使用所保存的cache。</li>
+</ul>
+</li>
+</ul>
+<p>本地缓存时间到期后，浏览器向服务端发送请求报文，其中Request Header中包含If-none-match和Last-Modified-Since（与服务端Etag和Last-Modified对比，Etag优先级高），用以验证本地缓存数据验证是否与服务端保持一致。在服务器端会优先判断Etag。如果相同，返回304；如果不同，就继续比较Last-Modified，然后决定是否返回新的资源。若服务端验证本地缓存与服务端一致，返回304，浏览器加载本地缓存；否则，服务器返回请求的资源，同时给出新的Etag以及Last-Modified时间。</p>
+<div class="note warning"><p>在精确度上，Etag优于Last-Modified。Last-Modified精确到s，如果1s内，资源多次改变，Etag是可以判断出来并返回最新的资源。</p>
+<p>在性能上，Last-Modified优于Etag，因为Last-Modified只需要记录时间，而Etag需要服务器重新生成hash值，所以性能上略差。</p>
+<p>在优先级上，Etag优于Last-Modified，Etag和Last-Modified可同时存在。</p>
+</div>
+<h3 id="流程图">流程图</h3>
+<p><img data-src="https://pic1.zhimg.com/80/v2-b52f314c86e3e95459845589d4d35570_720w.jpg" alt=""></p>
+<h3 id="用户行为对缓存的影响">用户行为对缓存的影响</h3>
+<table>
+<thead>
+<tr>
+<th>用户操作</th>
+<th>Expires/Cache-Control</th>
+<th>Last-Modied/Etag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址栏回车</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>页面链接跳转</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>新开窗口</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>前进回退</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>F5刷新</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Ctrl+F5强制刷新</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<h3 id="缓存更新">缓存更新</h3>
+<p>通过更新页面中引用的资源路径，让浏览器主动放弃缓存，加载新资源。</p>
+<h4 id="用数字做版本号">用数字做版本号</h4>
+<p><img data-src="https://pic1.zhimg.com/80/8a8676e933478d1a73777d84a5de55f5_720w.jpg?source=1940ef5c" alt=""></p>
+<p>但是如果使用版本号的话，假设某次更新只更改了一个文件，其他未更改的文件为了保持版本一致都需要更新，会导致原有缓存失效，造成无效更新</p>
+<h4 id="用文件摘要做版本号">用文件摘要做版本号</h4>
+<p>采用<strong>数据摘要要算法</strong>对文件求摘要值，拼接到路径参数上，更新某一文件时，只需更新对应文件的路径即可。</p>
+<p><img data-src="https://pic3.zhimg.com/80/5276595f41d6276e21e5bc1d25741680_720w.jpg?source=1940ef5c" alt=""></p>
+<p>但这样会导致无论<strong>先部署页面</strong>还是<strong>先部署静态资源</strong>都会导致部署过程中发生页面错乱的问题</p>
+<p><strong>先部署页面</strong>，在两者部署间隔中，假如有用户访问新页面，此时<strong>页面中的资源路径已经更新，但资源仍未更新</strong>。客户端看到这个新的路径，就会发起请求，然而依然会拿到旧资源并作为缓存，并且，即便后面资源更新了，在已拿到资源缓存过期前，一直都不会重新请求，<strong>一直都会是旧资源</strong></p>
+<p><strong>先部署资源</strong>，在两者部署间隔中，假如有用户访问，此时 html 中资源路径仍未更新，资源已经更新。这时假如本地缓存未过期，则不会请求，一切安好。假如这时本地缓存过期了，会去协商缓存，就会出现<strong>旧 html 引用新资源的情况，可能会导致页面出错</strong>。</p>
+<h4 id="更好的做法">更好的做法</h4>
+<p>用文件的摘要信息来对资源文件进行重命名，把摘要信息放到资源文件发布路径中，这样，内容有修改的资源就变成了一个新的文件发布到线上，不会覆盖已有的资源文件。上线过程中，先全量部署静态资源，再灰度部署页面</p>
+<p><img data-src="https://pic4.zhimg.com/80/9b3a9df114d14a14130a70abf5733837_720w.jpg?source=1940ef5c" alt=""></p>
+<h3 id="参考">参考</h3>
+<p>[1]<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching">MDN. HTTP 缓存. </a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://www.cnblogs.com/huaweiyun/p/13390041.html">华为云开发者社区. 深入理解浏览器的缓存机制. 博客园</a></p>
+<p>[3]<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/360512798">字节前端. 浅析HTTP缓存. 知乎专栏</a></p>
+<p>[4]<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20790576/answer/32602154">张云龙. 大公司里怎样开发和部署前端代码？问题下回答. 知乎</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/HTTP-Header/" rel="tag"><i class="fa fa-tag"></i> HTTP-Header</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/HTTP-security-headers/" rel="prev" title="HTTP-Security-Headers">
+                  <i class="fa fa-chevron-left"></i> HTTP-Security-Headers
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Javascript-CORS/" rel="next" title="Javascript-CORS">
+                  Javascript-CORS <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

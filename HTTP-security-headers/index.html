@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CFira+Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kinsiy.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.15.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Content Security Policy (CSP)  内容安全策略  (CSP) 是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (XSS (en-US)) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段。 CSP 被设计成完全向后兼容（除CSP2 在向后兼容有明确提及的不一致; 更多细节查看这里）。不支持CSP的浏览器也能与实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP-Security-Headers">
+<meta property="og:url" content="https://kinsiy.github.io/HTTP-security-headers/index.html">
+<meta property="og:site_name" content="Kinsiy">
+<meta property="og:description" content="Content Security Policy (CSP)  内容安全策略  (CSP) 是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (XSS (en-US)) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段。 CSP 被设计成完全向后兼容（除CSP2 在向后兼容有明确提及的不一致; 更多细节查看这里）。不支持CSP的浏览器也能与实现">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-04T14:35:08.000Z">
+<meta property="article:modified_time" content="2023-04-09T15:31:05.449Z">
+<meta property="article:author" content="Kinsiy">
+<meta property="article:tag" content="HTTP-Header">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://kinsiy.github.io/HTTP-security-headers/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://kinsiy.github.io/HTTP-security-headers/","path":"HTTP-security-headers/","title":"HTTP-Security-Headers"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTTP-Security-Headers | Kinsiy</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Kinsiy</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Security-Policy-CSP"><span class="nav-text">Content Security Policy (CSP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%8F%8A%E6%8C%87%E4%BB%A4"><span class="nav-text">语法及指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strict-CSP"><span class="nav-text">strict CSP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nonce-based"><span class="nav-text">nonce-based</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash-based"><span class="nav-text">hash-based</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-Public-Key-Pinning-HPKP"><span class="nav-text">HTTP Public Key Pinning (HPKP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-Strict-Transport-Security-HSTS"><span class="nav-text">HTTP Strict Transport Security(HSTS)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-2"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-2"><span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%8A%A0%E8%BD%BD-HSTS"><span class="nav-text">预加载 HSTS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Referrer-Policy"><span class="nav-text">Referrer-Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-3"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-3"><span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E8%87%B3HTML"><span class="nav-text">集成至HTML</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-Content-Type-Options"><span class="nav-text">X-Content-Type-Options</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-4"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-4"><span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-Frame-Options"><span class="nav-text">X-Frame-Options</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-5"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-5"><span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X-XSS-Protection"><span class="nav-text">X-XSS-Protection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95-6"><span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4-6"><span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kinsiy"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Kinsiy</p>
+  <div class="site-description" itemprop="description">slipped the surly bonds of earth to touch the face of God</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kinsiy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kinsiy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/HTTP-security-headers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTTP-Security-Headers | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP-Security-Headers
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-04 22:35:08" itemprop="dateCreated datePublished" datetime="2021-11-04T22:35:08+08:00">2021-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Content-Security-Policy-CSP">Content Security Policy (CSP)</h2>
+<blockquote>
+<p>内容安全策略  (<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CSP">CSP</a>) 是一个额外的安全层，用于检测并削弱某些特定类型的攻击，包括跨站脚本 (<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting">XSS (en-US)</a>) 和数据注入攻击等。无论是数据盗取、网站内容污染还是散发恶意软件，这些攻击都是主要的手段。</p>
+<p>CSP 被设计成完全向后兼容（除CSP2 在向后兼容有明确提及的不一致; 更多细节查看<a target="_blank" rel="noopener" href="https://www.w3.org/TR/CSP2">这里</a>）。不支持CSP的浏览器也能与实现了CSP的服务器正常合作，反之亦然：不支持 CSP 的浏览器只会忽略它，如常运行，默认为网页内容使用标准的同源策略。如果网站不提供 CSP 头部，浏览器也使用标准的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">同源策略</a>。</p>
+<p><strong>为使CSP可用, 你需要配置你的网络服务器返回  <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy"><mark class="label primary">Content-Security-Policy</mark></a> HTTP头部</strong></p>
+<p>( 有时你会看到一些关于<mark class="label primary">X-Content-Security-Policy</mark>头部的提法, 那是旧版本，你无须再如此指定它)。</p>
+<p><strong>除此之外, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta"><mark class="label primary">&lt;meta&gt;</mark></a>元素也可以被用来配置该策略</strong></p>
+<p>——MDN. 内容安全策略( CSP ).</p>
+</blockquote>
+<span id="more"></span>
+<h3 id="语法及指令">语法及指令</h3>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;default-src &#x27;self&#x27;; img-src https://*; child-src &#x27;none&#x27;;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个策略由一系列策略指令组成，每个策略指令都描述了一个针对某个特定类型资源以及生效范围的策略。</li>
+<li>default-src 是 CSP 指令，多个指令之间使用英文分号分割。</li>
+<li>self 是指令值，多个指令值用英文空格分割</li>
+</ul>
+<p>具体语法及指令及其意义可以参考这里 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy"><mark class="label info">MDN. Content-Security-Policy.</mark> </a></p>
+<p>更多详细配置方案可以参考这里 <a target="_blank" rel="noopener" href="https://web.dev/security-headers/"><mark class="label info">web.dev Security headers quick reference</mark></a></p>
+<h3 id="strict-CSP">strict CSP</h3>
+<p>可以使用以下两种方式启用严格CSP</p>
+<ul>
+<li>如果HTML在服务端渲染，选用 <mark class="label primary">nonce-based strict CSP</mark></li>
+<li>如果HTML必须静态提供或缓存，例如单页面富应用，选用 <mark class="label primary">hash-based strict CSP</mark></li>
+</ul>
+<h4 id="nonce-based">nonce-based</h4>
+<div class="note warning"><p>nonce 是一个只使用一次的随机数。nonce-based strict CSP 只在能为每次响应生成不同的nonce的情况下是安全的。如果做不到选用hash-based strict CSP</p>
+</div>
+<p>服务器配置</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>:</span><br><span class="line">  script-src &#x27;nonce-&#123;RANDOM1&#125;&#x27; &#x27;strict-dynamic&#x27; https: &#x27;unsafe-inline&#x27;;</span><br><span class="line">  object-src &#x27;none&#x27;;</span><br><span class="line">  base-uri &#x27;none&#x27;;</span><br></pre></td></tr></table></figure>
+<p>HTML文件中，需要为所有&lt;script&gt;标签添加相同值 <mark class="label primary">{RANDOM1}</mark> 字符串的nonce属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">nonce</span>=<span class="string">&quot;&#123;RANDOM1&#125;&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://example.com/script1.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">nonce</span>=<span class="string">&quot;&#123;RANDOM1&#125;&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// Inline scripts can be used with the &#123;% label primary@nonce %&#125; attribute.</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="hash-based">hash-based</h4>
+<p>服务器配置</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Security-Policy</span>:</span><br><span class="line">  script-src &#x27;sha256-&#123;HASH1&#125;&#x27; &#x27;sha256-&#123;HASH2&#125;&#x27; &#x27;strict-dynamic&#x27; https: &#x27;unsafe-inline&#x27;;</span><br><span class="line">  object-src &#x27;none&#x27;;</span><br><span class="line">  base-uri &#x27;none&#x27;;</span><br></pre></td></tr></table></figure>
+<p>HTML文件中，需要把所有的js文件写在&lt;script&gt;标签中(inline)，因为大多数浏览器都不支持对外部引用脚本进行哈希</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">...<span class="comment">// your script1, inlined</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">...<span class="comment">// your script2, inlined</span></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以动态引用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">var</span> scripts = [ <span class="string">&#x27;https://example.org/foo.js&#x27;</span>, <span class="string">&#x27;https://example.org/bar.js&#x27;</span>];</span></span><br><span class="line"><span class="language-javascript">scripts.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">scriptUrl</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">var</span> s = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  s.<span class="property">src</span> = scriptUrl;</span></span><br><span class="line"><span class="language-javascript">  s.<span class="property">async</span> = <span class="literal">false</span>; <span class="comment">// to preserve execution order</span></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="property">head</span>.<span class="title function_">appendChild</span>(s);</span></span><br><span class="line"><span class="language-javascript">&#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="HTTP-Public-Key-Pinning-HPKP">HTTP Public Key Pinning (HPKP)</h2>
+<blockquote>
+<p>HTTP 公钥锁定（HPKP）是一种安全功能，它告诉 Web 客户端将特定加密公钥与某个 Web 服务器相关联，以降低使用伪造证书进行 MITM 攻击的风险。</p>
+<p>为确保 TLS 会话中使用的服务器公钥的真实性，此公钥将包装到 X.509 证书中，该证书通常由证书颁发机构（CA）签名。诸如浏览器之类的 Web 客户端信任许多这些 CA，它们都可以为任意域名创建证书。如果攻击者能够攻击单个 CA，则他们可以对各种 TLS 连接执行 MITM 攻击。 HPKP 可以通过告知客户端哪个公钥属于某个 Web 服务器来规避 HTTPS 协议的这种威胁。</p>
+<p>HPKP 是首次使用信任（TOFU）技术。 Web 服务器第一次通过特殊的 HTTP 标头告诉客户端哪些公钥属于它，客户端会在给定的时间段内存储此信息。当客户端再次访问服务器时，它希望证书链中至少有一个证书包含一个公钥，其指纹已通过 HPKP 已知。如果服务器提供未知的公钥，则客户端应向用户发出警告。</p>
+<p>——HTTP Public Key Pinning (HPKP)</p>
+</blockquote>
+<h3 id="语法">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Public-Key-Pins</span><span class="punctuation">: </span>pin-sha256=&quot;&lt;pin-value&gt;&quot;;</span><br><span class="line">                 max-age=&lt;expire-time&gt;;</span><br><span class="line">                 includeSubDomains;</span><br><span class="line">                 report-uri=&quot;&lt;uri&gt;&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="指令">指令</h3>
+<ul>
+<li>pin-sha256：即证书指纹，允许出现多次，实际上应用最少指定两个</li>
+<li>max-age：过期时间</li>
+<li>includeSubdomains：是否包含子域</li>
+<li>report-uri：验证失败时上报的地址</li>
+</ul>
+<h2 id="HTTP-Strict-Transport-Security-HSTS">HTTP Strict Transport Security(HSTS)</h2>
+<blockquote>
+<p>HTTP Strict Transport Security (通常简称为 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/HSTS"><mark class="label info">HSTS</mark></a> )是一个安全功能，它告诉浏览器只能通过HTTPS访问当前资源，而不是 HTTP。</p>
+<p>——MDN. HTTP Strict Transport Security.</p>
+</blockquote>
+<h3 id="语法-2">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Strict-Transport-Security</span><span class="punctuation">: </span>max-age=&lt;expire-time&gt;</span><br><span class="line"><span class="attribute">Strict-Transport-Security</span><span class="punctuation">: </span>max-age=&lt;expire-time&gt;; includeSubDomains</span><br><span class="line"><span class="attribute">Strict-Transport-Security</span><span class="punctuation">: </span>max-age=&lt;expire-time&gt;; preload</span><br></pre></td></tr></table></figure>
+<h3 id="指令-2">指令</h3>
+<ul>
+<li>
+<p>max-age=&lt;expire-time&gt;</p>
+<p>设置在浏览器收到这个请求后的&lt;expire-time&gt;秒的时间内凡是访问这个域名下的请求都使用HTTPS请求。</p>
+</li>
+<li>
+<p>includeSubDomains 可选</p>
+<p>如果这个可选的参数被指定，那么说明此规则也适用于该网站的所有子域名。</p>
+</li>
+<li>
+<p>preload  可选</p>
+<p>查看 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Strict-Transport-Security#%E9%A2%84%E5%8A%A0%E8%BD%BD_hsts">预加载 HSTS</a> 获得详情。不是标准的一部分。</p>
+</li>
+</ul>
+<h3 id="预加载-HSTS">预加载 HSTS</h3>
+<p>谷歌维护着一个 <a target="_blank" rel="noopener" href="https://hstspreload.appspot.com/">HSTS 预加载服务</a>。按照如下指示成功提交你的域名后，浏览器将会永不使用非安全的方式连接到你的域名。虽然该服务是由谷歌提供的，但所有浏览器都有使用这份列表的意向（或者已经在用了）。但是，这不是 HSTS 标准的一部分，也不该被当作正式的内容。</p>
+<ul>
+<li>Chrome &amp; Chromium 的 HSTS 预加载列表： <a target="_blank" rel="noopener" href="https://www.chromium.org/hsts">https://www.chromium.org/hsts</a></li>
+<li>Firefox 的 HSTS 预加载列表：<a target="_blank" rel="noopener" href="https://hg.mozilla.org/mozilla-central/raw-file/tip/security/manager/ssl/nsSTSPreloadList.inc">nsSTSPreloadList.inc</a></li>
+</ul>
+<h2 id="Referrer-Policy">Referrer-Policy</h2>
+<blockquote>
+<p><strong><mark class="label primary">Referrer-Policy</mark></strong> 首部用来监管哪些访问来源信息——会在 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Referer"><mark class="label primary">Referer</mark></a> 中发送——应该被包含在生成的请求当中</p>
+<p>——MDN. Referrer-Policy.</p>
+</blockquote>
+<h3 id="语法-3">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>no-referrer</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>no-referrer-when-downgrade</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>origin</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>origin-when-cross-origin</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>same-origin</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>strict-origin</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>strict-origin-when-cross-origin</span><br><span class="line"><span class="attribute">Referrer-Policy</span><span class="punctuation">: </span>unsafe-url</span><br></pre></td></tr></table></figure>
+<h3 id="指令-3">指令</h3>
+<ul>
+<li>no-referrer：不允许被记录。</li>
+<li>origin：只记录 origin，即域名。</li>
+<li>strict-origin：只有在 HTTPS -&gt; HTTPS 之间才会被记录下来。</li>
+<li>strict-origin-when-cross-origin：同源请求会发送完整的 URL；HTTPS-&gt;HTTPS，发送源；降级下不发送此首部。</li>
+<li>no-referrer-when-downgrade(default)：同 strict-origin。</li>
+<li>origin-when-cross-origin：对于同源的请求，会发送完整的 URL 作为引用地址，但是对于非同源请求仅发送文件的源。</li>
+<li>same-origin：对于同源请求会发送完整 URL，非同源请求则不发送 referer。</li>
+<li>unsafe-url：无论是同源请求还是非同源请求，都发送完整的 URL（移除参数信息之后）作为引用地址。（可能会泄漏敏感信息）。</li>
+</ul>
+<h3 id="集成至HTML">集成至HTML</h3>
+<p>你也可以在 HTML 内设置 referrer 策略。例如，你可以用一个 name 为 referrer 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta"><mark class="label info">&lt;meta&gt;</mark></a>  元素为整个文档设置 referrer 策略。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;referrer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;origin&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者用&lt;a&gt;、&lt;area&gt;、&lt;img&gt;、&lt;iframe&gt;、&lt;script&gt;或者&lt;link&gt;元素上的 <mark class="label primary">referrerpolicy</mark> 属性为其设置独立的请求策略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://example.com&quot; referrerpolicy=&quot;origin&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>另外也可以在&lt;a&gt;、&lt;area&gt;、&lt;link&gt;元素上将 <mark class="label primary">rel</mark> 属性设置为 <mark class="label primary">noreferrer</mark>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;http://example.com&quot; rel=&quot;noreferrer&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="X-Content-Type-Options">X-Content-Type-Options</h2>
+<blockquote>
+<p>X-Content-Type-Options HTTP 消息头相当于一个提示标志，被服务器用来提示客户端一定要遵循在 Content-Type 首部中对  MIME 类型 的设定，而不能对其进行修改。这就禁用了客户端的 MIME 类型嗅探行为，换句话说，也就是意味着网站管理员确定自己的设置没有问题</p>
+<p>——MDN. X-Content-Type-Options.</p>
+</blockquote>
+<h3 id="语法-4">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">X-Content-Type-Options</span><span class="punctuation">: </span>nosniff</span><br></pre></td></tr></table></figure>
+<h3 id="指令-4">指令</h3>
+<mark class="label primary">nosniff</mark>
+<p>下面两种情况的请求将被阻止：</p>
+<ul>
+<li>请求类型是<mark class="label info">style</mark> 但是 MIME 类型不是 <mark class="label info">text/css</mark></li>
+<li>请求类型是<mark class="label info">script</mark> 但是 MIME 类型不是 <a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/scripting.html#javascript-mime-type"><mark class="label info">JavaScript MIME 类型</mark></a>。</li>
+</ul>
+<h2 id="X-Frame-Options">X-Frame-Options</h2>
+<blockquote>
+<p>The X-Frame-Options HTTP 响应头是用来给浏览器 指示允许一个页面 可否在 &lt;frame&gt;, &lt;iframe&gt;, &lt;embed&gt; 或者 &lt;object&gt; 中展现的标记。站点可以通过确保网站没有被嵌入到别人的站点里面，从而避免 clickjacking 攻击</p>
+<p>The added security is only provided if the user accessing the document is using a browser supporting X-Frame-Options.</p>
+<mark class="label info">Content-Security-Policy</mark>HTTP 头中的 frame-ancestors 指令会替代这个非标准的 header。CSP 的 frame-ancestors 会在 Gecko 4.0 中支持，但是并不会被所有浏览器支持。然而 X-Frame-Options 是个已广泛支持的非官方标准，可以和 CSP 结合使用
+<p>——MDN. X-Frame-Options.</p>
+</blockquote>
+<h3 id="语法-5">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">X-Frame-Options</span><span class="punctuation">: </span>deny</span><br><span class="line"><span class="attribute">X-Frame-Options</span><span class="punctuation">: </span>sameorigin</span><br><span class="line"><span class="attribute">X-Frame-Options</span><span class="punctuation">: </span>allow-from https://example.com/</span><br></pre></td></tr></table></figure>
+<h3 id="指令-5">指令</h3>
+<ul>
+<li>deny: 表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许。</li>
+<li>sameorigin: 表示该页面可以在相同域名页面的 frame 中展示。</li>
+<li>allow-from uri: 表示该页面可以在指定来源的 frame 中展示。</li>
+</ul>
+<div class="note warning"><p>设置 meta 标签是无效的！例如 <mark class="label danger">&lt;meta http-equiv=X-Frame-Options content=deny&gt;</mark> 没有任何效果。配置方法 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/X-Frame-Options"><mark class="label info">MDN. X-Frame-Options.</mark></a></p>
+</div>
+<h2 id="X-XSS-Protection">X-XSS-Protection</h2>
+<blockquote>
+<p>HTTP <strong><mark class="label info">X-XSS-Protection</mark></strong> 响应头是 Internet Explorer，Chrome 和 Safari 的一个特性，当检测到跨站脚本攻击 (<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting">XSS (en-US)</a>)时，浏览器将停止加载页面。若网站设置了良好的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy"><mark class="label info">Content-Security-Policy</mark></a> 来禁用内联 JavaScript (<mark class="label info">'unsafe-inline'</mark>)，现代浏览器不太需要这些保护， 但其仍然可以为尚不支持 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Glossary/CSP">CSP</a> 的旧版浏览器的用户提供保护</p>
+<p>——MDN. X-XSS-Protection.</p>
+</blockquote>
+<h3 id="语法-6">语法</h3>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">X-XSS-Protection</span><span class="punctuation">: </span>0</span><br><span class="line"><span class="attribute">X-XSS-Protection</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">X-XSS-Protection</span><span class="punctuation">: </span>1; mode=block</span><br><span class="line"><span class="attribute">X-XSS-Protection</span><span class="punctuation">: </span>1; report=&lt;reporting-uri&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="指令-6">指令</h3>
+<ul>
+<li>0： 禁止XSS过滤</li>
+<li>1： 启用XSS过滤（通常浏览器是默认的）。 如果检测到跨站脚本攻击，浏览器将清除页面（删除不安全的部分）。</li>
+<li>1; mode=block：启用XSS过滤。 如果检测到攻击，浏览器将不会清除页面，而是阻止页面加载</li>
+<li>1; report=&lt;reporting-URI&gt; (Chromium only)：启用XSS过滤。 如果检测到跨站脚本攻击，浏览器将清除页面并使用CSP <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri">report-uri (en-US)</a>指令的功能发送违规报告</li>
+</ul>
+<h2 id="参考">参考</h2>
+<p>[1]<a target="_blank" rel="noopener" href="https://web.dev/security-headers/">web.dev. Security headers quick reference</a></p>
+<p>[2]<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers">MDN. HTTP-Headers</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/WechatQR.png" alt="Kinsiy 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/AliPayQR.jpg" alt="Kinsiy 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/HTTP-Header/" rel="tag"><i class="fa fa-tag"></i> HTTP-Header</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/dataStructure-sort-%E2%85%A0/" rel="prev" title="排序算法-Ⅰ">
+                  <i class="fa fa-chevron-left"></i> 排序算法-Ⅰ
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/HTTP-cache/" rel="next" title="HTTP-Cache">
+                  HTTP-Cache <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kinsiy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@9.4.3/dist/mermaid.min.js","integrity":"sha256-e0o3JYsdjqKajf9eOe22FhioYSz9WofRY4dLKo3F6do="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/copy-tex.min.js","integrity":"sha256-Us54+rSGDSTvIhKKUs4kygE2ipA0RXpWWh0/zLqw3bs="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>
