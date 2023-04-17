@@ -294,7 +294,7 @@ function getArea(shape: Shape) {
 ```
 
 
-尽管我们用 kind 进行了判断，分支内 Shape 必是circle，我们知道radius必然存在。但Ts无法知道这个信息，strictNullChecks下会给出我们 radius 可能不存在的错误。对于这种我们比Ts更清楚的情况，可以使用**非空断言(添加!后缀)**告诉Ts某个值必然存在。
+尽管我们用 kind 进行了判断，分支内 Shape 必是circle，我们知道radius必然存在。但Ts无法知道这个信息，strictNullChecks下会给出我们 radius 可能不存在的错误。对于这种我们比Ts更清楚的情况，可以使用 **非空断言(添加!后缀)** 告诉Ts某个值必然存在。
 
 
 ```typescript

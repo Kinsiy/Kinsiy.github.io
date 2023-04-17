@@ -183,17 +183,17 @@ fit-content(arg) => min(max-content, max(min-content, arg))
 }
 ```
 
-定义好栅格区域之后, 接下来要使用前面介绍的{% label primary@grid-template-columns %}和{% label primary@grid-template-rows %}定义栅格轨道的尺寸.
+定义好栅格区域之后, 接下来要使用前面介绍的 {% label primary@grid-template-columns %} 和 {% label primary@grid-template-rows %} 定义栅格轨道的尺寸.
 
-对于命名区域, 会自动为构成栅格区域的栅格线进行命名, 对矩形的左/上两条栅格线命名为{% label primary@$1 %}, 右/下则为{% label primary@$1 %}. 对与上方的规则来说, 自动为第一条列栅格线命名{% label primary@header-start %}, 最后一条列栅格线命名{% label primary@header-end %}, 行栅格线同理.
+对于命名区域, 会自动为构成栅格区域的栅格线进行命名, 对矩形的左/上两条栅格线命名为 {% label primary@$1 %}, 右/下则为{% label primary@$1 %}. 对与上方的规则来说, 自动为第一条列栅格线命名{% label primary@header-start %}, 最后一条列栅格线命名{% label primary@header-end %}, 行栅格线同理.
 
-除显式声明栅格区域, 也可以通过为栅格线命名{% label primary@$1 %},{% label primary@$1 %}的形式隐式声明栅格区域**(不建议)**
+除显式声明栅格区域, 也可以通过为栅格线命名{% label primary@$1 %}, {% label primary@$1 %}的形式隐式声明栅格区域 **(不建议)**
 
 ## 附加元素
 
 ### 使用列线和行线
 
-可以通过使用{% label primary@grid-row-start %},{% label primary@grid-row-end %},{% label primary@grid-column-start %},{% label primary@grid-column-end %}.四个属性把栅格元素附加到栅格中.
+可以通过使用{% label primary@grid-row-start %}, {% label primary@grid-row-end %}, {% label primary@grid-column-start %}, {% label primary@grid-column-end %}.四个属性把栅格元素附加到栅格中.
 
 这几个属性的意思是, “我想把元素的边界附加到某条栅格线上”
 
