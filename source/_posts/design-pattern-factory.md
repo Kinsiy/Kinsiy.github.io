@@ -3,7 +3,7 @@ title: 工厂方法模式
 mathjax: false
 date: 2023-04-06 23:03:45
 tags: factory-method
-categories: 设计模式
+categories: [设计模式,创建型模式]
 description: 
 photos:
 ---

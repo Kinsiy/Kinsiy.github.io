@@ -2,8 +2,8 @@
 title: 原型模式
 mathjax: false
 date: 2023-04-17 21:01:51
-tags:
-categories: 设计模式
+tags: clone prototype
+categories: [设计模式,创建型模式]
 description:
 photos:
 ---
@@ -233,4 +233,4 @@ circle2.draw(); // Drawing a Red circle with size 10 and ID <different random nu
 
 ## 参考
 
-[Refactoringguru.cn 生成器模式](https://refactoringguru.cn/design-patterns/prototype)
+[Refactoringguru.cn 原型模式](https://refactoringguru.cn/design-patterns/prototype)

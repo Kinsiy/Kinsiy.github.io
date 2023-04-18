@@ -2,8 +2,8 @@
 title: 抽象工厂模式
 mathjax: false
 date: 2023-04-07 22:04:26
-tags: abstract factory
-categories: 设计模式
+tags: abstract-factory factory-method
+categories: [设计模式,创建型模式]
 description:
 photos:
 ---

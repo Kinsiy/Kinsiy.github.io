@@ -2,8 +2,8 @@
 title: 生成器模式
 mathjax: false
 date: 2023-04-08 19:48:57
-tags:
-categories: 设计模式
+tags: builder
+categories: [设计模式,创建型模式]
 description:
 photos:
 ---

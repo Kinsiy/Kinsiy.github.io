@@ -2,8 +2,8 @@
 title: 工厂模式比较
 mathjax: false
 date: 2023-04-08 11:57:32
-tags: 
-categories: 设计模式
+tags: factory-method
+categories: [设计模式,创建型模式]
 description:
 photos:
 ---
