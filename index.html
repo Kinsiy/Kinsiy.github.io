@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-singleton/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-singleton/" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-18 19:33:09 / 修改时间：20:06:21" itemprop="dateCreated datePublished" datetime="2023-04-18T19:33:09+08:00">2023-04-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>单例模式</strong>是一种创建型设计模式，让你能够保证一个类只有一个实例，并提供一个访问该实例的全局节点。</p>
+<pre><code class="highlight mermaid">classDiagram
+class Singleton &#123;
+-instance Singleton$
+-Singleton()
++getInstance()$ Singleton
+&#125;
+
+Singleton &lt;-- Singleton</code></pre>
+<p><strong>单例（Singleton）</strong> 类声明了一个名为 <mark class="label info">getInstance</mark> 的静态方法来返回其所属类的一个相同实例</p>
+<p>单例的构造函数必须对客户端（Client）代码隐藏。调用<mark class="label info">getInstance</mark> 方法必须是获取单例对象的唯一方式</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-singleton/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -223,9 +310,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-17 21:01:51 / 修改时间：23:00:04" itemprop="dateCreated datePublished" datetime="2023-04-17T21:01:51+08:00">2023-04-17</time>
+      <time title="创建时间：2023-04-17 21:01:51" itemprop="dateCreated datePublished" datetime="2023-04-17T21:01:51+08:00">2023-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-18 19:47:39" itemprop="dateModified" datetime="2023-04-18T19:47:39+08:00">2023-04-18</time>
     </span>
 
   
@@ -311,7 +404,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+      <time title="修改时间：2023-04-18 19:31:27" itemprop="dateModified" datetime="2023-04-18T19:31:27+08:00">2023-04-18</time>
     </span>
 
   
@@ -407,7 +500,7 @@ class HouseBuilder &#123;
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+      <time title="修改时间：2023-04-18 19:32:52" itemprop="dateModified" datetime="2023-04-18T19:32:52+08:00">2023-04-18</time>
     </span>
 
   
@@ -499,7 +592,7 @@ class HouseBuilder &#123;
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+      <time title="修改时间：2023-04-18 19:32:36" itemprop="dateModified" datetime="2023-04-18T19:32:36+08:00">2023-04-18</time>
     </span>
 
   
@@ -603,7 +696,7 @@ Chair &lt;|.. ModernChair</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
+      <time title="修改时间：2023-04-18 19:31:53" itemprop="dateModified" datetime="2023-04-18T19:31:53+08:00">2023-04-18</time>
     </span>
 
   
@@ -978,91 +1071,6 @@ Logistics &lt;|-- SeaLogistics</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/simple-diff/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/effect-system-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/effect-system-3/" class="post-title-link" itemprop="url">响应系统 - 原始值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-27 19:46:34" itemprop="dateCreated datePublished" datetime="2022-09-27T19:46:34+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第六章 - 原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文</p>
-</div>
-<p>原始值指的是Boolean, Number, BigInt, String, Symbol, undefined 和 null 等类型的值.在 Javascript 中, 原始值是按值传递的,而非按引用传递. 形参和实参之间没有引用关系, 它们是两个完全独立的值, 对形参的修改不会影响实参. 另外, Javascript 中的Proxy 无法提供对原始值的代理, 因此想要将原始值变成响应式数据, 就必须对其做一层包裹, 也就是<mark class="label info">ref</mark></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/effect-system-3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
