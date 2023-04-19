@@ -2,7 +2,7 @@
 title: Javascript-Proxy[捕获器与反射]
 date: 2021-03-07 19:26:58
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Proxy]
+tags: [ Proxy]
 keywords:
 description:
 photos:

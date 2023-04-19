@@ -2,7 +2,7 @@
 title: Javascript-Promise
 date: 2021-03-21 20:25:55
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Promise]
+tags: [ Promise]
 keywords:
 description:
 photos:

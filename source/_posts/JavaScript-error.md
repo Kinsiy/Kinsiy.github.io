@@ -3,7 +3,7 @@ title: JavaScript-错误处理与调试
 date: 2020-11-25 01:26:39
 description: Javascript错误对象汇总、console、debugger、try-catch
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Debug]
+tags: [ Debug]
 ---
 
 # Error 对象

@@ -1,7 +1,7 @@
 ---
 title: Javascript - Fetch
 date: 2021-12-03 21:04:51
-tags: [JS红宝书, Fetch]
+tags: [ Fetch]
 categories: [学习笔记, Javascript]
 description:
 photos:

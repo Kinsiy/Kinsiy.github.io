@@ -2,7 +2,7 @@
 title: Javascript-BOM-1
 date: 2021-04-18 11:03:39
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, BOM]
+tags: [ BOM]
 keywords:
 description: 浏览器对象模型BOM，是使用Javascript开发Web应用程序的核心。本文对window对象及窗口关系进行学习
 photos:

@@ -3,7 +3,7 @@ title: Javascript-String
 date: 2021-1-18 21:33:05
 description:
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, String]
+tags: [ String]
 ---
 
 ## 基本引用类型(原始包装类型)

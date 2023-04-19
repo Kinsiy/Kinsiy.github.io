@@ -1,7 +1,7 @@
 ---
 title: Javascript-DOM-range
 date: 2021-10-22 19:55:58
-tags: [JS红宝书, DOM]
+tags: [ DOM]
 categories: [学习笔记, Javascript]
 description:
 photos:

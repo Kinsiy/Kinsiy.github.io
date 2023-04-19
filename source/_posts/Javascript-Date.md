@@ -3,7 +3,7 @@ title: Javascript - Date
 date: 2021-01-13 00:48:35
 description: 基本引用类型, Date 对象的使用
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Date]
+tags: [ Date]
 ---
 
 ## Date

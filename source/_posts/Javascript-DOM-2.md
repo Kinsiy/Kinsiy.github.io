@@ -1,7 +1,7 @@
 ---
 title: Javascript-DOM-2
 date: 2021-03-31 20:31:10
-tags: [JS红宝书, DOM]
+tags: [ DOM]
 categories: [学习笔记, Javascript]
 keywords:
 description: 

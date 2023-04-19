@@ -2,7 +2,7 @@
 title: Javascript-Object.1[理解对象]
 date: 2021-01-24 01:44:54
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Object]
+tags: [ Object]
 keywords:
 description:
 photos:

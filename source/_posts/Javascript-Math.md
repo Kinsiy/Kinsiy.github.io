@@ -2,7 +2,7 @@
 title: Javascript-(Global & Math)
 date: 2021-01-23 22:57:33
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Global, Math]
+tags: [ Global, Math]
 keywords:
 description:
 photos:

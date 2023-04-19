@@ -2,7 +2,7 @@
 title: Javascript-Array
 date: 2021-01-24 14:47:28
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Array]
+tags: [ Array]
 keywords:
 description: 
 photos:

@@ -2,7 +2,7 @@
 title: Javascript-Event-2
 date: 2021-04-06 23:13:39
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Event]
+tags: [ Event]
 keywords:
 description:
 photos:

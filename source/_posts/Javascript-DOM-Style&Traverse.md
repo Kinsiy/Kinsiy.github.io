@@ -1,7 +1,7 @@
 ﻿---
 title: Javascript-DOM-Style/Traverse
 date: 2021-10-22 19:54:58
-tags: [JS红宝书, DOM]
+tags: [ DOM]
 categories: [学习笔记, Javascript]
 keywords: 
 description: DOM1主要定义了HTML和XML文档的底层结构。DOM2和 DOM3在这些结构之上加入更多交互能力，提供了更高级的 XML 特性

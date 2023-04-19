@@ -2,7 +2,7 @@
 title: Javascript-Object.2[创建对象]
 date: 2021-02-19 22:22:00
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Object]
+tags: [ Object]
 keywords:
 description:
 photos:

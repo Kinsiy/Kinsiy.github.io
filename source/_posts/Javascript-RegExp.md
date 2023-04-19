@@ -3,7 +3,7 @@ title: Javascript-RegExp
 date: 2021-1-17 22:14:48
 description:
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, RegExp]
+tags: [ RegExp]
 ---
 
 ## RegExp

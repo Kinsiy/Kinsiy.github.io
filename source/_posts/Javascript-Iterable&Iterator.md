@@ -2,7 +2,7 @@
 title: Javascript-迭代器与生成器
 date: 2021-02-03 01:13:43
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Iterator]
+tags: [ Iterator]
 keywords:
 description:
 photos:

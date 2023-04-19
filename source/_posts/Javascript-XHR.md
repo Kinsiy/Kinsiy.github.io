@@ -1,7 +1,7 @@
 ---
 title: Javascript-XHR
 date: 2021-10-28 22:46:59
-tags: [JS红宝书, XHR]
+tags: [XHR]
 categories: [学习笔记, Javascript]
 description:
 photos:

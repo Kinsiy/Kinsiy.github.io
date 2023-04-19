@@ -2,7 +2,7 @@
 title: Javascript-async/await
 date: 2021-03-22 22:41:38
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, async/await]
+tags: [ async/await]
 keywords:
 description:
 photos:

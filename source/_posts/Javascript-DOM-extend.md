@@ -1,7 +1,7 @@
 ---
 title: Javascript - DOM扩展
 date: 2021-10-21 21:33:28
-tags: [JS红宝书, DOM]
+tags: [DOM]
 categories: [学习笔记, Javascript]
 keywords:
 description: 尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能

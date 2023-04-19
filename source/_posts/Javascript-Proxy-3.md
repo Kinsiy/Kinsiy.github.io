@@ -2,7 +2,7 @@
 title: Javascript-Proxy[代理模式]
 date: 2021-03-07 19:28:44
 categories: [学习笔记, Javascript]
-tags: [JS红宝书, Proxy]
+tags: [ Proxy]
 keywords:
 description:
 photos:
