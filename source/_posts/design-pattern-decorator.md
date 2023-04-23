@@ -3,7 +3,7 @@ title: 装饰模式
 mathjax: false
 date: 2023-04-22 22:56:38
 tags: Wrapper Decorator
-categories: [设计模式, 装饰模式]
+categories: [设计模式, 结构型模式]
 description:
 photos:
 ---

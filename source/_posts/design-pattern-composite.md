@@ -3,7 +3,7 @@ title: 组合模式
 mathjax: false
 date: 2023-04-21 21:28:24
 tags: Composite
-categories: [设计模式, 组合模式]
+categories: [设计模式, 结构型模式]
 description:
 photos:
 ---
