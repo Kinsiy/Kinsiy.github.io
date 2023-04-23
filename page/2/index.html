@@ -153,18 +153,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-factory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-factory/" class="post-title-link" itemprop="url">工厂方法模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-06 23:03:45" itemprop="dateCreated datePublished" datetime="2023-04-06T23:03:45+08:00">2023-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-04-18 19:31:53" itemprop="dateModified" datetime="2023-04-18T19:31:53+08:00">2023-04-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>工厂方法模式是一种创建型设计模式,其在父类中提供一个创建对象的方法,允许子类决定实例化对象的类型.</p>
+<p>工厂方法模式建议使用特殊的工厂方法代替对于对象构造函数的直接调用(即使用 <mark class="label info">new</mark> 运算符).不用担心,对象仍将通过<mark class="label info">new</mark>运算符创建,只是该运算符改在工厂方法中调用罢了.</p>
+<p>工厂方法返回的对象通常被称作“产品”</p>
+<pre><code class="highlight mermaid">classDiagram
+class Logistics &#123;
+ + planDelivery()
+ + createTransport(): Transport
+&#125;
+class RoadLogistics &#123;
+ + createTransport(): Transport
+&#125;
+
+class SeaLogistics &#123;
+ + createTransport(): Transport
+&#125;
+
+Logistics &lt;|-- RoadLogistics
+Logistics &lt;|-- SeaLogistics</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-factory/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -937,92 +1037,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/effect-system-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/CSS-Grid-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/CSS-Grid-2/" class="post-title-link" itemprop="url">CSS - 栅格布局 - Ⅱ</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-17 20:16:01" itemprop="dateCreated datePublished" datetime="2022-07-17T20:16:01+08:00">2022-07-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>承接上篇<a href="https://kinsiy.github.io/CSS-Grid-1/">CSS - 栅格布局 - Ⅰ</a> , 上篇说了如何定义栅格轨道及如何将栅格元素附加到栅格轨道/区域上.这篇主要说下栅格流/栏距/栅格的对齐方式等</p>
-<h2 id="栅格流">栅格流</h2>
-<p>前面附加元素时基本上都明确指定了栅格元素在栅格中的位置,对与未明确指定的栅格元素,其位置将按照栅格流自动放入栅格中.</p>
-<p>栅格流主要分为两种模式,即行优先和列优先,不过二者都可以通过密集流增强.栅格流通过<mark class="label primary">grid-auto-flow</mark>设置</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/CSS-Grid-2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
