@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -186,6 +186,105 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-flyweight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-flyweight/" class="post-title-link" itemprop="url">享元模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-24 20:50:44 / 修改时间：21:47:17" itemprop="dateCreated datePublished" datetime="2023-04-24T20:50:44+08:00">2023-04-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>享元模式</strong> 是一种结构型设计模式，它摒弃了在每个对象中保存所有数据的方式，通过共享多个对象共有的相同状态，让你能在有限的内存容量中载入更多对象</p>
+<h2 id="享元模式结构">享元模式结构</h2>
+<pre><code class="highlight mermaid">classDiagram
+class FlyweightFactory &#123;
+-cache: Flyweight[]
++getFlyweight(repeatingState)
+&#125;
+class Flyweight &#123;
+-repeatingState
++operation(uniqueState)
+&#125;
+class Context &#123;
+-uniqueState
+-flyweight
++Context(repeatingState, uniqueState)
++operation()
+&#125;
+FlyweightFactory o--&gt; Flyweight
+Context --&gt; Flyweight
+FlyweightFactory &lt;-- Context
+Client *--&gt; Context</code></pre>
+<div class="note warning"><p>享元模式只是一种优化。在使用该模式之前，你要确定程序中存在大量类似对象同时占用内存相关的内存消耗问题，并且确保该问题无法使用其他更好的方式来解决</p>
+</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-flyweight/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -964,110 +1063,6 @@ class HouseBuilder &#123;
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-compare-factory/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-abstract-factory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-abstract-factory/" class="post-title-link" itemprop="url">抽象工厂模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-07 22:04:26" itemprop="dateCreated datePublished" datetime="2023-04-07T22:04:26+08:00">2023-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-23 21:34:45" itemprop="dateModified" datetime="2023-04-23T21:34:45+08:00">2023-04-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>抽象工厂模式是一种创建型设计模式,它能创建一系列相关的对象,而无需指定具体</p>
-<p>抽象工厂模式建议为系列中的每件产品明确声明接口.然后,确保所有产品变体都继承这些接口</p>
-<pre><code class="highlight mermaid">classDiagram
-class Chair &#123;
-	&lt;&lt;interface&gt;&gt;
-	+ hasLegs()
-	+ sitOn()
-&#125;
-
-class VictorianChair &#123;
-	+ hasLegs()
-	+ sitOn()
-&#125;
-
-class ModernChair &#123;
-  + hasLegs()
-  + sitOn()
-&#125;
-
-Chair &lt;|.. VictorianChair
-Chair &lt;|.. ModernChair</code></pre>
-<p>同一对象的所有变体都必须放置在同一个类层次结构之中.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-abstract-factory/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
