@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-count">81</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,224 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-iterator/" class="post-title-link" itemprop="url">迭代器模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-23 22:47:21 / 修改时间：23:17:50" itemprop="dateCreated datePublished" datetime="2023-05-23T22:47:21+08:00">2023-05-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>迭代器模式是一种行为设计模式，让你能在不暴露集合底层表现形式（列表，栈和树等）的情况下遍历集合中所有的元素</p>
+<pre><code class="highlight mermaid">classDiagram
+class Client
+class Iterator &#123;
+&lt;&lt;interface&gt;&gt;
++getNext()
++hasMore(): bool
+&#125;
+class IterableCollection &#123;
+&lt;&lt;interface&gt;&gt;
++createIterator(): Iterator
+&#125;
+class ConcreteCollection &#123;
+...
++createIterator(): Iterator
+&#125;
+class ConcreteIterator &#123;
+-collection: ConcreteCollection
+-iterationState
++ConcreteIterator(c: ConcreteCollection)
++getNext()
++hasMore(): bool
+&#125;
+
+Client --&gt; Iterator
+Client --&gt; IterableCollection
+IterableCollection ..&gt; Iterator
+Iterator &lt;|.. ConcreteIterator
+IterableCollection &lt;|.. ConcreteCollection
+ConcreteIterator &lt;--&gt; ConcreteCollection</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-iterator/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-command/" class="post-title-link" itemprop="url">命令模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-22 23:21:17" itemprop="dateCreated datePublished" datetime="2023-05-22T23:21:17+08:00">2023-05-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-23 23:18:52" itemprop="dateModified" datetime="2023-05-23T23:18:52+08:00">2023-05-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>命令模式是一种行为设计模式，它可将请求转换为一个包含与请求相关的所有信息的独立对象。该转换让你能根据不同的请求将方法参数化、延迟请求执行或将其放入队列中，且能实现可撤销操作</p>
+<pre><code class="highlight mermaid">classDiagram
+class Invoker &#123;
+-command
++setCommand(command)
++executeCommand()
+&#125;
+class Command &#123;
+&lt;&lt;Interface&gt;&gt;
++execute()
+&#125;
+class ConcreteCommand1 &#123;
+-receiver
+-params
++Command1(receiver, params)
++execute()
+&#125;
+class ConcreteCommand2 &#123;
++execute()
+&#125;
+class Receiver &#123;
+...
++operation(a,b,c)
+&#125;
+class Client
+Client --&gt; Receiver
+Client ..&gt; ConcreteCommand1
+Command &lt;|.. ConcreteCommand1
+Command &lt;|.. ConcreteCommand2
+Invoker --&gt; Command</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-command/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -231,7 +449,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-15 20:05:26" itemprop="dateModified" datetime="2023-05-15T20:05:26+08:00">2023-05-15</time>
+      <time title="修改时间：2023-05-23 23:23:46" itemprop="dateModified" datetime="2023-05-23T23:23:46+08:00">2023-05-23</time>
     </span>
 
   
@@ -327,9 +545,15 @@ BaseHandler &lt;|.. ConcreteHandlers</code></pre>
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-25 22:00:37 / 修改时间：22:49:23" itemprop="dateCreated datePublished" datetime="2023-04-25T22:00:37+08:00">2023-04-25</time>
+      <time title="创建时间：2023-04-25 22:00:37" itemprop="dateCreated datePublished" datetime="2023-04-25T22:00:37+08:00">2023-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-23 23:24:21" itemprop="dateModified" datetime="2023-05-23T23:24:21+08:00">2023-05-23</time>
     </span>
 
   
@@ -701,7 +925,7 @@ Client *--&gt; Context</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-23 21:34:08" itemprop="dateModified" datetime="2023-04-23T21:34:08+08:00">2023-04-23</time>
+      <time title="修改时间：2023-05-23 23:25:02" itemprop="dateModified" datetime="2023-05-23T23:25:02+08:00">2023-05-23</time>
     </span>
 
   
@@ -904,179 +1128,6 @@ Component &lt;--o Composite</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-adapter/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-singleton/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-singleton/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-04-18 19:33:09 / 修改时间：20:06:21" itemprop="dateCreated datePublished" datetime="2023-04-18T19:33:09+08:00">2023-04-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>单例模式</strong>是一种创建型设计模式，让你能够保证一个类只有一个实例，并提供一个访问该实例的全局节点。</p>
-<pre><code class="highlight mermaid">classDiagram
-class Singleton &#123;
--instance Singleton$
--Singleton()
-+getInstance()$ Singleton
-&#125;
-
-Singleton &lt;-- Singleton</code></pre>
-<p><strong>单例（Singleton）</strong> 类声明了一个名为 <mark class="label info">getInstance</mark> 的静态方法来返回其所属类的一个相同实例</p>
-<p>单例的构造函数必须对客户端（Client）代码隐藏。调用<mark class="label info">getInstance</mark> 方法必须是获取单例对象的唯一方式</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-singleton/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-clone/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-clone/" class="post-title-link" itemprop="url">原型模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-17 21:01:51" itemprop="dateCreated datePublished" datetime="2023-04-17T21:01:51+08:00">2023-04-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-18 19:47:39" itemprop="dateModified" datetime="2023-04-18T19:47:39+08:00">2023-04-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>原型模式将克隆过程委派给被克隆的实际对象。模式为所有支持克隆的对象声明了一个通用接口，该接口让你能够克隆对象，同时又无需将代码和对象所属类耦合。</p>
-<p>通常情况下，这样的接口中仅包含一个 <mark class="label info">克隆</mark> 方法</p>
-<p>所有的类对 <mark class="label info">克隆</mark> 方法都非常相似。该方法会创建一个当前类的对象，然后将原始对象所有的成员变量值复制到新建的类中。</p>
-<p>支持克隆的对象即为原型。当你的对象有几十个成员变量和几百种类型时，对其进行克隆甚至可以代替子类的构造</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-clone/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

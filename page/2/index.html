@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">90</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">79</span>
+        <span class="site-state-item-count">81</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,179 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-singleton/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-singleton/" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-04-18 19:33:09 / 修改时间：20:06:21" itemprop="dateCreated datePublished" datetime="2023-04-18T19:33:09+08:00">2023-04-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>单例模式</strong>是一种创建型设计模式，让你能够保证一个类只有一个实例，并提供一个访问该实例的全局节点。</p>
+<pre><code class="highlight mermaid">classDiagram
+class Singleton &#123;
+-instance Singleton$
+-Singleton()
++getInstance()$ Singleton
+&#125;
+
+Singleton &lt;-- Singleton</code></pre>
+<p><strong>单例（Singleton）</strong> 类声明了一个名为 <mark class="label info">getInstance</mark> 的静态方法来返回其所属类的一个相同实例</p>
+<p>单例的构造函数必须对客户端（Client）代码隐藏。调用<mark class="label info">getInstance</mark> 方法必须是获取单例对象的唯一方式</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-singleton/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-clone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-clone/" class="post-title-link" itemprop="url">原型模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-17 21:01:51" itemprop="dateCreated datePublished" datetime="2023-04-17T21:01:51+08:00">2023-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-23 20:45:42" itemprop="dateModified" datetime="2023-05-23T20:45:42+08:00">2023-05-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>原型模式将克隆过程委派给被克隆的实际对象。模式为所有支持克隆的对象声明了一个通用接口，该接口让你能够克隆对象，同时又无需将代码和对象所属类耦合。</p>
+<p>通常情况下，这样的接口中仅包含一个 <mark class="label info">克隆</mark> 方法</p>
+<p>所有的类对 <mark class="label info">克隆</mark> 方法都非常相似。该方法会创建一个当前类的对象，然后将原始对象所有的成员变量值复制到新建的类中。</p>
+<p>支持克隆的对象即为原型。当你的对象有几十个成员变量和几百种类型时，对其进行克隆甚至可以代替子类的构造</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-clone/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -898,177 +1071,6 @@ Logistics &lt;|-- SeaLogistics</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/simple-diff/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/effect-system-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/effect-system-3/" class="post-title-link" itemprop="url">响应系统 - 原始值</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-27 19:46:34" itemprop="dateCreated datePublished" datetime="2022-09-27T19:46:34+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第六章 - 原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文</p>
-</div>
-<p>原始值指的是Boolean, Number, BigInt, String, Symbol, undefined 和 null 等类型的值.在 Javascript 中, 原始值是按值传递的,而非按引用传递. 形参和实参之间没有引用关系, 它们是两个完全独立的值, 对形参的修改不会影响实参. 另外, Javascript 中的Proxy 无法提供对原始值的代理, 因此想要将原始值变成响应式数据, 就必须对其做一层包裹, 也就是<mark class="label info">ref</mark></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/effect-system-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/effect-system-2-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/effect-system-2-3/" class="post-title-link" itemprop="url">响应系统 - 非原始值 - Set&Map</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-27 00:30:43" itemprop="dateCreated datePublished" datetime="2022-09-27T00:30:43+08:00">2022-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第五章 - 非原始值的响应式方案 摘录而来, 更为详细的内容参见书籍原文</p>
-</div>
-<h2 id="代理-Set-和-Map">代理 Set 和 Map</h2>
-<p>Set 和 Map 的代理思路与代理数组是一样的, 需要注意的是其<mark class="label info">size</mark>是一个访问器属性, 访问器内部检查了<mark class="label danger">[[SetData]]</mark>内部槽, <mark class="label info">Reflect.get</mark>中<mark class="label info">this</mark>的值要指向原始对象而非代理对象,其余方法也是一样</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/effect-system-2-3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
