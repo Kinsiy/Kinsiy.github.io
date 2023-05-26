@@ -2,7 +2,7 @@
 title: 命令模式
 mathjax: false
 date: 2023-05-22 23:21:17
-tags: action transaction command
+tags: [action, transaction, command,]
 categories: [设计模式, 行为模式]
 description:
 photos:

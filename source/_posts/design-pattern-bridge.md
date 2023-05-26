@@ -2,7 +2,7 @@
 title: 桥接模式
 mathjax: false
 date: 2023-04-20 19:52:03
-tags: Bridge
+tags: bridge
 categories: [设计模式, 结构型模式]
 description:
 photos:

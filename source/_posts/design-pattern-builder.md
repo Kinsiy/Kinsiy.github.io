@@ -14,19 +14,57 @@ photos:
 
 ```mermaid
 classDiagram
-class HouseBuilder {
- + buildWalls()
- + buildDoors()
- + buildWindows()
- + buildRoof()
- + buildGarage()
- + getResult(): House
+class Client
+class Builder {
+<<interface>>
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
 }
+class Director {
+-builder: Builder
++Director(builder)
++changeBuilder(bulider)
++make(type)
+}
+class ConcreteBuilder1 {
+-result: Product1
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
++getResult(): Product1
+}
+class Product1
+class ConcreteBuilder2 {
+-result: Product2
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
++getResult(): Product2
+}
+class Product2
+
+Client ..> ConcreteBuilder1
+Client --> Director
+Director --> Builder
+Builder <|.. ConcreteBuilder1
+ConcreteBuilder1 --> Product1
+Builder <|.. ConcreteBuilder2
+ConcreteBuilder2 --> Product2
 ```
 
 > 生成器模式让你能够分步骤复杂对象.生成器不允许其他对象访问正在创建的产品
 
 <!--more-->
+
+- **生成器（Builder）** 接口声明在所有类型生成器中通用的产品构造步骤
+- **具体生成器（Concrete Builders）** 提供构造过程的不同实现。具体生成器也可以构造不遵循通用接口的产品
+- **产品（Products）** 是最终生成的对象。由不同生成器构造的产品无需属于同一类层次结构或接口
+- **主管（Director）** 类定义调用构造步骤的顺序，这样你就可以创建和复用特定的产品配置
+- **客户端（Client）** 必须将某个生成器对象与主管类关联。一般情况下，你只需通过主管类构造函数的参数进行一次性关联即可。此后主管类就能使用生成器对象完成后续所有的构造任务。但在客户端将生成器对象传递给主管类制造方法时还有另一种方式。在这种情况下，你在使用主管类生产产品时每次都可以使用不同的生成器
 
 该模式会将对象构造过程划分为一组步骤, 比如{% label info@buildWalls 创建墙壁 %}和{% label info@buildDoor 创建房门 %}创建房门等.每次创建对象时,你都需要通过生成器对象执行一系列步骤. 重点在于你无需调用所有步骤, 而只需调用创建特定对象配置所需的那些步骤即可
 

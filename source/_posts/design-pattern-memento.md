@@ -2,7 +2,7 @@
 title: 备忘录模式
 mathjax: false
 date: 2023-05-25 22:54:05
-tags: snapshot memento
+tags: [snapshot, memento]
 categories: [设计模式, 行为模式]
 description:
 photos:

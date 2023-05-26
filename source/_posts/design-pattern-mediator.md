@@ -2,7 +2,7 @@
 title: 中介者模式
 mathjax: false
 date: 2023-05-25 21:25:08
-tags: intermediary controller mediator
+tags: [intermediary, controller, mediator]
 categories: [设计模式, 行为模式]
 description:
 photos:

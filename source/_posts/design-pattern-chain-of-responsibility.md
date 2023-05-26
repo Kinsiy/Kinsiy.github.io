@@ -2,7 +2,7 @@
 title: 责任链模式
 mathjax: false
 date: 2023-05-09 21:16:07
-tags: CoR Chain of Command Chain of Responsibility
+tags: [CoR, Chain of Command, Chain of Responsibility]
 categories: [设计模式, 行为模式]
 description:
 photos:
@@ -31,7 +31,7 @@ class Client
 Handler <-- Client
 Handler <|.. BaseHandler
 Handler <--o BaseHandler
-BaseHandler <|.. ConcreteHandlers
+BaseHandler <|-- ConcreteHandlers
 ```
 
 <!--more-->

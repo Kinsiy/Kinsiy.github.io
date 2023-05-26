@@ -2,7 +2,7 @@
 title: 原型模式
 mathjax: false
 date: 2023-04-17 21:01:51
-tags: clone prototype
+tags: [clone, prototype]
 categories: [设计模式,创建型模式]
 description:
 photos:

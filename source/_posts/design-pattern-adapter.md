@@ -2,7 +2,7 @@
 title: 适配器模式
 mathjax: false
 date: 2023-04-19 20:05:24
-tags: Wrapper Adapter
+tags: [wrapper, adapter]
 categories: [设计模式, 结构型模式]
 description:
 photos:
