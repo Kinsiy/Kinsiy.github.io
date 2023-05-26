@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">96</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-observer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-observer/" class="post-title-link" itemprop="url">观察者模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 21:47:01 / 修改时间：22:15:53" itemprop="dateCreated datePublished" datetime="2023-05-26T21:47:01+08:00">2023-05-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>观察者模式</strong>是一种行为设计模式，允许你定义一种订阅机制，可在对象事件发生时通知多个“观察”该对象的其他对象</p>
+<pre><code class="highlight mermaid">classDiagram
+class Publisher &#123;
+-subscribers: Subscriber[]
+-mainState
++subscribe(s: Subscriber)
++unsubscribe(s: Subscriber)
++notifySubscribers()
++mainBusinessLogic()
+&#125;
+class Subscriber &#123;
+&lt;&lt;interface&gt;&gt;
++update(context)
+&#125;
+class ConcreteSubscribers &#123;
+...
++update(context)
+&#125;
+class Client
+
+Publisher &lt;-- Client
+Publisher o--&gt; Subscriber
+Subscriber &lt;|.. ConcreteSubscribers
+ConcreteSubscribers &lt;.. Client</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-observer/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -223,9 +323,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-05-25 22:54:05 / 修改时间：23:40:59" itemprop="dateCreated datePublished" datetime="2023-05-25T22:54:05+08:00">2023-05-25</time>
+      <time title="创建时间：2023-05-25 22:54:05" itemprop="dateCreated datePublished" datetime="2023-05-25T22:54:05+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-26 22:16:37" itemprop="dateModified" datetime="2023-05-26T22:16:37+08:00">2023-05-26</time>
     </span>
 
   
@@ -320,9 +426,15 @@ Memento &lt;--o Caretaker</code></pre>
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-05-25 21:25:08 / 修改时间：23:42:20" itemprop="dateCreated datePublished" datetime="2023-05-25T21:25:08+08:00">2023-05-25</time>
+      <time title="创建时间：2023-05-25 21:25:08" itemprop="dateCreated datePublished" datetime="2023-05-25T21:25:08+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-26 22:16:23" itemprop="dateModified" datetime="2023-05-26T22:16:23+08:00">2023-05-26</time>
     </span>
 
   
@@ -560,7 +672,7 @@ ConcreteIterator &lt;--&gt; ConcreteCollection</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-25 23:42:32" itemprop="dateModified" datetime="2023-05-25T23:42:32+08:00">2023-05-25</time>
+      <time title="修改时间：2023-05-26 22:55:33" itemprop="dateModified" datetime="2023-05-26T22:55:33+08:00">2023-05-26</time>
     </span>
 
   
@@ -672,7 +784,7 @@ Invoker --&gt; Command</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-23 23:23:46" itemprop="dateModified" datetime="2023-05-23T23:23:46+08:00">2023-05-23</time>
+      <time title="修改时间：2023-05-26 22:55:13" itemprop="dateModified" datetime="2023-05-26T22:55:13+08:00">2023-05-26</time>
     </span>
 
   
@@ -706,7 +818,7 @@ class Client
 Handler &lt;-- Client
 Handler &lt;|.. BaseHandler
 Handler &lt;--o BaseHandler
-BaseHandler &lt;|.. ConcreteHandlers</code></pre>
+BaseHandler &lt;|-- ConcreteHandlers</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-chain-of-responsibility/#more" rel="contents">
@@ -1058,7 +1170,7 @@ Client *--&gt; Context</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-23 21:34:21" itemprop="dateModified" datetime="2023-04-23T21:34:21+08:00">2023-04-23</time>
+      <time title="修改时间：2023-05-26 22:55:43" itemprop="dateModified" datetime="2023-05-26T22:55:43+08:00">2023-05-26</time>
     </span>
 
   
@@ -1082,112 +1194,6 @@ Client *--&gt; Context</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-decorator/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-composite/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-composite/" class="post-title-link" itemprop="url">组合模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-21 21:28:24" itemprop="dateCreated datePublished" datetime="2023-04-21T21:28:24+08:00">2023-04-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-23 23:25:02" itemprop="dateModified" datetime="2023-05-23T23:25:02+08:00">2023-05-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>组合模式</strong> 是一种结构型设计模式，你可以使用它将对象组合成树状结构，并且能像使用独立对象一样使用它们。</p>
-<pre><code class="highlight mermaid">classDiagram
-class Client
-class Component &#123;
-&lt;&lt;interface&gt;&gt;
-+execute()
-&#125;
-class Leaf &#123;
-...
-+execute()
-&#125;
-class Composite &#123;
--children: Component[]
-+add(c: Component)
-+remove(c: Component)
-+getChildren(): Component[]
-+execute()
-&#125;
-Client --&gt; Component
-Component &lt;|.. Leaf
-Component &lt;|.. Composite
-Component &lt;--o Composite</code></pre>
-<div class="note warning"><p>如果应用的核心模型能用树状结构表示，在应用中使用组合模式才有价值</p>
-</div>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-composite/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

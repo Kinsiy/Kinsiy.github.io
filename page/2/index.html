@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">93</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">83</span>
+        <span class="site-state-item-count">96</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,112 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-composite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-composite/" class="post-title-link" itemprop="url">组合模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-21 21:28:24" itemprop="dateCreated datePublished" datetime="2023-04-21T21:28:24+08:00">2023-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-23 23:25:02" itemprop="dateModified" datetime="2023-05-23T23:25:02+08:00">2023-05-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>组合模式</strong> 是一种结构型设计模式，你可以使用它将对象组合成树状结构，并且能像使用独立对象一样使用它们。</p>
+<pre><code class="highlight mermaid">classDiagram
+class Client
+class Component &#123;
+&lt;&lt;interface&gt;&gt;
++execute()
+&#125;
+class Leaf &#123;
+...
++execute()
+&#125;
+class Composite &#123;
+-children: Component[]
++add(c: Component)
++remove(c: Component)
++getChildren(): Component[]
++execute()
+&#125;
+Client --&gt; Component
+Component &lt;|.. Leaf
+Component &lt;|.. Composite
+Component &lt;--o Composite</code></pre>
+<div class="note warning"><p>如果应用的核心模型能用树状结构表示，在应用中使用组合模式才有价值</p>
+</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-composite/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -223,9 +329,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-20 19:52:03 / 修改时间：20:27:36" itemprop="dateCreated datePublished" datetime="2023-04-20T19:52:03+08:00">2023-04-20</time>
+      <time title="创建时间：2023-04-20 19:52:03" itemprop="dateCreated datePublished" datetime="2023-04-20T19:52:03+08:00">2023-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-26 22:37:35" itemprop="dateModified" datetime="2023-05-26T22:37:35+08:00">2023-05-26</time>
     </span>
 
   
@@ -303,9 +415,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-19 20:05:24 / 修改时间：21:20:29" itemprop="dateCreated datePublished" datetime="2023-04-19T20:05:24+08:00">2023-04-19</time>
+      <time title="创建时间：2023-04-19 20:05:24" itemprop="dateCreated datePublished" datetime="2023-04-19T20:05:24+08:00">2023-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-26 22:46:08" itemprop="dateModified" datetime="2023-05-26T22:46:08+08:00">2023-05-26</time>
     </span>
 
   
@@ -481,7 +599,7 @@ Singleton &lt;-- Singleton</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-23 20:45:42" itemprop="dateModified" datetime="2023-05-23T20:45:42+08:00">2023-05-23</time>
+      <time title="修改时间：2023-05-26 22:55:24" itemprop="dateModified" datetime="2023-05-26T22:55:24+08:00">2023-05-26</time>
     </span>
 
   
@@ -567,7 +685,7 @@ Singleton &lt;-- Singleton</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-18 19:31:27" itemprop="dateModified" datetime="2023-04-18T19:31:27+08:00">2023-04-18</time>
+      <time title="修改时间：2023-05-26 22:36:28" itemprop="dateModified" datetime="2023-05-26T22:36:28+08:00">2023-05-26</time>
     </span>
 
   
@@ -583,14 +701,46 @@ Singleton &lt;-- Singleton</code></pre>
           <p>生成器模式是一种创建型设计模式,使你能够分步骤创建复杂对象.该模式允许你使用相同的创建代码生成不同类型和形式的对象.</p>
 <p>生成器模式建议将对象构造代码从产品类中抽取出来, 并将其放在一个名为生成器的独立对象中.</p>
 <pre><code class="highlight mermaid">classDiagram
-class HouseBuilder &#123;
- + buildWalls()
- + buildDoors()
- + buildWindows()
- + buildRoof()
- + buildGarage()
- + getResult(): House
-&#125;</code></pre>
+class Client
+class Builder &#123;
+&lt;&lt;interface&gt;&gt;
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
+&#125;
+class Director &#123;
+-builder: Builder
++Director(builder)
++changeBuilder(bulider)
++make(type)
+&#125;
+class ConcreteBuilder1 &#123;
+-result: Product1
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
++getResult(): Product1
+&#125;
+class Product1
+class ConcreteBuilder2 &#123;
+-result: Product2
++reset()
++buildStepA()
++buildStepB()
++buildStepZ()
++getResult(): Product2
+&#125;
+class Product2
+
+Client ..&gt; ConcreteBuilder1
+Client --&gt; Director
+Director --&gt; Builder
+Builder &lt;|.. ConcreteBuilder1
+ConcreteBuilder1 --&gt; Product1
+Builder &lt;|.. ConcreteBuilder2
+ConcreteBuilder2 --&gt; Product2</code></pre>
 <blockquote>
 <p>生成器模式让你能够分步骤复杂对象.生成器不允许其他对象访问正在创建的产品</p>
 </blockquote>
@@ -755,7 +905,7 @@ class HouseBuilder &#123;
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-23 21:34:45" itemprop="dateModified" datetime="2023-04-23T21:34:45+08:00">2023-04-23</time>
+      <time title="修改时间：2023-05-26 22:54:57" itemprop="dateModified" datetime="2023-05-26T22:54:57+08:00">2023-05-26</time>
     </span>
 
   
@@ -982,90 +1132,6 @@ Logistics &lt;|-- SeaLogistics</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Graph-Dijkstra/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/quick-diff/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/quick-diff/" class="post-title-link" itemprop="url">快速 Diff 算法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-09 18:57:05" itemprop="dateCreated datePublished" datetime="2022-10-09T18:57:05+08:00">2022-10-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-09 23:31:05" itemprop="dateModified" datetime="2023-04-09T23:31:05+08:00">2023-04-09</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="note primary"><p>文章依据<a target="_blank" rel="noopener" href="https://book.douban.com/subject/35768338/">《Vue.js设计与实现》</a>第十一章 - 快速 Diff 算法 摘录而来, 更为详细的内容参见书籍原文</p>
-</div>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/quick-diff/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
