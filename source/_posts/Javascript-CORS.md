@@ -2,7 +2,6 @@
 title: Javascript-CORS
 date: 2021-10-29 19:08:39
 tags:
-    - JS红宝书
     - CORS
 categories: [学习笔记, Javascript]
 description:

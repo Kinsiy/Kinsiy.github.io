@@ -2,7 +2,7 @@
 title: Javascript - Function
 date: 2021-03-14 14:54:52
 categories: [学习笔记, Javascript]
-tags: [JS红宝书]
+tags:
 keywords:
 description:
 photos:

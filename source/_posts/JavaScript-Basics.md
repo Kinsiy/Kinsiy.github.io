@@ -3,7 +3,7 @@ title: JavaScript-语言基础
 date: 2020-12-20 12:01:49
 description:
 categories: [学习笔记, Javascript]
-tags: [JS红宝书]
+tags: 
 ---
 
 本文依据红宝书内容概括了 Javascript 的语言基础，分语法、关键字与保留字、变量、数据类型、操作符、语句、函数六部分。为个人读书笔记，可能会有错误的地方。

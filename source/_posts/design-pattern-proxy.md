@@ -2,7 +2,7 @@
 title: 代理模式
 mathjax: false
 date: 2023-04-25 22:00:37
-tags:
+tags: proxy
 categories: [设计模式, 结构型模式]
 description:
 photos:

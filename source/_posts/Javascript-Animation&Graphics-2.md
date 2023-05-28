@@ -1,7 +1,7 @@
 ---
 title: Javascript-动画与图形-下
 date: 2021-10-28 22:36:59
-tags: [JS红宝书]
+tags:
 categories: [学习笔记, Javascript]
 description:
 photos:
