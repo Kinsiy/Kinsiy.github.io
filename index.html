@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,205 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-strategy/" class="post-title-link" itemprop="url">策略模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-28 21:55:50 / 修改时间：22:30:44" itemprop="dateCreated datePublished" datetime="2023-05-28T21:55:50+08:00">2023-05-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>策略模式</strong> 是一种行为设计模式，它能让你定义一系列算法，并将每种算法分别放入独立的类中，以使算法的对象能够相互替代</p>
+<pre><code class="highlight mermaid">classDiagram
+class Context &#123;
+-strategy
++setStrategy(strategy)
++doSomething()
+&#125;
+class Strategy &#123;
+&lt;&lt;interface&gt;&gt;
++execute(data)
+&#125;
+class ConcreteStrategies &#123;
++execute(data)
+&#125;
+class Client
+Context &lt;-- Client
+Context o--&gt; Strategy
+Strategy &lt;|.. ConcreteStrategies
+Client ..&gt; ConcreteStrategies</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-strategy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-state/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-state/" class="post-title-link" itemprop="url">状态模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-28 21:07:21 / 修改时间：22:30:53" itemprop="dateCreated datePublished" datetime="2023-05-28T21:07:21+08:00">2023-05-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>状态模式</strong> 是一种行为设计模式，让你能在一个对象的内部状态变化时改变其行为，使其看上去就像改变了自身所属的类一样。</p>
+<pre><code class="highlight mermaid">classDiagram
+class Context &#123;
+-state
++Context(initialState)
++ChangeState(state)
++doThis()
++doThat()
+&#125;
+class State &#123;
+&lt;&lt;interface&gt;&gt;
++doThis()
++doThat()
+&#125;
+class ConcreteStates &#123;
+-context
++setContext(context)
++doThis()
++doThat()
+&#125;
+class Client
+
+Context &lt;-- Client
+Context &lt;-- ConcreteStates
+Context o--&gt; State
+State &lt;|.. ConcreteStates
+Client ..&gt; ConcreteStates
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-state/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -672,7 +871,7 @@ ConcreteIterator &lt;--&gt; ConcreteCollection</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-26 22:55:33" itemprop="dateModified" datetime="2023-05-26T22:55:33+08:00">2023-05-26</time>
+      <time title="修改时间：2023-05-28 22:32:02" itemprop="dateModified" datetime="2023-05-28T22:32:02+08:00">2023-05-28</time>
     </span>
 
   
@@ -888,7 +1087,7 @@ BaseHandler &lt;|-- ConcreteHandlers</code></pre>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-23 23:24:21" itemprop="dateModified" datetime="2023-05-23T23:24:21+08:00">2023-05-23</time>
+      <time title="修改时间：2023-05-28 22:31:06" itemprop="dateModified" datetime="2023-05-28T22:31:06+08:00">2023-05-28</time>
     </span>
 
   
@@ -984,9 +1183,15 @@ Proxy o--&gt; Service</code></pre>
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-04-24 20:50:44 / 修改时间：21:47:17" itemprop="dateCreated datePublished" datetime="2023-04-24T20:50:44+08:00">2023-04-24</time>
+      <time title="创建时间：2023-04-24 20:50:44" itemprop="dateCreated datePublished" datetime="2023-04-24T20:50:44+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-28 22:31:44" itemprop="dateModified" datetime="2023-05-28T22:31:44+08:00">2023-05-28</time>
     </span>
 
   
@@ -1025,175 +1230,6 @@ Client *--&gt; Context</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-flyweight/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-facade/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-facade/" class="post-title-link" itemprop="url">外观模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-04-23 21:35:00 / 修改时间：22:11:42" itemprop="dateCreated datePublished" datetime="2023-04-23T21:35:00+08:00">2023-04-23</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>外观模式</strong> 是一种结构型设计模式，能为程序库、框架或其他复杂类提供一个简单的接口。</p>
-<p>外观类为包含许多活动部件的复杂子系统提供一个简单的接口。与直接调用子系统相比，外观提供的功能可能比较有限，但它却包含了客户端真正关心的功能。</p>
-<p>如果你的程序需要与包含几十种功能的复杂库整合，但只需使用其中非常少的功能，那么使用外观模式会非常方便</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-facade/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-decorator/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-decorator/" class="post-title-link" itemprop="url">装饰模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-22 22:56:38" itemprop="dateCreated datePublished" datetime="2023-04-22T22:56:38+08:00">2023-04-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-26 22:55:43" itemprop="dateModified" datetime="2023-05-26T22:55:43+08:00">2023-05-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>装饰模式</strong> 是一种结构性设计模式，允许你通过将对象放入包含行为的特殊封装对象来为原对象绑定新的行为</p>
-<p>当你需要更改一个对象的行为时，第一个跳入脑海的想法就是拓展它所属的类。但是，你不能忽视继承可能引发的几个严重问题</p>
-<ul>
-<li>继承是静态的。你无法在运行时更改已有对象的行为，只能使用由不同子类创建的对象来代替当前的整个对象</li>
-<li>子类只能有一个父类。大部分编程语言不允许一个类同时继承多个类的行为</li>
-</ul>
-<p>其中一种方法是用聚合或组合，而不是继承。两者的工作方式几乎一模一样；一个对象包含指向另一个对象的引用，并将部分工作委派给引用对象；继承中的对象则继承了父类的行为，它们自己能够完成这些工作</p>
-<mark class="label primary">封装器</mark> 是装饰模式的别称，这个称谓明确地表达了该模式的主要思想。“封装器”是一个能与其他“目标”对象连接的对象。封装器包含与目标对象相同的一系列方法<mark class="label success">（即实现了与封装对象相同的接口）</mark>，它会将所有接收到的请求委派给目标对象。但是，封装器可以在将请求委派给目标前后对其进行处理，所以可能会改变最终结果。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-decorator/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
