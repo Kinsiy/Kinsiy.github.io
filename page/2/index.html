@@ -153,7 +153,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -164,7 +164,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-count">102</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -186,6 +186,215 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-proxy/" class="post-title-link" itemprop="url">代理模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-25 22:00:37" itemprop="dateCreated datePublished" datetime="2023-04-25T22:00:37+08:00">2023-04-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-28 22:31:06" itemprop="dateModified" datetime="2023-05-28T22:31:06+08:00">2023-05-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>代理模式</strong> 是一种结构型设计模式，让你能够提供对象的替代品或其占位符。代理空着着对于原对象的访问，并允许在将请求提交给对象前后进行一些处理。</p>
+<h2 id="代理模式结构">代理模式结构</h2>
+<pre><code class="highlight mermaid">classDiagram
+class Client
+class ServiceInterface &#123;
+&lt;&lt;interface&gt;&gt;
++operation()
+&#125;
+class Proxy &#123;
+-realService: Service
++Proxy(s: Service)
++checkAccess()
++operation()
+&#125;
+class Service &#123;
+...
++operation()
+&#125;
+Client --&gt; ServiceInterface
+ServiceInterface &lt;|.. Proxy
+ServiceInterface &lt;|.. Service
+Proxy o--&gt; Service</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-proxy/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-flyweight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Kinsiy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kinsiy">
+      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Kinsiy">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/design-pattern-flyweight/" class="post-title-link" itemprop="url">享元模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-24 20:50:44" itemprop="dateCreated datePublished" datetime="2023-04-24T20:50:44+08:00">2023-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-28 22:31:44" itemprop="dateModified" datetime="2023-05-28T22:31:44+08:00">2023-05-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>享元模式</strong> 是一种结构型设计模式，它摒弃了在每个对象中保存所有数据的方式，通过共享多个对象共有的相同状态，让你能在有限的内存容量中载入更多对象</p>
+<h2 id="享元模式结构">享元模式结构</h2>
+<pre><code class="highlight mermaid">classDiagram
+class FlyweightFactory &#123;
+-cache: Flyweight[]
++getFlyweight(repeatingState)
+&#125;
+class Flyweight &#123;
+-repeatingState
++operation(uniqueState)
+&#125;
+class Context &#123;
+-uniqueState
+-flyweight
++Context(repeatingState, uniqueState)
++operation()
+&#125;
+FlyweightFactory o--&gt; Flyweight
+Context --&gt; Flyweight
+FlyweightFactory &lt;-- Context
+Client *--&gt; Context</code></pre>
+<div class="note warning"><p>享元模式只是一种优化。在使用该模式之前，你要确定程序中存在大量类似对象同时占用内存相关的内存消耗问题，并且确保该问题无法使用其他更好的方式来解决</p>
+</div>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/design-pattern-flyweight/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -922,202 +1131,6 @@ ConcreteBuilder2 --&gt; Product2</code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/design-pattern-builder/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-compare-factory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-compare-factory/" class="post-title-link" itemprop="url">工厂模式比较</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-08 11:57:32" itemprop="dateCreated datePublished" datetime="2023-04-08T11:57:32+08:00">2023-04-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-04-18 19:32:52" itemprop="dateModified" datetime="2023-04-18T19:32:52+08:00">2023-04-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="工厂">工厂</h2>
-<p>工厂是一个含义模糊的术语,表示可以创建一些东西的函数,方法或类.最常见的情况下,工厂创建的是对象.但是它们也可以 创建文件和数据库记录等其他东西.</p>
-<p>例如,下面这些东西都可以非正式地被称为“工厂”</p>
-<ul>
-<li>创建程序GUI的函数或方法</li>
-<li>创建用户的类</li>
-<li>以特定方式调用类构造函数的静态方法</li>
-<li>一种创建型设计模式</li>
-</ul>
-<p>当某人说到“工厂”这个词时,其具体含义通常可以根据上下文来确定.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-compare-factory/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://kinsiy.github.io/design-pattern-abstract-factory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Kinsiy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kinsiy">
-      <meta itemprop="description" content="slipped the surly bonds of earth to touch the face of God">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Kinsiy">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/design-pattern-abstract-factory/" class="post-title-link" itemprop="url">抽象工厂模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-04-07 22:04:26" itemprop="dateCreated datePublished" datetime="2023-04-07T22:04:26+08:00">2023-04-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-26 22:54:57" itemprop="dateModified" datetime="2023-05-26T22:54:57+08:00">2023-05-26</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>抽象工厂模式是一种创建型设计模式,它能创建一系列相关的对象,而无需指定具体</p>
-<p>抽象工厂模式建议为系列中的每件产品明确声明接口.然后,确保所有产品变体都继承这些接口</p>
-<pre><code class="highlight mermaid">classDiagram
-class Chair &#123;
-	&lt;&lt;interface&gt;&gt;
-	+ hasLegs()
-	+ sitOn()
-&#125;
-
-class VictorianChair &#123;
-	+ hasLegs()
-	+ sitOn()
-&#125;
-
-class ModernChair &#123;
-  + hasLegs()
-  + sitOn()
-&#125;
-
-Chair &lt;|.. VictorianChair
-Chair &lt;|.. ModernChair</code></pre>
-<p>同一对象的所有变体都必须放置在同一个类层次结构之中.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/design-pattern-abstract-factory/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
