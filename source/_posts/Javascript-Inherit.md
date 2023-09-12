@@ -148,7 +148,6 @@ console.log(`value: ${instance_2.value}     sex: ${instance_2.sex}`);
 ### 盗用构造函数的问题
 
 - 必须在构造函数中定义方法, 函数不能重用
-
 - 子类不能访问父类原型上定义的方法，因此所有类型只能使用构造函数模式。
 
 ## 组合继承
@@ -205,7 +204,7 @@ function object(o) {
 
 原型式继承是适用于这种情况：你有一个对象，想在它的基础上再创建一个新对象。你需要把这个对象先传给 object()，然后再对返回的对象进行适当修改。
 
-EMCAScript5 通过增加 Object.create()方法将原型式继承的概念规范化了。这个方法接收两个参数：作为新对象原型的对象，以及给新对象定义额外属性的对象(第二个可选)。在只有一个参数时，Object.create()与这里的 object()方法效果相同。
+EMCAScript5 通过增加 Object.create() 方法将原型式继承的概念规范化了。这个方法接收两个参数：作为新对象原型的对象，以及给新对象定义额外属性的对象(第二个可选)。在只有一个参数时，Object.create() 与这里的 object() 方法效果相同。
 
 ```javascript
 let person = {
@@ -215,11 +214,11 @@ let person = {
 
 let anotherPerson = Object.create(person);
 anotherPerson.name = "QingLai";
-anOtherPerson.friends.push("King");
+anotherPerson.friends.push("King");
 
 let yetAnthorPerson = Object.create(person);
-anotherPerson.name = "BaiLiXu";
-anOtherPerson.friends.push("witcher");
+yetAnthorPerson.name = "BaiLiXu";
+yetAnthorPerson.friends.push("witcher");
 
 console.log(yetAnthorPerson.friends); //  ["Restituo", "Type57", "King", "witcher"]
 
