@@ -4,7 +4,6 @@ date: 2021-11-03 22:26:31
 tags: ['HTTP-Header']
 categories: ['学习笔记',"HTTP"]
 description:
-photos:
 ---
 
 ## HTTP 缓存
@@ -72,7 +71,7 @@ Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control
 
 若最后修改时间小于等于If-Modified-Since，则response header返回304，告知浏览器继续使用所保存的cache。若大于If-Modified-Since，则说明资源被改动过，返回状态码200；
 
-#####  **If-none-match / Etag**
+#####  **If-None-Match / Etag**
 
 - Etag：服务器响应请求时，告诉浏览器当前资源在浏览器的唯一标识（生成规则由服务器确定）
 
@@ -82,7 +81,7 @@ Pragma 的值就只有一个，no-cache，并且它的优先级比 Cache-Control
   - 不同，说明资源又被改动过，则响应整片资源内容，返回状态码200；
   - 相同，说明资源无新修改，则响应HTTP 304，告知浏览器继续使用所保存的cache。
 
-本地缓存时间到期后，浏览器向服务端发送请求报文，其中Request Header中包含If-none-match和Last-Modified-Since（与服务端Etag和Last-Modified对比，Etag优先级高），用以验证本地缓存数据验证是否与服务端保持一致。在服务器端会优先判断Etag。如果相同，返回304；如果不同，就继续比较Last-Modified，然后决定是否返回新的资源。若服务端验证本地缓存与服务端一致，返回304，浏览器加载本地缓存；否则，服务器返回请求的资源，同时给出新的Etag以及Last-Modified时间。
+本地缓存时间到期后，浏览器向服务端发送请求报文，其中Request Header中包含If-None-Match和If-Modified-Since（与服务端Etag和Last-Modified对比，Etag优先级高），用以验证本地缓存数据验证是否与服务端保持一致。在服务器端会优先判断Etag。如果相同，返回304；如果不同，就继续比较Last-Modified，然后决定是否返回新的资源。若服务端验证本地缓存与服务端一致，返回304，浏览器加载本地缓存；否则，服务器返回请求的资源，同时给出新的Etag以及Last-Modified时间。
 
 {% note warning %}
 

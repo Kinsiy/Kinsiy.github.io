@@ -3,9 +3,7 @@ title: Javascript - 继承方式
 date: 2021-03-02 19:54:11
 categories: [学习笔记, Javascript]
 tags: [Classes]
-keywords:
 description:
-photos:
 ---
 
 ## 原型链
@@ -117,8 +115,8 @@ let instance_1 = new SubType();
 let instance_2 = new SubType();
 
 instance_1.language.push("Java");
-console.log(inatance_1); // ["Python", "Javascript", "C", "Java"]
-console.log(inatance_2); // ["Python", "Javascript", "C"]
+console.log(instance_1); // ["Python", "Javascript", "C", "Java"]
+console.log(instance_2); // ["Python", "Javascript", "C"]
 ```
 
 ### 传递参数

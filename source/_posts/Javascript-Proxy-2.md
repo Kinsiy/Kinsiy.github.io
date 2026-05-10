@@ -3,9 +3,7 @@ title: Javascript-Proxy[捕获器与反射]
 date: 2021-03-07 19:26:58
 categories: [学习笔记, Javascript]
 tags: [ Proxy]
-keywords:
 description:
-photos:
 ---
 
 ## 代理捕获器与反射方法

@@ -3,9 +3,7 @@ title: Javascript-DOM-2
 date: 2021-03-31 20:31:10
 tags: [ DOM]
 categories: [学习笔记, Javascript]
-keywords:
 description: 
-photos:
 ---
 
 ## DOM 编程
@@ -135,6 +133,10 @@ document.body.className = "bar"; // 不会有日志输出
 ### 后续
 
 略 🤣
+
+## 相关文章
+
+{% post_link Javascript-DOM-1 "Javascript - DOM (一)" %}
 
 ## 参考
 

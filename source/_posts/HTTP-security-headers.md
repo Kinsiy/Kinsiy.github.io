@@ -4,7 +4,6 @@ date: 2021-11-04 22:35:08
 tags: ['HTTP-Header']
 categories: ['学习笔记',"HTTP"]
 description:
-photos:
 ---
 
 ## Content Security Policy (CSP)

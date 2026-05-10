@@ -5,14 +5,13 @@ date: 2022-03-28 23:17:51
 tags: [Classes]
 categories: [学习笔记, TypeScript]
 description:
-photos:
 ---
 
 Ts完全支持Es2015中的{% label primary@class %}关键字.
 
 {% note info%}
 
-学习ES6中的类[Javascript - Class](https://kinsiy.github.io/Javascript-Class/?highlight=%E7%B1%BB)、[MDN. Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+学习ES6中的类[Javascript - Class](https://kinsiy.github.io/Javascript-Classes/?highlight=%E7%B1%BB)、[MDN. Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 
 本文参考Typescript官网[Docs - Handbook - Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)自翻译而来, 仅供个人参考学习使用.一切请以官网为准!
 

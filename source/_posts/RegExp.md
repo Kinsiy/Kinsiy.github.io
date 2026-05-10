@@ -3,9 +3,7 @@ title: 正则表达式
 date: 2021-02-28 17:45:48
 categories: [转发]
 tags: [RegExp]
-keywords:
 description: 一文掌握开发利器：正则表达式
-photos:
 ---
 
 {% note primary %}
@@ -338,7 +336,7 @@ NFA 正则引擎中的括号主要有两个作用：
 
 -   [正则表达式中的悲观回溯](https://loveky.github.io/2017/05/31/regular-expressions-catastrophic-backtracking/?from=singlemessage)
 -   [小心别落入正则回溯陷阱](https://mp.weixinbridge.com/mp/wapredirect?url=https%3A%2F%2Fjuejin.im%2Fentry%2F59f7f41ef265da4322407f37%3Ffrom%3Dsinglemessage&action=appmsg_redirect&uin=MjEyMjYyMzcxNg==&biz=MjM5ODYwMjI2MA==&mid=2649749963&idx=1&type=0&scene=0)
--   [正则匹配原理解析]()
+-   正则匹配原理解析
 -   [learncodethehardway](https://learncodethehardway.org/regex/)
 -   [正则表达式系列总结](https://zhuanlan.zhihu.com/p/27653434)
 -   [wikipedia Backtracking](https://en.wikipedia.org/wiki/Backtracking)

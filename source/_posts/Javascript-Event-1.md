@@ -3,9 +3,7 @@ title: Javascript-Event-1
 date: 2021-04-06 15:50:08
 categories: [学习笔记, Javascript]
 tags: [ Event]
-keywords:
 description:
-photos:
 ---
 
 ## 事件流
@@ -215,6 +213,10 @@ btn.attachEvent("onclick", function (event) {
 | type         | 字符串 | 只读  | 触发的事件类型                                                                     |
 
 由于事件处理程序的作用域取决于指定它的方式，因此 this 值并不总是等于事件目标。为此，更好的方式是使用事件对象的 srcElement 属性代替 this。
+
+## 相关文章
+
+{% post_link Javascript-Event-2 "Javascript - 事件 (二)" %}
 
 ## 参考
 

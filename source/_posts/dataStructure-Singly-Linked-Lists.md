@@ -4,7 +4,6 @@ date: 2021-11-15 20:27:24
 tags: ['单向链表']
 categories: ['数据结构','链表']
 description:
-photos:
 ---
 
 ## 前置知识

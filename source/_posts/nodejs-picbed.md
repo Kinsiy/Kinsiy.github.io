@@ -5,7 +5,6 @@ date: 2022-04-16 21:47:48
 tags:
 categories: ['nodeJs']
 description:
-photos:
 ---
 
 最近有需要向别人分享markdown文档的需求,然而文档上面插入了一些本地图片,这些图片又不好上传到外网图床上.导致在非本机环境中打开文档,均无法查看图片.

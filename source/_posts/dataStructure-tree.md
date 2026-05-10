@@ -1,11 +1,10 @@
 ---
 title: 树
 date: 2021-11-26 21:13:56
-tags: 树
+tags: [树]
 categories: 
   - ['数据结构','树']
 description:
-photos:
 ---
 
 

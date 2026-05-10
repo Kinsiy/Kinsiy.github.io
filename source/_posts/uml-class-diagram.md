@@ -5,7 +5,6 @@ date: 2023-05-30 21:47:52
 tags:
 categories:
 description:
-photos:
 ---
 
 ## 泛化

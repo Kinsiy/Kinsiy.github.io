@@ -23,7 +23,7 @@ person.name = "Kinsiy";
 console.log(person.name); // "Kinsiy"
 /* 原始值 */
 // 原始值不能有属性，尽管尝试给原始值添加属性不会报错
-ler name = "Kinsiy";
+let name = "Kinsiy";
 name.age = 23;
 console.log(name.age); // undefined
 ```
@@ -104,12 +104,12 @@ console.log(patter instanceof RegExp); //true
 全局上下文是最外层的上下文。在浏览器中，全局上下文就是我们常说的 window 对象，因此所有通过 var 定义的全局变量和函数都会成为 window 对象的属性和方法。使用 let 和 const 的顶级声明不会定义在全局上下文中，但在作用域链解析上效果是一样的。
 
 ```javascript
-var color = "bule";
+var color = "blue";
 function changeColor(){
   let anotherColor = "red";
 
   function swapColor(){
-    ler tempColor = anotherColor;
+    let tempColor = anotherColor;
     anotherColor = color;
     color = tempColor;
 
@@ -187,7 +187,7 @@ const a; // SyntaxError
 const b = 3;
 console.log(b); // 3
 b = 4; // TypeError
-/* cosnt除了要遵守以上规则，其它方面与let声明一样
+/* const除了要遵守以上规则，其它方面与let声明一样
     const声明只应用到顶级原语或对象，换句话说，赋值为对象的const变量不能再被重新赋值为其他引用值，但对象的键则不收限制
     若想让整个对象都不能修改，可以使用Object.freeze(),这样再给属性赋值时虽然不会报错，但会静默失败
 */
@@ -237,10 +237,10 @@ function createPerson(name){
   return localPerson;
 }
 
-let grobalPerson = createPerson("Kinsiy");
+let globalPerson = createPerson("Kinsiy");
 //  ....
 
-grobalPerson = null;        //解除grobalPerson 对值得引用
+globalPerson = null;        //解除globalPerson 对值得引用
 
 /* 通过const和let 声明提升性能
     因为const和let 都以块(而非)函数为作用域，所以相比于var，使用这两个新关键字可能会更早的让垃圾回收程序介入,尽早的回收应该回收的内存
@@ -271,7 +271,7 @@ function setName(){
 let name = "Kinsiy";
 setInterval(() => {
   console.log(name);
-}, 100;)                            //定时器导致内存泄露
+}, 100)                            //定时器导致内存泄露
 
 let outer = function(){
   let name = "Kinsiy";

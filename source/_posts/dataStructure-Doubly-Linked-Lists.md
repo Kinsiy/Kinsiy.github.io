@@ -4,11 +4,10 @@ date: 2021-11-25 21:52:11
 tags: ['双向链表']
 categories: ['数据结构','链表']
 description:
-photos:
 ---
 
 
-> 双向链表，又称为双链表，是链表的一种，它的每个数据结点都有两个指针，分别指向直接后继和直接前驱。所有，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表
+> 双向链表，又称为双链表，是链表的一种，它的每个数据结点都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表中的任意一个结点开始，都可以很方便地访问它的前驱结点和后继结点。一般我们都构造双向循环链表
 >
 > ——Wikipedia. 双向链表
 
@@ -149,7 +148,7 @@ class LinkedList {
 
   // 按索引值删除单向链表的值, 返回结点值, 不存在返回undefined
   removeByIndex(index = 0) {
-    if (index === 0) this.shift();
+    if (index === 0) return this.shift();
     let currentNode = this.head;
     for (let i = 0; i < this.size; i++) {
       if (i === index) {

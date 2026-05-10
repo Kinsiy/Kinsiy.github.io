@@ -3,9 +3,7 @@ title: Javascript-Event-2
 date: 2021-04-06 23:13:39
 categories: [学习笔记, Javascript]
 tags: [ Event]
-keywords:
 description:
-photos:
 ---
 
 ## 事件类型
@@ -227,6 +225,10 @@ if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
 // 触发事件
 textbox.dispatchEvent(event);
 ```
+## 相关文章
+
+{% post_link Javascript-Event-1 "Javascript - 事件 (一)" %}
+
 ## 参考
 
 [1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

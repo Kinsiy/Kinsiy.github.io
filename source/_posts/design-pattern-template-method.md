@@ -5,7 +5,6 @@ date: 2023-05-29 22:11:29
 tags: template method
 categories: [设计模式, 行为模式]
 description:
-photos:
 ---
 
 **模板方法模式** 是一种行为设计模式，它在超类中定义了一个算法的框架，允许子类在不修改结构的情况下重写算法的特定步骤

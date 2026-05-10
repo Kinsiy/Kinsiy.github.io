@@ -3,9 +3,7 @@ title: Javascript-动画与图形-上
 date: 2021-10-25 21:08:28
 tags:
 categories: [学习笔记, Javascript]
-keywords:
 description:
-photos:
 ---
 
 图形和动画已经日益成为浏览器中现代 Web 应用程序的必备功能，但实现起来仍然比较困难

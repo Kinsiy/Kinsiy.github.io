@@ -5,7 +5,6 @@ tags: ['前序遍历','中序遍历','后序遍历','层序遍历']
 categories:
  - ['数据结构','二叉树']
 description:
-photos:
 ---
 
 ## 遍历

@@ -5,7 +5,6 @@ date: 2022-07-16 11:08:29
 tags: ['CSS', 'Grid']
 categories:
 description:
-photos:
 ---
 
 很早之前就看过如何应用栅格布局,但平常都是flex布局用的多.导致grid布局都忘了.最近重新复习了一遍.这里记录下
@@ -73,7 +72,7 @@ photos:
 
 注意: {% label primary@minmax() %}表达式的最小值部分不允许使用{% label primary@fr %}单位
 
-使用{% label primary@min-content %}, {% label primary@max-context %}根据内容设定轨道尺寸
+使用{% label primary@min-content %}, {% label primary@max-content %}根据内容设定轨道尺寸
 
 - max-content. 占据内容所需的最大空间. “宽度尽量大,以防换行”
 - min-content. 占据内容所需的最小空间.  “尽量少占据空间,够显示内容即可”, 对文本来说,只保证最长的单词能够在一行里完整显示,会导致大量断行
@@ -88,7 +87,7 @@ photos:
 
 ### 自动适配
 
-除{% label primary@min-content %}和{% label primary@max-content %}外,还可以使用{% label primary@fix-content() %}函数以简练的方式表达特定类型的尺寸模型
+除{% label primary@min-content %}和{% label primary@max-content %}外,还可以使用{% label primary@fit-content() %}函数以简练的方式表达特定类型的尺寸模型
 
 ```css
 #grid {

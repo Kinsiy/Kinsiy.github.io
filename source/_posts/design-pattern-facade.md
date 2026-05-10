@@ -5,7 +5,6 @@ date: 2023-04-23 21:35:00
 tags: facade
 categories: [设计模式, 结构型模式]
 description:
-photos:
 ---
 
 **外观模式** 是一种结构型设计模式，能为程序库、框架或其他复杂类提供一个简单的接口。

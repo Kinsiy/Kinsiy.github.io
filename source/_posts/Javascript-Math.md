@@ -3,9 +3,7 @@ title: Javascript-(Global & Math)
 date: 2021-01-23 22:57:33
 categories: [学习笔记, Javascript]
 tags: [ Global, Math]
-keywords:
 description:
-photos:
 ---
 
 任何由 EMCAscript 实现提供、与宿主环境无关，并在 EMCAscript 程序开始执行时就存在的对象。前面已经接触了大部分内置对象，包括 Object，Array 和 String。本文介绍 EMCA-262 定义的另外两个单例对象：Global 和 Math。

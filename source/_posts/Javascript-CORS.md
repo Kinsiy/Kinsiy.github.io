@@ -5,7 +5,6 @@ tags:
     - CORS
 categories: [学习笔记, Javascript]
 description:
-photos:
 ---
 
 ## 跨域资源共享(CORS)

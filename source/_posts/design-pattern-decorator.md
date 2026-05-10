@@ -5,7 +5,6 @@ date: 2023-04-22 22:56:38
 tags: [Wrapper, Decorator]
 categories: [设计模式, 结构型模式]
 description:
-photos:
 ---
 
 **装饰模式** 是一种结构性设计模式，允许你通过将对象放入包含行为的特殊封装对象来为原对象绑定新的行为

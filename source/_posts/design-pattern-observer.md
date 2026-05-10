@@ -2,10 +2,9 @@
 title: 观察者模式
 mathjax: false
 date: 2023-05-26 21:47:01
-tags: [evnet-subscriber, listener, observer]
+tags: [event-subscriber, listener, observer]
 categories: [设计模式, 行为模式]
 description:
-photos:
 ---
 
 **观察者模式**是一种行为设计模式，允许你定义一种订阅机制，可在对象事件发生时通知多个“观察”该对象的其他对象

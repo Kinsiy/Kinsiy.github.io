@@ -6,7 +6,6 @@ tags: ["Dijkstra算法"]
 categories:
     - ["数据结构", "图"]
 description:
-photos:
 ---
 
 最短路径,是指两顶点之间经过的边上权值之和最少的路径

@@ -5,7 +5,6 @@ tags: ["线索二叉树"]
 categories:
     - ["数据结构", "二叉树"]
 description:
-photos:
 ---
 
 ## 定义

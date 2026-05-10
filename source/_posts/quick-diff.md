@@ -6,7 +6,6 @@ tags: 'diff'
 categories:
  - ['Vue', 'Vue.js设计与实现']
 description:
-photos:
 ---
 
 {% note primary %}

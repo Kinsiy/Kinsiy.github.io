@@ -5,7 +5,6 @@ date: 2023-05-25 22:54:05
 tags: [snapshot, memento]
 categories: [设计模式, 行为模式]
 description:
-photos:
 ---
 
 **备忘录模式** 是一种行为设计模式，允许在不暴露对象细节的情况下保存和恢复对象之前的状态

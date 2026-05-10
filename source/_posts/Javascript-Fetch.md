@@ -4,7 +4,6 @@ date: 2021-12-03 21:04:51
 tags: [ Fetch]
 categories: [学习笔记, Javascript]
 description:
-photos:
 ---
 
 Fetch API 能够执行 XMLHttpRequest 对象的所有任务，但更容易使用，接口也更现代化，能够在Web 工作线程等现代 Web 工具中使用。XMLHttpRequest 可以选择异步，而 Fetch API 则必须是异步

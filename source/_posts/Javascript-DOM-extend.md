@@ -3,9 +3,7 @@ title: Javascript - DOM扩展
 date: 2021-10-21 21:33:28
 tags: [DOM]
 categories: [学习笔记, Javascript]
-keywords:
 description: 尽管DOM API 已经相当不错，但仍然不断有标准或专有的扩展出现，已支持更多功能
-photos:
 ---
 
 
@@ -395,7 +393,7 @@ console.log(container.firstChild.nodeName);
 #### 内存与性能问题
 
 
-使用本节介绍的方法替换子节点可能在浏览器（特别是 IE）中导致内存问题。比如，如果被移除的 子树元素中之前有关联的事件处理程序或其他 JavaScript 对象（作为元素的属性），那它们之间的绑定关 系会滞留在内存中。如果这种替换操作频繁发生，页面的内存占用就会持续攀升。在使用 innerHTML、 outerHTML 和 insertAdjacentHTML()之前，最好手动删除要被替换的元素上关联的事件处理程序和 JavaScript 对象。
+现代浏览器已经能很好地处理被移除 DOM 元素的事件处理程序和 JavaScript 对象的内存回收。但在频繁进行大量 DOM 替换操作时，仍建议关注内存占用情况。在使用 innerHTML、outerHTML 和 insertAdjacentHTML() 时，用单次操作替代多次 DOM 操作是更好的实践。
 
 
  使用这些属性当然有其方便之处，特别是 innerHTML。一般来讲，插入大量的新 HTML 使用 innerHTML 比使用多次 DOM 操作创建节点再插入来得更便捷。这是因为 HTML 解析器会解析设置给 innerHTML（或 outerHTML）的值。解析器在浏览器中是底层代码（通常是 C++代码），比 JavaScript 快得多。不过，HTML 解析器的构建与解构也不是没有代价，因此最好限制使用 innerHTML 和 outerHTML 的次数

@@ -6,7 +6,6 @@ tags: ["Prim算法","Kruskal算法"]
 categories: 
     - ["数据结构", "图"]
 description:
-photos:
 ---
 
 
@@ -38,7 +37,7 @@ photos:
 {% note warning %}
 
 
-简单实现，核心思想很简单，从任一顶点出发，每次选择所有顶点指向未选中顶点的最小权邻接边, 直至所有顶点军被选中即可. 图定义见附录
+简单实现，核心思想很简单，从任一顶点出发，每次选择所有顶点指向未选中顶点的最小权邻接边, 直至所有顶点均被选中即可. 图定义见附录
 
 
 {% endnote %}
@@ -216,7 +215,7 @@ class Node {
    * @param {Node} node
    */
   isAdjacent(node) {
-    this.adjacents.has(node);
+    return this.adjacents.has(node);
   }
 
   /**

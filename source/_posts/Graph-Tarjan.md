@@ -6,7 +6,6 @@ tags: ['Tarjan算法']
 categories:
   - ['数据结构','图']
 description:
-photos:
 ---
 
 ## 定义
@@ -75,15 +74,15 @@ class Graph{
     stack.push(key);
 
 
-    for (let adjcent of this.nodes.get(key).getAdjacents()) {
-      let adjcentKey = adjcent.value;
+    for (let adjacent of this.nodes.get(key).getAdjacents()) {
+      let adjacentKey = adjacent.value;
 
 
-      if (index.get(adjcentKey) === -1) {
-        time = this.SCCUtil(adjcentKey, index, lowLink, stack, time, result);
-        lowLink.set(key, Math.min(lowLink.get(key), lowLink.get(adjcentKey)));
-      } else if (stack.includes(adjcentKey)) {
-        lowLink.set(key, Math.min(lowLink.get(key), index.get(adjcentKey)));
+      if (index.get(adjacentKey) === -1) {
+        time = this.SCCUtil(adjacentKey, index, lowLink, stack, time, result);
+        lowLink.set(key, Math.min(lowLink.get(key), lowLink.get(adjacentKey)));
+      } else if (stack.includes(adjacentKey)) {
+        lowLink.set(key, Math.min(lowLink.get(key), index.get(adjacentKey)));
       }
     }
 

@@ -3,9 +3,7 @@ title: Javascript-Object.1[理解对象]
 date: 2021-01-24 01:44:54
 categories: [学习笔记, Javascript]
 tags: [ Object]
-keywords:
 description:
-photos:
 ---
 
 # 理解对象
@@ -411,6 +409,10 @@ getPersonInfo("1st", person, "2st");
 // ["1st", {name: "Kinsiy", age: 23}, "2st"]
 // Kinsiy 23
 ```
+## 相关文章
+
+{% post_link Javascript-Object-2 "Javascript - Object (二)" %}
+
 ## 参考
 
 [1\][JavaScript高级程序设计(第4版).](https://book.douban.com/subject/35175321/)

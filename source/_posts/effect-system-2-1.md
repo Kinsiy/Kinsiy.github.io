@@ -6,7 +6,6 @@ tags: 响应式
 categories:
  - ['Vue', 'Vue.js设计与实现']
 description:
-photos:
 ---
 {% note primary %}
 

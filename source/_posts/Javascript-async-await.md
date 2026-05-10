@@ -3,9 +3,7 @@ title: Javascript-async/await
 date: 2021-03-22 22:41:38
 categories: [学习笔记, Javascript]
 tags: [ async/await]
-keywords:
 description:
-photos:
 ---
 
 异步函数，也称为"async/await"(语法关键字)，是 ES6 期约模式在 ECMAScript 函数中的引用。async/await 是 ES8 规范新增的。
@@ -271,6 +269,10 @@ addTen(9).then(console.log); // 19
 ### 栈追踪与内存管理
 
 略
+
+## 相关文章
+
+{% post_link Javascript-Promise "Javascript - Promise" %}
 
 ## 参考
 

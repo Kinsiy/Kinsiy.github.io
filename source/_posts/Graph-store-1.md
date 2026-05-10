@@ -6,7 +6,6 @@ categories:
     - ["数据结构", "图"]
 mathjax: true
 description:
-photos:
 ---
 
 
@@ -221,7 +220,7 @@ class Node {
    * @param {Node} node
    */
   isAdjacent(node) {
-    this.adjacents.has(node);
+    return this.adjacents.has(node);
   }
 
   /**

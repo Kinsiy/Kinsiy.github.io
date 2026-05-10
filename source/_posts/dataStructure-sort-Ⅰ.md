@@ -4,7 +4,6 @@ date: 2021-11-11 21:24:28
 tags: ['冒泡排序','简单选择排序','直接插入排序','希尔排序']
 categories: ['数据结构','排序']
 description:
-photos:
 ---
 
 ## 排序基本概念
@@ -22,7 +21,7 @@ photos:
 ### 严格定义
 
 
-> 假设含有n个记录的序列为{r<sub>1</sub>, r<sub>2</sub>, ...... , r<sub>n</sub>}, 其相应的关键字分别为{k<sub>1</sub>, k<sub>2</sub>, ...... , k<sub>n</sub>}, 需确定1, 2, ......, n 的一种排列p<sub>1</sub>, p<sub>2</sub>, ......, p<sub>n</sub>, 使其相应的关键字满足k<sub>p1</sub> ≤ k<sub>p2</sub> ≤ ...... ≤ k<sub>pn</sub> (非递减或非递增)关系，即使得序列成为一个按关键字有序得序列{r<sub>p1</sub>, r<sub>p2</sub>, ......, r<sub>pn</sub>}, 这样得操作就称为排序 
+> 假设含有n个记录的序列为{r<sub>1</sub>, r<sub>2</sub>, ...... , r<sub>n</sub>}, 其相应的关键字分别为{k<sub>1</sub>, k<sub>2</sub>, ...... , k<sub>n</sub>}, 需确定1, 2, ......, n 的一种排列p<sub>1</sub>, p<sub>2</sub>, ......, p<sub>n</sub>, 使其相应的关键字满足k<sub>p1</sub> ≤ k<sub>p2</sub> ≤ ...... ≤ k<sub>pn</sub> (非递减或非递增)关系，即使得序列成为一个按关键字有序的序列{r<sub>p1</sub>, r<sub>p2</sub>, ......, r<sub>pn</sub>}, 这样得操作就称为排序 
 
 
 ### 稳定性

@@ -5,7 +5,6 @@ date: 2023-04-08 19:48:57
 tags: builder
 categories: [设计模式,创建型模式]
 description:
-photos:
 ---
 
 生成器模式是一种创建型设计模式,使你能够分步骤创建复杂对象.该模式允许你使用相同的创建代码生成不同类型和形式的对象.
@@ -124,7 +123,7 @@ class CarBuilder implements Builder {
   
   // 所有生成步骤都会与同一个产品实例进行交互
   setSeats(seats: number) {
-    this.car.serts = seats
+    this.car.seats = seats
   }
   
   setEngine(engine: string) {
@@ -136,7 +135,7 @@ class CarBuilder implements Builder {
   }
   
   setGps(gps: string) {
-    this.gps = gps
+    this.car.gps = gps
   }
   
   // 具体生成器需要自行提供获取结果的方法.
@@ -170,29 +169,29 @@ class CarManualBuilder implements Builder {
   
   // 所有生成步骤都会与同一个产品实例进行交互
   setSeats(seats: number) {
-    this.car.serts = seats
+    this.manual.seats = seats
   }
   
   setEngine(engine: string) {
-    this.car.engine = engine
+    this.manual.engine = engine
   }
   
   setTripComputer(computer: string) {
-    this.car.tripComputer = computer
+    this.manual.tripComputer = computer
   }
   
   setGps(gps: string) {
-    this.gps = gps
+    this.manual.gps = gps
   }
   
   // 具体生成器需要自行提供获取结果的方法.
   // 这是因为不同类型的生成器可能会创建不遵循相同接口的,完全不同的产品.
   // 所以也就无法在生成器接口中声明这些方法
   
-  getProduct(): Car {
-    const car = this.car
+  getProduct(): Manual {
+    const manual = this.manual
     this.reset()	// 做好生成另一个产品的准备
-    return car
+    return manual
   }
   
   // 通常在生成器实例将结果返回给客户端后,它们应该做好生成另一个产品的准备.
@@ -210,7 +209,7 @@ class Director {
     builder.setSeats(2)
     builder.setEngine("sport engine")
     builder.setTripComputer("super computer")
-    builder.setGPs("gps system")
+    builder.setGps("gps system")
   }
   
   constructSUV(builder: Builder) {
@@ -228,12 +227,12 @@ const car = carBuilder.getProduct()
 
 const carManualBuilder = new CarManualBuilder()
 director.constructSportsCar(carManualBuilder)
-const manual = builder.getProduct()
+const manual = carManualBuilder.getProduct()
 ```
 
 ## 适用场景
 
-- 使用生成器模式可避免“重叠构造函数(telescoping construtor)” 的出现
+- 使用生成器模式可避免“重叠构造函数(telescoping constructor)” 的出现
 - 当你希望使用代码创建不同形式的产品时,可使用生成器模式
 - 使用生成器构造组合树或其他复杂对象
 

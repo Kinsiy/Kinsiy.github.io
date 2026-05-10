@@ -5,7 +5,6 @@ date: 2022-03-22 23:46:36
 tags:
 categories: [学习笔记, TypeScript]
 description:
-photos:
 ---
 
 

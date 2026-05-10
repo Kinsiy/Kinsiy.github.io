@@ -3,9 +3,7 @@ title: Javascript-DOM-1
 date: 2021-03-30 20:39:31
 tags: [ DOM]
 categories: [学习笔记, Javascript]
-keywords:
 description: 
-photos:
 ---
 
 ## 节点层级
@@ -185,6 +183,10 @@ Element 类型是唯一使用 attributes 属性的 DOM 节点类型。attribute 
 Text 类型 && Comment 类型 && CDATASection 类型
 DocumentType 类型 && DocumentFragment 类型 && Attr 类型
 略 🤣
+
+## 相关文章
+
+{% post_link Javascript-DOM-2 "Javascript - DOM (二)" %}
 
 ## 参考
 

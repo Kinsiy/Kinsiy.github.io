@@ -3,9 +3,7 @@ title: Javascript - Classes
 date: 2021-03-04 21:07:28
 categories: [学习笔记, Javascript]
 tags: [Classes]
-keywords:
 description: 类(class)是 ECMAScript 中新的基础性语法糖结构。虽然 ECMAScript6 类表面上看起来可以支持正式的面向对象编程，但实际上它背后使用的仍然是原型和构造函数的概念。
-photos:
 ---
 
 ## 类定义

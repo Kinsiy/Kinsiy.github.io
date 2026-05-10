@@ -6,7 +6,6 @@ tags: ['十字链表','邻接多重表','边集数组']
 categories:
   - ["数据结构", "图"]
 description:
-photos:
 ---
 
 
@@ -228,7 +227,7 @@ iVex 和 jVex 是与某条边依附的两个顶点在顶点表中下标。iLink 
 ![边集数组](https://img-blog.csdnimg.cn/20200903141819409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poZW1pbmdidWhhbw==,size_16,color_FFFFFF,t_70)
 
 
-边集数组关注的是边的集合，在边集数组中要查找一个顶点的度需要扫描整个边数组，效率并不高。更适合对边一次经行处理的操作，不适合对顶点相关的操作
+边集数组关注的是边的集合，在边集数组中要查找一个顶点的度需要扫描整个边数组，效率并不高。更适合对边一次进行处理的操作，不适合对顶点相关的操作
 
 
 ## 参考

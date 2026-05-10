@@ -5,7 +5,6 @@ mathjax: true
 tags: ['BFS','DFS']
 categories: ['数据结构','图']
 description:
-photos:
 ---
 
 
@@ -82,16 +81,16 @@ class Graph{
         ...
   
   /**
-   * @description: 深度优先遍历，生成器函数
+   * @description: 广度优先遍历，生成器函数
    * @param {Node} first 第一个开始遍历的节点
    */  
-  *dfs(first){
+  *bfs(first){
     const visited = new Map
     const visitList = [first]
 
 
     while(visitList.length !== 0){
-      const node = visitList.pop()
+      const node = visitList.shift()
       if(node && !visited.has(node)){
         yield node
         visited.set(node)

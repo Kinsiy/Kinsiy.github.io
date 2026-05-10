@@ -3,9 +3,7 @@ title: Javascript-Array
 date: 2021-01-24 14:47:28
 categories: [学习笔记, Javascript]
 tags: [ Array]
-keywords:
 description: 
-photos:
 ---
 
 > 数组是一种类列表对象，它的原型中提供了遍历和修改元素的相关操作。JavaScript 数组的长度和元素类型都是非固定的。因为数组的长度可随时改变，并且其数据在内存中也可以不连续，所以 JavaScript 数组不一定是密集型的，这取决于它的使用方式
@@ -625,8 +623,8 @@ obj.toString()
 
 ```Javascript
 let colors = ["red", "blue", "pink", "yellow"];
-console.log(colors.toString()); // red,bule,pink,yellow
-alert(colors); // red,bule,pink,yellow     alert()期待字符串，后台调用toString()
+console.log(colors.toString()); // red,blue,pink,yellow
+alert(colors); // red,blue,pink,yellow     alert()期待字符串，后台调用toString()
 
 let person_1 = {
   toLocaleString() {

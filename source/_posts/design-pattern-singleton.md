@@ -5,7 +5,6 @@ date: 2023-04-18 19:33:09
 tags: singleton
 categories: [设计模式, 创建型模式]
 description:
-photos:
 ---
 
 **单例模式**是一种创建型设计模式，让你能够保证一个类只有一个实例，并提供一个访问该实例的全局节点。
@@ -95,4 +94,4 @@ console.log(instance1.getData()); // Output: ["Data 2"]
 
 ## 参考
 
-[Refactoringguru.cn 单例模式](https://refactoringguru.cn/design-patterns/factory-method)
+[Refactoringguru.cn 单例模式](https://refactoringguru.cn/design-patterns/singleton)

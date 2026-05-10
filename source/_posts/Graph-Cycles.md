@@ -6,7 +6,6 @@ tags: ['环']
 categories: 
 - ['数据结构','图']
 description:
-photos:
 ---
 
 
@@ -58,8 +57,8 @@ class Graph{
     recStack.set(key, true); // 入栈
 
 
-    for (const adjcent of this.nodes.get(key).getAdjacents()) {
-      if (this.isCyclicUtil(adjcent.value, visited, recStack)) return true;
+    for (const adjacent of this.nodes.get(key).getAdjacents()) {
+      if (this.isCyclicUtil(adjacent.value, visited, recStack)) return true;
     }
 
 

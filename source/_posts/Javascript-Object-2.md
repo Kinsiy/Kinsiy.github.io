@@ -3,9 +3,7 @@ title: Javascript-Object.2[创建对象]
 date: 2021-02-19 22:22:00
 categories: [学习笔记, Javascript]
 tags: [ Object]
-keywords:
 description:
-photos:
 ---
 
 # 概述
@@ -125,7 +123,7 @@ function sayName() {
 let person_1 = new Person("Kinsiy", 23, "Software Engineer");
 let person_2 = new Person("Greg", 27, "Doctor");
 
-person_1.sayName(); // Kissiy
+person_1.sayName(); // Kinsiy
 person_2.sayName(); // Greg
 console.log(person_1.sayName == person_2.sayName); // true
 ```
@@ -388,10 +386,10 @@ console.log(person_1.constructor == Object);
 * 可以改为使用Object.defineProperty()方法来定义constructor 属性
 */
 
-Object.defineProperty(Person.property,"contructor"){
+Object.defineProperty(Person.prototype, "constructor", {
     enumerable: false,
     value: Person
-};
+});
 ```
 
 ## 原型的动态性
@@ -454,6 +452,12 @@ person_1.friends.push("Type57");
 console.log(person_1.friends); // ["Kinsiy", "Restituo", "Type57"]
 console.log(person_2.friends); // ["Kinsiy", "Restituo", "Type57"]
 ```
+
+## 相关文章
+
+{% post_link Javascript-Object-1 "Javascript - Object (一)" %}
+{% post_link Javascript-Classes "Javascript - Classes" %}
+{% post_link Javascript-Inherit "Javascript - 继承" %}
 
 ## 参考
 

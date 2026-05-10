@@ -6,7 +6,6 @@ tags: diff
 categories:
  - ['Vue', 'Vue.js设计与实现']
 description:
-photos:
 ---
 
 {% note primary %}
@@ -53,7 +52,7 @@ function patchKeyedChildren(n1, n2, container) {
       oldStartVNode = oldChildren[++oldStartIdx]
     } else if (!oldEndVNode) {
       // DOM 已被移动
-      oldEndVNode = newChildren[--oldEndIdx]
+      oldEndVNode = oldChildren[--oldEndIdx]
     } else if (oldStartVNode.key === newStartVNode.key) {
       // 步骤一： oldStartVNode 和 newStartVNode 比较
       // 无需移动

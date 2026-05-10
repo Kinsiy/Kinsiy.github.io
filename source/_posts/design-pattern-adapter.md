@@ -5,7 +5,6 @@ date: 2023-04-19 20:05:24
 tags: [wrapper, adapter]
 categories: [设计模式, 结构型模式]
 description:
-photos:
 ---
 
 **适配器模式**是一种结构型设计模式，它能使接口不兼容的对象能够相互合作。

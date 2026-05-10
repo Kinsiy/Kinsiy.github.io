@@ -3,9 +3,7 @@ title: Javascript-Map&Set
 date: 2021-01-29 22:31:45
 categories: [学习笔记, Javascript]
 tags: [ Map, Set]
-keywords:
 description: 集合引用类型, Map()、WeakMap()、Set()、WeakSet()的使用
-photos:
 ---
 
 # Map

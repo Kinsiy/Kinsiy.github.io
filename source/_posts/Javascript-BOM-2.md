@@ -4,7 +4,6 @@ date: 2021-04-20 10:11:29
 categories: [学习笔记, Javascript]
 tags: [ BOM]
 description:
-photos:
 ---
 
 ## location 对象

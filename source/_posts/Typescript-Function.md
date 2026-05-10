@@ -5,7 +5,6 @@ date: 2022-04-01 22:07:24
 tags:
 categories: [学习笔记, TypeScript]
 description:
-photos:
 ---
 
 本文学习如何在Ts中声明函数类型

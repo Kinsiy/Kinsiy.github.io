@@ -3,9 +3,7 @@ title: Javascript - Function
 date: 2021-03-14 14:54:52
 categories: [学习笔记, Javascript]
 tags:
-keywords:
 description:
-photos:
 ---
 
 函数实际上是对象。每个函数都是 Function 类型的实例，而 Function 也有属性和方法，跟其他引用类型一样。因为函数是对象，所以函数名就是指向函数对象的指针，而且不一定与函数本身紧密绑定。
@@ -35,7 +33,7 @@ let sum_4 = new Function(val_1, val_2, "return val_1 + val_2");
 很大程度上，箭头函数实例化的函数对象与正式的函数表达式创建的函数对象行为是相同的。任何可以使用函数表达式的地方，都可以使用箭头函数。
 
 ```javascript
-let double = x => {retuan 2 * x}
+let double = x => {return 2 * x}
 
 // 多个参数与无参数需要括号
 

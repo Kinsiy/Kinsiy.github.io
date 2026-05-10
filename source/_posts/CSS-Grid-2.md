@@ -5,7 +5,6 @@ date: 2022-07-17 20:16:01
 tags:
 categories:
 description:
-photos:
 ---
 
 承接上篇[CSS - 栅格布局 - Ⅰ](https://kinsiy.github.io/CSS-Grid-1/) , 上篇说了如何定义栅格轨道及如何将栅格元素附加到栅格轨道/区域上.这篇主要说下栅格流/栏距/栅格的对齐方式等

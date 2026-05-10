@@ -5,7 +5,6 @@ date: 2023-04-07 22:04:26
 tags: [abstract-factory, factory-method]
 categories: [设计模式, 创建型模式]
 description:
-photos:
 ---
 
 抽象工厂模式是一种创建型设计模式,它能创建一系列相关的对象,而无需指定具体

@@ -5,7 +5,6 @@ date: 2023-05-29 23:36:34
 tags: visitor
 categories: [设计模式, 行为模式]
 description:
-photos:
 ---
 
 **访问者模式** 是一种行为设计模式，它能将算法与其作用的对象隔离开来
